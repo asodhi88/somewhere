@@ -1,0 +1,842 @@
+[
+  {
+    "id": "bkk",
+    "city": "Bangkok",
+    "country": "Thailand",
+    "airport": "BKK",
+    "region": "Southeast Asia",
+    "coords": [13.75, 100.52],
+    "flight": {
+      "hours": 20,
+      "nonstop": false,
+      "bands": { "jan": [1350, 1750], "mar": [1250, 1600], "jun": [1100, 1450], "oct": [1200, 1550], "dec": [1500, 1950] }
+    },
+    "stay": { "budget": [15, 30], "mid": [55, 95], "nice": [160, 320] },
+    "ground_daily": [25, 50],
+    "climate": {
+      "jan": { "high_c": 33, "low_c": 22, "rain_days": 1, "label": "hot, dry, peak season" },
+      "mar": { "high_c": 35, "low_c": 26, "rain_days": 3, "label": "very hot" },
+      "jun": { "high_c": 33, "low_c": 26, "rain_days": 16, "label": "hot, wet season" },
+      "oct": { "high_c": 32, "low_c": 25, "rain_days": 17, "label": "hot, wettest month" },
+      "dec": { "high_c": 32, "low_c": 21, "rain_days": 1, "label": "warm, dry, peak season" }
+    },
+    "best_months": ["nov", "dec", "jan", "feb"],
+    "visa_ca": "visa_free_30",
+    "advisory": "caution",
+    "vibes": ["city", "food", "cheap"],
+    "hero_image": null,
+    "blurb": "Long haul, but a week on the ground costs less than a Toronto weekend."
+  },
+  {
+    "id": "rek",
+    "city": "Reykjavík",
+    "country": "Iceland",
+    "airport": "KEF",
+    "region": "Northern Europe",
+    "coords": [64.15, -21.94],
+    "flight": {
+      "hours": 5.5,
+      "nonstop": true,
+      "bands": { "jan": [550, 800], "mar": [600, 850], "jun": [900, 1300], "oct": [650, 950], "dec": [700, 1050] }
+    },
+    "stay": { "budget": [55, 90], "mid": [150, 240], "nice": [340, 550] },
+    "ground_daily": [90, 160],
+    "climate": {
+      "jan": { "high_c": 3, "low_c": -2, "rain_days": 13, "label": "cold, dark, aurora season" },
+      "mar": { "high_c": 4, "low_c": -1, "rain_days": 12, "label": "cold, lengthening days" },
+      "jun": { "high_c": 12, "low_c": 7, "rain_days": 10, "label": "mild, near-endless daylight" },
+      "oct": { "high_c": 7, "low_c": 2, "rain_days": 14, "label": "cool, wet, aurora returns" },
+      "dec": { "high_c": 3, "low_c": -2, "rain_days": 13, "label": "cold, dark, festive" }
+    },
+    "best_months": ["jun", "jul", "aug", "sep"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["hike", "city"],
+    "hero_image": null,
+    "blurb": "Cheap flight, punishing ground costs — the inverse of most long-haul trips."
+  },
+  {
+    "id": "lis",
+    "city": "Lisbon",
+    "country": "Portugal",
+    "airport": "LIS",
+    "region": "Southern Europe",
+    "coords": [38.72, -9.14],
+    "flight": {
+      "hours": 6.5,
+      "nonstop": true,
+      "bands": { "jan": [520, 720], "mar": [600, 850], "jun": [850, 1200], "oct": [650, 950], "dec": [600, 900] }
+    },
+    "stay": { "budget": [40, 65], "mid": [95, 160], "nice": [230, 400] },
+    "ground_daily": [50, 90],
+    "climate": {
+      "jan": { "high_c": 15, "low_c": 8, "rain_days": 11, "label": "mild, some rain" },
+      "mar": { "high_c": 18, "low_c": 10, "rain_days": 9, "label": "mild spring" },
+      "jun": { "high_c": 26, "low_c": 16, "rain_days": 3, "label": "warm, dry" },
+      "oct": { "high_c": 22, "low_c": 14, "rain_days": 8, "label": "mild, some rain" },
+      "dec": { "high_c": 15, "low_c": 9, "rain_days": 12, "label": "mild, wettest month" }
+    },
+    "best_months": ["apr", "may", "jun", "sep", "oct"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "food", "beach"],
+    "hero_image": null,
+    "blurb": "Cheap for Western Europe, warm into November, walkable."
+  },
+  {
+    "id": "cun",
+    "city": "Cancún",
+    "country": "Mexico",
+    "airport": "CUN",
+    "region": "Central America & Caribbean",
+    "coords": [21.16, -86.85],
+    "flight": {
+      "hours": 4,
+      "nonstop": true,
+      "bands": { "jan": [500, 750], "mar": [650, 950], "jun": [450, 700], "oct": [400, 650], "dec": [600, 900] }
+    },
+    "stay": { "budget": [35, 60], "mid": [110, 190], "nice": [280, 550] },
+    "ground_daily": [45, 85],
+    "climate": {
+      "jan": { "high_c": 28, "low_c": 20, "rain_days": 6, "label": "warm, dry, peak season" },
+      "mar": { "high_c": 30, "low_c": 22, "rain_days": 3, "label": "hot, dry, spring break" },
+      "jun": { "high_c": 32, "low_c": 25, "rain_days": 11, "label": "hot, humid" },
+      "oct": { "high_c": 31, "low_c": 24, "rain_days": 13, "label": "hot, wet, hurricane season" },
+      "dec": { "high_c": 28, "low_c": 21, "rain_days": 7, "label": "warm, dry" }
+    },
+    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "visa_ca": "visa_free_180",
+    "advisory": "caution",
+    "vibes": ["beach", "cheap"],
+    "hero_image": null,
+    "blurb": "Short nonstop, warm all winter — the default Toronto escape for a reason."
+  },
+  {
+    "id": "tyo",
+    "city": "Tokyo",
+    "country": "Japan",
+    "airport": "NRT",
+    "region": "East Asia",
+    "coords": [35.68, 139.69],
+    "flight": {
+      "hours": 13,
+      "nonstop": true,
+      "bands": { "jan": [1100, 1500], "mar": [1400, 1900], "jun": [1200, 1600], "oct": [1300, 1750], "dec": [1350, 1800] }
+    },
+    "stay": { "budget": [40, 70], "mid": [120, 200], "nice": [300, 550] },
+    "ground_daily": [55, 100],
+    "climate": {
+      "jan": { "high_c": 10, "low_c": 2, "rain_days": 5, "label": "cold, dry, clear" },
+      "mar": { "high_c": 14, "low_c": 5, "rain_days": 10, "label": "cool, cherry blossoms late month" },
+      "jun": { "high_c": 25, "low_c": 18, "rain_days": 12, "label": "warm, rainy season" },
+      "oct": { "high_c": 22, "low_c": 15, "rain_days": 10, "label": "mild, pleasant" },
+      "dec": { "high_c": 12, "low_c": 4, "rain_days": 5, "label": "cold, dry, clear" }
+    },
+    "best_months": ["mar", "apr", "oct", "nov"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "food"],
+    "hero_image": null,
+    "blurb": "Passes a tight budget at hostel tier, fails it at nice hotels — the tier toggle earns its keep here."
+  },
+  {
+    "id": "par",
+    "city": "Paris",
+    "country": "France",
+    "airport": "CDG",
+    "region": "Western Europe",
+    "coords": [48.86, 2.35],
+    "flight": {
+      "hours": 7.5,
+      "nonstop": true,
+      "bands": { "jan": [600, 850], "mar": [700, 1000], "jun": [950, 1350], "oct": [750, 1100], "dec": [700, 1050] }
+    },
+    "stay": { "budget": [50, 85], "mid": [140, 230], "nice": [350, 650] },
+    "ground_daily": [70, 130],
+    "climate": {
+      "jan": { "high_c": 7, "low_c": 3, "rain_days": 10, "label": "cold, grey" },
+      "mar": { "high_c": 12, "low_c": 5, "rain_days": 9, "label": "cool spring" },
+      "jun": { "high_c": 23, "low_c": 14, "rain_days": 8, "label": "warm, long days" },
+      "oct": { "high_c": 16, "low_c": 9, "rain_days": 9, "label": "cool autumn" },
+      "dec": { "high_c": 8, "low_c": 3, "rain_days": 10, "label": "cold, festive" }
+    },
+    "best_months": ["may", "jun", "sep", "oct"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "food"],
+    "hero_image": null,
+    "blurb": "Reasonable flight, but ground costs push it mid-to-high — a fair benchmark for Western Europe."
+  },
+  {
+    "id": "mex",
+    "city": "Mexico City",
+    "country": "Mexico",
+    "airport": "MEX",
+    "region": "Central America & Caribbean",
+    "coords": [19.43, -99.13],
+    "flight": {
+      "hours": 5,
+      "nonstop": true,
+      "bands": { "jan": [520, 780], "mar": [600, 880], "jun": [480, 720], "oct": [500, 760], "dec": [650, 950] }
+    },
+    "stay": { "budget": [30, 55], "mid": [85, 150], "nice": [220, 420] },
+    "ground_daily": [35, 70],
+    "climate": {
+      "jan": { "high_c": 22, "low_c": 6, "rain_days": 2, "label": "mild, dry, sunny days" },
+      "mar": { "high_c": 26, "low_c": 9, "rain_days": 3, "label": "warm, dry" },
+      "jun": { "high_c": 24, "low_c": 12, "rain_days": 17, "label": "mild, wet season" },
+      "oct": { "high_c": 22, "low_c": 10, "rain_days": 12, "label": "mild, tapering rain" },
+      "dec": { "high_c": 21, "low_c": 6, "rain_days": 2, "label": "mild, dry" }
+    },
+    "best_months": ["nov", "dec", "jan", "feb", "mar"],
+    "visa_ca": "visa_free_180",
+    "advisory": "caution",
+    "vibes": ["city", "food", "cheap"],
+    "hero_image": null,
+    "blurb": "Cheap, close, world-class food — strong all-round value from YYZ."
+  },
+  {
+    "id": "bcn",
+    "city": "Barcelona",
+    "country": "Spain",
+    "airport": "BCN",
+    "region": "Southern Europe",
+    "coords": [41.39, 2.17],
+    "flight": {
+      "hours": 8,
+      "nonstop": true,
+      "bands": { "jan": [600, 850], "mar": [700, 1000], "jun": [950, 1350], "oct": [750, 1100], "dec": [700, 1000] }
+    },
+    "stay": { "budget": [45, 75], "mid": [120, 200], "nice": [300, 550] },
+    "ground_daily": [60, 110],
+    "climate": {
+      "jan": { "high_c": 14, "low_c": 6, "rain_days": 5, "label": "mild, some sun" },
+      "mar": { "high_c": 17, "low_c": 8, "rain_days": 6, "label": "mild spring" },
+      "jun": { "high_c": 26, "low_c": 18, "rain_days": 4, "label": "warm, beach weather" },
+      "oct": { "high_c": 22, "low_c": 14, "rain_days": 7, "label": "warm, pleasant" },
+      "dec": { "high_c": 15, "low_c": 7, "rain_days": 5, "label": "mild, festive" }
+    },
+    "best_months": ["may", "jun", "sep", "oct"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "beach", "food"],
+    "hero_image": null,
+    "blurb": "Beach and city in one, warm shoulder seasons, mid-range costs."
+  },
+  {
+    "id": "sjo",
+    "city": "San José",
+    "country": "Costa Rica",
+    "airport": "SJO",
+    "region": "Central America & Caribbean",
+    "coords": [9.93, -84.08],
+    "flight": {
+      "hours": 6,
+      "nonstop": true,
+      "bands": { "jan": [650, 950], "mar": [700, 1050], "jun": [550, 800], "oct": [500, 750], "dec": [800, 1200] }
+    },
+    "stay": { "budget": [30, 55], "mid": [90, 160], "nice": [240, 450] },
+    "ground_daily": [45, 85],
+    "climate": {
+      "jan": { "high_c": 26, "low_c": 17, "rain_days": 3, "label": "warm, dry season" },
+      "mar": { "high_c": 27, "low_c": 18, "rain_days": 3, "label": "warm, dry" },
+      "jun": { "high_c": 26, "low_c": 18, "rain_days": 18, "label": "warm, green season rain" },
+      "oct": { "high_c": 25, "low_c": 17, "rain_days": 22, "label": "warm but soaking — wettest month" },
+      "dec": { "high_c": 25, "low_c": 17, "rain_days": 8, "label": "warm, dry season begins" }
+    },
+    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["hike", "beach"],
+    "hero_image": null,
+    "blurb": "Rainforest and coast within reach — go in the dry months, October is a washout."
+  },
+  {
+    "id": "rak",
+    "city": "Marrakesh",
+    "country": "Morocco",
+    "airport": "RAK",
+    "region": "North Africa",
+    "coords": [31.63, -7.99],
+    "flight": {
+      "hours": 10,
+      "nonstop": false,
+      "bands": { "jan": [750, 1100], "mar": [800, 1200], "jun": [900, 1350], "oct": [850, 1250], "dec": [800, 1200] }
+    },
+    "stay": { "budget": [25, 50], "mid": [70, 130], "nice": [200, 400] },
+    "ground_daily": [30, 60],
+    "climate": {
+      "jan": { "high_c": 18, "low_c": 6, "rain_days": 4, "label": "mild days, cold nights" },
+      "mar": { "high_c": 23, "low_c": 10, "rain_days": 4, "label": "warm, pleasant" },
+      "jun": { "high_c": 34, "low_c": 18, "rain_days": 1, "label": "very hot, dry" },
+      "oct": { "high_c": 28, "low_c": 15, "rain_days": 3, "label": "warm, dry" },
+      "dec": { "high_c": 18, "low_c": 6, "rain_days": 4, "label": "mild days, cold nights" }
+    },
+    "best_months": ["mar", "apr", "may", "oct", "nov"],
+    "visa_ca": "visa_free_90",
+    "advisory": "caution",
+    "vibes": ["city", "food", "cheap"],
+    "hero_image": null,
+    "blurb": "One stop away, but cheap on the ground with strong spring and autumn weather."
+  },
+  {
+    "id": "rom",
+    "city": "Rome",
+    "country": "Italy",
+    "airport": "FCO",
+    "region": "Southern Europe",
+    "coords": [41.9, 12.5],
+    "flight": {
+      "hours": 9,
+      "nonstop": true,
+      "bands": { "jan": [650, 950], "mar": [750, 1100], "jun": [1000, 1450], "oct": [800, 1200], "dec": [750, 1100] }
+    },
+    "stay": { "budget": [45, 80], "mid": [120, 210], "nice": [300, 560] },
+    "ground_daily": [60, 110],
+    "climate": {
+      "jan": { "high_c": 12, "low_c": 3, "rain_days": 8, "label": "cool, some rain" },
+      "mar": { "high_c": 16, "low_c": 6, "rain_days": 7, "label": "mild spring" },
+      "jun": { "high_c": 28, "low_c": 16, "rain_days": 4, "label": "warm, dry" },
+      "oct": { "high_c": 22, "low_c": 12, "rain_days": 8, "label": "mild autumn" },
+      "dec": { "high_c": 13, "low_c": 4, "rain_days": 9, "label": "cool, festive" }
+    },
+    "best_months": ["apr", "may", "sep", "oct"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "food"],
+    "hero_image": null,
+    "blurb": "Nonstop to the heart of it; shoulder months dodge both crowds and peak fares."
+  },
+  {
+    "id": "hav",
+    "city": "Havana",
+    "country": "Cuba",
+    "airport": "HAV",
+    "region": "Central America & Caribbean",
+    "coords": [23.11, -82.37],
+    "flight": {
+      "hours": 3.5,
+      "nonstop": true,
+      "bands": { "jan": [450, 700], "mar": [550, 850], "jun": [400, 650], "oct": [380, 620], "dec": [550, 850] }
+    },
+    "stay": { "budget": [25, 45], "mid": [65, 120], "nice": [160, 300] },
+    "ground_daily": [35, 70],
+    "climate": {
+      "jan": { "high_c": 26, "low_c": 18, "rain_days": 4, "label": "warm, dry, peak season" },
+      "mar": { "high_c": 28, "low_c": 19, "rain_days": 3, "label": "warm, dry" },
+      "jun": { "high_c": 31, "low_c": 23, "rain_days": 11, "label": "hot, humid" },
+      "oct": { "high_c": 29, "low_c": 22, "rain_days": 12, "label": "warm, wet, hurricane season" },
+      "dec": { "high_c": 26, "low_c": 19, "rain_days": 5, "label": "warm, dry" }
+    },
+    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "visa_ca": "visa_free_90",
+    "advisory": "caution",
+    "vibes": ["beach", "city", "cheap"],
+    "hero_image": null,
+    "blurb": "The shortest warm-water hop from Toronto, and cheap once you're there."
+  },
+  {
+    "id": "ath",
+    "city": "Athens",
+    "country": "Greece",
+    "airport": "ATH",
+    "region": "Southern Europe",
+    "coords": [37.98, 23.73],
+    "flight": {
+      "hours": 10,
+      "nonstop": true,
+      "bands": { "jan": [650, 950], "mar": [750, 1100], "jun": [1050, 1500], "oct": [800, 1200], "dec": [700, 1050] }
+    },
+    "stay": { "budget": [35, 65], "mid": [95, 170], "nice": [250, 480] },
+    "ground_daily": [50, 95],
+    "climate": {
+      "jan": { "high_c": 13, "low_c": 6, "rain_days": 10, "label": "mild, some rain" },
+      "mar": { "high_c": 16, "low_c": 8, "rain_days": 7, "label": "mild spring" },
+      "jun": { "high_c": 31, "low_c": 20, "rain_days": 2, "label": "hot, dry" },
+      "oct": { "high_c": 23, "low_c": 15, "rain_days": 6, "label": "warm, pleasant" },
+      "dec": { "high_c": 15, "low_c": 8, "rain_days": 10, "label": "mild, wettest month" }
+    },
+    "best_months": ["apr", "may", "sep", "oct"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "beach", "food"],
+    "hero_image": null,
+    "blurb": "Gateway to the islands; October keeps the warmth without the summer fare spike."
+  },
+  {
+    "id": "sin",
+    "city": "Singapore",
+    "country": "Singapore",
+    "airport": "SIN",
+    "region": "Southeast Asia",
+    "coords": [1.35, 103.82],
+    "flight": {
+      "hours": 19,
+      "nonstop": false,
+      "bands": { "jan": [1400, 1850], "mar": [1350, 1750], "jun": [1300, 1700], "oct": [1350, 1750], "dec": [1600, 2100] }
+    },
+    "stay": { "budget": [45, 80], "mid": [140, 240], "nice": [340, 620] },
+    "ground_daily": [55, 110],
+    "climate": {
+      "jan": { "high_c": 30, "low_c": 24, "rain_days": 15, "label": "hot, humid, wet" },
+      "mar": { "high_c": 32, "low_c": 25, "rain_days": 13, "label": "hot, humid" },
+      "jun": { "high_c": 32, "low_c": 25, "rain_days": 13, "label": "hot, humid" },
+      "oct": { "high_c": 31, "low_c": 24, "rain_days": 16, "label": "hot, humid, wet" },
+      "dec": { "high_c": 30, "low_c": 24, "rain_days": 18, "label": "hot, humid, monsoon" }
+    },
+    "best_months": ["feb", "mar", "apr", "jul", "aug"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "food"],
+    "hero_image": null,
+    "blurb": "Long, pricey haul with high ground costs too — the opposite end from Bangkok despite the same region."
+  },
+  {
+    "id": "rio",
+    "city": "Rio de Janeiro",
+    "country": "Brazil",
+    "airport": "GIG",
+    "region": "South America",
+    "coords": [-22.91, -43.17],
+    "flight": {
+      "hours": 12,
+      "nonstop": false,
+      "bands": { "jan": [1050, 1500], "mar": [950, 1400], "jun": [850, 1250], "oct": [900, 1350], "dec": [1200, 1700] }
+    },
+    "stay": { "budget": [30, 60], "mid": [90, 170], "nice": [240, 470] },
+    "ground_daily": [40, 80],
+    "climate": {
+      "jan": { "high_c": 30, "low_c": 24, "rain_days": 11, "label": "hot, humid, peak summer" },
+      "mar": { "high_c": 30, "low_c": 24, "rain_days": 10, "label": "hot, humid" },
+      "jun": { "high_c": 25, "low_c": 19, "rain_days": 6, "label": "mild, drier winter" },
+      "oct": { "high_c": 26, "low_c": 20, "rain_days": 9, "label": "warm spring" },
+      "dec": { "high_c": 29, "low_c": 23, "rain_days": 11, "label": "hot, humid" }
+    },
+    "best_months": ["may", "jun", "jul", "aug", "sep"],
+    "visa_ca": "visa_free_90",
+    "advisory": "caution",
+    "vibes": ["beach", "city"],
+    "hero_image": null,
+    "blurb": "One stop south; cheap on the ground and best value in its cooler, drier winter."
+  },
+  {
+    "id": "dxb",
+    "city": "Dubai",
+    "country": "UAE",
+    "airport": "DXB",
+    "region": "Middle East",
+    "coords": [25.2, 55.27],
+    "flight": {
+      "hours": 13,
+      "nonstop": true,
+      "bands": { "jan": [1000, 1450], "mar": [1050, 1500], "jun": [900, 1300], "oct": [1000, 1450], "dec": [1250, 1750] }
+    },
+    "stay": { "budget": [55, 95], "mid": [150, 260], "nice": [380, 700] },
+    "ground_daily": [70, 140],
+    "climate": {
+      "jan": { "high_c": 24, "low_c": 14, "rain_days": 5, "label": "warm, pleasant, peak season" },
+      "mar": { "high_c": 28, "low_c": 18, "rain_days": 3, "label": "warm, dry" },
+      "jun": { "high_c": 40, "low_c": 29, "rain_days": 0, "label": "extreme heat" },
+      "oct": { "high_c": 35, "low_c": 24, "rain_days": 1, "label": "hot, easing" },
+      "dec": { "high_c": 25, "low_c": 15, "rain_days": 4, "label": "warm, peak season" }
+    },
+    "best_months": ["nov", "dec", "jan", "feb", "mar"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "beach"],
+    "hero_image": null,
+    "blurb": "Nonstop and glossy, but ground costs run high — winter only unless you like 40°C."
+  },
+  {
+    "id": "cph",
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "airport": "CPH",
+    "region": "Northern Europe",
+    "coords": [55.68, 12.57],
+    "flight": {
+      "hours": 8,
+      "nonstop": false,
+      "bands": { "jan": [600, 900], "mar": [700, 1050], "jun": [950, 1400], "oct": [750, 1100], "dec": [750, 1100] }
+    },
+    "stay": { "budget": [55, 90], "mid": [150, 250], "nice": [350, 620] },
+    "ground_daily": [85, 150],
+    "climate": {
+      "jan": { "high_c": 3, "low_c": -1, "rain_days": 12, "label": "cold, grey" },
+      "mar": { "high_c": 6, "low_c": 0, "rain_days": 9, "label": "cold spring" },
+      "jun": { "high_c": 20, "low_c": 11, "rain_days": 9, "label": "mild, long days" },
+      "oct": { "high_c": 11, "low_c": 6, "rain_days": 12, "label": "cool, wet" },
+      "dec": { "high_c": 4, "low_c": 0, "rain_days": 12, "label": "cold, festive" }
+    },
+    "best_months": ["may", "jun", "jul", "aug"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "food"],
+    "hero_image": null,
+    "blurb": "Scandi design and food, but among the priciest ground costs in Europe."
+  },
+  {
+    "id": "mde",
+    "city": "Medellín",
+    "country": "Colombia",
+    "airport": "MDE",
+    "region": "South America",
+    "coords": [6.24, -75.58],
+    "flight": {
+      "hours": 8,
+      "nonstop": false,
+      "bands": { "jan": [650, 950], "mar": [600, 900], "jun": [550, 850], "oct": [500, 800], "dec": [750, 1100] }
+    },
+    "stay": { "budget": [25, 50], "mid": [70, 130], "nice": [190, 380] },
+    "ground_daily": [30, 60],
+    "climate": {
+      "jan": { "high_c": 28, "low_c": 17, "rain_days": 8, "label": "warm, spring-like, drier" },
+      "mar": { "high_c": 28, "low_c": 18, "rain_days": 14, "label": "warm, wetter" },
+      "jun": { "high_c": 28, "low_c": 17, "rain_days": 12, "label": "warm, spring-like" },
+      "oct": { "high_c": 27, "low_c": 17, "rain_days": 18, "label": "warm, wettest stretch" },
+      "dec": { "high_c": 28, "low_c": 17, "rain_days": 9, "label": "warm, drier" }
+    },
+    "best_months": ["dec", "jan", "feb", "jul", "aug"],
+    "visa_ca": "visa_free_90",
+    "advisory": "caution",
+    "vibes": ["city", "cheap"],
+    "hero_image": null,
+    "blurb": "'City of eternal spring' — same mild weather year-round and very cheap on the ground."
+  },
+  {
+    "id": "mbj",
+    "city": "Montego Bay",
+    "country": "Jamaica",
+    "airport": "MBJ",
+    "region": "Central America & Caribbean",
+    "coords": [18.47, -77.92],
+    "flight": {
+      "hours": 4,
+      "nonstop": true,
+      "bands": { "jan": [550, 850], "mar": [650, 1000], "jun": [500, 800], "oct": [450, 720], "dec": [700, 1050] }
+    },
+    "stay": { "budget": [45, 80], "mid": [130, 230], "nice": [320, 620] },
+    "ground_daily": [50, 95],
+    "climate": {
+      "jan": { "high_c": 30, "low_c": 21, "rain_days": 4, "label": "warm, dry, peak season" },
+      "mar": { "high_c": 30, "low_c": 21, "rain_days": 3, "label": "warm, dry" },
+      "jun": { "high_c": 32, "low_c": 24, "rain_days": 8, "label": "hot, humid" },
+      "oct": { "high_c": 31, "low_c": 23, "rain_days": 13, "label": "hot, wet, hurricane season" },
+      "dec": { "high_c": 30, "low_c": 22, "rain_days": 8, "label": "warm, dry" }
+    },
+    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "visa_ca": "visa_free_90",
+    "advisory": "caution",
+    "vibes": ["beach", "cheap"],
+    "hero_image": null,
+    "blurb": "Short nonstop to guaranteed winter sun; all-inclusive stays skew the tiers cheaper than they look."
+  },
+  {
+    "id": "lax",
+    "city": "Los Angeles",
+    "country": "United States",
+    "airport": "LAX",
+    "region": "North America",
+    "coords": [34.05, -118.24],
+    "flight": {
+      "hours": 5.5,
+      "nonstop": true,
+      "bands": { "jan": [400, 650], "mar": [500, 800], "jun": [600, 950], "oct": [500, 800], "dec": [650, 1000] }
+    },
+    "stay": { "budget": [70, 120], "mid": [180, 300], "nice": [400, 750] },
+    "ground_daily": [80, 150],
+    "climate": {
+      "jan": { "high_c": 20, "low_c": 9, "rain_days": 6, "label": "mild, occasional rain" },
+      "mar": { "high_c": 21, "low_c": 11, "rain_days": 5, "label": "warm, dry" },
+      "jun": { "high_c": 25, "low_c": 16, "rain_days": 1, "label": "warm, 'June gloom' mornings" },
+      "oct": { "high_c": 26, "low_c": 15, "rain_days": 2, "label": "warm, dry" },
+      "dec": { "high_c": 20, "low_c": 9, "rain_days": 5, "label": "mild, some rain" }
+    },
+    "best_months": ["apr", "may", "sep", "oct", "nov"],
+    "visa_ca": "visa_free_us",
+    "advisory": "normal",
+    "vibes": ["city", "beach"],
+    "hero_image": null,
+    "blurb": "Cheap short flight, but US ground costs and pricey hotels blunt the value."
+  },
+  {
+    "id": "prg",
+    "city": "Prague",
+    "country": "Czechia",
+    "airport": "PRG",
+    "region": "Central & Eastern Europe",
+    "coords": [50.08, 14.44],
+    "flight": {
+      "hours": 8.5,
+      "nonstop": false,
+      "bands": { "jan": [600, 880], "mar": [700, 1000], "jun": [950, 1350], "oct": [750, 1100], "dec": [700, 1050] }
+    },
+    "stay": { "budget": [30, 55], "mid": [85, 150], "nice": [200, 380] },
+    "ground_daily": [40, 75],
+    "climate": {
+      "jan": { "high_c": 2, "low_c": -3, "rain_days": 8, "label": "cold, grey, festive" },
+      "mar": { "high_c": 9, "low_c": 0, "rain_days": 7, "label": "cold spring" },
+      "jun": { "high_c": 23, "low_c": 13, "rain_days": 10, "label": "warm, long days" },
+      "oct": { "high_c": 13, "low_c": 6, "rain_days": 8, "label": "cool autumn" },
+      "dec": { "high_c": 3, "low_c": -2, "rain_days": 8, "label": "cold, Christmas markets" }
+    },
+    "best_months": ["may", "jun", "sep", "oct"],
+    "visa_ca": "visa_free_90",
+    "advisory": "normal",
+    "vibes": ["city", "food", "cheap"],
+    "hero_image": null,
+    "blurb": "The cheapest way to do a classic European city break — half the ground cost of Paris."
+  },
+  {
+    "id": "ist",
+    "city": "Istanbul",
+    "country": "Türkiye",
+    "airport": "IST",
+    "region": "Middle East",
+    "coords": [41.01, 28.98],
+    "flight": {
+      "hours": 10,
+      "nonstop": true,
+      "bands": { "jan": [850, 1200], "mar": [900, 1300], "jun": [1100, 1550], "oct": [950, 1350], "dec": [950, 1350] }
+    },
+    "stay": { "budget": [30, 55], "mid": [90, 160], "nice": [220, 420] },
+    "ground_daily": [35, 70],
+    "climate": {
+      "jan": { "high_c": 9, "low_c": 3, "rain_days": 13, "label": "cold, damp" },
+      "mar": { "high_c": 12, "low_c": 5, "rain_days": 10, "label": "cool spring" },
+      "jun": { "high_c": 26, "low_c": 17, "rain_days": 5, "label": "warm, dry" },
+      "oct": { "high_c": 20, "low_c": 13, "rain_days": 8, "label": "mild autumn" },
+      "dec": { "high_c": 11, "low_c": 5, "rain_days": 13, "label": "cold, damp" }
+    },
+    "best_months": ["apr", "may", "sep", "oct"],
+    "visa_ca": "visa_free_90",
+    "advisory": "caution",
+    "vibes": ["city", "food", "cheap"],
+    "hero_image": null,
+    "blurb": "Nonstop, cheap on the ground, and one of the best food cities anywhere."
+  },
+  {
+    "id": "sgn",
+    "city": "Ho Chi Minh City",
+    "country": "Vietnam",
+    "airport": "SGN",
+    "region": "Southeast Asia",
+    "coords": [10.82, 106.63],
+    "flight": {
+      "hours": 22,
+      "nonstop": false,
+      "bands": { "jan": [1400, 1850], "mar": [1300, 1700], "jun": [1150, 1500], "oct": [1250, 1650], "dec": [1550, 2000] }
+    },
+    "stay": { "budget": [15, 30], "mid": [50, 90], "nice": [150, 300] },
+    "ground_daily": [25, 50],
+    "climate": {
+      "jan": { "high_c": 32, "low_c": 21, "rain_days": 2, "label": "hot, dry" },
+      "mar": { "high_c": 34, "low_c": 24, "rain_days": 2, "label": "very hot, dry" },
+      "jun": { "high_c": 32, "low_c": 25, "rain_days": 18, "label": "hot, wet season" },
+      "oct": { "high_c": 31, "low_c": 24, "rain_days": 20, "label": "hot, wettest stretch" },
+      "dec": { "high_c": 31, "low_c": 21, "rain_days": 4, "label": "warm, dry" }
+    },
+    "best_months": ["dec", "jan", "feb", "mar"],
+    "visa_ca": "evisa_required",
+    "advisory": "caution",
+    "vibes": ["city", "food", "cheap"],
+    "hero_image": null,
+    "blurb": "About the cheapest ground costs on this list — the flight is the whole expense."
+  },
+  {
+    "id": "cpt",
+    "city": "Cape Town",
+    "country": "South Africa",
+    "airport": "CPT",
+    "region": "Southern Africa",
+    "coords": [-33.92, 18.42],
+    "flight": {
+      "hours": 20,
+      "nonstop": false,
+      "bands": { "jan": [1800, 2400], "mar": [1600, 2200], "jun": [1300, 1800], "oct": [1500, 2050], "dec": [1900, 2600] }
+    },
+    "stay": { "budget": [30, 55], "mid": [95, 170], "nice": [260, 500] },
+    "ground_daily": [45, 85],
+    "climate": {
+      "jan": { "high_c": 27, "low_c": 17, "rain_days": 2, "label": "hot, dry, peak summer" },
+      "mar": { "high_c": 26, "low_c": 16, "rain_days": 3, "label": "warm, dry" },
+      "jun": { "high_c": 18, "low_c": 9, "rain_days": 10, "label": "cool, wet winter" },
+      "oct": { "high_c": 21, "low_c": 11, "rain_days": 6, "label": "mild spring" },
+      "dec": { "high_c": 26, "low_c": 16, "rain_days": 3, "label": "warm, dry" }
+    },
+    "best_months": ["nov", "dec", "jan", "feb", "mar"],
+    "visa_ca": "visa_free_90",
+    "advisory": "caution",
+    "vibes": ["hike", "beach", "city", "food"],
+    "hero_image": null,
+    "blurb": "Expensive to reach, cheap once there — mountains, coast and wine in one trip."
+  },
+  {
+    "id": "yvr",
+    "city": "Vancouver",
+    "country": "Canada",
+    "airport": "YVR",
+    "region": "North America",
+    "coords": [49.28, -123.12],
+    "flight": {
+      "hours": 5,
+      "nonstop": true,
+      "bands": { "jan": [400, 650], "mar": [480, 750], "jun": [650, 1000], "oct": [500, 800], "dec": [600, 950] }
+    },
+    "stay": { "budget": [60, 100], "mid": [160, 270], "nice": [350, 650] },
+    "ground_daily": [75, 135],
+    "climate": {
+      "jan": { "high_c": 7, "low_c": 2, "rain_days": 18, "label": "cool, wet" },
+      "mar": { "high_c": 10, "low_c": 4, "rain_days": 15, "label": "cool, wet" },
+      "jun": { "high_c": 20, "low_c": 12, "rain_days": 8, "label": "mild, long days" },
+      "oct": { "high_c": 13, "low_c": 7, "rain_days": 15, "label": "cool, wet" },
+      "dec": { "high_c": 7, "low_c": 2, "rain_days": 18, "label": "cool, wet" }
+    },
+    "best_months": ["jun", "jul", "aug", "sep"],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": ["hike", "city", "food"],
+    "hero_image": null,
+    "blurb": "No passport needed and mountains at the city edge — but hotel costs rival Europe."
+  },
+  {
+    "id": "sju",
+    "city": "San Juan",
+    "country": "Puerto Rico",
+    "airport": "SJU",
+    "region": "Central America & Caribbean",
+    "coords": [18.47, -66.11],
+    "flight": {
+      "hours": 4.5,
+      "nonstop": true,
+      "bands": { "jan": [550, 850], "mar": [650, 980], "jun": [480, 750], "oct": [430, 700], "dec": [700, 1050] }
+    },
+    "stay": { "budget": [50, 85], "mid": [140, 240], "nice": [320, 600] },
+    "ground_daily": [55, 100],
+    "climate": {
+      "jan": { "high_c": 28, "low_c": 21, "rain_days": 8, "label": "warm, drier, peak season" },
+      "mar": { "high_c": 29, "low_c": 21, "rain_days": 6, "label": "warm, dry" },
+      "jun": { "high_c": 31, "low_c": 24, "rain_days": 12, "label": "hot, humid" },
+      "oct": { "high_c": 31, "low_c": 24, "rain_days": 15, "label": "hot, wet, hurricane season" },
+      "dec": { "high_c": 29, "low_c": 22, "rain_days": 11, "label": "warm, pleasant" }
+    },
+    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "visa_ca": "visa_free_us",
+    "advisory": "normal",
+    "vibes": ["beach", "city", "food"],
+    "hero_image": null,
+    "blurb": "Caribbean beaches with US infrastructure — pricier than Cuba, far easier to travel."
+  },
+  {
+    "id": "eze",
+    "city": "Buenos Aires",
+    "country": "Argentina",
+    "airport": "EZE",
+    "region": "South America",
+    "coords": [-34.6, -58.38],
+    "flight": {
+      "hours": 13,
+      "nonstop": false,
+      "bands": { "jan": [1400, 1900], "mar": [1250, 1700], "jun": [1050, 1450], "oct": [1150, 1600], "dec": [1500, 2050] }
+    },
+    "stay": { "budget": [25, 50], "mid": [75, 140], "nice": [200, 390] },
+    "ground_daily": [35, 70],
+    "climate": {
+      "jan": { "high_c": 30, "low_c": 20, "rain_days": 8, "label": "hot summer" },
+      "mar": { "high_c": 26, "low_c": 17, "rain_days": 8, "label": "warm autumn" },
+      "jun": { "high_c": 15, "low_c": 8, "rain_days": 7, "label": "cool winter" },
+      "oct": { "high_c": 22, "low_c": 13, "rain_days": 8, "label": "mild spring" },
+      "dec": { "high_c": 28, "low_c": 19, "rain_days": 8, "label": "warm summer" }
+    },
+    "best_months": ["mar", "apr", "oct", "nov"],
+    "visa_ca": "visa_free_90",
+    "advisory": "caution",
+    "vibes": ["city", "food", "cheap"],
+    "hero_image": null,
+    "blurb": "Long flight, then European-feeling city living at South American prices."
+  },
+  {
+    "id": "del",
+    "city": "Delhi",
+    "country": "India",
+    "airport": "DEL",
+    "region": "South Asia",
+    "coords": [28.61, 77.21],
+    "flight": {
+      "hours": 15,
+      "nonstop": true,
+      "bands": { "jan": [1200, 1650], "mar": [1150, 1550], "jun": [1050, 1450], "oct": [1250, 1700], "dec": [1450, 1950] }
+    },
+    "stay": { "budget": [15, 35], "mid": [55, 100], "nice": [160, 330] },
+    "ground_daily": [25, 50],
+    "climate": {
+      "jan": { "high_c": 20, "low_c": 8, "rain_days": 2, "label": "cool, hazy, heavy smog" },
+      "mar": { "high_c": 30, "low_c": 15, "rain_days": 2, "label": "warm, pleasant" },
+      "jun": { "high_c": 39, "low_c": 28, "rain_days": 6, "label": "extreme heat, pre-monsoon" },
+      "oct": { "high_c": 33, "low_c": 20, "rain_days": 3, "label": "warm, post-monsoon" },
+      "dec": { "high_c": 22, "low_c": 9, "rain_days": 1, "label": "cool, hazy, heavy smog" }
+    },
+    "best_months": ["feb", "mar", "oct", "nov"],
+    "visa_ca": "evisa_required",
+    "advisory": "caution",
+    "vibes": ["city", "food", "cheap"],
+    "hero_image": null,
+    "blurb": "Nonstop and dirt cheap on the ground — but check air quality before booking winter."
+  },
+  {
+    "id": "akl",
+    "city": "Auckland",
+    "country": "New Zealand",
+    "airport": "AKL",
+    "region": "Oceania",
+    "coords": [-36.85, 174.76],
+    "flight": {
+      "hours": 22,
+      "nonstop": false,
+      "bands": { "jan": [2100, 2800], "mar": [1900, 2550], "jun": [1650, 2200], "oct": [1800, 2400], "dec": [2200, 2950] }
+    },
+    "stay": { "budget": [45, 80], "mid": [130, 220], "nice": [300, 560] },
+    "ground_daily": [70, 130],
+    "climate": {
+      "jan": { "high_c": 24, "low_c": 16, "rain_days": 8, "label": "warm summer" },
+      "mar": { "high_c": 22, "low_c": 15, "rain_days": 9, "label": "mild autumn" },
+      "jun": { "high_c": 15, "low_c": 9, "rain_days": 14, "label": "cool, wet winter" },
+      "oct": { "high_c": 18, "low_c": 11, "rain_days": 12, "label": "mild spring" },
+      "dec": { "high_c": 22, "low_c": 14, "rain_days": 9, "label": "warm early summer" }
+    },
+    "best_months": ["dec", "jan", "feb", "mar"],
+    "visa_ca": "eta_required",
+    "advisory": "normal",
+    "vibes": ["hike", "beach", "city"],
+    "hero_image": null,
+    "blurb": "The furthest and priciest trip here — worth it only with two weeks, not one."
+  },
+  {
+    "id": "yyc",
+    "city": "Calgary & Banff",
+    "country": "Canada",
+    "airport": "YYC",
+    "region": "North America",
+    "coords": [51.05, -114.07],
+    "flight": {
+      "hours": 4.5,
+      "nonstop": true,
+      "bands": { "jan": [350, 600], "mar": [420, 700], "jun": [600, 950], "oct": [450, 750], "dec": [550, 900] }
+    },
+    "stay": { "budget": [55, 95], "mid": [150, 250], "nice": [320, 600] },
+    "ground_daily": [70, 130],
+    "climate": {
+      "jan": { "high_c": -1, "low_c": -13, "rain_days": 6, "label": "cold, snowy, ski season" },
+      "mar": { "high_c": 5, "low_c": -7, "rain_days": 6, "label": "cold, snowy" },
+      "jun": { "high_c": 21, "low_c": 9, "rain_days": 12, "label": "mild, green, long days" },
+      "oct": { "high_c": 11, "low_c": -1, "rain_days": 6, "label": "cool, crisp" },
+      "dec": { "high_c": 0, "low_c": -11, "rain_days": 6, "label": "cold, snowy" }
+    },
+    "best_months": ["jun", "jul", "aug", "sep"],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": ["hike"],
+    "hero_image": null,
+    "blurb": "Cheapest flight on the list and no passport — the Rockies are the whole point."
+  }
+]
