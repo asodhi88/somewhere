@@ -145,8 +145,38 @@ Cost breakdown (flight / stay / ground), month-by-month weather and price strip 
 **Product-thinking constraint:** this might become a shipped product, not just a portfolio piece. That changes almost nothing about v1 except: **keep the data layer behind a seam.** Components must not import the JSON directly — route everything through a single `getDestinations(filters)` module so swapping static JSON for Supabase later is a one-file change. Do NOT otherwise build for scale you don't have (no auth, no DB, no accounts until something forces it).
 
 **Platform:** all tooling instructions assume **Windows 11 / VS Code / PowerShell**.
+### Visual direction (decided Weekend 2)
 
+**Palette — warm dark:**
+- Background: `#1A1614` (warm near-black, brown-leaning)
+- Elevated surfaces: `#26201C`
+- Borders: `#3A322C`
+- Primary text: `#F5F0E8`
+- Muted text: `#A89B8F`
+- Primary accent: `#E8A33D` (amber) — CTA only
+- Secondary accent: `#E8735A` (coral) — sparing
+
+**Type:** Cabinet Grotesk (display), Inter (body, tabular figures for numbers). No monospace.
+
+**Hero:** headline → subhead → search bar → landmark illustration band. Night sky
+layer with stars, real-moon-phase moon (calculated, with tooltip), shooting stars,
+satellite. No clouds. Respects `prefers-reduced-motion`.
+
+**Rule:** amber CTA is the single loudest element. Nothing competes with it.
 ---
+## 7b. MVP scope — SHIP THIS FIRST
+
+Main screen only: search bar + ranked results list. That's it.
+
+**In scope:** search inputs (budget, nights, month, stay tier), results wired to
+real `getDestinations()` output, Unsplash hero images, thin-results state,
+URL-encoded search state, mobile.
+
+**NOT in MVP:** tile clicks, shortlist, comparison view, detail pages.
+
+**Design was built against ideal content.** The build must also handle:
+over-budget cards with "~$X over" tags, searches returning very few results,
+and the loading state.
 
 ## 8. Three-weekend plan
 
@@ -235,3 +265,11 @@ raccoon/
 - Preview the build locally: `npm run preview`
 - Lint: `npm run lint`
 - Deploy: push to `main` — Vercel auto-deploys.
+
+## Post-MVP backlog
+- Comparison view (shortlist → side-by-side) — highest portfolio value
+- Detail view (cost breakdown, month strip, Google Flights hand-off)
+- "Why not [destination]" panel — surface a rejected pick and explain why.
+  Needs real ranking logic, not decorative copy.
+- Community cost validation (see 4.4)
+- Vibe filter in the search bar UI
