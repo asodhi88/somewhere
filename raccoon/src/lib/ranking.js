@@ -33,11 +33,21 @@ export const STAY_TIERS = ['budget', 'mid', 'nice']
 // has constrained flight time (see flightSensitivity / effectiveWeights). If
 // they haven't, rewarding short flights would bias the grid toward nearby
 // destinations they never asked to prioritise.
+//
+// TEMPORARY — visa scoring is DISABLED (weight 0). visa_ca hard-codes a Canadian
+// passport, which is wrong for any other traveller, so we stop letting it move
+// the ranking until passport-aware requirement data is wired in from the Sherpa
+// Requirements API. Visa's original 0.10 is redistributed proportionally across
+// headroom / weather / nonstop — equivalently: drop visa and renormalise the
+// other three (base sum 0.90) to sum to 1, hence `base / 0.9`. This is a disable,
+// not a removal: visa_ca, visaScore(), and the scoring code path all stay intact;
+// parts.visa is still computed, just multiplied by a 0 weight. To re-enable,
+// restore the base weights: headroom 0.40, weather 0.35, nonstop 0.15, visa 0.10.
 export const WEIGHTS = {
-  headroom: 0.40, // how comfortably the trip fits the budget
-  weather: 0.35, // weather quality for the chosen month
-  nonstop: 0.15, // nonstop bonus — scaled by flight sensitivity
-  visa: 0.10, // visa-free bonus
+  headroom: 0.40 / 0.9, // 0.40 base + visa's redistributed share ≈ 0.4444
+  weather: 0.35 / 0.9, // 0.35 base + visa's redistributed share ≈ 0.3889
+  nonstop: 0.15 / 0.9, // 0.15 base + visa's redistributed share ≈ 0.1667
+  visa: 0, // DISABLED (was 0.10) — see note above; visaScore() still runs, weighted 0
 }
 
 // Flight-sensitivity ramp (hours). At/under FULL the user clearly wants a short
@@ -309,6 +319,7 @@ function toResult(entry, filters, rank) {
     vibes: dest.vibes,
     reason: matchReason(dest, filters, cost, parts),
     blurb: dest.blurb,
+    hero_image: dest.hero_image || null, // { url, photographer, profile_url } | null
   }
 }
 

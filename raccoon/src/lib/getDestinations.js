@@ -40,4 +40,22 @@ export function searchWithDetails(filters = {}) {
   return searchDestinations(destinations, filters)
 }
 
+/**
+ * The set of 3-letter month keys the dataset can actually price and describe
+ * (a destination counts a month only if it has both a flight band and a climate
+ * normal for it). The UI uses this to tell "no data for this month yet" apart
+ * from "your filters were too tight" — routed through the seam so no component
+ * reads the raw JSON directly (§7).
+ */
+export function getAvailableMonths() {
+  const months = new Set()
+  for (const d of destinations) {
+    const bands = d.flight?.bands || {}
+    for (const m of Object.keys(d.climate || {})) {
+      if (bands[m]) months.add(m)
+    }
+  }
+  return months
+}
+
 export default getDestinations
