@@ -1,11 +1,12 @@
 import NightSky from './NightSky'
 import SearchBar from './SearchBar'
+import OriginPicker from './OriginPicker'
 import heroImg from '../assets/hero-base-warm.png'
 
 /**
  * Hero — the search-first panel: night sky behind, the pitch stacked in the
- * upper middle, the search bar as the loudest thing on the screen, and the
- * landmark mural dropping to a quiet horizon band beneath it.
+ * upper middle, then the origin control + search bar as one left-aligned group,
+ * and the landmark mural dropping to a quiet horizon band beneath it.
  */
 export default function Hero({ defaults, pending, onSearch }) {
   return (
@@ -13,7 +14,6 @@ export default function Hero({ defaults, pending, onSearch }) {
       <NightSky />
 
       <div className="rc-hero__content">
-        <span className="rc-eyebrow">Departing Toronto · YYZ</span>
         <h1 className="rc-hero__title">
           Pick a week and a budget. We&rsquo;ll pick the window seat.
         </h1>
@@ -21,7 +21,11 @@ export default function Hero({ defaults, pending, onSearch }) {
           Every city ranked by what the whole trip costs — flight, bed, and the
           week you spend once you land.
         </p>
-        <SearchBar defaults={defaults} pending={pending} onSearch={onSearch} />
+
+        <div className="rc-searchgroup">
+          <OriginPicker />
+          <SearchBar defaults={defaults} pending={pending} onSearch={onSearch} />
+        </div>
       </div>
 
       <div className="rc-hero__image" data-motion="1">

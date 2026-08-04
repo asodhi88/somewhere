@@ -20,7 +20,7 @@ const UTM = '?utm_source=raccoon&utm_medium=referral'
  * `hero_image` is present, with required attribution; when it's null (the whole
  * v1 dataset today, §5) it falls back to the designed placeholder texture.
  */
-export default function ResultCard({ result, nights }) {
+export default function ResultCard({ result, nights, onOpenLightbox }) {
   const [open, setOpen] = useState(false)
   const { cost } = result
   const reason = result.blurb || result.reason
@@ -40,6 +40,20 @@ export default function ResultCard({ result, nights }) {
                 loading="lazy"
               />
               <div className="rc-card__scrim" aria-hidden="true" />
+              <button
+                type="button"
+                className="rc-card__enlarge"
+                aria-label={`Enlarge photo of ${result.city}`}
+                onClick={() =>
+                  onOpenLightbox({
+                    url: img.url,
+                    photographer: img.photographer,
+                    profile_url: img.profile_url,
+                    city: result.city,
+                    country: result.country,
+                  })
+                }
+              />
               <span className="rc-card__attr">
                 {img.photographer ? (
                   <>

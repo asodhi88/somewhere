@@ -47,6 +47,15 @@ export function visaChip(visa) {
 /** Over-budget tag: "~$340 over". */
 export const overTag = (overBy) => `~${money(overBy)} over`
 
+/**
+ * A larger variant of a baked Unsplash "regular" URL for the lightbox. Only the
+ * image CDN's width param is bumped — this is not an API call, and the app still
+ * never touches the Unsplash API at runtime (CLAUDE.md §5). Returns the URL
+ * unchanged if it carries no width param.
+ */
+export const largeUrl = (url) =>
+  !url ? url : url.replace(/([?&])w=\d+/, '$1w=1600')
+
 /** Zero-padded rank, "01".."12". */
 export const rankLabel = (rank) => String(rank).padStart(2, '0')
 

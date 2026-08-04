@@ -1,14 +1,13 @@
 import { useState } from 'react'
-import { ORIGIN_OPTIONS, MONTH_OPTIONS, STAY_OPTIONS } from '../lib/searchState'
+import { MONTH_OPTIONS, STAY_OPTIONS } from '../lib/searchState'
 
 /**
  * SearchBar — the product's single input (CLAUDE.md: "search-first hero").
  * Holds a local draft of the filters and only commits on submit, so the amber
  * "Show me where" button stays the one loud action the design calls for.
  *
- * Origin leads the group (it comes first logically) but is display-only in v1:
- * only YYZ is selectable, the rest are greyed "coming soon" and not wired to
- * search, since every flight band is YYZ-specific.
+ * Origin lives in the OriginPicker control above the widget, not here — these
+ * four fields are budget, nights, month and stay tier.
  */
 export default function SearchBar({ defaults, pending, onSearch }) {
   const [budget, setBudget] = useState(defaults.budget)
@@ -41,25 +40,8 @@ export default function SearchBar({ defaults, pending, onSearch }) {
 
   return (
     <form className="rc-search" onSubmit={submit}>
-      <label className="rc-field rc-field--origin">
-        <span className="rc-field__label">From</span>
-        <div className="rc-field__control">
-          <select aria-label="Origin airport" defaultValue="yyz">
-            {ORIGIN_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value} disabled={!o.available}>
-                {o.code} · {o.city}
-                {o.available ? '' : ' — coming soon'}
-              </option>
-            ))}
-          </select>
-          <span className="rc-field__caret" aria-hidden="true">
-            ▾
-          </span>
-        </div>
-      </label>
-
       <label className="rc-field rc-field--budget">
-        <span className="rc-field__label">Total budget</span>
+        <span className="rc-field__label">Budget</span>
         <div className="rc-field__control">
           <span className="rc-field__prefix">$</span>
           <input

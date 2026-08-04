@@ -14,6 +14,7 @@ export default function ResultsList({
   searched,
   monthLabel,
   monthHasData,
+  onOpenLightbox,
 }) {
   if (pending) {
     return (
@@ -87,7 +88,12 @@ export default function ResultsList({
       )}
       <div className="rc-list">
         {results.map((r) => (
-          <ResultCard key={r.id} result={r} nights={nights} />
+          <ResultCard
+            key={r.id}
+            result={r}
+            nights={nights}
+            onOpenLightbox={onOpenLightbox}
+          />
         ))}
       </div>
     </section>

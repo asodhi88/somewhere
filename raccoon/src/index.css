@@ -267,10 +267,88 @@ a:hover {
 }
 
 /* ── Search bar ─────────────────────────────────────────────────────────── */
-.rc-search {
-  margin-top: 14px;
+/* Origin control + search bar, one left-aligned group above the mural. */
+.rc-searchgroup {
   width: 100%;
-  max-width: 1040px;
+  max-width: 980px;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rc-originbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rc-origin {
+  position: relative;
+}
+.rc-origin__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.rc-origin__btn:hover {
+  border-color: color-mix(in srgb, var(--amber) 50%, var(--border));
+}
+.rc-origin__chev {
+  font-size: 11px;
+  color: var(--muted);
+}
+.rc-origin__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 30;
+  min-width: 230px;
+  padding: 6px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 45px -18px rgba(0, 0, 0, 0.75);
+}
+.rc-origin__opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--surface-inset);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+.rc-origin__check {
+  color: var(--amber);
+  font-size: 12px;
+}
+.rc-origin__soon {
+  margin: 8px 4px 2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.rc-search {
+  width: 100%;
   display: flex;
   align-items: stretch;
   gap: 10px;
@@ -295,20 +373,17 @@ a:hover {
 .rc-field:focus-within {
   border-color: var(--amber);
 }
-.rc-field--origin {
-  flex: 1.05;
-}
 .rc-field--budget {
-  flex: 1;
-}
-.rc-field--nights {
-  flex: 0.5;
-}
-.rc-field--when {
   flex: 1.15;
 }
+.rc-field--nights {
+  flex: 0.6;
+}
+.rc-field--when {
+  flex: 1.1;
+}
 .rc-field--stay {
-  flex: 0.95;
+  flex: 1;
 }
 .rc-field__label {
   font-size: 11px;
@@ -479,6 +554,7 @@ a:hover {
 .rc-card__photo-img {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -487,11 +563,27 @@ a:hover {
 .rc-card__scrim {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
     to top,
     rgba(20, 16, 14, 0.72),
     rgba(20, 16, 14, 0) 42%
   );
+}
+/* Transparent full-cover click target that opens the lightbox. Sits below the
+   attribution links and rank (which stay independently interactive). */
+.rc-card__enlarge {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+.rc-card__enlarge:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: -3px;
 }
 .rc-card__region {
   font-size: 12px;
@@ -499,26 +591,33 @@ a:hover {
   letter-spacing: 0.04em;
   color: var(--muted);
 }
+/* Attribution required by Unsplash, kept deliberately minimal (§8): tiny, low
+   opacity, tucked in the corner. pointer-events pass through the non-link text
+   to the enlarge layer beneath; only the links themselves are clickable. */
 .rc-card__attr {
   position: relative;
-  z-index: 1;
-  font-size: 11px;
-  color: rgba(245, 240, 232, 0.82);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  z-index: 3;
+  pointer-events: none;
+  max-width: 78%;
+  font-size: 10px;
+  line-height: 1.2;
+  color: rgba(245, 240, 232, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
 }
 .rc-card__attr a {
+  pointer-events: auto;
   color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: rgba(245, 240, 232, 0.4);
+  text-decoration: none;
 }
 .rc-card__attr a:hover {
-  color: #fff;
-  text-decoration-color: rgba(245, 240, 232, 0.9);
+  color: rgba(245, 240, 232, 0.95);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 .rc-card__rank {
   position: relative;
-  z-index: 1;
+  z-index: 3;
+  pointer-events: none;
   font-size: 12px;
   font-weight: 600;
   color: var(--muted);
@@ -700,6 +799,107 @@ a:hover {
   flex: none;
 }
 
+/* ── Back to top ────────────────────────────────────────────────────────── */
+.rc-backtotop {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.15s ease;
+}
+.rc-backtotop.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.rc-backtotop:hover {
+  border-color: color-mix(in srgb, var(--amber) 55%, var(--border));
+}
+
+/* ── Lightbox ───────────────────────────────────────────────────────────── */
+.rc-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6vh 5vw;
+  background: rgba(10, 8, 7, 0.86);
+  animation: rc-fade 0.15s ease;
+}
+.rc-lightbox__inner {
+  position: relative;
+  max-width: min(1200px, 94vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.rc-lightbox__img {
+  display: block;
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
+}
+.rc-lightbox__close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.rc-lightbox__close:hover {
+  border-color: color-mix(in srgb, var(--amber) 55%, var(--border));
+}
+.rc-lightbox__attr {
+  font-size: 13px;
+  color: rgba(245, 240, 232, 0.75);
+  text-align: center;
+}
+.rc-lightbox__attr a {
+  color: rgba(245, 240, 232, 0.95);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@keyframes rc-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* ── Motion ─────────────────────────────────────────────────────────────── */
 @keyframes rc-twinkleA {
   0%,
@@ -795,6 +995,12 @@ a:hover {
     display: none !important;
   }
   .rc-skeleton {
+    animation: none !important;
+  }
+  .rc-backtotop {
+    transition: none !important;
+  }
+  .rc-lightbox {
     animation: none !important;
   }
 }
@@ -899,5 +1105,9 @@ a:hover {
     align-items: flex-start;
     gap: 10px;
     padding: 22px 20px 28px;
+  }
+  .rc-backtotop {
+    right: 16px;
+    bottom: 16px;
   }
 }

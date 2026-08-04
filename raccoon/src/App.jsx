@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import ResultsList from './components/ResultsList'
 import Footer from './components/Footer'
+import Lightbox from './components/Lightbox'
 import { getDestinations, getAvailableMonths } from './lib/getDestinations'
 import {
   filtersFromSearch,
@@ -31,6 +32,11 @@ export default function App() {
   const [pending, setPending] = useState(false)
   // Bumped only on browser back/forward so the search bar re-reads the URL.
   const [resetKey, setResetKey] = useState(0)
+  // The photo currently enlarged in the lightbox (null when closed).
+  const [lightbox, setLightbox] = useState(null)
+  // Back-to-top affordance: only once the user has searched and scrolled into
+  // the results.
+  const [showTop, setShowTop] = useState(false)
   const timer = useRef(null)
   const resultsRef = useRef(null)
 
@@ -86,6 +92,25 @@ export default function App() {
     }
   }, [])
 
+  // Reveal the back-to-top button once the results have scrolled up past the fold.
+  useEffect(() => {
+    const onScroll = () => {
+      const el = resultsRef.current
+      const show = searched && !!el && el.getBoundingClientRect().top < 80
+      setShowTop((prev) => (prev === show ? prev : show))
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [searched])
+
+  const scrollToTop = useCallback(() => {
+    const reduce =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+  }, [])
+
   return (
     <div className="rc-app">
       <Header />
@@ -98,9 +123,23 @@ export default function App() {
           searched={searched}
           monthLabel={monthLabel}
           monthHasData={monthHasData}
+          onOpenLightbox={setLightbox}
         />
       </div>
       <Footer />
+
+      <button
+        type="button"
+        className={`rc-backtotop${showTop ? ' is-visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label="Back to top"
+        aria-hidden={!showTop}
+        tabIndex={showTop ? 0 : -1}
+      >
+        <span aria-hidden="true">↑</span> Top
+      </button>
+
+      {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}
     </div>
   )
 }
