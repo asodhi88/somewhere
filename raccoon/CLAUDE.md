@@ -273,3 +273,9 @@ raccoon/
   Needs real ranking logic, not decorative copy.
 - Community cost validation (see 4.4)
 - Vibe filter in the search bar UI
+- **Image carousel per destination** (3–5 photos instead of one hero).
+  Requires: `hero_image` becomes an array; fetch script takes top N results;
+  per-photo attribution. Rate-limit cost is significant — 30 × 4 photos × 2
+  requests ≈ 240 calls against the 50/hr free cap (~5hrs of resume runs).
+  Open question: carousels may suit the detail view better than the results
+  list, where users are scanning to compare rather than lingering.
