@@ -5,26 +5,172 @@
     "country": "Thailand",
     "airport": "BKK",
     "region": "Southeast Asia",
-    "coords": [13.75, 100.52],
+    "coords": [
+      13.75,
+      100.52
+    ],
     "flight": {
       "hours": 20,
       "nonstop": false,
-      "bands": { "jan": [1350, 1750], "mar": [1250, 1600], "jun": [1100, 1450], "oct": [1200, 1550], "dec": [1500, 1950] }
+      "bands": {
+        "jan": [
+          1350,
+          1860
+        ],
+        "feb": [
+          1300,
+          1790
+        ],
+        "mar": [
+          1250,
+          1720
+        ],
+        "apr": [
+          1250,
+          1720
+        ],
+        "may": [
+          1150,
+          1590
+        ],
+        "jun": [
+          1100,
+          1520
+        ],
+        "jul": [
+          1150,
+          1590
+        ],
+        "aug": [
+          1150,
+          1590
+        ],
+        "sep": [
+          1100,
+          1520
+        ],
+        "oct": [
+          1200,
+          1660
+        ],
+        "nov": [
+          1300,
+          1790
+        ],
+        "dec": [
+          1500,
+          2070
+        ]
+      }
     },
-    "stay": { "budget": [15, 30], "mid": [55, 95], "nice": [160, 320] },
-    "ground_daily": [25, 50],
+    "stay": {
+      "budget": [
+        15,
+        30
+      ],
+      "mid": [
+        55,
+        95
+      ],
+      "nice": [
+        160,
+        320
+      ]
+    },
+    "ground_daily": [
+      25,
+      50
+    ],
     "climate": {
-      "jan": { "high_c": 33, "low_c": 22, "rain_days": 1, "label": "hot, dry, peak season" },
-      "mar": { "high_c": 35, "low_c": 26, "rain_days": 3, "label": "very hot" },
-      "jun": { "high_c": 33, "low_c": 26, "rain_days": 16, "label": "hot, wet season" },
-      "oct": { "high_c": 32, "low_c": 25, "rain_days": 17, "label": "hot, wettest month" },
-      "dec": { "high_c": 32, "low_c": 21, "rain_days": 1, "label": "warm, dry, peak season" }
+      "jan": {
+        "high_c": 33,
+        "low_c": 22,
+        "rain_days": 1,
+        "label": "hot, dry"
+      },
+      "feb": {
+        "high_c": 34,
+        "low_c": 24,
+        "rain_days": 2,
+        "label": "hot, dry"
+      },
+      "mar": {
+        "high_c": 35,
+        "low_c": 26,
+        "rain_days": 3,
+        "label": "extreme heat, dry"
+      },
+      "apr": {
+        "high_c": 35,
+        "low_c": 27,
+        "rain_days": 6,
+        "label": "extreme heat, mostly dry"
+      },
+      "may": {
+        "high_c": 34,
+        "low_c": 26,
+        "rain_days": 15,
+        "label": "hot, wet"
+      },
+      "jun": {
+        "high_c": 33,
+        "low_c": 26,
+        "rain_days": 16,
+        "label": "hot, very wet"
+      },
+      "jul": {
+        "high_c": 33,
+        "low_c": 25,
+        "rain_days": 17,
+        "label": "hot, very wet"
+      },
+      "aug": {
+        "high_c": 33,
+        "low_c": 25,
+        "rain_days": 19,
+        "label": "hot, very wet"
+      },
+      "sep": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 20,
+        "label": "hot, very wet"
+      },
+      "oct": {
+        "high_c": 32,
+        "low_c": 24,
+        "rain_days": 17,
+        "label": "hot, very wet"
+      },
+      "nov": {
+        "high_c": 32,
+        "low_c": 23,
+        "rain_days": 6,
+        "label": "hot, mostly dry"
+      },
+      "dec": {
+        "high_c": 32,
+        "low_c": 21,
+        "rain_days": 1,
+        "label": "hot, dry"
+      }
     },
-    "best_months": ["nov", "dec", "jan", "feb"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "nov",
+      "dec"
+    ],
     "visa_ca": "visa_free_30",
     "advisory": "caution",
-    "vibes": ["city", "food", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food",
+      "cheap"
+    ],
+    "photo_query": "Bangkok Thailand temple skyline",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1779419183239-25222afb3b26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZ2tvayUyMFRoYWlsYW5kJTIwdGVtcGxlJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Ahmet Yüksek ✪", "profile_url": "https://unsplash.com/@ahmetyuksek", "download_location": "https://api.unsplash.com/photos/7enOiBayyPg/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZ2tvayUyMFRoYWlsYW5kJTIwdGVtcGxlJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MjY5fDA" },
     "blurb": "Long haul, but a week on the ground costs less than a Toronto weekend."
   },
   {
@@ -33,26 +179,171 @@
     "country": "Iceland",
     "airport": "KEF",
     "region": "Northern Europe",
-    "coords": [64.15, -21.94],
+    "coords": [
+      64.15,
+      -21.94
+    ],
     "flight": {
       "hours": 5.5,
       "nonstop": true,
-      "bands": { "jan": [550, 800], "mar": [600, 850], "jun": [900, 1300], "oct": [650, 950], "dec": [700, 1050] }
+      "bands": {
+        "jan": [
+          550,
+          760
+        ],
+        "feb": [
+          570,
+          790
+        ],
+        "mar": [
+          600,
+          830
+        ],
+        "apr": [
+          700,
+          970
+        ],
+        "may": [
+          850,
+          1170
+        ],
+        "jun": [
+          900,
+          1240
+        ],
+        "jul": [
+          950,
+          1310
+        ],
+        "aug": [
+          900,
+          1240
+        ],
+        "sep": [
+          750,
+          1040
+        ],
+        "oct": [
+          650,
+          900
+        ],
+        "nov": [
+          600,
+          830
+        ],
+        "dec": [
+          700,
+          970
+        ]
+      }
     },
-    "stay": { "budget": [55, 90], "mid": [150, 240], "nice": [340, 550] },
-    "ground_daily": [90, 160],
+    "stay": {
+      "budget": [
+        55,
+        90
+      ],
+      "mid": [
+        150,
+        240
+      ],
+      "nice": [
+        340,
+        550
+      ]
+    },
+    "ground_daily": [
+      90,
+      160
+    ],
     "climate": {
-      "jan": { "high_c": 3, "low_c": -2, "rain_days": 13, "label": "cold, dark, aurora season" },
-      "mar": { "high_c": 4, "low_c": -1, "rain_days": 12, "label": "cold, lengthening days" },
-      "jun": { "high_c": 12, "low_c": 7, "rain_days": 10, "label": "mild, near-endless daylight" },
-      "oct": { "high_c": 7, "low_c": 2, "rain_days": 14, "label": "cool, wet, aurora returns" },
-      "dec": { "high_c": 3, "low_c": -2, "rain_days": 13, "label": "cold, dark, festive" }
+      "jan": {
+        "high_c": 3,
+        "low_c": -2,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "feb": {
+        "high_c": 3,
+        "low_c": -2,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "mar": {
+        "high_c": 4,
+        "low_c": -1,
+        "rain_days": 12,
+        "label": "cold, wet"
+      },
+      "apr": {
+        "high_c": 6,
+        "low_c": 1,
+        "rain_days": 11,
+        "label": "cold, some rain"
+      },
+      "may": {
+        "high_c": 10,
+        "low_c": 4,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "jun": {
+        "high_c": 12,
+        "low_c": 7,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "jul": {
+        "high_c": 14,
+        "low_c": 9,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "aug": {
+        "high_c": 13,
+        "low_c": 8,
+        "rain_days": 11,
+        "label": "cool, some rain"
+      },
+      "sep": {
+        "high_c": 11,
+        "low_c": 6,
+        "rain_days": 12,
+        "label": "cool, wet"
+      },
+      "oct": {
+        "high_c": 7,
+        "low_c": 2,
+        "rain_days": 14,
+        "label": "cold, wet"
+      },
+      "nov": {
+        "high_c": 4,
+        "low_c": 0,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "dec": {
+        "high_c": 3,
+        "low_c": -2,
+        "rain_days": 13,
+        "label": "cold, wet"
+      }
     },
-    "best_months": ["jun", "jul", "aug", "sep"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["hike", "city"],
-    "hero_image": null,
+    "vibes": [
+      "hike",
+      "city"
+    ],
+    "photo_query": "Iceland landscape waterfall",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SWNlbGFuZCUyMGxhbmRzY2FwZSUyMHdhdGVyZmFsbHxlbnwxfDB8fHwxNzg1ODU2MjczfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Robert Lukeman", "profile_url": "https://unsplash.com/@robertlukeman", "download_location": "https://api.unsplash.com/photos/zNN6ubHmruI/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SWNlbGFuZCUyMGxhbmRzY2FwZSUyMHdhdGVyZmFsbHxlbnwxfDB8fHwxNzg1ODU2MjczfDA" },
     "blurb": "Cheap flight, punishing ground costs — the inverse of most long-haul trips."
   },
   {
@@ -61,26 +352,172 @@
     "country": "Portugal",
     "airport": "LIS",
     "region": "Southern Europe",
-    "coords": [38.72, -9.14],
+    "coords": [
+      38.72,
+      -9.14
+    ],
     "flight": {
       "hours": 6.5,
       "nonstop": true,
-      "bands": { "jan": [520, 720], "mar": [600, 850], "jun": [850, 1200], "oct": [650, 950], "dec": [600, 900] }
+      "bands": {
+        "jan": [
+          520,
+          720
+        ],
+        "feb": [
+          540,
+          750
+        ],
+        "mar": [
+          600,
+          830
+        ],
+        "apr": [
+          700,
+          970
+        ],
+        "may": [
+          800,
+          1100
+        ],
+        "jun": [
+          850,
+          1170
+        ],
+        "jul": [
+          950,
+          1310
+        ],
+        "aug": [
+          900,
+          1240
+        ],
+        "sep": [
+          750,
+          1040
+        ],
+        "oct": [
+          650,
+          900
+        ],
+        "nov": [
+          580,
+          800
+        ],
+        "dec": [
+          600,
+          830
+        ]
+      }
     },
-    "stay": { "budget": [40, 65], "mid": [95, 160], "nice": [230, 400] },
-    "ground_daily": [50, 90],
+    "stay": {
+      "budget": [
+        40,
+        65
+      ],
+      "mid": [
+        95,
+        160
+      ],
+      "nice": [
+        230,
+        400
+      ]
+    },
+    "ground_daily": [
+      50,
+      90
+    ],
     "climate": {
-      "jan": { "high_c": 15, "low_c": 8, "rain_days": 11, "label": "mild, some rain" },
-      "mar": { "high_c": 18, "low_c": 10, "rain_days": 9, "label": "mild spring" },
-      "jun": { "high_c": 26, "low_c": 16, "rain_days": 3, "label": "warm, dry" },
-      "oct": { "high_c": 22, "low_c": 14, "rain_days": 8, "label": "mild, some rain" },
-      "dec": { "high_c": 15, "low_c": 9, "rain_days": 12, "label": "mild, wettest month" }
+      "jan": {
+        "high_c": 15,
+        "low_c": 8,
+        "rain_days": 11,
+        "label": "cool, some rain"
+      },
+      "feb": {
+        "high_c": 16,
+        "low_c": 9,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "mar": {
+        "high_c": 18,
+        "low_c": 10,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "apr": {
+        "high_c": 20,
+        "low_c": 11,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "may": {
+        "high_c": 22,
+        "low_c": 13,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "jun": {
+        "high_c": 26,
+        "low_c": 16,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "jul": {
+        "high_c": 28,
+        "low_c": 18,
+        "rain_days": 1,
+        "label": "warm, dry"
+      },
+      "aug": {
+        "high_c": 29,
+        "low_c": 18,
+        "rain_days": 1,
+        "label": "warm, dry"
+      },
+      "sep": {
+        "high_c": 26,
+        "low_c": 17,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      },
+      "oct": {
+        "high_c": 22,
+        "low_c": 14,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "nov": {
+        "high_c": 18,
+        "low_c": 11,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "dec": {
+        "high_c": 15,
+        "low_c": 9,
+        "rain_days": 12,
+        "label": "cool, wet"
+      }
     },
-    "best_months": ["apr", "may", "jun", "sep", "oct"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "food", "beach"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food",
+      "beach"
+    ],
+    "photo_query": "Lisbon Portugal tram street",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1548707309-23edbbbbd84c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TGlzYm9uJTIwUG9ydHVnYWwlMjB0cmFtJTIwc3RyZWV0fGVufDF8MHx8fDE3ODU4NTYyNzd8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Claudio Schwarz", "profile_url": "https://unsplash.com/@purzlbaum", "download_location": "https://api.unsplash.com/photos/UGF22xM1KQU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TGlzYm9uJTIwUG9ydHVnYWwlMjB0cmFtJTIwc3RyZWV0fGVufDF8MHx8fDE3ODU4NTYyNzd8MA" },
     "blurb": "Cheap for Western Europe, warm into November, walkable."
   },
   {
@@ -89,26 +526,171 @@
     "country": "Mexico",
     "airport": "CUN",
     "region": "Central America & Caribbean",
-    "coords": [21.16, -86.85],
+    "coords": [
+      21.16,
+      -86.85
+    ],
     "flight": {
       "hours": 4,
       "nonstop": true,
-      "bands": { "jan": [500, 750], "mar": [650, 950], "jun": [450, 700], "oct": [400, 650], "dec": [600, 900] }
+      "bands": {
+        "jan": [
+          500,
+          690
+        ],
+        "feb": [
+          600,
+          830
+        ],
+        "mar": [
+          650,
+          900
+        ],
+        "apr": [
+          700,
+          970
+        ],
+        "may": [
+          550,
+          760
+        ],
+        "jun": [
+          450,
+          620
+        ],
+        "jul": [
+          500,
+          690
+        ],
+        "aug": [
+          480,
+          660
+        ],
+        "sep": [
+          400,
+          550
+        ],
+        "oct": [
+          400,
+          550
+        ],
+        "nov": [
+          480,
+          660
+        ],
+        "dec": [
+          600,
+          830
+        ]
+      }
     },
-    "stay": { "budget": [35, 60], "mid": [110, 190], "nice": [280, 550] },
-    "ground_daily": [45, 85],
+    "stay": {
+      "budget": [
+        35,
+        60
+      ],
+      "mid": [
+        110,
+        190
+      ],
+      "nice": [
+        280,
+        550
+      ]
+    },
+    "ground_daily": [
+      45,
+      85
+    ],
     "climate": {
-      "jan": { "high_c": 28, "low_c": 20, "rain_days": 6, "label": "warm, dry, peak season" },
-      "mar": { "high_c": 30, "low_c": 22, "rain_days": 3, "label": "hot, dry, spring break" },
-      "jun": { "high_c": 32, "low_c": 25, "rain_days": 11, "label": "hot, humid" },
-      "oct": { "high_c": 31, "low_c": 24, "rain_days": 13, "label": "hot, wet, hurricane season" },
-      "dec": { "high_c": 28, "low_c": 21, "rain_days": 7, "label": "warm, dry" }
+      "jan": {
+        "high_c": 28,
+        "low_c": 20,
+        "rain_days": 6,
+        "label": "warm, mostly dry"
+      },
+      "feb": {
+        "high_c": 29,
+        "low_c": 21,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      },
+      "mar": {
+        "high_c": 30,
+        "low_c": 22,
+        "rain_days": 3,
+        "label": "hot, dry"
+      },
+      "apr": {
+        "high_c": 31,
+        "low_c": 23,
+        "rain_days": 3,
+        "label": "hot, dry"
+      },
+      "may": {
+        "high_c": 32,
+        "low_c": 24,
+        "rain_days": 6,
+        "label": "hot, mostly dry"
+      },
+      "jun": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 11,
+        "label": "hot, some rain"
+      },
+      "jul": {
+        "high_c": 33,
+        "low_c": 25,
+        "rain_days": 10,
+        "label": "hot, some rain"
+      },
+      "aug": {
+        "high_c": 33,
+        "low_c": 25,
+        "rain_days": 11,
+        "label": "hot, some rain"
+      },
+      "sep": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "oct": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "nov": {
+        "high_c": 29,
+        "low_c": 22,
+        "rain_days": 9,
+        "label": "warm, some rain"
+      },
+      "dec": {
+        "high_c": 28,
+        "low_c": 21,
+        "rain_days": 7,
+        "label": "warm, mostly dry"
+      }
     },
-    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "dec"
+    ],
     "visa_ca": "visa_free_180",
     "advisory": "caution",
-    "vibes": ["beach", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "beach",
+      "cheap"
+    ],
+    "photo_query": "Cancun Mexico beach turquoise water",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1602088113235-229c19758e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FuY3VuJTIwTWV4aWNvJTIwYmVhY2glMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwxfDB8fHwxNzg1ODU2MjgwfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "David Vives", "profile_url": "https://unsplash.com/@davidvives", "download_location": "https://api.unsplash.com/photos/ELf8M_YWRTY/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FuY3VuJTIwTWV4aWNvJTIwYmVhY2glMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwxfDB8fHwxNzg1ODU2MjgwfDA" },
     "blurb": "Short nonstop, warm all winter — the default Toronto escape for a reason."
   },
   {
@@ -117,26 +699,171 @@
     "country": "Japan",
     "airport": "NRT",
     "region": "East Asia",
-    "coords": [35.68, 139.69],
+    "coords": [
+      35.68,
+      139.69
+    ],
     "flight": {
       "hours": 13,
       "nonstop": true,
-      "bands": { "jan": [1100, 1500], "mar": [1400, 1900], "jun": [1200, 1600], "oct": [1300, 1750], "dec": [1350, 1800] }
+      "bands": {
+        "jan": [
+          1100,
+          1520
+        ],
+        "feb": [
+          1150,
+          1590
+        ],
+        "mar": [
+          1400,
+          1930
+        ],
+        "apr": [
+          1450,
+          2000
+        ],
+        "may": [
+          1300,
+          1790
+        ],
+        "jun": [
+          1200,
+          1660
+        ],
+        "jul": [
+          1500,
+          2070
+        ],
+        "aug": [
+          1500,
+          2070
+        ],
+        "sep": [
+          1300,
+          1790
+        ],
+        "oct": [
+          1300,
+          1790
+        ],
+        "nov": [
+          1200,
+          1660
+        ],
+        "dec": [
+          1350,
+          1860
+        ]
+      }
     },
-    "stay": { "budget": [40, 70], "mid": [120, 200], "nice": [300, 550] },
-    "ground_daily": [55, 100],
+    "stay": {
+      "budget": [
+        40,
+        70
+      ],
+      "mid": [
+        120,
+        200
+      ],
+      "nice": [
+        300,
+        550
+      ]
+    },
+    "ground_daily": [
+      55,
+      100
+    ],
     "climate": {
-      "jan": { "high_c": 10, "low_c": 2, "rain_days": 5, "label": "cold, dry, clear" },
-      "mar": { "high_c": 14, "low_c": 5, "rain_days": 10, "label": "cool, cherry blossoms late month" },
-      "jun": { "high_c": 25, "low_c": 18, "rain_days": 12, "label": "warm, rainy season" },
-      "oct": { "high_c": 22, "low_c": 15, "rain_days": 10, "label": "mild, pleasant" },
-      "dec": { "high_c": 12, "low_c": 4, "rain_days": 5, "label": "cold, dry, clear" }
+      "jan": {
+        "high_c": 10,
+        "low_c": 2,
+        "rain_days": 5,
+        "label": "cool, mostly dry"
+      },
+      "feb": {
+        "high_c": 11,
+        "low_c": 2,
+        "rain_days": 6,
+        "label": "cool, mostly dry"
+      },
+      "mar": {
+        "high_c": 14,
+        "low_c": 5,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "apr": {
+        "high_c": 19,
+        "low_c": 10,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "may": {
+        "high_c": 23,
+        "low_c": 15,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "jun": {
+        "high_c": 25,
+        "low_c": 18,
+        "rain_days": 12,
+        "label": "warm, wet"
+      },
+      "jul": {
+        "high_c": 29,
+        "low_c": 22,
+        "rain_days": 10,
+        "label": "warm, some rain"
+      },
+      "aug": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 8,
+        "label": "hot, some rain"
+      },
+      "sep": {
+        "high_c": 27,
+        "low_c": 21,
+        "rain_days": 12,
+        "label": "warm, wet"
+      },
+      "oct": {
+        "high_c": 22,
+        "low_c": 15,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "nov": {
+        "high_c": 17,
+        "low_c": 9,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "dec": {
+        "high_c": 12,
+        "low_c": 4,
+        "rain_days": 5,
+        "label": "cool, mostly dry"
+      }
     },
-    "best_months": ["mar", "apr", "oct", "nov"],
+    "best_months": [
+      "may",
+      "jun",
+      "sep",
+      "oct",
+      "nov"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "food"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food"
+    ],
+    "photo_query": "Tokyo Japan street night",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1573455494060-c5595004fb6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VG9reW8lMjBKYXBhbiUyMHN0cmVldCUyMG5pZ2h0fGVufDF8MHx8fDE3ODU4NTYyODR8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Denys Nevozhai", "profile_url": "https://unsplash.com/@dnevozhai", "download_location": "https://api.unsplash.com/photos/D68ADLeMh5Q/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VG9reW8lMjBKYXBhbiUyMHN0cmVldCUyMG5pZ2h0fGVufDF8MHx8fDE3ODU4NTYyODR8MA" },
     "blurb": "Passes a tight budget at hostel tier, fails it at nice hotels — the tier toggle earns its keep here."
   },
   {
@@ -145,26 +872,171 @@
     "country": "France",
     "airport": "CDG",
     "region": "Western Europe",
-    "coords": [48.86, 2.35],
+    "coords": [
+      48.86,
+      2.35
+    ],
     "flight": {
       "hours": 7.5,
       "nonstop": true,
-      "bands": { "jan": [600, 850], "mar": [700, 1000], "jun": [950, 1350], "oct": [750, 1100], "dec": [700, 1050] }
+      "bands": {
+        "jan": [
+          600,
+          830
+        ],
+        "feb": [
+          620,
+          860
+        ],
+        "mar": [
+          700,
+          970
+        ],
+        "apr": [
+          800,
+          1100
+        ],
+        "may": [
+          900,
+          1240
+        ],
+        "jun": [
+          950,
+          1310
+        ],
+        "jul": [
+          1050,
+          1450
+        ],
+        "aug": [
+          1000,
+          1380
+        ],
+        "sep": [
+          850,
+          1170
+        ],
+        "oct": [
+          750,
+          1040
+        ],
+        "nov": [
+          680,
+          940
+        ],
+        "dec": [
+          700,
+          970
+        ]
+      }
     },
-    "stay": { "budget": [50, 85], "mid": [140, 230], "nice": [350, 650] },
-    "ground_daily": [70, 130],
+    "stay": {
+      "budget": [
+        50,
+        85
+      ],
+      "mid": [
+        140,
+        230
+      ],
+      "nice": [
+        350,
+        650
+      ]
+    },
+    "ground_daily": [
+      70,
+      130
+    ],
     "climate": {
-      "jan": { "high_c": 7, "low_c": 3, "rain_days": 10, "label": "cold, grey" },
-      "mar": { "high_c": 12, "low_c": 5, "rain_days": 9, "label": "cool spring" },
-      "jun": { "high_c": 23, "low_c": 14, "rain_days": 8, "label": "warm, long days" },
-      "oct": { "high_c": 16, "low_c": 9, "rain_days": 9, "label": "cool autumn" },
-      "dec": { "high_c": 8, "low_c": 3, "rain_days": 10, "label": "cold, festive" }
+      "jan": {
+        "high_c": 7,
+        "low_c": 3,
+        "rain_days": 10,
+        "label": "cold, some rain"
+      },
+      "feb": {
+        "high_c": 8,
+        "low_c": 3,
+        "rain_days": 9,
+        "label": "cold, some rain"
+      },
+      "mar": {
+        "high_c": 12,
+        "low_c": 5,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      },
+      "apr": {
+        "high_c": 16,
+        "low_c": 7,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      },
+      "may": {
+        "high_c": 20,
+        "low_c": 11,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "jun": {
+        "high_c": 23,
+        "low_c": 14,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "jul": {
+        "high_c": 25,
+        "low_c": 16,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      },
+      "aug": {
+        "high_c": 25,
+        "low_c": 16,
+        "rain_days": 7,
+        "label": "warm, mostly dry"
+      },
+      "sep": {
+        "high_c": 21,
+        "low_c": 13,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "oct": {
+        "high_c": 16,
+        "low_c": 10,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      },
+      "nov": {
+        "high_c": 11,
+        "low_c": 6,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "dec": {
+        "high_c": 8,
+        "low_c": 3,
+        "rain_days": 10,
+        "label": "cold, some rain"
+      }
     },
-    "best_months": ["may", "jun", "sep", "oct"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "food"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food"
+    ],
+    "photo_query": "Paris France rooftops street",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1471623432079-b009d30b6729?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UGFyaXMlMjBGcmFuY2UlMjByb29mdG9wcyUyMHN0cmVldHxlbnwxfDB8fHwxNzg1ODU2Mjg3fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "JOHN TOWNER", "profile_url": "https://unsplash.com/@heytowner", "download_location": "https://api.unsplash.com/photos/UO02gAW3c0c/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UGFyaXMlMjBGcmFuY2UlMjByb29mdG9wcyUyMHN0cmVldHxlbnwxfDB8fHwxNzg1ODU2Mjg3fDA" },
     "blurb": "Reasonable flight, but ground costs push it mid-to-high — a fair benchmark for Western Europe."
   },
   {
@@ -173,26 +1045,172 @@
     "country": "Mexico",
     "airport": "MEX",
     "region": "Central America & Caribbean",
-    "coords": [19.43, -99.13],
+    "coords": [
+      19.43,
+      -99.13
+    ],
     "flight": {
       "hours": 5,
       "nonstop": true,
-      "bands": { "jan": [520, 780], "mar": [600, 880], "jun": [480, 720], "oct": [500, 760], "dec": [650, 950] }
+      "bands": {
+        "jan": [
+          520,
+          720
+        ],
+        "feb": [
+          550,
+          760
+        ],
+        "mar": [
+          600,
+          830
+        ],
+        "apr": [
+          650,
+          900
+        ],
+        "may": [
+          550,
+          760
+        ],
+        "jun": [
+          480,
+          660
+        ],
+        "jul": [
+          550,
+          760
+        ],
+        "aug": [
+          530,
+          730
+        ],
+        "sep": [
+          500,
+          690
+        ],
+        "oct": [
+          500,
+          690
+        ],
+        "nov": [
+          560,
+          770
+        ],
+        "dec": [
+          650,
+          900
+        ]
+      }
     },
-    "stay": { "budget": [30, 55], "mid": [85, 150], "nice": [220, 420] },
-    "ground_daily": [35, 70],
+    "stay": {
+      "budget": [
+        30,
+        55
+      ],
+      "mid": [
+        85,
+        150
+      ],
+      "nice": [
+        220,
+        420
+      ]
+    },
+    "ground_daily": [
+      35,
+      70
+    ],
     "climate": {
-      "jan": { "high_c": 22, "low_c": 6, "rain_days": 2, "label": "mild, dry, sunny days" },
-      "mar": { "high_c": 26, "low_c": 9, "rain_days": 3, "label": "warm, dry" },
-      "jun": { "high_c": 24, "low_c": 12, "rain_days": 17, "label": "mild, wet season" },
-      "oct": { "high_c": 22, "low_c": 10, "rain_days": 12, "label": "mild, tapering rain" },
-      "dec": { "high_c": 21, "low_c": 6, "rain_days": 2, "label": "mild, dry" }
+      "jan": {
+        "high_c": 22,
+        "low_c": 6,
+        "rain_days": 2,
+        "label": "mild, dry"
+      },
+      "feb": {
+        "high_c": 24,
+        "low_c": 7,
+        "rain_days": 2,
+        "label": "mild, dry"
+      },
+      "mar": {
+        "high_c": 26,
+        "low_c": 9,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "apr": {
+        "high_c": 27,
+        "low_c": 11,
+        "rain_days": 7,
+        "label": "warm, mostly dry"
+      },
+      "may": {
+        "high_c": 26,
+        "low_c": 12,
+        "rain_days": 12,
+        "label": "warm, wet"
+      },
+      "jun": {
+        "high_c": 24,
+        "low_c": 12,
+        "rain_days": 17,
+        "label": "mild, very wet"
+      },
+      "jul": {
+        "high_c": 23,
+        "low_c": 12,
+        "rain_days": 20,
+        "label": "mild, very wet"
+      },
+      "aug": {
+        "high_c": 23,
+        "low_c": 12,
+        "rain_days": 19,
+        "label": "mild, very wet"
+      },
+      "sep": {
+        "high_c": 23,
+        "low_c": 12,
+        "rain_days": 17,
+        "label": "mild, very wet"
+      },
+      "oct": {
+        "high_c": 23,
+        "low_c": 10,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "nov": {
+        "high_c": 22,
+        "low_c": 8,
+        "rain_days": 5,
+        "label": "mild, mostly dry"
+      },
+      "dec": {
+        "high_c": 21,
+        "low_c": 6,
+        "rain_days": 2,
+        "label": "mild, dry"
+      }
     },
-    "best_months": ["nov", "dec", "jan", "feb", "mar"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "nov",
+      "dec"
+    ],
     "visa_ca": "visa_free_180",
     "advisory": "caution",
-    "vibes": ["city", "food", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food",
+      "cheap"
+    ],
+    "photo_query": "Mexico City colourful architecture",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1521216774850-01bc1c5fe0da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWV4aWNvJTIwQ2l0eSUyMGNvbG91cmZ1bCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MjkxfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "david carballar", "profile_url": "https://unsplash.com/@david_carballar", "download_location": "https://api.unsplash.com/photos/FZU-vIW-lk8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWV4aWNvJTIwQ2l0eSUyMGNvbG91cmZ1bCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MjkxfDA" },
     "blurb": "Cheap, close, world-class food — strong all-round value from YYZ."
   },
   {
@@ -201,26 +1219,172 @@
     "country": "Spain",
     "airport": "BCN",
     "region": "Southern Europe",
-    "coords": [41.39, 2.17],
+    "coords": [
+      41.39,
+      2.17
+    ],
     "flight": {
       "hours": 8,
       "nonstop": true,
-      "bands": { "jan": [600, 850], "mar": [700, 1000], "jun": [950, 1350], "oct": [750, 1100], "dec": [700, 1000] }
+      "bands": {
+        "jan": [
+          600,
+          830
+        ],
+        "feb": [
+          620,
+          860
+        ],
+        "mar": [
+          700,
+          970
+        ],
+        "apr": [
+          780,
+          1080
+        ],
+        "may": [
+          880,
+          1210
+        ],
+        "jun": [
+          950,
+          1310
+        ],
+        "jul": [
+          1050,
+          1450
+        ],
+        "aug": [
+          1000,
+          1380
+        ],
+        "sep": [
+          850,
+          1170
+        ],
+        "oct": [
+          750,
+          1040
+        ],
+        "nov": [
+          680,
+          940
+        ],
+        "dec": [
+          700,
+          970
+        ]
+      }
     },
-    "stay": { "budget": [45, 75], "mid": [120, 200], "nice": [300, 550] },
-    "ground_daily": [60, 110],
+    "stay": {
+      "budget": [
+        45,
+        75
+      ],
+      "mid": [
+        120,
+        200
+      ],
+      "nice": [
+        300,
+        550
+      ]
+    },
+    "ground_daily": [
+      60,
+      110
+    ],
     "climate": {
-      "jan": { "high_c": 14, "low_c": 6, "rain_days": 5, "label": "mild, some sun" },
-      "mar": { "high_c": 17, "low_c": 8, "rain_days": 6, "label": "mild spring" },
-      "jun": { "high_c": 26, "low_c": 18, "rain_days": 4, "label": "warm, beach weather" },
-      "oct": { "high_c": 22, "low_c": 14, "rain_days": 7, "label": "warm, pleasant" },
-      "dec": { "high_c": 15, "low_c": 7, "rain_days": 5, "label": "mild, festive" }
+      "jan": {
+        "high_c": 14,
+        "low_c": 6,
+        "rain_days": 5,
+        "label": "cool, mostly dry"
+      },
+      "feb": {
+        "high_c": 15,
+        "low_c": 7,
+        "rain_days": 5,
+        "label": "cool, mostly dry"
+      },
+      "mar": {
+        "high_c": 17,
+        "low_c": 8,
+        "rain_days": 6,
+        "label": "cool, mostly dry"
+      },
+      "apr": {
+        "high_c": 19,
+        "low_c": 10,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "may": {
+        "high_c": 22,
+        "low_c": 14,
+        "rain_days": 6,
+        "label": "mild, mostly dry"
+      },
+      "jun": {
+        "high_c": 26,
+        "low_c": 18,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      },
+      "jul": {
+        "high_c": 28,
+        "low_c": 21,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "aug": {
+        "high_c": 29,
+        "low_c": 21,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      },
+      "sep": {
+        "high_c": 26,
+        "low_c": 18,
+        "rain_days": 6,
+        "label": "warm, mostly dry"
+      },
+      "oct": {
+        "high_c": 22,
+        "low_c": 14,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "nov": {
+        "high_c": 17,
+        "low_c": 10,
+        "rain_days": 6,
+        "label": "cool, mostly dry"
+      },
+      "dec": {
+        "high_c": 15,
+        "low_c": 7,
+        "rain_days": 5,
+        "label": "cool, mostly dry"
+      }
     },
-    "best_months": ["may", "jun", "sep", "oct"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "sep",
+      "oct"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "beach", "food"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "beach",
+      "food"
+    ],
+    "photo_query": "Barcelona Spain architecture",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1688680437050-d2cddf4f20b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFyY2Vsb25hJTIwU3BhaW4lMjBhcmNoaXRlY3R1cmV8ZW58MXwwfHx8MTc4NTg1NjI5NXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Taisia Karaseva", "profile_url": "https://unsplash.com/@taisiat", "download_location": "https://api.unsplash.com/photos/s3kdLmeYxXs/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFyY2Vsb25hJTIwU3BhaW4lMjBhcmNoaXRlY3R1cmV8ZW58MXwwfHx8MTc4NTg1NjI5NXww" },
     "blurb": "Beach and city in one, warm shoulder seasons, mid-range costs."
   },
   {
@@ -229,27 +1393,172 @@
     "country": "Costa Rica",
     "airport": "SJO",
     "region": "Central America & Caribbean",
-    "coords": [9.93, -84.08],
+    "coords": [
+      9.93,
+      -84.08
+    ],
     "flight": {
       "hours": 6,
       "nonstop": true,
-      "bands": { "jan": [650, 950], "mar": [700, 1050], "jun": [550, 800], "oct": [500, 750], "dec": [800, 1200] }
+      "bands": {
+        "jan": [
+          650,
+          900
+        ],
+        "feb": [
+          680,
+          940
+        ],
+        "mar": [
+          700,
+          970
+        ],
+        "apr": [
+          750,
+          1040
+        ],
+        "may": [
+          650,
+          900
+        ],
+        "jun": [
+          550,
+          760
+        ],
+        "jul": [
+          600,
+          830
+        ],
+        "aug": [
+          580,
+          800
+        ],
+        "sep": [
+          520,
+          720
+        ],
+        "oct": [
+          500,
+          690
+        ],
+        "nov": [
+          600,
+          830
+        ],
+        "dec": [
+          800,
+          1100
+        ]
+      }
     },
-    "stay": { "budget": [30, 55], "mid": [90, 160], "nice": [240, 450] },
-    "ground_daily": [45, 85],
+    "stay": {
+      "budget": [
+        30,
+        55
+      ],
+      "mid": [
+        90,
+        160
+      ],
+      "nice": [
+        240,
+        450
+      ]
+    },
+    "ground_daily": [
+      45,
+      85
+    ],
     "climate": {
-      "jan": { "high_c": 26, "low_c": 17, "rain_days": 3, "label": "warm, dry season" },
-      "mar": { "high_c": 27, "low_c": 18, "rain_days": 3, "label": "warm, dry" },
-      "jun": { "high_c": 26, "low_c": 18, "rain_days": 18, "label": "warm, green season rain" },
-      "oct": { "high_c": 25, "low_c": 17, "rain_days": 22, "label": "warm but soaking — wettest month" },
-      "dec": { "high_c": 25, "low_c": 17, "rain_days": 8, "label": "warm, dry season begins" }
+      "jan": {
+        "high_c": 26,
+        "low_c": 17,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "feb": {
+        "high_c": 27,
+        "low_c": 17,
+        "rain_days": 2,
+        "label": "warm, dry"
+      },
+      "mar": {
+        "high_c": 27,
+        "low_c": 18,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "apr": {
+        "high_c": 27,
+        "low_c": 19,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      },
+      "may": {
+        "high_c": 27,
+        "low_c": 19,
+        "rain_days": 18,
+        "label": "warm, very wet"
+      },
+      "jun": {
+        "high_c": 26,
+        "low_c": 18,
+        "rain_days": 18,
+        "label": "warm, very wet"
+      },
+      "jul": {
+        "high_c": 26,
+        "low_c": 18,
+        "rain_days": 17,
+        "label": "warm, very wet"
+      },
+      "aug": {
+        "high_c": 26,
+        "low_c": 18,
+        "rain_days": 18,
+        "label": "warm, very wet"
+      },
+      "sep": {
+        "high_c": 26,
+        "low_c": 18,
+        "rain_days": 20,
+        "label": "warm, very wet"
+      },
+      "oct": {
+        "high_c": 25,
+        "low_c": 17,
+        "rain_days": 22,
+        "label": "warm, very wet"
+      },
+      "nov": {
+        "high_c": 25,
+        "low_c": 17,
+        "rain_days": 14,
+        "label": "warm, wet"
+      },
+      "dec": {
+        "high_c": 25,
+        "low_c": 17,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      }
     },
-    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "dec"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["hike", "beach"],
-    "hero_image": null,
-    "blurb": "Rainforest and coast within reach — go in the dry months, October is a washout."
+    "vibes": [
+      "hike",
+      "beach"
+    ],
+    "photo_query": "Costa Rica rainforest landscape",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1629494939320-e36ef741dc36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29zdGElMjBSaWNhJTIwcmFpbmZvcmVzdCUyMGxhbmRzY2FwZXxlbnwxfDB8fHwxNzg1ODU2Mjk4fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Christina Victoria Craft", "profile_url": "https://unsplash.com/@victoriabcphotographer", "download_location": "https://api.unsplash.com/photos/bjVoK4pDMj4/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29zdGElMjBSaWNhJTIwcmFpbmZvcmVzdCUyMGxhbmRzY2FwZXxlbnwxfDB8fHwxNzg1ODU2Mjk4fDA" },
+    "blurb": "Rainforest and coast within reach — go in the dry months, autumn is a washout."
   },
   {
     "id": "rak",
@@ -257,26 +1566,172 @@
     "country": "Morocco",
     "airport": "RAK",
     "region": "North Africa",
-    "coords": [31.63, -7.99],
+    "coords": [
+      31.63,
+      -7.99
+    ],
     "flight": {
       "hours": 10,
       "nonstop": false,
-      "bands": { "jan": [750, 1100], "mar": [800, 1200], "jun": [900, 1350], "oct": [850, 1250], "dec": [800, 1200] }
+      "bands": {
+        "jan": [
+          750,
+          1040
+        ],
+        "feb": [
+          780,
+          1080
+        ],
+        "mar": [
+          800,
+          1100
+        ],
+        "apr": [
+          850,
+          1170
+        ],
+        "may": [
+          880,
+          1210
+        ],
+        "jun": [
+          900,
+          1240
+        ],
+        "jul": [
+          950,
+          1310
+        ],
+        "aug": [
+          920,
+          1270
+        ],
+        "sep": [
+          880,
+          1210
+        ],
+        "oct": [
+          850,
+          1170
+        ],
+        "nov": [
+          800,
+          1100
+        ],
+        "dec": [
+          800,
+          1100
+        ]
+      }
     },
-    "stay": { "budget": [25, 50], "mid": [70, 130], "nice": [200, 400] },
-    "ground_daily": [30, 60],
+    "stay": {
+      "budget": [
+        25,
+        50
+      ],
+      "mid": [
+        70,
+        130
+      ],
+      "nice": [
+        200,
+        400
+      ]
+    },
+    "ground_daily": [
+      30,
+      60
+    ],
     "climate": {
-      "jan": { "high_c": 18, "low_c": 6, "rain_days": 4, "label": "mild days, cold nights" },
-      "mar": { "high_c": 23, "low_c": 10, "rain_days": 4, "label": "warm, pleasant" },
-      "jun": { "high_c": 34, "low_c": 18, "rain_days": 1, "label": "very hot, dry" },
-      "oct": { "high_c": 28, "low_c": 15, "rain_days": 3, "label": "warm, dry" },
-      "dec": { "high_c": 18, "low_c": 6, "rain_days": 4, "label": "mild days, cold nights" }
+      "jan": {
+        "high_c": 18,
+        "low_c": 6,
+        "rain_days": 4,
+        "label": "mild, mostly dry"
+      },
+      "feb": {
+        "high_c": 20,
+        "low_c": 8,
+        "rain_days": 4,
+        "label": "mild, mostly dry"
+      },
+      "mar": {
+        "high_c": 23,
+        "low_c": 10,
+        "rain_days": 4,
+        "label": "mild, mostly dry"
+      },
+      "apr": {
+        "high_c": 25,
+        "low_c": 12,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      },
+      "may": {
+        "high_c": 28,
+        "low_c": 15,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "jun": {
+        "high_c": 32,
+        "low_c": 18,
+        "rain_days": 1,
+        "label": "hot, dry"
+      },
+      "jul": {
+        "high_c": 37,
+        "low_c": 21,
+        "rain_days": 0,
+        "label": "extreme heat, dry"
+      },
+      "aug": {
+        "high_c": 36,
+        "low_c": 21,
+        "rain_days": 1,
+        "label": "extreme heat, dry"
+      },
+      "sep": {
+        "high_c": 32,
+        "low_c": 19,
+        "rain_days": 2,
+        "label": "hot, dry"
+      },
+      "oct": {
+        "high_c": 28,
+        "low_c": 15,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "nov": {
+        "high_c": 22,
+        "low_c": 11,
+        "rain_days": 4,
+        "label": "mild, mostly dry"
+      },
+      "dec": {
+        "high_c": 18,
+        "low_c": 6,
+        "rain_days": 4,
+        "label": "mild, mostly dry"
+      }
     },
-    "best_months": ["mar", "apr", "may", "oct", "nov"],
+    "best_months": [
+      "mar",
+      "apr",
+      "may",
+      "oct",
+      "nov"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "caution",
-    "vibes": ["city", "food", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food",
+      "cheap"
+    ],
+    "photo_query": "Marrakesh Morocco medina",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1597212618440-806262de4f6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWFycmFrZXNoJTIwTW9yb2NjbyUyMG1lZGluYXxlbnwxfDB8fHwxNzg1ODU2MzAxfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Paul Macallan", "profile_url": "https://unsplash.com/@pemacallan", "download_location": "https://api.unsplash.com/photos/CFKksjYRSQ8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWFycmFrZXNoJTIwTW9yb2NjbyUyMG1lZGluYXxlbnwxfDB8fHwxNzg1ODU2MzAxfDA" },
     "blurb": "One stop away, but cheap on the ground with strong spring and autumn weather."
   },
   {
@@ -285,26 +1740,171 @@
     "country": "Italy",
     "airport": "FCO",
     "region": "Southern Europe",
-    "coords": [41.9, 12.5],
+    "coords": [
+      41.9,
+      12.5
+    ],
     "flight": {
       "hours": 9,
       "nonstop": true,
-      "bands": { "jan": [650, 950], "mar": [750, 1100], "jun": [1000, 1450], "oct": [800, 1200], "dec": [750, 1100] }
+      "bands": {
+        "jan": [
+          650,
+          900
+        ],
+        "feb": [
+          680,
+          940
+        ],
+        "mar": [
+          750,
+          1040
+        ],
+        "apr": [
+          850,
+          1170
+        ],
+        "may": [
+          950,
+          1310
+        ],
+        "jun": [
+          1000,
+          1380
+        ],
+        "jul": [
+          1150,
+          1590
+        ],
+        "aug": [
+          1100,
+          1520
+        ],
+        "sep": [
+          900,
+          1240
+        ],
+        "oct": [
+          800,
+          1100
+        ],
+        "nov": [
+          720,
+          990
+        ],
+        "dec": [
+          750,
+          1040
+        ]
+      }
     },
-    "stay": { "budget": [45, 80], "mid": [120, 210], "nice": [300, 560] },
-    "ground_daily": [60, 110],
+    "stay": {
+      "budget": [
+        45,
+        80
+      ],
+      "mid": [
+        120,
+        210
+      ],
+      "nice": [
+        300,
+        560
+      ]
+    },
+    "ground_daily": [
+      60,
+      110
+    ],
     "climate": {
-      "jan": { "high_c": 12, "low_c": 3, "rain_days": 8, "label": "cool, some rain" },
-      "mar": { "high_c": 16, "low_c": 6, "rain_days": 7, "label": "mild spring" },
-      "jun": { "high_c": 28, "low_c": 16, "rain_days": 4, "label": "warm, dry" },
-      "oct": { "high_c": 22, "low_c": 12, "rain_days": 8, "label": "mild autumn" },
-      "dec": { "high_c": 13, "low_c": 4, "rain_days": 9, "label": "cool, festive" }
+      "jan": {
+        "high_c": 12,
+        "low_c": 3,
+        "rain_days": 8,
+        "label": "cool, some rain"
+      },
+      "feb": {
+        "high_c": 13,
+        "low_c": 4,
+        "rain_days": 8,
+        "label": "cool, some rain"
+      },
+      "mar": {
+        "high_c": 16,
+        "low_c": 6,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "apr": {
+        "high_c": 19,
+        "low_c": 8,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "may": {
+        "high_c": 24,
+        "low_c": 12,
+        "rain_days": 5,
+        "label": "mild, mostly dry"
+      },
+      "jun": {
+        "high_c": 28,
+        "low_c": 16,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      },
+      "jul": {
+        "high_c": 31,
+        "low_c": 18,
+        "rain_days": 2,
+        "label": "hot, dry"
+      },
+      "aug": {
+        "high_c": 31,
+        "low_c": 18,
+        "rain_days": 3,
+        "label": "hot, dry"
+      },
+      "sep": {
+        "high_c": 27,
+        "low_c": 15,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      },
+      "oct": {
+        "high_c": 22,
+        "low_c": 12,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "nov": {
+        "high_c": 16,
+        "low_c": 7,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "dec": {
+        "high_c": 13,
+        "low_c": 4,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      }
     },
-    "best_months": ["apr", "may", "sep", "oct"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "sep",
+      "oct"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "food"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food"
+    ],
+    "photo_query": "Rome Italy ancient architecture",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1588614959060-4d144f28b207?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Um9tZSUyMEl0YWx5JTIwYW5jaWVudCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MzA1fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Clay Banks", "profile_url": "https://unsplash.com/@claybanks", "download_location": "https://api.unsplash.com/photos/hi_52O-h5G8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Um9tZSUyMEl0YWx5JTIwYW5jaWVudCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MzA1fDA" },
     "blurb": "Nonstop to the heart of it; shoulder months dodge both crowds and peak fares."
   },
   {
@@ -313,26 +1913,172 @@
     "country": "Cuba",
     "airport": "HAV",
     "region": "Central America & Caribbean",
-    "coords": [23.11, -82.37],
+    "coords": [
+      23.11,
+      -82.37
+    ],
     "flight": {
       "hours": 3.5,
       "nonstop": true,
-      "bands": { "jan": [450, 700], "mar": [550, 850], "jun": [400, 650], "oct": [380, 620], "dec": [550, 850] }
+      "bands": {
+        "jan": [
+          450,
+          620
+        ],
+        "feb": [
+          500,
+          690
+        ],
+        "mar": [
+          550,
+          760
+        ],
+        "apr": [
+          600,
+          830
+        ],
+        "may": [
+          480,
+          660
+        ],
+        "jun": [
+          400,
+          550
+        ],
+        "jul": [
+          450,
+          620
+        ],
+        "aug": [
+          430,
+          590
+        ],
+        "sep": [
+          380,
+          520
+        ],
+        "oct": [
+          380,
+          520
+        ],
+        "nov": [
+          450,
+          620
+        ],
+        "dec": [
+          550,
+          760
+        ]
+      }
     },
-    "stay": { "budget": [25, 45], "mid": [65, 120], "nice": [160, 300] },
-    "ground_daily": [35, 70],
+    "stay": {
+      "budget": [
+        25,
+        45
+      ],
+      "mid": [
+        65,
+        120
+      ],
+      "nice": [
+        160,
+        300
+      ]
+    },
+    "ground_daily": [
+      35,
+      70
+    ],
     "climate": {
-      "jan": { "high_c": 26, "low_c": 18, "rain_days": 4, "label": "warm, dry, peak season" },
-      "mar": { "high_c": 28, "low_c": 19, "rain_days": 3, "label": "warm, dry" },
-      "jun": { "high_c": 31, "low_c": 23, "rain_days": 11, "label": "hot, humid" },
-      "oct": { "high_c": 29, "low_c": 22, "rain_days": 12, "label": "warm, wet, hurricane season" },
-      "dec": { "high_c": 26, "low_c": 19, "rain_days": 5, "label": "warm, dry" }
+      "jan": {
+        "high_c": 26,
+        "low_c": 18,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      },
+      "feb": {
+        "high_c": 27,
+        "low_c": 18,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "mar": {
+        "high_c": 28,
+        "low_c": 19,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "apr": {
+        "high_c": 29,
+        "low_c": 21,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "may": {
+        "high_c": 30,
+        "low_c": 22,
+        "rain_days": 7,
+        "label": "hot, mostly dry"
+      },
+      "jun": {
+        "high_c": 31,
+        "low_c": 23,
+        "rain_days": 11,
+        "label": "hot, some rain"
+      },
+      "jul": {
+        "high_c": 32,
+        "low_c": 24,
+        "rain_days": 9,
+        "label": "hot, some rain"
+      },
+      "aug": {
+        "high_c": 32,
+        "low_c": 24,
+        "rain_days": 10,
+        "label": "hot, some rain"
+      },
+      "sep": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 11,
+        "label": "hot, some rain"
+      },
+      "oct": {
+        "high_c": 29,
+        "low_c": 23,
+        "rain_days": 12,
+        "label": "warm, wet"
+      },
+      "nov": {
+        "high_c": 27,
+        "low_c": 21,
+        "rain_days": 7,
+        "label": "warm, mostly dry"
+      },
+      "dec": {
+        "high_c": 26,
+        "low_c": 19,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      }
     },
-    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "dec"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "caution",
-    "vibes": ["beach", "city", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "beach",
+      "city",
+      "cheap"
+    ],
+    "photo_query": "Havana Cuba colourful street classic car",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1570299437488-d430e1e677c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SGF2YW5hJTIwQ3ViYSUyMGNvbG91cmZ1bCUyMHN0cmVldCUyMGNsYXNzaWMlMjBjYXJ8ZW58MXwwfHx8MTc4NTg1NjMwOHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Spencer Everett", "profile_url": "https://unsplash.com/@sp3v", "download_location": "https://api.unsplash.com/photos/4MTSE39Oqro/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SGF2YW5hJTIwQ3ViYSUyMGNvbG91cmZ1bCUyMHN0cmVldCUyMGNsYXNzaWMlMjBjYXJ8ZW58MXwwfHx8MTc4NTg1NjMwOHww" },
     "blurb": "The shortest warm-water hop from Toronto, and cheap once you're there."
   },
   {
@@ -341,27 +2087,173 @@
     "country": "Greece",
     "airport": "ATH",
     "region": "Southern Europe",
-    "coords": [37.98, 23.73],
+    "coords": [
+      37.98,
+      23.73
+    ],
     "flight": {
       "hours": 10,
       "nonstop": true,
-      "bands": { "jan": [650, 950], "mar": [750, 1100], "jun": [1050, 1500], "oct": [800, 1200], "dec": [700, 1050] }
+      "bands": {
+        "jan": [
+          650,
+          900
+        ],
+        "feb": [
+          680,
+          940
+        ],
+        "mar": [
+          750,
+          1040
+        ],
+        "apr": [
+          850,
+          1170
+        ],
+        "may": [
+          980,
+          1350
+        ],
+        "jun": [
+          1050,
+          1450
+        ],
+        "jul": [
+          1200,
+          1660
+        ],
+        "aug": [
+          1150,
+          1590
+        ],
+        "sep": [
+          950,
+          1310
+        ],
+        "oct": [
+          800,
+          1100
+        ],
+        "nov": [
+          720,
+          990
+        ],
+        "dec": [
+          700,
+          970
+        ]
+      }
     },
-    "stay": { "budget": [35, 65], "mid": [95, 170], "nice": [250, 480] },
-    "ground_daily": [50, 95],
+    "stay": {
+      "budget": [
+        35,
+        65
+      ],
+      "mid": [
+        95,
+        170
+      ],
+      "nice": [
+        250,
+        480
+      ]
+    },
+    "ground_daily": [
+      50,
+      95
+    ],
     "climate": {
-      "jan": { "high_c": 13, "low_c": 6, "rain_days": 10, "label": "mild, some rain" },
-      "mar": { "high_c": 16, "low_c": 8, "rain_days": 7, "label": "mild spring" },
-      "jun": { "high_c": 31, "low_c": 20, "rain_days": 2, "label": "hot, dry" },
-      "oct": { "high_c": 23, "low_c": 15, "rain_days": 6, "label": "warm, pleasant" },
-      "dec": { "high_c": 15, "low_c": 8, "rain_days": 10, "label": "mild, wettest month" }
+      "jan": {
+        "high_c": 13,
+        "low_c": 6,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "feb": {
+        "high_c": 14,
+        "low_c": 6,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      },
+      "mar": {
+        "high_c": 16,
+        "low_c": 8,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "apr": {
+        "high_c": 20,
+        "low_c": 11,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "may": {
+        "high_c": 25,
+        "low_c": 15,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      },
+      "jun": {
+        "high_c": 30,
+        "low_c": 20,
+        "rain_days": 2,
+        "label": "hot, dry"
+      },
+      "jul": {
+        "high_c": 33,
+        "low_c": 23,
+        "rain_days": 1,
+        "label": "hot, dry"
+      },
+      "aug": {
+        "high_c": 33,
+        "low_c": 23,
+        "rain_days": 1,
+        "label": "hot, dry"
+      },
+      "sep": {
+        "high_c": 28,
+        "low_c": 19,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "oct": {
+        "high_c": 23,
+        "low_c": 15,
+        "rain_days": 6,
+        "label": "mild, mostly dry"
+      },
+      "nov": {
+        "high_c": 18,
+        "low_c": 11,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "dec": {
+        "high_c": 15,
+        "low_c": 8,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      }
     },
-    "best_months": ["apr", "may", "sep", "oct"],
+    "best_months": [
+      "apr",
+      "may",
+      "jun",
+      "sep",
+      "oct"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "beach", "food"],
-    "hero_image": null,
-    "blurb": "Gateway to the islands; October keeps the warmth without the summer fare spike."
+    "vibes": [
+      "city",
+      "beach",
+      "food"
+    ],
+    "photo_query": "Athens Greece Acropolis",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QXRoZW5zJTIwR3JlZWNlJTIwQWNyb3BvbGlzfGVufDF8MHx8fDE3ODU4NTYzMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Constantinos Kollias", "profile_url": "https://unsplash.com/@ckollias", "download_location": "https://api.unsplash.com/photos/yqBvJJ8jGBQ/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QXRoZW5zJTIwR3JlZWNlJTIwQWNyb3BvbGlzfGVufDF8MHx8fDE3ODU4NTYzMTJ8MA" },
+    "blurb": "Gateway to the islands; autumn keeps the warmth without the summer fare spike."
   },
   {
     "id": "sin",
@@ -369,26 +2261,171 @@
     "country": "Singapore",
     "airport": "SIN",
     "region": "Southeast Asia",
-    "coords": [1.35, 103.82],
+    "coords": [
+      1.35,
+      103.82
+    ],
     "flight": {
       "hours": 19,
       "nonstop": false,
-      "bands": { "jan": [1400, 1850], "mar": [1350, 1750], "jun": [1300, 1700], "oct": [1350, 1750], "dec": [1600, 2100] }
+      "bands": {
+        "jan": [
+          1400,
+          1930
+        ],
+        "feb": [
+          1380,
+          1900
+        ],
+        "mar": [
+          1350,
+          1860
+        ],
+        "apr": [
+          1350,
+          1860
+        ],
+        "may": [
+          1300,
+          1790
+        ],
+        "jun": [
+          1300,
+          1790
+        ],
+        "jul": [
+          1400,
+          1930
+        ],
+        "aug": [
+          1400,
+          1930
+        ],
+        "sep": [
+          1300,
+          1790
+        ],
+        "oct": [
+          1350,
+          1860
+        ],
+        "nov": [
+          1400,
+          1930
+        ],
+        "dec": [
+          1600,
+          2210
+        ]
+      }
     },
-    "stay": { "budget": [45, 80], "mid": [140, 240], "nice": [340, 620] },
-    "ground_daily": [55, 110],
+    "stay": {
+      "budget": [
+        45,
+        80
+      ],
+      "mid": [
+        140,
+        240
+      ],
+      "nice": [
+        340,
+        620
+      ]
+    },
+    "ground_daily": [
+      55,
+      110
+    ],
     "climate": {
-      "jan": { "high_c": 30, "low_c": 24, "rain_days": 15, "label": "hot, humid, wet" },
-      "mar": { "high_c": 32, "low_c": 25, "rain_days": 13, "label": "hot, humid" },
-      "jun": { "high_c": 32, "low_c": 25, "rain_days": 13, "label": "hot, humid" },
-      "oct": { "high_c": 31, "low_c": 24, "rain_days": 16, "label": "hot, humid, wet" },
-      "dec": { "high_c": 30, "low_c": 24, "rain_days": 18, "label": "hot, humid, monsoon" }
+      "jan": {
+        "high_c": 30,
+        "low_c": 24,
+        "rain_days": 15,
+        "label": "hot, wet"
+      },
+      "feb": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 11,
+        "label": "hot, some rain"
+      },
+      "mar": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "apr": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 15,
+        "label": "hot, wet"
+      },
+      "may": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 15,
+        "label": "hot, wet"
+      },
+      "jun": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "jul": {
+        "high_c": 31,
+        "low_c": 25,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "aug": {
+        "high_c": 31,
+        "low_c": 25,
+        "rain_days": 14,
+        "label": "hot, wet"
+      },
+      "sep": {
+        "high_c": 31,
+        "low_c": 25,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "oct": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 16,
+        "label": "hot, very wet"
+      },
+      "nov": {
+        "high_c": 30,
+        "low_c": 24,
+        "rain_days": 19,
+        "label": "hot, very wet"
+      },
+      "dec": {
+        "high_c": 30,
+        "low_c": 24,
+        "rain_days": 18,
+        "label": "hot, very wet"
+      }
     },
-    "best_months": ["feb", "mar", "apr", "jul", "aug"],
+    "best_months": [
+      "jan",
+      "feb",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "food"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food"
+    ],
+    "photo_query": "Singapore skyline gardens",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1496939376851-89342e90adcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2luZ2Fwb3JlJTIwc2t5bGluZSUyMGdhcmRlbnN8ZW58MXwwfHx8MTc4NTg1NjMxNXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Mike Enerio", "profile_url": "https://unsplash.com/@mikeenerio", "download_location": "https://api.unsplash.com/photos/7ryPpZK1qV8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2luZ2Fwb3JlJTIwc2t5bGluZSUyMGdhcmRlbnN8ZW58MXwwfHx8MTc4NTg1NjMxNXww" },
     "blurb": "Long, pricey haul with high ground costs too — the opposite end from Bangkok despite the same region."
   },
   {
@@ -397,26 +2434,171 @@
     "country": "Brazil",
     "airport": "GIG",
     "region": "South America",
-    "coords": [-22.91, -43.17],
+    "coords": [
+      -22.91,
+      -43.17
+    ],
     "flight": {
       "hours": 12,
       "nonstop": false,
-      "bands": { "jan": [1050, 1500], "mar": [950, 1400], "jun": [850, 1250], "oct": [900, 1350], "dec": [1200, 1700] }
+      "bands": {
+        "jan": [
+          1050,
+          1450
+        ],
+        "feb": [
+          1000,
+          1380
+        ],
+        "mar": [
+          950,
+          1310
+        ],
+        "apr": [
+          900,
+          1240
+        ],
+        "may": [
+          880,
+          1210
+        ],
+        "jun": [
+          850,
+          1170
+        ],
+        "jul": [
+          900,
+          1240
+        ],
+        "aug": [
+          880,
+          1210
+        ],
+        "sep": [
+          880,
+          1210
+        ],
+        "oct": [
+          900,
+          1240
+        ],
+        "nov": [
+          1050,
+          1450
+        ],
+        "dec": [
+          1200,
+          1660
+        ]
+      }
     },
-    "stay": { "budget": [30, 60], "mid": [90, 170], "nice": [240, 470] },
-    "ground_daily": [40, 80],
+    "stay": {
+      "budget": [
+        30,
+        60
+      ],
+      "mid": [
+        90,
+        170
+      ],
+      "nice": [
+        240,
+        470
+      ]
+    },
+    "ground_daily": [
+      40,
+      80
+    ],
     "climate": {
-      "jan": { "high_c": 30, "low_c": 24, "rain_days": 11, "label": "hot, humid, peak summer" },
-      "mar": { "high_c": 30, "low_c": 24, "rain_days": 10, "label": "hot, humid" },
-      "jun": { "high_c": 25, "low_c": 19, "rain_days": 6, "label": "mild, drier winter" },
-      "oct": { "high_c": 26, "low_c": 20, "rain_days": 9, "label": "warm spring" },
-      "dec": { "high_c": 29, "low_c": 23, "rain_days": 11, "label": "hot, humid" }
+      "jan": {
+        "high_c": 30,
+        "low_c": 24,
+        "rain_days": 11,
+        "label": "hot, some rain"
+      },
+      "feb": {
+        "high_c": 30,
+        "low_c": 24,
+        "rain_days": 9,
+        "label": "hot, some rain"
+      },
+      "mar": {
+        "high_c": 30,
+        "low_c": 24,
+        "rain_days": 10,
+        "label": "hot, some rain"
+      },
+      "apr": {
+        "high_c": 28,
+        "low_c": 22,
+        "rain_days": 9,
+        "label": "warm, some rain"
+      },
+      "may": {
+        "high_c": 26,
+        "low_c": 21,
+        "rain_days": 7,
+        "label": "warm, mostly dry"
+      },
+      "jun": {
+        "high_c": 25,
+        "low_c": 19,
+        "rain_days": 6,
+        "label": "warm, mostly dry"
+      },
+      "jul": {
+        "high_c": 25,
+        "low_c": 19,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      },
+      "aug": {
+        "high_c": 25,
+        "low_c": 19,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      },
+      "sep": {
+        "high_c": 25,
+        "low_c": 20,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      },
+      "oct": {
+        "high_c": 26,
+        "low_c": 21,
+        "rain_days": 10,
+        "label": "warm, some rain"
+      },
+      "nov": {
+        "high_c": 28,
+        "low_c": 22,
+        "rain_days": 11,
+        "label": "warm, some rain"
+      },
+      "dec": {
+        "high_c": 29,
+        "low_c": 23,
+        "rain_days": 11,
+        "label": "warm, some rain"
+      }
     },
-    "best_months": ["may", "jun", "jul", "aug", "sep"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "caution",
-    "vibes": ["beach", "city"],
-    "hero_image": null,
+    "vibes": [
+      "beach",
+      "city"
+    ],
+    "photo_query": "Rio de Janeiro Brazil beach mountains",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1679957631642-94f406206544?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UmlvJTIwZGUlMjBKYW5laXJvJTIwQnJhemlsJTIwYmVhY2glMjBtb3VudGFpbnN8ZW58MXwwfHx8MTc4NTg1NjMxOXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Johannes Mändle", "profile_url": "https://unsplash.com/@leonardo_64", "download_location": "https://api.unsplash.com/photos/FlVMi4RtHzI/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UmlvJTIwZGUlMjBKYW5laXJvJTIwQnJhemlsJTIwYmVhY2glMjBtb3VudGFpbnN8ZW58MXwwfHx8MTc4NTg1NjMxOXww" },
     "blurb": "One stop south; cheap on the ground and best value in its cooler, drier winter."
   },
   {
@@ -425,26 +2607,171 @@
     "country": "UAE",
     "airport": "DXB",
     "region": "Middle East",
-    "coords": [25.2, 55.27],
+    "coords": [
+      25.2,
+      55.27
+    ],
     "flight": {
       "hours": 13,
       "nonstop": true,
-      "bands": { "jan": [1000, 1450], "mar": [1050, 1500], "jun": [900, 1300], "oct": [1000, 1450], "dec": [1250, 1750] }
+      "bands": {
+        "jan": [
+          1000,
+          1380
+        ],
+        "feb": [
+          1020,
+          1410
+        ],
+        "mar": [
+          1050,
+          1450
+        ],
+        "apr": [
+          1050,
+          1450
+        ],
+        "may": [
+          950,
+          1310
+        ],
+        "jun": [
+          900,
+          1240
+        ],
+        "jul": [
+          950,
+          1310
+        ],
+        "aug": [
+          950,
+          1310
+        ],
+        "sep": [
+          950,
+          1310
+        ],
+        "oct": [
+          1000,
+          1380
+        ],
+        "nov": [
+          1150,
+          1590
+        ],
+        "dec": [
+          1250,
+          1720
+        ]
+      }
     },
-    "stay": { "budget": [55, 95], "mid": [150, 260], "nice": [380, 700] },
-    "ground_daily": [70, 140],
+    "stay": {
+      "budget": [
+        55,
+        95
+      ],
+      "mid": [
+        150,
+        260
+      ],
+      "nice": [
+        380,
+        700
+      ]
+    },
+    "ground_daily": [
+      70,
+      140
+    ],
     "climate": {
-      "jan": { "high_c": 24, "low_c": 14, "rain_days": 5, "label": "warm, pleasant, peak season" },
-      "mar": { "high_c": 28, "low_c": 18, "rain_days": 3, "label": "warm, dry" },
-      "jun": { "high_c": 40, "low_c": 29, "rain_days": 0, "label": "extreme heat" },
-      "oct": { "high_c": 35, "low_c": 24, "rain_days": 1, "label": "hot, easing" },
-      "dec": { "high_c": 25, "low_c": 15, "rain_days": 4, "label": "warm, peak season" }
+      "jan": {
+        "high_c": 24,
+        "low_c": 14,
+        "rain_days": 5,
+        "label": "mild, mostly dry"
+      },
+      "feb": {
+        "high_c": 25,
+        "low_c": 15,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "mar": {
+        "high_c": 28,
+        "low_c": 18,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "apr": {
+        "high_c": 32,
+        "low_c": 21,
+        "rain_days": 2,
+        "label": "hot, dry"
+      },
+      "may": {
+        "high_c": 37,
+        "low_c": 25,
+        "rain_days": 1,
+        "label": "extreme heat, dry"
+      },
+      "jun": {
+        "high_c": 39,
+        "low_c": 28,
+        "rain_days": 0,
+        "label": "extreme heat, dry"
+      },
+      "jul": {
+        "high_c": 40,
+        "low_c": 30,
+        "rain_days": 0,
+        "label": "extreme heat, dry"
+      },
+      "aug": {
+        "high_c": 40,
+        "low_c": 30,
+        "rain_days": 0,
+        "label": "extreme heat, dry"
+      },
+      "sep": {
+        "high_c": 38,
+        "low_c": 27,
+        "rain_days": 0,
+        "label": "extreme heat, dry"
+      },
+      "oct": {
+        "high_c": 35,
+        "low_c": 23,
+        "rain_days": 1,
+        "label": "extreme heat, dry"
+      },
+      "nov": {
+        "high_c": 30,
+        "low_c": 19,
+        "rain_days": 3,
+        "label": "hot, dry"
+      },
+      "dec": {
+        "high_c": 26,
+        "low_c": 16,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      }
     },
-    "best_months": ["nov", "dec", "jan", "feb", "mar"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "nov",
+      "dec"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "beach"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "beach"
+    ],
+    "photo_query": "Dubai skyline desert",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1623725206109-3ef2c2eec00e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RHViYWklMjBza3lsaW5lJTIwZGVzZXJ0fGVufDF8MHx8fDE3ODU4NTYzMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Ahmed Galal", "profile_url": "https://unsplash.com/@ahmadgalal", "download_location": "https://api.unsplash.com/photos/o27Syy2u6wU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RHViYWklMjBza3lsaW5lJTIwZGVzZXJ0fGVufDF8MHx8fDE3ODU4NTYzMjJ8MA" },
     "blurb": "Nonstop and glossy, but ground costs run high — winter only unless you like 40°C."
   },
   {
@@ -453,26 +2780,171 @@
     "country": "Denmark",
     "airport": "CPH",
     "region": "Northern Europe",
-    "coords": [55.68, 12.57],
+    "coords": [
+      55.68,
+      12.57
+    ],
     "flight": {
       "hours": 8,
       "nonstop": false,
-      "bands": { "jan": [600, 900], "mar": [700, 1050], "jun": [950, 1400], "oct": [750, 1100], "dec": [750, 1100] }
+      "bands": {
+        "jan": [
+          600,
+          830
+        ],
+        "feb": [
+          620,
+          860
+        ],
+        "mar": [
+          700,
+          970
+        ],
+        "apr": [
+          800,
+          1100
+        ],
+        "may": [
+          900,
+          1240
+        ],
+        "jun": [
+          950,
+          1310
+        ],
+        "jul": [
+          1050,
+          1450
+        ],
+        "aug": [
+          1000,
+          1380
+        ],
+        "sep": [
+          850,
+          1170
+        ],
+        "oct": [
+          750,
+          1040
+        ],
+        "nov": [
+          700,
+          970
+        ],
+        "dec": [
+          750,
+          1040
+        ]
+      }
     },
-    "stay": { "budget": [55, 90], "mid": [150, 250], "nice": [350, 620] },
-    "ground_daily": [85, 150],
+    "stay": {
+      "budget": [
+        55,
+        90
+      ],
+      "mid": [
+        150,
+        250
+      ],
+      "nice": [
+        350,
+        620
+      ]
+    },
+    "ground_daily": [
+      85,
+      150
+    ],
     "climate": {
-      "jan": { "high_c": 3, "low_c": -1, "rain_days": 12, "label": "cold, grey" },
-      "mar": { "high_c": 6, "low_c": 0, "rain_days": 9, "label": "cold spring" },
-      "jun": { "high_c": 20, "low_c": 11, "rain_days": 9, "label": "mild, long days" },
-      "oct": { "high_c": 11, "low_c": 6, "rain_days": 12, "label": "cool, wet" },
-      "dec": { "high_c": 4, "low_c": 0, "rain_days": 12, "label": "cold, festive" }
+      "jan": {
+        "high_c": 3,
+        "low_c": -1,
+        "rain_days": 12,
+        "label": "cold, wet"
+      },
+      "feb": {
+        "high_c": 4,
+        "low_c": -1,
+        "rain_days": 10,
+        "label": "cold, some rain"
+      },
+      "mar": {
+        "high_c": 6,
+        "low_c": 0,
+        "rain_days": 9,
+        "label": "cold, some rain"
+      },
+      "apr": {
+        "high_c": 11,
+        "low_c": 3,
+        "rain_days": 8,
+        "label": "cool, some rain"
+      },
+      "may": {
+        "high_c": 16,
+        "low_c": 8,
+        "rain_days": 8,
+        "label": "cool, some rain"
+      },
+      "jun": {
+        "high_c": 19,
+        "low_c": 11,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "jul": {
+        "high_c": 21,
+        "low_c": 13,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "aug": {
+        "high_c": 21,
+        "low_c": 13,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "sep": {
+        "high_c": 17,
+        "low_c": 10,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "oct": {
+        "high_c": 12,
+        "low_c": 7,
+        "rain_days": 11,
+        "label": "cool, some rain"
+      },
+      "nov": {
+        "high_c": 7,
+        "low_c": 3,
+        "rain_days": 12,
+        "label": "cold, wet"
+      },
+      "dec": {
+        "high_c": 4,
+        "low_c": 0,
+        "rain_days": 12,
+        "label": "cold, wet"
+      }
     },
-    "best_months": ["may", "jun", "jul", "aug"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "food"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food"
+    ],
+    "photo_query": "Copenhagen Denmark harbour colourful houses",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1604906148235-df407ed053f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29wZW5oYWdlbiUyMERlbm1hcmslMjBoYXJib3VyJTIwY29sb3VyZnVsJTIwaG91c2VzfGVufDF8MHx8fDE3ODU4NTYzMjZ8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Michael Jerrard", "profile_url": "https://unsplash.com/@michaeljerrard", "download_location": "https://api.unsplash.com/photos/q9KIP0iytbU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29wZW5oYWdlbiUyMERlbm1hcmslMjBoYXJib3VyJTIwY29sb3VyZnVsJTIwaG91c2VzfGVufDF8MHx8fDE3ODU4NTYzMjZ8MA" },
     "blurb": "Scandi design and food, but among the priciest ground costs in Europe."
   },
   {
@@ -481,26 +2953,171 @@
     "country": "Colombia",
     "airport": "MDE",
     "region": "South America",
-    "coords": [6.24, -75.58],
+    "coords": [
+      6.24,
+      -75.58
+    ],
     "flight": {
       "hours": 8,
       "nonstop": false,
-      "bands": { "jan": [650, 950], "mar": [600, 900], "jun": [550, 850], "oct": [500, 800], "dec": [750, 1100] }
+      "bands": {
+        "jan": [
+          650,
+          900
+        ],
+        "feb": [
+          620,
+          860
+        ],
+        "mar": [
+          600,
+          830
+        ],
+        "apr": [
+          600,
+          830
+        ],
+        "may": [
+          580,
+          800
+        ],
+        "jun": [
+          550,
+          760
+        ],
+        "jul": [
+          600,
+          830
+        ],
+        "aug": [
+          580,
+          800
+        ],
+        "sep": [
+          500,
+          690
+        ],
+        "oct": [
+          500,
+          690
+        ],
+        "nov": [
+          600,
+          830
+        ],
+        "dec": [
+          750,
+          1040
+        ]
+      }
     },
-    "stay": { "budget": [25, 50], "mid": [70, 130], "nice": [190, 380] },
-    "ground_daily": [30, 60],
+    "stay": {
+      "budget": [
+        25,
+        50
+      ],
+      "mid": [
+        70,
+        130
+      ],
+      "nice": [
+        190,
+        380
+      ]
+    },
+    "ground_daily": [
+      30,
+      60
+    ],
     "climate": {
-      "jan": { "high_c": 28, "low_c": 17, "rain_days": 8, "label": "warm, spring-like, drier" },
-      "mar": { "high_c": 28, "low_c": 18, "rain_days": 14, "label": "warm, wetter" },
-      "jun": { "high_c": 28, "low_c": 17, "rain_days": 12, "label": "warm, spring-like" },
-      "oct": { "high_c": 27, "low_c": 17, "rain_days": 18, "label": "warm, wettest stretch" },
-      "dec": { "high_c": 28, "low_c": 17, "rain_days": 9, "label": "warm, drier" }
+      "jan": {
+        "high_c": 28,
+        "low_c": 17,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      },
+      "feb": {
+        "high_c": 28,
+        "low_c": 17,
+        "rain_days": 9,
+        "label": "warm, some rain"
+      },
+      "mar": {
+        "high_c": 28,
+        "low_c": 18,
+        "rain_days": 14,
+        "label": "warm, wet"
+      },
+      "apr": {
+        "high_c": 27,
+        "low_c": 18,
+        "rain_days": 18,
+        "label": "warm, very wet"
+      },
+      "may": {
+        "high_c": 27,
+        "low_c": 18,
+        "rain_days": 20,
+        "label": "warm, very wet"
+      },
+      "jun": {
+        "high_c": 28,
+        "low_c": 18,
+        "rain_days": 15,
+        "label": "warm, wet"
+      },
+      "jul": {
+        "high_c": 29,
+        "low_c": 17,
+        "rain_days": 13,
+        "label": "warm, wet"
+      },
+      "aug": {
+        "high_c": 29,
+        "low_c": 17,
+        "rain_days": 14,
+        "label": "warm, wet"
+      },
+      "sep": {
+        "high_c": 28,
+        "low_c": 17,
+        "rain_days": 18,
+        "label": "warm, very wet"
+      },
+      "oct": {
+        "high_c": 27,
+        "low_c": 17,
+        "rain_days": 18,
+        "label": "warm, very wet"
+      },
+      "nov": {
+        "high_c": 27,
+        "low_c": 17,
+        "rain_days": 15,
+        "label": "warm, wet"
+      },
+      "dec": {
+        "high_c": 28,
+        "low_c": 17,
+        "rain_days": 9,
+        "label": "warm, some rain"
+      }
     },
-    "best_months": ["dec", "jan", "feb", "jul", "aug"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "nov",
+      "dec"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "caution",
-    "vibes": ["city", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "cheap"
+    ],
+    "photo_query": "Medellin Colombia valley city",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1590598016835-83cf3357ebc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWVkZWxsaW4lMjBDb2xvbWJpYSUyMHZhbGxleSUyMGNpdHl8ZW58MXwwfHx8MTc4NTg1NjMzMHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Mike Swigunski", "profile_url": "https://unsplash.com/@mike_swigunski", "download_location": "https://api.unsplash.com/photos/JvZ1paoSnHc/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWVkZWxsaW4lMjBDb2xvbWJpYSUyMHZhbGxleSUyMGNpdHl8ZW58MXwwfHx8MTc4NTg1NjMzMHww" },
     "blurb": "'City of eternal spring' — same mild weather year-round and very cheap on the ground."
   },
   {
@@ -509,26 +3126,171 @@
     "country": "Jamaica",
     "airport": "MBJ",
     "region": "Central America & Caribbean",
-    "coords": [18.47, -77.92],
+    "coords": [
+      18.47,
+      -77.92
+    ],
     "flight": {
       "hours": 4,
       "nonstop": true,
-      "bands": { "jan": [550, 850], "mar": [650, 1000], "jun": [500, 800], "oct": [450, 720], "dec": [700, 1050] }
+      "bands": {
+        "jan": [
+          550,
+          760
+        ],
+        "feb": [
+          600,
+          830
+        ],
+        "mar": [
+          650,
+          900
+        ],
+        "apr": [
+          700,
+          970
+        ],
+        "may": [
+          550,
+          760
+        ],
+        "jun": [
+          500,
+          690
+        ],
+        "jul": [
+          550,
+          760
+        ],
+        "aug": [
+          520,
+          720
+        ],
+        "sep": [
+          450,
+          620
+        ],
+        "oct": [
+          450,
+          620
+        ],
+        "nov": [
+          550,
+          760
+        ],
+        "dec": [
+          700,
+          970
+        ]
+      }
     },
-    "stay": { "budget": [45, 80], "mid": [130, 230], "nice": [320, 620] },
-    "ground_daily": [50, 95],
+    "stay": {
+      "budget": [
+        45,
+        80
+      ],
+      "mid": [
+        130,
+        230
+      ],
+      "nice": [
+        320,
+        620
+      ]
+    },
+    "ground_daily": [
+      50,
+      95
+    ],
     "climate": {
-      "jan": { "high_c": 30, "low_c": 21, "rain_days": 4, "label": "warm, dry, peak season" },
-      "mar": { "high_c": 30, "low_c": 21, "rain_days": 3, "label": "warm, dry" },
-      "jun": { "high_c": 32, "low_c": 24, "rain_days": 8, "label": "hot, humid" },
-      "oct": { "high_c": 31, "low_c": 23, "rain_days": 13, "label": "hot, wet, hurricane season" },
-      "dec": { "high_c": 30, "low_c": 22, "rain_days": 8, "label": "warm, dry" }
+      "jan": {
+        "high_c": 30,
+        "low_c": 21,
+        "rain_days": 4,
+        "label": "hot, mostly dry"
+      },
+      "feb": {
+        "high_c": 30,
+        "low_c": 21,
+        "rain_days": 3,
+        "label": "hot, dry"
+      },
+      "mar": {
+        "high_c": 30,
+        "low_c": 21,
+        "rain_days": 3,
+        "label": "hot, dry"
+      },
+      "apr": {
+        "high_c": 31,
+        "low_c": 22,
+        "rain_days": 3,
+        "label": "hot, dry"
+      },
+      "may": {
+        "high_c": 31,
+        "low_c": 23,
+        "rain_days": 6,
+        "label": "hot, mostly dry"
+      },
+      "jun": {
+        "high_c": 32,
+        "low_c": 24,
+        "rain_days": 8,
+        "label": "hot, some rain"
+      },
+      "jul": {
+        "high_c": 32,
+        "low_c": 24,
+        "rain_days": 6,
+        "label": "hot, mostly dry"
+      },
+      "aug": {
+        "high_c": 32,
+        "low_c": 24,
+        "rain_days": 8,
+        "label": "hot, some rain"
+      },
+      "sep": {
+        "high_c": 32,
+        "low_c": 24,
+        "rain_days": 10,
+        "label": "hot, some rain"
+      },
+      "oct": {
+        "high_c": 31,
+        "low_c": 23,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "nov": {
+        "high_c": 30,
+        "low_c": 22,
+        "rain_days": 8,
+        "label": "hot, some rain"
+      },
+      "dec": {
+        "high_c": 30,
+        "low_c": 22,
+        "rain_days": 8,
+        "label": "hot, some rain"
+      }
     },
-    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "may"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "caution",
-    "vibes": ["beach", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "beach",
+      "cheap"
+    ],
+    "photo_query": "Jamaica beach palm trees",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1733596679766-3d8f63b30a75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SmFtYWljYSUyMGJlYWNoJTIwcGFsbSUyMHRyZWVzfGVufDF8MHx8fDE3ODU4NTYzMzN8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Clay LeConey", "profile_url": "https://unsplash.com/@clayleconey", "download_location": "https://api.unsplash.com/photos/-cE_WYFod6g/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SmFtYWljYSUyMGJlYWNoJTIwcGFsbSUyMHRyZWVzfGVufDF8MHx8fDE3ODU4NTYzMzN8MA" },
     "blurb": "Short nonstop to guaranteed winter sun; all-inclusive stays skew the tiers cheaper than they look."
   },
   {
@@ -537,26 +3299,171 @@
     "country": "United States",
     "airport": "LAX",
     "region": "North America",
-    "coords": [34.05, -118.24],
+    "coords": [
+      34.05,
+      -118.24
+    ],
     "flight": {
       "hours": 5.5,
       "nonstop": true,
-      "bands": { "jan": [400, 650], "mar": [500, 800], "jun": [600, 950], "oct": [500, 800], "dec": [650, 1000] }
+      "bands": {
+        "jan": [
+          400,
+          550
+        ],
+        "feb": [
+          450,
+          620
+        ],
+        "mar": [
+          500,
+          690
+        ],
+        "apr": [
+          550,
+          760
+        ],
+        "may": [
+          580,
+          800
+        ],
+        "jun": [
+          600,
+          830
+        ],
+        "jul": [
+          700,
+          970
+        ],
+        "aug": [
+          680,
+          940
+        ],
+        "sep": [
+          600,
+          830
+        ],
+        "oct": [
+          500,
+          690
+        ],
+        "nov": [
+          550,
+          760
+        ],
+        "dec": [
+          650,
+          900
+        ]
+      }
     },
-    "stay": { "budget": [70, 120], "mid": [180, 300], "nice": [400, 750] },
-    "ground_daily": [80, 150],
+    "stay": {
+      "budget": [
+        70,
+        120
+      ],
+      "mid": [
+        180,
+        300
+      ],
+      "nice": [
+        400,
+        750
+      ]
+    },
+    "ground_daily": [
+      80,
+      150
+    ],
     "climate": {
-      "jan": { "high_c": 20, "low_c": 9, "rain_days": 6, "label": "mild, occasional rain" },
-      "mar": { "high_c": 21, "low_c": 11, "rain_days": 5, "label": "warm, dry" },
-      "jun": { "high_c": 25, "low_c": 16, "rain_days": 1, "label": "warm, 'June gloom' mornings" },
-      "oct": { "high_c": 26, "low_c": 15, "rain_days": 2, "label": "warm, dry" },
-      "dec": { "high_c": 20, "low_c": 9, "rain_days": 5, "label": "mild, some rain" }
+      "jan": {
+        "high_c": 20,
+        "low_c": 9,
+        "rain_days": 6,
+        "label": "mild, mostly dry"
+      },
+      "feb": {
+        "high_c": 20,
+        "low_c": 10,
+        "rain_days": 6,
+        "label": "mild, mostly dry"
+      },
+      "mar": {
+        "high_c": 21,
+        "low_c": 11,
+        "rain_days": 5,
+        "label": "mild, mostly dry"
+      },
+      "apr": {
+        "high_c": 22,
+        "low_c": 12,
+        "rain_days": 3,
+        "label": "mild, dry"
+      },
+      "may": {
+        "high_c": 23,
+        "low_c": 14,
+        "rain_days": 2,
+        "label": "mild, dry"
+      },
+      "jun": {
+        "high_c": 25,
+        "low_c": 16,
+        "rain_days": 1,
+        "label": "warm, dry"
+      },
+      "jul": {
+        "high_c": 28,
+        "low_c": 18,
+        "rain_days": 0,
+        "label": "warm, dry"
+      },
+      "aug": {
+        "high_c": 29,
+        "low_c": 19,
+        "rain_days": 1,
+        "label": "warm, dry"
+      },
+      "sep": {
+        "high_c": 28,
+        "low_c": 18,
+        "rain_days": 1,
+        "label": "warm, dry"
+      },
+      "oct": {
+        "high_c": 26,
+        "low_c": 15,
+        "rain_days": 2,
+        "label": "warm, dry"
+      },
+      "nov": {
+        "high_c": 22,
+        "low_c": 11,
+        "rain_days": 4,
+        "label": "mild, mostly dry"
+      },
+      "dec": {
+        "high_c": 20,
+        "low_c": 9,
+        "rain_days": 5,
+        "label": "mild, mostly dry"
+      }
     },
-    "best_months": ["apr", "may", "sep", "oct", "nov"],
+    "best_months": [
+      "apr",
+      "may",
+      "jun",
+      "jul",
+      "oct"
+    ],
     "visa_ca": "visa_free_us",
     "advisory": "normal",
-    "vibes": ["city", "beach"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "beach"
+    ],
+    "photo_query": "Los Angeles California palm trees",
+    "hero_image": { "url": "https://images.unsplash.com/flagged/photo-1575555201693-7cd442b8023f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TG9zJTIwQW5nZWxlcyUyMENhbGlmb3JuaWElMjBwYWxtJTIwdHJlZXN8ZW58MXwwfHx8MTc4NTg1NjMzN3ww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Cedric Letsch", "profile_url": "https://unsplash.com/@cedricletsch", "download_location": "https://api.unsplash.com/photos/UZVlSjrIJ3o/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TG9zJTIwQW5nZWxlcyUyMENhbGlmb3JuaWElMjBwYWxtJTIwdHJlZXN8ZW58MXwwfHx8MTc4NTg1NjMzN3ww" },
     "blurb": "Cheap short flight, but US ground costs and pricey hotels blunt the value."
   },
   {
@@ -565,26 +3472,172 @@
     "country": "Czechia",
     "airport": "PRG",
     "region": "Central & Eastern Europe",
-    "coords": [50.08, 14.44],
+    "coords": [
+      50.08,
+      14.44
+    ],
     "flight": {
       "hours": 8.5,
       "nonstop": false,
-      "bands": { "jan": [600, 880], "mar": [700, 1000], "jun": [950, 1350], "oct": [750, 1100], "dec": [700, 1050] }
+      "bands": {
+        "jan": [
+          600,
+          830
+        ],
+        "feb": [
+          620,
+          860
+        ],
+        "mar": [
+          700,
+          970
+        ],
+        "apr": [
+          800,
+          1100
+        ],
+        "may": [
+          900,
+          1240
+        ],
+        "jun": [
+          950,
+          1310
+        ],
+        "jul": [
+          1050,
+          1450
+        ],
+        "aug": [
+          1000,
+          1380
+        ],
+        "sep": [
+          850,
+          1170
+        ],
+        "oct": [
+          750,
+          1040
+        ],
+        "nov": [
+          680,
+          940
+        ],
+        "dec": [
+          700,
+          970
+        ]
+      }
     },
-    "stay": { "budget": [30, 55], "mid": [85, 150], "nice": [200, 380] },
-    "ground_daily": [40, 75],
+    "stay": {
+      "budget": [
+        30,
+        55
+      ],
+      "mid": [
+        85,
+        150
+      ],
+      "nice": [
+        200,
+        380
+      ]
+    },
+    "ground_daily": [
+      40,
+      75
+    ],
     "climate": {
-      "jan": { "high_c": 2, "low_c": -3, "rain_days": 8, "label": "cold, grey, festive" },
-      "mar": { "high_c": 9, "low_c": 0, "rain_days": 7, "label": "cold spring" },
-      "jun": { "high_c": 23, "low_c": 13, "rain_days": 10, "label": "warm, long days" },
-      "oct": { "high_c": 13, "low_c": 6, "rain_days": 8, "label": "cool autumn" },
-      "dec": { "high_c": 3, "low_c": -2, "rain_days": 8, "label": "cold, Christmas markets" }
+      "jan": {
+        "high_c": 2,
+        "low_c": -3,
+        "rain_days": 8,
+        "label": "very cold, some rain"
+      },
+      "feb": {
+        "high_c": 4,
+        "low_c": -3,
+        "rain_days": 7,
+        "label": "cold, mostly dry"
+      },
+      "mar": {
+        "high_c": 9,
+        "low_c": 0,
+        "rain_days": 7,
+        "label": "cold, mostly dry"
+      },
+      "apr": {
+        "high_c": 15,
+        "low_c": 4,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "may": {
+        "high_c": 20,
+        "low_c": 8,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "jun": {
+        "high_c": 23,
+        "low_c": 12,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "jul": {
+        "high_c": 25,
+        "low_c": 14,
+        "rain_days": 10,
+        "label": "warm, some rain"
+      },
+      "aug": {
+        "high_c": 24,
+        "low_c": 13,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "sep": {
+        "high_c": 19,
+        "low_c": 10,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "oct": {
+        "high_c": 13,
+        "low_c": 5,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "nov": {
+        "high_c": 7,
+        "low_c": 1,
+        "rain_days": 8,
+        "label": "cold, some rain"
+      },
+      "dec": {
+        "high_c": 3,
+        "low_c": -2,
+        "rain_days": 8,
+        "label": "cold, some rain"
+      }
     },
-    "best_months": ["may", "jun", "sep", "oct"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "normal",
-    "vibes": ["city", "food", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food",
+      "cheap"
+    ],
+    "photo_query": "Prague Czechia old town bridge",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1563913801192-bcefb1bb7651?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UHJhZ3VlJTIwQ3plY2hpYSUyMG9sZCUyMHRvd24lMjBicmlkZ2V8ZW58MXwwfHx8MTc4NTg1NjM0MXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Nomadic Julien", "profile_url": "https://unsplash.com/@nomadicjulien", "download_location": "https://api.unsplash.com/photos/Kgt2l8dq8tE/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UHJhZ3VlJTIwQ3plY2hpYSUyMG9sZCUyMHRvd24lMjBicmlkZ2V8ZW58MXwwfHx8MTc4NTg1NjM0MXww" },
     "blurb": "The cheapest way to do a classic European city break — half the ground cost of Paris."
   },
   {
@@ -593,26 +3646,172 @@
     "country": "Türkiye",
     "airport": "IST",
     "region": "Middle East",
-    "coords": [41.01, 28.98],
+    "coords": [
+      41.01,
+      28.98
+    ],
     "flight": {
       "hours": 10,
       "nonstop": true,
-      "bands": { "jan": [850, 1200], "mar": [900, 1300], "jun": [1100, 1550], "oct": [950, 1350], "dec": [950, 1350] }
+      "bands": {
+        "jan": [
+          850,
+          1170
+        ],
+        "feb": [
+          880,
+          1210
+        ],
+        "mar": [
+          900,
+          1240
+        ],
+        "apr": [
+          1000,
+          1380
+        ],
+        "may": [
+          1080,
+          1490
+        ],
+        "jun": [
+          1100,
+          1520
+        ],
+        "jul": [
+          1250,
+          1720
+        ],
+        "aug": [
+          1200,
+          1660
+        ],
+        "sep": [
+          1050,
+          1450
+        ],
+        "oct": [
+          950,
+          1310
+        ],
+        "nov": [
+          900,
+          1240
+        ],
+        "dec": [
+          950,
+          1310
+        ]
+      }
     },
-    "stay": { "budget": [30, 55], "mid": [90, 160], "nice": [220, 420] },
-    "ground_daily": [35, 70],
+    "stay": {
+      "budget": [
+        30,
+        55
+      ],
+      "mid": [
+        90,
+        160
+      ],
+      "nice": [
+        220,
+        420
+      ]
+    },
+    "ground_daily": [
+      35,
+      70
+    ],
     "climate": {
-      "jan": { "high_c": 9, "low_c": 3, "rain_days": 13, "label": "cold, damp" },
-      "mar": { "high_c": 12, "low_c": 5, "rain_days": 10, "label": "cool spring" },
-      "jun": { "high_c": 26, "low_c": 17, "rain_days": 5, "label": "warm, dry" },
-      "oct": { "high_c": 20, "low_c": 13, "rain_days": 8, "label": "mild autumn" },
-      "dec": { "high_c": 11, "low_c": 5, "rain_days": 13, "label": "cold, damp" }
+      "jan": {
+        "high_c": 9,
+        "low_c": 3,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "feb": {
+        "high_c": 10,
+        "low_c": 3,
+        "rain_days": 12,
+        "label": "cool, wet"
+      },
+      "mar": {
+        "high_c": 12,
+        "low_c": 5,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "apr": {
+        "high_c": 17,
+        "low_c": 8,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      },
+      "may": {
+        "high_c": 21,
+        "low_c": 12,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "jun": {
+        "high_c": 26,
+        "low_c": 17,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      },
+      "jul": {
+        "high_c": 28,
+        "low_c": 19,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "aug": {
+        "high_c": 29,
+        "low_c": 20,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "sep": {
+        "high_c": 25,
+        "low_c": 16,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      },
+      "oct": {
+        "high_c": 20,
+        "low_c": 12,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "nov": {
+        "high_c": 15,
+        "low_c": 8,
+        "rain_days": 11,
+        "label": "cool, some rain"
+      },
+      "dec": {
+        "high_c": 11,
+        "low_c": 5,
+        "rain_days": 13,
+        "label": "cool, wet"
+      }
     },
-    "best_months": ["apr", "may", "sep", "oct"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "caution",
-    "vibes": ["city", "food", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food",
+      "cheap"
+    ],
+    "photo_query": "Istanbul Turkey mosque Bosphorus",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1623439844752-524658b16ce6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SXN0YW5idWwlMjBUdXJrZXklMjBtb3NxdWUlMjBCb3NwaG9ydXN8ZW58MXwwfHx8MTc4NTg1NjM0NHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Ibrahim Uzun", "profile_url": "https://unsplash.com/@ibuzn", "download_location": "https://api.unsplash.com/photos/2uemAqyp9rk/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SXN0YW5idWwlMjBUdXJrZXklMjBtb3NxdWUlMjBCb3NwaG9ydXN8ZW58MXwwfHx8MTc4NTg1NjM0NHww" },
     "blurb": "Nonstop, cheap on the ground, and one of the best food cities anywhere."
   },
   {
@@ -621,26 +3820,172 @@
     "country": "Vietnam",
     "airport": "SGN",
     "region": "Southeast Asia",
-    "coords": [10.82, 106.63],
+    "coords": [
+      10.82,
+      106.63
+    ],
     "flight": {
       "hours": 22,
       "nonstop": false,
-      "bands": { "jan": [1400, 1850], "mar": [1300, 1700], "jun": [1150, 1500], "oct": [1250, 1650], "dec": [1550, 2000] }
+      "bands": {
+        "jan": [
+          1400,
+          1930
+        ],
+        "feb": [
+          1350,
+          1860
+        ],
+        "mar": [
+          1300,
+          1790
+        ],
+        "apr": [
+          1300,
+          1790
+        ],
+        "may": [
+          1200,
+          1660
+        ],
+        "jun": [
+          1150,
+          1590
+        ],
+        "jul": [
+          1250,
+          1720
+        ],
+        "aug": [
+          1250,
+          1720
+        ],
+        "sep": [
+          1200,
+          1660
+        ],
+        "oct": [
+          1250,
+          1720
+        ],
+        "nov": [
+          1350,
+          1860
+        ],
+        "dec": [
+          1550,
+          2140
+        ]
+      }
     },
-    "stay": { "budget": [15, 30], "mid": [50, 90], "nice": [150, 300] },
-    "ground_daily": [25, 50],
+    "stay": {
+      "budget": [
+        15,
+        30
+      ],
+      "mid": [
+        50,
+        90
+      ],
+      "nice": [
+        150,
+        300
+      ]
+    },
+    "ground_daily": [
+      25,
+      50
+    ],
     "climate": {
-      "jan": { "high_c": 32, "low_c": 21, "rain_days": 2, "label": "hot, dry" },
-      "mar": { "high_c": 34, "low_c": 24, "rain_days": 2, "label": "very hot, dry" },
-      "jun": { "high_c": 32, "low_c": 25, "rain_days": 18, "label": "hot, wet season" },
-      "oct": { "high_c": 31, "low_c": 24, "rain_days": 20, "label": "hot, wettest stretch" },
-      "dec": { "high_c": 31, "low_c": 21, "rain_days": 4, "label": "warm, dry" }
+      "jan": {
+        "high_c": 32,
+        "low_c": 21,
+        "rain_days": 2,
+        "label": "hot, dry"
+      },
+      "feb": {
+        "high_c": 33,
+        "low_c": 22,
+        "rain_days": 1,
+        "label": "hot, dry"
+      },
+      "mar": {
+        "high_c": 34,
+        "low_c": 24,
+        "rain_days": 2,
+        "label": "hot, dry"
+      },
+      "apr": {
+        "high_c": 34,
+        "low_c": 25,
+        "rain_days": 5,
+        "label": "hot, mostly dry"
+      },
+      "may": {
+        "high_c": 33,
+        "low_c": 25,
+        "rain_days": 18,
+        "label": "hot, very wet"
+      },
+      "jun": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 21,
+        "label": "hot, very wet"
+      },
+      "jul": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 22,
+        "label": "hot, very wet"
+      },
+      "aug": {
+        "high_c": 32,
+        "low_c": 25,
+        "rain_days": 22,
+        "label": "hot, very wet"
+      },
+      "sep": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 22,
+        "label": "hot, very wet"
+      },
+      "oct": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 20,
+        "label": "hot, very wet"
+      },
+      "nov": {
+        "high_c": 31,
+        "low_c": 23,
+        "rain_days": 12,
+        "label": "hot, wet"
+      },
+      "dec": {
+        "high_c": 31,
+        "low_c": 21,
+        "rain_days": 4,
+        "label": "hot, mostly dry"
+      }
     },
-    "best_months": ["dec", "jan", "feb", "mar"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "dec"
+    ],
     "visa_ca": "evisa_required",
     "advisory": "caution",
-    "vibes": ["city", "food", "cheap"],
-    "hero_image": null,
+    "vibes": [
+      "city",
+      "food",
+      "cheap"
+    ],
+    "photo_query": "Ho Chi Minh City Vietnam street",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1736665813752-f15663994b6f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SG8lMjBDaGklMjBNaW5oJTIwQ2l0eSUyMFZpZXRuYW0lMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg1NjM0OHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Maria Ivanova", "profile_url": "https://unsplash.com/@marishphoto", "download_location": "https://api.unsplash.com/photos/jrzxKKbcT4U/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SG8lMjBDaGklMjBNaW5oJTIwQ2l0eSUyMFZpZXRuYW0lMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg1NjM0OHww" },
     "blurb": "About the cheapest ground costs on this list — the flight is the whole expense."
   },
   {
@@ -649,26 +3994,173 @@
     "country": "South Africa",
     "airport": "CPT",
     "region": "Southern Africa",
-    "coords": [-33.92, 18.42],
+    "coords": [
+      -33.92,
+      18.42
+    ],
     "flight": {
       "hours": 20,
       "nonstop": false,
-      "bands": { "jan": [1800, 2400], "mar": [1600, 2200], "jun": [1300, 1800], "oct": [1500, 2050], "dec": [1900, 2600] }
+      "bands": {
+        "jan": [
+          1800,
+          2480
+        ],
+        "feb": [
+          1700,
+          2350
+        ],
+        "mar": [
+          1600,
+          2210
+        ],
+        "apr": [
+          1500,
+          2070
+        ],
+        "may": [
+          1400,
+          1930
+        ],
+        "jun": [
+          1300,
+          1790
+        ],
+        "jul": [
+          1400,
+          1930
+        ],
+        "aug": [
+          1400,
+          1930
+        ],
+        "sep": [
+          1450,
+          2000
+        ],
+        "oct": [
+          1500,
+          2070
+        ],
+        "nov": [
+          1700,
+          2350
+        ],
+        "dec": [
+          1900,
+          2620
+        ]
+      }
     },
-    "stay": { "budget": [30, 55], "mid": [95, 170], "nice": [260, 500] },
-    "ground_daily": [45, 85],
+    "stay": {
+      "budget": [
+        30,
+        55
+      ],
+      "mid": [
+        95,
+        170
+      ],
+      "nice": [
+        260,
+        500
+      ]
+    },
+    "ground_daily": [
+      45,
+      85
+    ],
     "climate": {
-      "jan": { "high_c": 27, "low_c": 17, "rain_days": 2, "label": "hot, dry, peak summer" },
-      "mar": { "high_c": 26, "low_c": 16, "rain_days": 3, "label": "warm, dry" },
-      "jun": { "high_c": 18, "low_c": 9, "rain_days": 10, "label": "cool, wet winter" },
-      "oct": { "high_c": 21, "low_c": 11, "rain_days": 6, "label": "mild spring" },
-      "dec": { "high_c": 26, "low_c": 16, "rain_days": 3, "label": "warm, dry" }
+      "jan": {
+        "high_c": 27,
+        "low_c": 17,
+        "rain_days": 2,
+        "label": "warm, dry"
+      },
+      "feb": {
+        "high_c": 27,
+        "low_c": 17,
+        "rain_days": 2,
+        "label": "warm, dry"
+      },
+      "mar": {
+        "high_c": 26,
+        "low_c": 16,
+        "rain_days": 3,
+        "label": "warm, dry"
+      },
+      "apr": {
+        "high_c": 23,
+        "low_c": 13,
+        "rain_days": 6,
+        "label": "mild, mostly dry"
+      },
+      "may": {
+        "high_c": 20,
+        "low_c": 11,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "jun": {
+        "high_c": 18,
+        "low_c": 9,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "jul": {
+        "high_c": 18,
+        "low_c": 8,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "aug": {
+        "high_c": 18,
+        "low_c": 8,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "sep": {
+        "high_c": 20,
+        "low_c": 10,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "oct": {
+        "high_c": 22,
+        "low_c": 12,
+        "rain_days": 6,
+        "label": "mild, mostly dry"
+      },
+      "nov": {
+        "high_c": 25,
+        "low_c": 14,
+        "rain_days": 4,
+        "label": "warm, mostly dry"
+      },
+      "dec": {
+        "high_c": 26,
+        "low_c": 16,
+        "rain_days": 3,
+        "label": "warm, dry"
+      }
     },
-    "best_months": ["nov", "dec", "jan", "feb", "mar"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "nov",
+      "dec"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "caution",
-    "vibes": ["hike", "beach", "city", "food"],
-    "hero_image": null,
+    "vibes": [
+      "hike",
+      "beach",
+      "city",
+      "food"
+    ],
+    "photo_query": "Cape Town South Africa Table Mountain",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1588455471455-4b28e9ab3cd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FwZSUyMFRvd24lMjBTb3V0aCUyMEFmcmljYSUyMFRhYmxlJTIwTW91bnRhaW58ZW58MXwwfHx8MTc4NTg1NjM1MXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Jaman Asad", "profile_url": "https://unsplash.com/@asadsnapper", "download_location": "https://api.unsplash.com/photos/FQ03xcur9As/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FwZSUyMFRvd24lMjBTb3V0aCUyMEFmcmljYSUyMFRhYmxlJTIwTW91bnRhaW58ZW58MXwwfHx8MTc4NTg1NjM1MXww" },
     "blurb": "Expensive to reach, cheap once there — mountains, coast and wine in one trip."
   },
   {
@@ -677,26 +4169,172 @@
     "country": "Canada",
     "airport": "YVR",
     "region": "North America",
-    "coords": [49.28, -123.12],
+    "coords": [
+      49.28,
+      -123.12
+    ],
     "flight": {
       "hours": 5,
       "nonstop": true,
-      "bands": { "jan": [400, 650], "mar": [480, 750], "jun": [650, 1000], "oct": [500, 800], "dec": [600, 950] }
+      "bands": {
+        "jan": [
+          400,
+          550
+        ],
+        "feb": [
+          420,
+          580
+        ],
+        "mar": [
+          480,
+          660
+        ],
+        "apr": [
+          550,
+          760
+        ],
+        "may": [
+          620,
+          860
+        ],
+        "jun": [
+          650,
+          900
+        ],
+        "jul": [
+          750,
+          1040
+        ],
+        "aug": [
+          730,
+          1010
+        ],
+        "sep": [
+          600,
+          830
+        ],
+        "oct": [
+          500,
+          690
+        ],
+        "nov": [
+          480,
+          660
+        ],
+        "dec": [
+          600,
+          830
+        ]
+      }
     },
-    "stay": { "budget": [60, 100], "mid": [160, 270], "nice": [350, 650] },
-    "ground_daily": [75, 135],
+    "stay": {
+      "budget": [
+        60,
+        100
+      ],
+      "mid": [
+        160,
+        270
+      ],
+      "nice": [
+        350,
+        650
+      ]
+    },
+    "ground_daily": [
+      75,
+      135
+    ],
     "climate": {
-      "jan": { "high_c": 7, "low_c": 2, "rain_days": 18, "label": "cool, wet" },
-      "mar": { "high_c": 10, "low_c": 4, "rain_days": 15, "label": "cool, wet" },
-      "jun": { "high_c": 20, "low_c": 12, "rain_days": 8, "label": "mild, long days" },
-      "oct": { "high_c": 13, "low_c": 7, "rain_days": 15, "label": "cool, wet" },
-      "dec": { "high_c": 7, "low_c": 2, "rain_days": 18, "label": "cool, wet" }
+      "jan": {
+        "high_c": 7,
+        "low_c": 2,
+        "rain_days": 18,
+        "label": "cold, very wet"
+      },
+      "feb": {
+        "high_c": 8,
+        "low_c": 2,
+        "rain_days": 15,
+        "label": "cold, wet"
+      },
+      "mar": {
+        "high_c": 10,
+        "low_c": 4,
+        "rain_days": 15,
+        "label": "cool, wet"
+      },
+      "apr": {
+        "high_c": 13,
+        "low_c": 6,
+        "rain_days": 13,
+        "label": "cool, wet"
+      },
+      "may": {
+        "high_c": 17,
+        "low_c": 9,
+        "rain_days": 11,
+        "label": "cool, some rain"
+      },
+      "jun": {
+        "high_c": 20,
+        "low_c": 12,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "jul": {
+        "high_c": 22,
+        "low_c": 14,
+        "rain_days": 6,
+        "label": "mild, mostly dry"
+      },
+      "aug": {
+        "high_c": 22,
+        "low_c": 14,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "sep": {
+        "high_c": 19,
+        "low_c": 11,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "oct": {
+        "high_c": 13,
+        "low_c": 7,
+        "rain_days": 15,
+        "label": "cool, wet"
+      },
+      "nov": {
+        "high_c": 9,
+        "low_c": 4,
+        "rain_days": 19,
+        "label": "cold, very wet"
+      },
+      "dec": {
+        "high_c": 7,
+        "low_c": 2,
+        "rain_days": 18,
+        "label": "cold, very wet"
+      }
     },
-    "best_months": ["jun", "jul", "aug", "sep"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "domestic",
     "advisory": "normal",
-    "vibes": ["hike", "city", "food"],
-    "hero_image": null,
+    "vibes": [
+      "hike",
+      "city",
+      "food"
+    ],
+    "photo_query": "Vancouver Canada mountains skyline",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1730661906876-18bfc6e95f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmFuY291dmVyJTIwQ2FuYWRhJTIwbW91bnRhaW5zJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MzU1fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Luke Lawreszuk", "profile_url": "https://unsplash.com/@lukel", "download_location": "https://api.unsplash.com/photos/rEDvog99iro/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmFuY291dmVyJTIwQ2FuYWRhJTIwbW91bnRhaW5zJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MzU1fDA" },
     "blurb": "No passport needed and mountains at the city edge — but hotel costs rival Europe."
   },
   {
@@ -705,25 +4343,171 @@
     "country": "Puerto Rico",
     "airport": "SJU",
     "region": "Central America & Caribbean",
-    "coords": [18.47, -66.11],
+    "coords": [
+      18.47,
+      -66.11
+    ],
     "flight": {
       "hours": 4.5,
       "nonstop": true,
-      "bands": { "jan": [550, 850], "mar": [650, 980], "jun": [480, 750], "oct": [430, 700], "dec": [700, 1050] }
+      "bands": {
+        "jan": [
+          550,
+          760
+        ],
+        "feb": [
+          600,
+          830
+        ],
+        "mar": [
+          650,
+          900
+        ],
+        "apr": [
+          700,
+          970
+        ],
+        "may": [
+          550,
+          760
+        ],
+        "jun": [
+          480,
+          660
+        ],
+        "jul": [
+          530,
+          730
+        ],
+        "aug": [
+          510,
+          700
+        ],
+        "sep": [
+          430,
+          590
+        ],
+        "oct": [
+          430,
+          590
+        ],
+        "nov": [
+          530,
+          730
+        ],
+        "dec": [
+          700,
+          970
+        ]
+      }
     },
-    "stay": { "budget": [50, 85], "mid": [140, 240], "nice": [320, 600] },
-    "ground_daily": [55, 100],
+    "stay": {
+      "budget": [
+        50,
+        85
+      ],
+      "mid": [
+        140,
+        240
+      ],
+      "nice": [
+        320,
+        600
+      ]
+    },
+    "ground_daily": [
+      55,
+      100
+    ],
     "climate": {
-      "jan": { "high_c": 28, "low_c": 21, "rain_days": 8, "label": "warm, drier, peak season" },
-      "mar": { "high_c": 29, "low_c": 21, "rain_days": 6, "label": "warm, dry" },
-      "jun": { "high_c": 31, "low_c": 24, "rain_days": 12, "label": "hot, humid" },
-      "oct": { "high_c": 31, "low_c": 24, "rain_days": 15, "label": "hot, wet, hurricane season" },
-      "dec": { "high_c": 29, "low_c": 22, "rain_days": 11, "label": "warm, pleasant" }
+      "jan": {
+        "high_c": 28,
+        "low_c": 21,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      },
+      "feb": {
+        "high_c": 28,
+        "low_c": 21,
+        "rain_days": 6,
+        "label": "warm, mostly dry"
+      },
+      "mar": {
+        "high_c": 29,
+        "low_c": 21,
+        "rain_days": 6,
+        "label": "warm, mostly dry"
+      },
+      "apr": {
+        "high_c": 29,
+        "low_c": 22,
+        "rain_days": 7,
+        "label": "warm, mostly dry"
+      },
+      "may": {
+        "high_c": 30,
+        "low_c": 23,
+        "rain_days": 10,
+        "label": "hot, some rain"
+      },
+      "jun": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 10,
+        "label": "hot, some rain"
+      },
+      "jul": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "aug": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 14,
+        "label": "hot, wet"
+      },
+      "sep": {
+        "high_c": 31,
+        "low_c": 24,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "oct": {
+        "high_c": 31,
+        "low_c": 23,
+        "rain_days": 15,
+        "label": "hot, wet"
+      },
+      "nov": {
+        "high_c": 30,
+        "low_c": 23,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "dec": {
+        "high_c": 29,
+        "low_c": 22,
+        "rain_days": 11,
+        "label": "warm, some rain"
+      }
     },
-    "best_months": ["dec", "jan", "feb", "mar", "apr"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "apr",
+      "dec"
+    ],
     "visa_ca": "visa_free_us",
     "advisory": "normal",
-    "vibes": ["beach", "city", "food"],
+    "vibes": [
+      "beach",
+      "city",
+      "food"
+    ],
+    "photo_query": "San Juan Puerto Rico colourful old town",
     "hero_image": null,
     "blurb": "Caribbean beaches with US infrastructure — pricier than Cuba, far easier to travel."
   },
@@ -733,25 +4517,171 @@
     "country": "Argentina",
     "airport": "EZE",
     "region": "South America",
-    "coords": [-34.6, -58.38],
+    "coords": [
+      -34.6,
+      -58.38
+    ],
     "flight": {
       "hours": 13,
       "nonstop": false,
-      "bands": { "jan": [1400, 1900], "mar": [1250, 1700], "jun": [1050, 1450], "oct": [1150, 1600], "dec": [1500, 2050] }
+      "bands": {
+        "jan": [
+          1400,
+          1930
+        ],
+        "feb": [
+          1300,
+          1790
+        ],
+        "mar": [
+          1250,
+          1720
+        ],
+        "apr": [
+          1200,
+          1660
+        ],
+        "may": [
+          1100,
+          1520
+        ],
+        "jun": [
+          1050,
+          1450
+        ],
+        "jul": [
+          1100,
+          1520
+        ],
+        "aug": [
+          1100,
+          1520
+        ],
+        "sep": [
+          1100,
+          1520
+        ],
+        "oct": [
+          1150,
+          1590
+        ],
+        "nov": [
+          1350,
+          1860
+        ],
+        "dec": [
+          1500,
+          2070
+        ]
+      }
     },
-    "stay": { "budget": [25, 50], "mid": [75, 140], "nice": [200, 390] },
-    "ground_daily": [35, 70],
+    "stay": {
+      "budget": [
+        25,
+        50
+      ],
+      "mid": [
+        75,
+        140
+      ],
+      "nice": [
+        200,
+        390
+      ]
+    },
+    "ground_daily": [
+      35,
+      70
+    ],
     "climate": {
-      "jan": { "high_c": 30, "low_c": 20, "rain_days": 8, "label": "hot summer" },
-      "mar": { "high_c": 26, "low_c": 17, "rain_days": 8, "label": "warm autumn" },
-      "jun": { "high_c": 15, "low_c": 8, "rain_days": 7, "label": "cool winter" },
-      "oct": { "high_c": 22, "low_c": 13, "rain_days": 8, "label": "mild spring" },
-      "dec": { "high_c": 28, "low_c": 19, "rain_days": 8, "label": "warm summer" }
+      "jan": {
+        "high_c": 30,
+        "low_c": 20,
+        "rain_days": 8,
+        "label": "hot, some rain"
+      },
+      "feb": {
+        "high_c": 29,
+        "low_c": 19,
+        "rain_days": 7,
+        "label": "warm, mostly dry"
+      },
+      "mar": {
+        "high_c": 26,
+        "low_c": 17,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      },
+      "apr": {
+        "high_c": 23,
+        "low_c": 14,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "may": {
+        "high_c": 19,
+        "low_c": 11,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "jun": {
+        "high_c": 16,
+        "low_c": 8,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "jul": {
+        "high_c": 15,
+        "low_c": 8,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "aug": {
+        "high_c": 17,
+        "low_c": 8,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "sep": {
+        "high_c": 19,
+        "low_c": 10,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "oct": {
+        "high_c": 23,
+        "low_c": 13,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "nov": {
+        "high_c": 26,
+        "low_c": 16,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      },
+      "dec": {
+        "high_c": 28,
+        "low_c": 18,
+        "rain_days": 8,
+        "label": "warm, some rain"
+      }
     },
-    "best_months": ["mar", "apr", "oct", "nov"],
+    "best_months": [
+      "mar",
+      "apr",
+      "oct",
+      "nov",
+      "dec"
+    ],
     "visa_ca": "visa_free_90",
     "advisory": "caution",
-    "vibes": ["city", "food", "cheap"],
+    "vibes": [
+      "city",
+      "food",
+      "cheap"
+    ],
+    "photo_query": "Buenos Aires Argentina architecture street",
     "hero_image": null,
     "blurb": "Long flight, then European-feeling city living at South American prices."
   },
@@ -761,25 +4691,171 @@
     "country": "India",
     "airport": "DEL",
     "region": "South Asia",
-    "coords": [28.61, 77.21],
+    "coords": [
+      28.61,
+      77.21
+    ],
     "flight": {
       "hours": 15,
       "nonstop": true,
-      "bands": { "jan": [1200, 1650], "mar": [1150, 1550], "jun": [1050, 1450], "oct": [1250, 1700], "dec": [1450, 1950] }
+      "bands": {
+        "jan": [
+          1200,
+          1660
+        ],
+        "feb": [
+          1180,
+          1630
+        ],
+        "mar": [
+          1150,
+          1590
+        ],
+        "apr": [
+          1150,
+          1590
+        ],
+        "may": [
+          1100,
+          1520
+        ],
+        "jun": [
+          1050,
+          1450
+        ],
+        "jul": [
+          1100,
+          1520
+        ],
+        "aug": [
+          1100,
+          1520
+        ],
+        "sep": [
+          1150,
+          1590
+        ],
+        "oct": [
+          1250,
+          1720
+        ],
+        "nov": [
+          1350,
+          1860
+        ],
+        "dec": [
+          1450,
+          2000
+        ]
+      }
     },
-    "stay": { "budget": [15, 35], "mid": [55, 100], "nice": [160, 330] },
-    "ground_daily": [25, 50],
+    "stay": {
+      "budget": [
+        15,
+        35
+      ],
+      "mid": [
+        55,
+        100
+      ],
+      "nice": [
+        160,
+        330
+      ]
+    },
+    "ground_daily": [
+      25,
+      50
+    ],
     "climate": {
-      "jan": { "high_c": 20, "low_c": 8, "rain_days": 2, "label": "cool, hazy, heavy smog" },
-      "mar": { "high_c": 30, "low_c": 15, "rain_days": 2, "label": "warm, pleasant" },
-      "jun": { "high_c": 39, "low_c": 28, "rain_days": 6, "label": "extreme heat, pre-monsoon" },
-      "oct": { "high_c": 33, "low_c": 20, "rain_days": 3, "label": "warm, post-monsoon" },
-      "dec": { "high_c": 22, "low_c": 9, "rain_days": 1, "label": "cool, hazy, heavy smog" }
+      "jan": {
+        "high_c": 20,
+        "low_c": 8,
+        "rain_days": 2,
+        "label": "mild, dry"
+      },
+      "feb": {
+        "high_c": 24,
+        "low_c": 11,
+        "rain_days": 2,
+        "label": "mild, dry"
+      },
+      "mar": {
+        "high_c": 30,
+        "low_c": 15,
+        "rain_days": 2,
+        "label": "hot, dry"
+      },
+      "apr": {
+        "high_c": 36,
+        "low_c": 21,
+        "rain_days": 2,
+        "label": "extreme heat, dry"
+      },
+      "may": {
+        "high_c": 39,
+        "low_c": 26,
+        "rain_days": 3,
+        "label": "extreme heat, dry"
+      },
+      "jun": {
+        "high_c": 39,
+        "low_c": 28,
+        "rain_days": 6,
+        "label": "extreme heat, mostly dry"
+      },
+      "jul": {
+        "high_c": 35,
+        "low_c": 27,
+        "rain_days": 12,
+        "label": "extreme heat, wet"
+      },
+      "aug": {
+        "high_c": 34,
+        "low_c": 27,
+        "rain_days": 13,
+        "label": "hot, wet"
+      },
+      "sep": {
+        "high_c": 34,
+        "low_c": 25,
+        "rain_days": 7,
+        "label": "hot, mostly dry"
+      },
+      "oct": {
+        "high_c": 33,
+        "low_c": 20,
+        "rain_days": 3,
+        "label": "hot, dry"
+      },
+      "nov": {
+        "high_c": 28,
+        "low_c": 14,
+        "rain_days": 1,
+        "label": "warm, dry"
+      },
+      "dec": {
+        "high_c": 22,
+        "low_c": 9,
+        "rain_days": 1,
+        "label": "mild, dry"
+      }
     },
-    "best_months": ["feb", "mar", "oct", "nov"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "nov",
+      "dec"
+    ],
     "visa_ca": "evisa_required",
     "advisory": "caution",
-    "vibes": ["city", "food", "cheap"],
+    "vibes": [
+      "city",
+      "food",
+      "cheap"
+    ],
+    "photo_query": "Delhi India architecture market",
     "hero_image": null,
     "blurb": "Nonstop and dirt cheap on the ground — but check air quality before booking winter."
   },
@@ -789,25 +4865,171 @@
     "country": "New Zealand",
     "airport": "AKL",
     "region": "Oceania",
-    "coords": [-36.85, 174.76],
+    "coords": [
+      -36.85,
+      174.76
+    ],
     "flight": {
       "hours": 22,
       "nonstop": false,
-      "bands": { "jan": [2100, 2800], "mar": [1900, 2550], "jun": [1650, 2200], "oct": [1800, 2400], "dec": [2200, 2950] }
+      "bands": {
+        "jan": [
+          2100,
+          2900
+        ],
+        "feb": [
+          2000,
+          2760
+        ],
+        "mar": [
+          1900,
+          2620
+        ],
+        "apr": [
+          1800,
+          2480
+        ],
+        "may": [
+          1700,
+          2350
+        ],
+        "jun": [
+          1650,
+          2280
+        ],
+        "jul": [
+          1700,
+          2350
+        ],
+        "aug": [
+          1700,
+          2350
+        ],
+        "sep": [
+          1750,
+          2420
+        ],
+        "oct": [
+          1800,
+          2480
+        ],
+        "nov": [
+          2000,
+          2760
+        ],
+        "dec": [
+          2200,
+          3040
+        ]
+      }
     },
-    "stay": { "budget": [45, 80], "mid": [130, 220], "nice": [300, 560] },
-    "ground_daily": [70, 130],
+    "stay": {
+      "budget": [
+        45,
+        80
+      ],
+      "mid": [
+        130,
+        220
+      ],
+      "nice": [
+        300,
+        560
+      ]
+    },
+    "ground_daily": [
+      70,
+      130
+    ],
     "climate": {
-      "jan": { "high_c": 24, "low_c": 16, "rain_days": 8, "label": "warm summer" },
-      "mar": { "high_c": 22, "low_c": 15, "rain_days": 9, "label": "mild autumn" },
-      "jun": { "high_c": 15, "low_c": 9, "rain_days": 14, "label": "cool, wet winter" },
-      "oct": { "high_c": 18, "low_c": 11, "rain_days": 12, "label": "mild spring" },
-      "dec": { "high_c": 22, "low_c": 14, "rain_days": 9, "label": "warm early summer" }
+      "jan": {
+        "high_c": 24,
+        "low_c": 16,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "feb": {
+        "high_c": 24,
+        "low_c": 16,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "mar": {
+        "high_c": 23,
+        "low_c": 15,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      },
+      "apr": {
+        "high_c": 20,
+        "low_c": 13,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "may": {
+        "high_c": 18,
+        "low_c": 11,
+        "rain_days": 13,
+        "label": "mild, wet"
+      },
+      "jun": {
+        "high_c": 15,
+        "low_c": 9,
+        "rain_days": 14,
+        "label": "cool, wet"
+      },
+      "jul": {
+        "high_c": 15,
+        "low_c": 8,
+        "rain_days": 15,
+        "label": "cool, wet"
+      },
+      "aug": {
+        "high_c": 15,
+        "low_c": 9,
+        "rain_days": 14,
+        "label": "cool, wet"
+      },
+      "sep": {
+        "high_c": 17,
+        "low_c": 10,
+        "rain_days": 12,
+        "label": "cool, wet"
+      },
+      "oct": {
+        "high_c": 18,
+        "low_c": 12,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "nov": {
+        "high_c": 20,
+        "low_c": 13,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "dec": {
+        "high_c": 22,
+        "low_c": 15,
+        "rain_days": 9,
+        "label": "mild, some rain"
+      }
     },
-    "best_months": ["dec", "jan", "feb", "mar"],
+    "best_months": [
+      "jan",
+      "feb",
+      "mar",
+      "nov",
+      "dec"
+    ],
     "visa_ca": "eta_required",
     "advisory": "normal",
-    "vibes": ["hike", "beach", "city"],
+    "vibes": [
+      "hike",
+      "beach",
+      "city"
+    ],
+    "photo_query": "New Zealand Auckland coast landscape",
     "hero_image": null,
     "blurb": "The furthest and priciest trip here — worth it only with two weeks, not one."
   },
@@ -817,25 +5039,169 @@
     "country": "Canada",
     "airport": "YYC",
     "region": "North America",
-    "coords": [51.05, -114.07],
+    "coords": [
+      51.05,
+      -114.07
+    ],
     "flight": {
       "hours": 4.5,
       "nonstop": true,
-      "bands": { "jan": [350, 600], "mar": [420, 700], "jun": [600, 950], "oct": [450, 750], "dec": [550, 900] }
+      "bands": {
+        "jan": [
+          350,
+          480
+        ],
+        "feb": [
+          380,
+          520
+        ],
+        "mar": [
+          420,
+          580
+        ],
+        "apr": [
+          480,
+          660
+        ],
+        "may": [
+          550,
+          760
+        ],
+        "jun": [
+          600,
+          830
+        ],
+        "jul": [
+          650,
+          900
+        ],
+        "aug": [
+          630,
+          870
+        ],
+        "sep": [
+          520,
+          720
+        ],
+        "oct": [
+          450,
+          620
+        ],
+        "nov": [
+          480,
+          660
+        ],
+        "dec": [
+          550,
+          760
+        ]
+      }
     },
-    "stay": { "budget": [55, 95], "mid": [150, 250], "nice": [320, 600] },
-    "ground_daily": [70, 130],
+    "stay": {
+      "budget": [
+        55,
+        95
+      ],
+      "mid": [
+        150,
+        250
+      ],
+      "nice": [
+        320,
+        600
+      ]
+    },
+    "ground_daily": [
+      70,
+      130
+    ],
     "climate": {
-      "jan": { "high_c": -1, "low_c": -13, "rain_days": 6, "label": "cold, snowy, ski season" },
-      "mar": { "high_c": 5, "low_c": -7, "rain_days": 6, "label": "cold, snowy" },
-      "jun": { "high_c": 21, "low_c": 9, "rain_days": 12, "label": "mild, green, long days" },
-      "oct": { "high_c": 11, "low_c": -1, "rain_days": 6, "label": "cool, crisp" },
-      "dec": { "high_c": 0, "low_c": -11, "rain_days": 6, "label": "cold, snowy" }
+      "jan": {
+        "high_c": -1,
+        "low_c": -13,
+        "rain_days": 6,
+        "label": "very cold, mostly dry"
+      },
+      "feb": {
+        "high_c": 1,
+        "low_c": -11,
+        "rain_days": 5,
+        "label": "very cold, mostly dry"
+      },
+      "mar": {
+        "high_c": 5,
+        "low_c": -7,
+        "rain_days": 6,
+        "label": "cold, mostly dry"
+      },
+      "apr": {
+        "high_c": 11,
+        "low_c": -2,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "may": {
+        "high_c": 16,
+        "low_c": 3,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "jun": {
+        "high_c": 20,
+        "low_c": 7,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "jul": {
+        "high_c": 23,
+        "low_c": 9,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "aug": {
+        "high_c": 22,
+        "low_c": 9,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "sep": {
+        "high_c": 17,
+        "low_c": 4,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "oct": {
+        "high_c": 11,
+        "low_c": -1,
+        "rain_days": 5,
+        "label": "cool, mostly dry"
+      },
+      "nov": {
+        "high_c": 3,
+        "low_c": -8,
+        "rain_days": 6,
+        "label": "cold, mostly dry"
+      },
+      "dec": {
+        "high_c": 0,
+        "low_c": -11,
+        "rain_days": 6,
+        "label": "very cold, mostly dry"
+      }
     },
-    "best_months": ["jun", "jul", "aug", "sep"],
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
     "visa_ca": "domestic",
     "advisory": "normal",
-    "vibes": ["hike"],
+    "vibes": [
+      "hike"
+    ],
+    "photo_query": "Banff Alberta mountains lake",
     "hero_image": null,
     "blurb": "Cheapest flight on the list and no passport — the Rockies are the whole point."
   }
