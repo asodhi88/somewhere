@@ -12,12 +12,6 @@ const NUMBER_WORDS = [
   'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve',
 ]
 
-const MONTH_ABBR = {
-  jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr',
-  may: 'May', jun: 'Jun', jul: 'Jul', aug: 'Aug',
-  sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec',
-}
-
 /** "$1,080" */
 export const money = (n) => '$' + Math.round(n).toLocaleString('en-US')
 
@@ -29,11 +23,12 @@ export const moneyRange = (low, high) =>
 export const flightMeta = (flight) =>
   flight.nonstop ? `nonstop ${flight.hours}h` : `${flight.hours}h · 1 stop`
 
-/** Weather chip from the month's climate normal: "Oct · 22° mild, some rain". */
-export const weatherChip = (weather) => {
-  const abbr = MONTH_ABBR[weather.month] || weather.month
-  return `${abbr} · ${weather.high_c}° ${weather.label}`
-}
+/**
+ * Weather chip from the month's climate normal: "22° mild, some rain". The
+ * month is intentionally omitted — the user already picked it in the search
+ * widget, so repeating it on every tile is redundant.
+ */
+export const weatherChip = (weather) => `${weather.high_c}° ${weather.label}`
 
 /** Short visa standing on a Canadian passport, from the visa_ca code. */
 export function visaChip(visa) {

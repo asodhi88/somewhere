@@ -1,7 +1,6 @@
 /**
  * Header — brand + light nav. The shortlist/comparison flow is post-MVP
- * (CLAUDE.md §7b), so the "Shortlist" pill is present but inert for now; the
- * nav links jump to the footer note that explains the total-cost approach.
+ * (CLAUDE.md §7b), so the "Shortlist" pill is present but inert for now.
  */
 export default function Header() {
   return (
@@ -13,12 +12,10 @@ export default function Header() {
         <span className="rc-brand__name">raccoon</span>
       </div>
       <nav className="rc-nav">
-        <a className="rc-nav__link" href="#rc-how">
-          How it works
-        </a>
-        <a className="rc-nav__link" href="#rc-how">
-          Why total cost
-        </a>
+        {/* Plain text, not a link: there's no "how it works" page yet, and a
+            nav item that looks clickable but does nothing is worse than none.
+            Restore the <a href> once the page exists. */}
+        <span className="rc-nav__text">How it works</span>
         <span className="rc-pill">Shortlist · 0</span>
       </nav>
     </header>

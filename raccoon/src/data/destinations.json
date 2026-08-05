@@ -4508,7 +4508,7 @@
       "food"
     ],
     "photo_query": "San Juan Puerto Rico colourful old town",
-    "hero_image": null,
+    "hero_image": { "url": "https://images.unsplash.com/photo-1782197581525-3276aa2c577c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2FuJTIwSnVhbiUyMFB1ZXJ0byUyMFJpY28lMjBjb2xvdXJmdWwlMjBvbGQlMjB0b3dufGVufDF8MHx8fDE3ODU4ODEzNTN8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Paul Farmer", "profile_url": "https://unsplash.com/@profepabloo", "download_location": "https://api.unsplash.com/photos/a-5huKfabfA/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2FuJTIwSnVhbiUyMFB1ZXJ0byUyMFJpY28lMjBjb2xvdXJmdWwlMjBvbGQlMjB0b3dufGVufDF8MHx8fDE3ODU4ODEzNTN8MA" },
     "blurb": "Caribbean beaches with US infrastructure — pricier than Cuba, far easier to travel."
   },
   {
@@ -4682,7 +4682,7 @@
       "cheap"
     ],
     "photo_query": "Buenos Aires Argentina architecture street",
-    "hero_image": null,
+    "hero_image": { "url": "https://images.unsplash.com/photo-1706170421190-48b12aa10f5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QnVlbm9zJTIwQWlyZXMlMjBBcmdlbnRpbmElMjBhcmNoaXRlY3R1cmUlMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg4MTM1N3ww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Juan Pablo Mascanfroni", "profile_url": "https://unsplash.com/@juanmascan1978", "download_location": "https://api.unsplash.com/photos/-CJvgl9hmsw/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QnVlbm9zJTIwQWlyZXMlMjBBcmdlbnRpbmElMjBhcmNoaXRlY3R1cmUlMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg4MTM1N3ww" },
     "blurb": "Long flight, then European-feeling city living at South American prices."
   },
   {
@@ -4856,7 +4856,7 @@
       "cheap"
     ],
     "photo_query": "Delhi India architecture market",
-    "hero_image": null,
+    "hero_image": { "url": "https://images.unsplash.com/photo-1513014576558-921f00d80b77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RGVsaGklMjBJbmRpYSUyMGFyY2hpdGVjdHVyZSUyMG1hcmtldHxlbnwxfDB8fHwxNzg1ODgxMzYwfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Aquib Akhter", "profile_url": "https://unsplash.com/@aquibakhter", "download_location": "https://api.unsplash.com/photos/oBCc0Hw6LrQ/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RGVsaGklMjBJbmRpYSUyMGFyY2hpdGVjdHVyZSUyMG1hcmtldHxlbnwxfDB8fHwxNzg1ODgxMzYwfDA" },
     "blurb": "Nonstop and dirt cheap on the ground — but check air quality before booking winter."
   },
   {
@@ -5030,7 +5030,7 @@
       "city"
     ],
     "photo_query": "New Zealand Auckland coast landscape",
-    "hero_image": null,
+    "hero_image": { "url": "https://images.unsplash.com/photo-1582254905895-cfab294e1d91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TmV3JTIwWmVhbGFuZCUyMEF1Y2tsYW5kJTIwY29hc3QlMjBsYW5kc2NhcGV8ZW58MXwwfHx8MTc4NTg4MTM2NHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "James Lee", "profile_url": "https://unsplash.com/@picsbyjameslee", "download_location": "https://api.unsplash.com/photos/Qik9CuemxO4/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TmV3JTIwWmVhbGFuZCUyMEF1Y2tsYW5kJTIwY29hc3QlMjBsYW5kc2NhcGV8ZW58MXwwfHx8MTc4NTg4MTM2NHww" },
     "blurb": "The furthest and priciest trip here — worth it only with two weeks, not one."
   },
   {
@@ -5202,7 +5202,7 @@
       "hike"
     ],
     "photo_query": "Banff Alberta mountains lake",
-    "hero_image": null,
+    "hero_image": { "url": "https://images.unsplash.com/photo-1516293635722-a0ae2709d570?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZmYlMjBBbGJlcnRhJTIwbW91bnRhaW5zJTIwbGFrZXxlbnwxfDB8fHwxNzg1ODgxMzY4fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Kevin Noble", "profile_url": "https://unsplash.com/@nobleshots", "download_location": "https://api.unsplash.com/photos/SLzVswyICJM/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZmYlMjBBbGJlcnRhJTIwbW91bnRhaW5zJTIwbGFrZXxlbnwxfDB8fHwxNzg1ODgxMzY4fDA" },
     "blurb": "Cheapest flight on the list and no passport — the Rockies are the whole point."
   }
 ]
