@@ -638,9 +638,14 @@ a:hover {
   flex: 1;
   min-width: 340px;
   display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 26px;
+}
+.rc-card__top {
+  display: flex;
   align-items: center;
   gap: 26px;
-  padding: 24px 26px;
 }
 .rc-card__main {
   flex: 1;
@@ -722,11 +727,13 @@ a:hover {
   font-size: 12px;
   color: var(--muted);
 }
+/* Inside the text column now (a child of rc-card__body), so it inherits the
+   body's padding and aligns to the text column's left edge — never under the
+   image, and the image stretches to the card's full height. */
 .rc-card__breakdown {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  padding: 0 26px 22px;
 }
 .rc-break {
   padding: 15px 17px;
@@ -1095,10 +1102,13 @@ a:hover {
     border-bottom: 1px solid var(--border);
   }
   .rc-card__body {
+    align-items: stretch;
+    padding: 20px;
+  }
+  .rc-card__top {
     flex-direction: column;
     align-items: stretch;
     gap: 16px;
-    padding: 20px;
   }
   .rc-price {
     flex-direction: row;
@@ -1107,7 +1117,6 @@ a:hover {
   }
   .rc-card__breakdown {
     grid-template-columns: 1fr;
-    padding: 0 20px 20px;
   }
   .rc-footer {
     flex-direction: column;

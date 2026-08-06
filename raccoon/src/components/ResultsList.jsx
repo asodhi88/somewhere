@@ -1,5 +1,4 @@
 import ResultCard from './ResultCard'
-import { countPhrase } from '../lib/format'
 
 /**
  * ResultsList — the ranked grid plus its off-happy-path states (CLAUDE.md §7b):
@@ -77,8 +76,7 @@ export default function ResultsList({
   return (
     <section className="rc-results">
       <div className="rc-results__head">
-        <h2 className="rc-results__title">{countPhrase(results.length)}</h2>
-        <div className="rc-results__meta tnum">Sorted by total trip cost · max 2 per region</div>
+        <h2 className="rc-results__title">Few good options for you&hellip;</h2>
       </div>
       {thin && (
         <p className="rc-results__hint">

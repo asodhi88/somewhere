@@ -12,9 +12,11 @@ import {
 const UTM = '?utm_source=raccoon&utm_medium=referral'
 
 /**
- * ResultCard — one ranked destination. The dominant number is the all-in trip
- * cost range (CLAUDE.md §3, §6.2); flight / weather / visa ride as secondary
- * chips. The price button toggles the flight / stay / ground breakdown.
+ * ResultCard — one ranked destination. The image is flush to the card's left
+ * edge, full height, meeting the text column at a vertical divider. The dominant
+ * number is the all-in trip cost range (CLAUDE.md §3, §6.2); flight / weather
+ * ride as secondary chips. The price button toggles the flight / stay / ground
+ * breakdown, which sits inside the text column beneath the chips.
  *
  * The photo cell renders the destination's hand-picked Unsplash hero when
  * `hero_image` is present, with required attribution; when it's null (the whole
@@ -79,62 +81,64 @@ export default function ResultCard({ result, nights, onOpenLightbox }) {
         </div>
 
         <div className="rc-card__body">
-          <div className="rc-card__main">
-            <div className="rc-card__heading">
-              <span className="rc-card__city">{result.city}</span>
-              <span className="rc-card__country">{result.country}</span>
+          <div className="rc-card__top">
+            <div className="rc-card__main">
+              <div className="rc-card__heading">
+                <span className="rc-card__city">{result.city}</span>
+                <span className="rc-card__country">{result.country}</span>
+              </div>
+              <p className="rc-card__reason">{reason}</p>
+              <div className="rc-chips tnum">
+                {result.overBudget && (
+                  <span className="rc-chip rc-chip--over">{overTag(result.overBy)}</span>
+                )}
+                <span className="rc-chip">{flightMeta(result.flight)}</span>
+                <span className="rc-chip">{weatherChip(result.weather)}</span>
+                {/* Visa chip intentionally omitted: visa scoring is disabled (see
+                    WEIGHTS in ranking.js); restore once passport-aware data lands
+                    from the Sherpa Requirements API. */}
+              </div>
             </div>
-            <p className="rc-card__reason">{reason}</p>
-            <div className="rc-chips tnum">
-              {result.overBudget && (
-                <span className="rc-chip rc-chip--over">{overTag(result.overBy)}</span>
-              )}
-              <span className="rc-chip">{flightMeta(result.flight)}</span>
-              <span className="rc-chip">{weatherChip(result.weather)}</span>
-              {/* Visa chip hidden: visa scoring is temporarily disabled (see
-                  WEIGHTS in ranking.js) because visa_ca assumes a Canadian
-                  passport. Restore this chip — result.visa and visaChip() are
-                  kept — once passport-aware data lands from the Sherpa
-                  Requirements API. */}
-            </div>
+
+            <button
+              type="button"
+              className="rc-price"
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span className="rc-price__range tnum">{moneyRange(cost.low, cost.high)}</span>
+              <span className="rc-price__sub tnum">
+                {open ? 'hide breakdown' : 'see breakdown'}
+              </span>
+            </button>
           </div>
 
-          <button
-            type="button"
-            className="rc-price"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span className="rc-price__range tnum">{moneyRange(cost.low, cost.high)}</span>
-            <span className="rc-price__sub tnum">
-              all-in · {nights} nights · {open ? 'hide breakdown' : 'see breakdown'}
-            </span>
-          </button>
+          {/* Breakdown lives inside the text column, beneath the chips — aligned
+              to the text column's left edge, never under the image. */}
+          {open && (
+            <div className="rc-card__breakdown">
+              <div className="rc-break">
+                <span className="rc-break__label">Flight</span>
+                <span className="rc-break__value tnum">
+                  {moneyRange(cost.breakdown.flight.low, cost.breakdown.flight.high)}
+                </span>
+              </div>
+              <div className="rc-break">
+                <span className="rc-break__label">Stay · {nights} nights</span>
+                <span className="rc-break__value tnum">
+                  {moneyRange(cost.breakdown.stay.low, cost.breakdown.stay.high)}
+                </span>
+              </div>
+              <div className="rc-break">
+                <span className="rc-break__label">On the ground</span>
+                <span className="rc-break__value tnum">
+                  {moneyRange(cost.breakdown.ground.low, cost.breakdown.ground.high)}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-
-      {open && (
-        <div className="rc-card__breakdown">
-          <div className="rc-break">
-            <span className="rc-break__label">Flight</span>
-            <span className="rc-break__value tnum">
-              {moneyRange(cost.breakdown.flight.low, cost.breakdown.flight.high)}
-            </span>
-          </div>
-          <div className="rc-break">
-            <span className="rc-break__label">Stay · {nights} nights</span>
-            <span className="rc-break__value tnum">
-              {moneyRange(cost.breakdown.stay.low, cost.breakdown.stay.high)}
-            </span>
-          </div>
-          <div className="rc-break">
-            <span className="rc-break__label">On the ground</span>
-            <span className="rc-break__value tnum">
-              {moneyRange(cost.breakdown.ground.low, cost.breakdown.ground.high)}
-            </span>
-          </div>
-        </div>
-      )}
     </article>
   )
 }
