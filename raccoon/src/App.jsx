@@ -40,7 +40,7 @@ export default function App() {
   const timer = useRef(null)
   const resultsRef = useRef(null)
 
-  const availableMonths = useMemo(() => getAvailableMonths(), [])
+  const availableMonths = useMemo(() => getAvailableMonths(filters.origin), [filters.origin])
 
   const results = useMemo(
     () => getDestinations({ ...filters, limit: RESULT_LIMIT }),

@@ -7,12 +7,12 @@
  */
 
 // ── Origins ──────────────────────────────────────────────────────────────
-// v1 ships YYZ-only (CLAUDE.md §10): all flight bands are YYZ-specific. The
-// other origins are shown, greyed, as "coming soon" so the ambition reads, but
-// they are not wired to search.
+// Toronto (YYZ) and Montreal (YUL) are selectable — both carry per-origin flight
+// bands in the dataset. The remaining cities render as a single "coming soon"
+// line in the picker and are not wired to search yet.
 export const ORIGIN_OPTIONS = [
   { value: 'yyz', code: 'YYZ', city: 'Toronto', available: true },
-  { value: 'yul', code: 'YUL', city: 'Montreal', available: false },
+  { value: 'yul', code: 'YUL', city: 'Montreal', available: true },
   { value: 'yqb', code: 'YQB', city: 'Quebec City', available: false },
   { value: 'yyc', code: 'YYC', city: 'Calgary', available: false },
   { value: 'yvr', code: 'YVR', city: 'Vancouver', available: false },
@@ -21,7 +21,14 @@ export const ORIGIN_OPTIONS = [
   { value: 'ytz', code: 'YTZ', city: 'Toronto Billy Bishop', available: false },
 ]
 
-export const ORIGIN = 'YYZ'
+export const DEFAULT_ORIGIN = 'yyz'
+const ORIGIN_VALUES = new Set(ORIGIN_OPTIONS.filter((o) => o.available).map((o) => o.value))
+
+/** Normalise a `from` param (any case) to a selectable origin value, or default. */
+export function normalizeOrigin(raw) {
+  const v = String(raw || '').toLowerCase()
+  return ORIGIN_VALUES.has(v) ? v : DEFAULT_ORIGIN
+}
 
 // ── Months ───────────────────────────────────────────────────────────────
 const MONTH_NAMES = [
@@ -66,8 +73,10 @@ export const STAY_OPTIONS = [
 ]
 const STAYS = STAY_OPTIONS.map((s) => s.value)
 
-// The defaults the design mockup shows: $2,000 · 7 nights · October · Mid-range.
+// The defaults the design mockup shows: $2,000 · 7 nights · October · Mid-range,
+// departing Toronto.
 export const DEFAULT_FILTERS = {
+  origin: DEFAULT_ORIGIN,
   budget: 2000,
   nights: 7,
   month: DEFAULT_MONTH,
@@ -115,13 +124,19 @@ export function filtersFromSearch(search) {
     ? clampInt(p.get('nights'), 1, 30, DEFAULT_FILTERS.nights)
     : DEFAULT_FILTERS.nights
 
-  return { budget, nights, month: normalizeMonth(p.get('month')), stay }
+  return {
+    origin: normalizeOrigin(p.get('from')),
+    budget,
+    nights,
+    month: normalizeMonth(p.get('month')),
+    stay,
+  }
 }
 
 /** Serialise filters back into a query string, origin included. */
 export function searchFromFilters(filters) {
   const p = new URLSearchParams()
-  p.set('from', ORIGIN)
+  p.set('from', (filters.origin || DEFAULT_ORIGIN).toUpperCase())
   if (filters.budget != null) p.set('budget', String(filters.budget))
   p.set('nights', String(filters.nights))
   p.set('month', filters.month)

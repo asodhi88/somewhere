@@ -101,6 +101,8 @@ export function normalizeFilters(filters = {}) {
     // Accept "october" or "oct"; the dataset keys are the 3-letter form.
     month: filters.month ? String(filters.month).toLowerCase().slice(0, 3) : null,
     vibe: filters.vibe ? String(filters.vibe).toLowerCase() : null,
+    // Origin airport (lower-case IATA), keyed into each dest's flights map.
+    origin: String(filters.origin || 'yyz').toLowerCase(),
     stay: STAY_TIERS.includes(stay) ? stay : 'mid',
     // maxFlightHours is the canonical name; accept maxFlight as an alias.
     maxFlightHours: num(filters.maxFlightHours ?? filters.maxFlight),
@@ -110,15 +112,26 @@ export function normalizeFilters(filters = {}) {
 }
 
 /**
- * Estimate the all-in trip cost range for one destination.
- * Returns null if the destination lacks pricing for the requested month/tier.
+ * The flight object for a destination from the selected origin, or null. The
+ * dataset carries per-origin flights (`flights: { yyz: {...}, yul: {...} }`), so
+ * everything downstream reads hours / nonstop / bands through this rather than a
+ * single hard-coded origin.
+ */
+export function originFlight(dest, origin) {
+  return dest?.flights?.[origin] || null
+}
+
+/**
+ * Estimate the all-in trip cost range for one destination from the given origin.
+ * Returns null if the destination lacks pricing for the requested origin/month/
+ * tier (e.g. not reachable from that origin in the dataset).
  *
  * Ground days are treated as equal to nights (a 7-night trip ≈ 7 days of
  * on-the-ground spend). This also reproduces the CLAUDE.md §6.1 example where
  * Tokyo passes a $2,000 / 7-night budget at the "budget" stay tier.
  */
-export function estimateCost(dest, { month, nights, stay }) {
-  const flight = dest?.flight?.bands?.[month]
+export function estimateCost(dest, { month, nights, stay, origin }) {
+  const flight = originFlight(dest, origin)?.bands?.[month]
   const stayRate = dest?.stay?.[stay]
   const ground = dest?.ground_daily
   if (!flight || !stayRate || !ground) return null
@@ -208,10 +221,11 @@ export function budgetStatus(cost, budget) {
  * searchDestinations); only destinations beyond the tolerance are cut here.
  */
 export function passesHardFilters(dest, filters, cost) {
-  const { budget, month, vibe, maxFlightHours } = filters
+  const { budget, month, vibe, maxFlightHours, origin } = filters
+  const flight = originFlight(dest, origin)
 
-  // Month availability — need both a price band and a climate normal.
-  if (!dest?.flight?.bands?.[month] || !dest?.climate?.[month]) return false
+  // Month availability — need a price band from this origin and a climate normal.
+  if (!flight?.bands?.[month] || !dest?.climate?.[month]) return false
 
   // Budget — soft: keep anything up to OVER_BUDGET_TOLERANCE over the low end.
   if (budget != null) {
@@ -223,7 +237,7 @@ export function passesHardFilters(dest, filters, cost) {
   if (!matchesVibe(dest, vibe)) return false
 
   // Max flight time, if set.
-  if (maxFlightHours != null && dest.flight.hours > maxFlightHours) return false
+  if (maxFlightHours != null && flight.hours > maxFlightHours) return false
 
   return true
 }
@@ -249,7 +263,7 @@ export function scoreDestination(dest, filters, cost) {
   const parts = {
     headroom: headroomScore(cost, filters.budget),
     weather: weatherScore(dest.climate[filters.month]),
-    nonstop: dest.flight.nonstop ? 1 : 0,
+    nonstop: originFlight(dest, filters.origin)?.nonstop ? 1 : 0,
     visa: visaScore(dest.visa_ca),
   }
   const merit =
@@ -269,6 +283,7 @@ const capitalize = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s)
 /** One-line human reason this destination matched (CLAUDE.md §6.2). */
 export function matchReason(dest, filters, cost, parts) {
   const clim = dest.climate[filters.month]
+  const flight = originFlight(dest, filters.origin)
   const monthName = MONTH_NAMES[filters.month] || filters.month
   const bits = []
 
@@ -288,7 +303,7 @@ export function matchReason(dest, filters, cost, parts) {
   else bits.push(`${monthName}: ${clim.label}`)
 
   // Access chips.
-  const access = [dest.flight.nonstop ? `nonstop ${dest.flight.hours}h` : `${dest.flight.hours}h, 1 stop`]
+  const access = [flight.nonstop ? `nonstop ${flight.hours}h` : `${flight.hours}h, 1 stop`]
   if (parts.visa === 1) access.push('visa-free')
   else if (parts.visa === 0.5) access.push('ESTA')
   bits.push(access.join(', '))
@@ -300,6 +315,7 @@ export function matchReason(dest, filters, cost, parts) {
 function toResult(entry, filters, rank) {
   const { dest, cost, score, merit, parts, status } = entry
   const clim = dest.climate[filters.month]
+  const flight = originFlight(dest, filters.origin)
   return {
     rank,
     id: dest.id,
@@ -313,7 +329,8 @@ function toResult(entry, filters, rank) {
     cost, // { low, high, mid, breakdown }
     overBudget: status.overBudget,
     overBy: status.overBy, // dollars over budget (0 when in budget)
-    flight: { hours: dest.flight.hours, nonstop: dest.flight.nonstop },
+    origin: filters.origin,
+    flight: { hours: flight.hours, nonstop: flight.nonstop },
     weather: { month: filters.month, ...clim },
     visa: dest.visa_ca,
     vibes: dest.vibes,

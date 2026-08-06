@@ -9,58 +9,114 @@
       13.75,
       100.52
     ],
-    "flight": {
-      "hours": 20,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          1350,
-          1860
-        ],
-        "feb": [
-          1300,
-          1790
-        ],
-        "mar": [
-          1250,
-          1720
-        ],
-        "apr": [
-          1250,
-          1720
-        ],
-        "may": [
-          1150,
-          1590
-        ],
-        "jun": [
-          1100,
-          1520
-        ],
-        "jul": [
-          1150,
-          1590
-        ],
-        "aug": [
-          1150,
-          1590
-        ],
-        "sep": [
-          1100,
-          1520
-        ],
-        "oct": [
-          1200,
-          1660
-        ],
-        "nov": [
-          1300,
-          1790
-        ],
-        "dec": [
-          1500,
-          2070
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 20,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1350,
+            1860
+          ],
+          "feb": [
+            1300,
+            1790
+          ],
+          "mar": [
+            1250,
+            1720
+          ],
+          "apr": [
+            1250,
+            1720
+          ],
+          "may": [
+            1150,
+            1590
+          ],
+          "jun": [
+            1100,
+            1520
+          ],
+          "jul": [
+            1150,
+            1590
+          ],
+          "aug": [
+            1150,
+            1590
+          ],
+          "sep": [
+            1100,
+            1520
+          ],
+          "oct": [
+            1200,
+            1660
+          ],
+          "nov": [
+            1300,
+            1790
+          ],
+          "dec": [
+            1500,
+            2070
+          ]
+        }
+      },
+      "yul": {
+        "hours": 21,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1390,
+            1920
+          ],
+          "feb": [
+            1340,
+            1840
+          ],
+          "mar": [
+            1290,
+            1770
+          ],
+          "apr": [
+            1290,
+            1770
+          ],
+          "may": [
+            1180,
+            1640
+          ],
+          "jun": [
+            1130,
+            1570
+          ],
+          "jul": [
+            1180,
+            1640
+          ],
+          "aug": [
+            1180,
+            1640
+          ],
+          "sep": [
+            1130,
+            1570
+          ],
+          "oct": [
+            1240,
+            1710
+          ],
+          "nov": [
+            1340,
+            1840
+          ],
+          "dec": [
+            1540,
+            2130
+          ]
+        }
       }
     },
     "stay": {
@@ -170,7 +226,12 @@
       "cheap"
     ],
     "photo_query": "Bangkok Thailand temple skyline",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1779419183239-25222afb3b26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZ2tvayUyMFRoYWlsYW5kJTIwdGVtcGxlJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Ahmet Yüksek ✪", "profile_url": "https://unsplash.com/@ahmetyuksek", "download_location": "https://api.unsplash.com/photos/7enOiBayyPg/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZ2tvayUyMFRoYWlsYW5kJTIwdGVtcGxlJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MjY5fDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1779419183239-25222afb3b26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZ2tvayUyMFRoYWlsYW5kJTIwdGVtcGxlJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MjY5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Ahmet Yüksek ✪",
+      "profile_url": "https://unsplash.com/@ahmetyuksek",
+      "download_location": "https://api.unsplash.com/photos/7enOiBayyPg/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZ2tvayUyMFRoYWlsYW5kJTIwdGVtcGxlJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MjY5fDA"
+    },
     "blurb": "Long haul, but a week on the ground costs less than a Toronto weekend."
   },
   {
@@ -183,58 +244,114 @@
       64.15,
       -21.94
     ],
-    "flight": {
-      "hours": 5.5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          550,
-          760
-        ],
-        "feb": [
-          570,
-          790
-        ],
-        "mar": [
-          600,
-          830
-        ],
-        "apr": [
-          700,
-          970
-        ],
-        "may": [
-          850,
-          1170
-        ],
-        "jun": [
-          900,
-          1240
-        ],
-        "jul": [
-          950,
-          1310
-        ],
-        "aug": [
-          900,
-          1240
-        ],
-        "sep": [
-          750,
-          1040
-        ],
-        "oct": [
-          650,
-          900
-        ],
-        "nov": [
-          600,
-          830
-        ],
-        "dec": [
-          700,
-          970
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 5.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            550,
+            760
+          ],
+          "feb": [
+            570,
+            790
+          ],
+          "mar": [
+            600,
+            830
+          ],
+          "apr": [
+            700,
+            970
+          ],
+          "may": [
+            850,
+            1170
+          ],
+          "jun": [
+            900,
+            1240
+          ],
+          "jul": [
+            950,
+            1310
+          ],
+          "aug": [
+            900,
+            1240
+          ],
+          "sep": [
+            750,
+            1040
+          ],
+          "oct": [
+            650,
+            900
+          ],
+          "nov": [
+            600,
+            830
+          ],
+          "dec": [
+            700,
+            970
+          ]
+        }
+      },
+      "yul": {
+        "hours": 5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            530,
+            740
+          ],
+          "feb": [
+            550,
+            770
+          ],
+          "mar": [
+            580,
+            810
+          ],
+          "apr": [
+            680,
+            940
+          ],
+          "may": [
+            820,
+            1130
+          ],
+          "jun": [
+            870,
+            1200
+          ],
+          "jul": [
+            920,
+            1270
+          ],
+          "aug": [
+            870,
+            1200
+          ],
+          "sep": [
+            730,
+            1010
+          ],
+          "oct": [
+            630,
+            870
+          ],
+          "nov": [
+            580,
+            810
+          ],
+          "dec": [
+            680,
+            940
+          ]
+        }
       }
     },
     "stay": {
@@ -343,7 +460,12 @@
       "city"
     ],
     "photo_query": "Iceland landscape waterfall",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SWNlbGFuZCUyMGxhbmRzY2FwZSUyMHdhdGVyZmFsbHxlbnwxfDB8fHwxNzg1ODU2MjczfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Robert Lukeman", "profile_url": "https://unsplash.com/@robertlukeman", "download_location": "https://api.unsplash.com/photos/zNN6ubHmruI/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SWNlbGFuZCUyMGxhbmRzY2FwZSUyMHdhdGVyZmFsbHxlbnwxfDB8fHwxNzg1ODU2MjczfDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SWNlbGFuZCUyMGxhbmRzY2FwZSUyMHdhdGVyZmFsbHxlbnwxfDB8fHwxNzg1ODU2MjczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Robert Lukeman",
+      "profile_url": "https://unsplash.com/@robertlukeman",
+      "download_location": "https://api.unsplash.com/photos/zNN6ubHmruI/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SWNlbGFuZCUyMGxhbmRzY2FwZSUyMHdhdGVyZmFsbHxlbnwxfDB8fHwxNzg1ODU2MjczfDA"
+    },
     "blurb": "Cheap flight, punishing ground costs — the inverse of most long-haul trips."
   },
   {
@@ -356,58 +478,114 @@
       38.72,
       -9.14
     ],
-    "flight": {
-      "hours": 6.5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          520,
-          720
-        ],
-        "feb": [
-          540,
-          750
-        ],
-        "mar": [
-          600,
-          830
-        ],
-        "apr": [
-          700,
-          970
-        ],
-        "may": [
-          800,
-          1100
-        ],
-        "jun": [
-          850,
-          1170
-        ],
-        "jul": [
-          950,
-          1310
-        ],
-        "aug": [
-          900,
-          1240
-        ],
-        "sep": [
-          750,
-          1040
-        ],
-        "oct": [
-          650,
-          900
-        ],
-        "nov": [
-          580,
-          800
-        ],
-        "dec": [
-          600,
-          830
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 6.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            520,
+            720
+          ],
+          "feb": [
+            540,
+            750
+          ],
+          "mar": [
+            600,
+            830
+          ],
+          "apr": [
+            700,
+            970
+          ],
+          "may": [
+            800,
+            1100
+          ],
+          "jun": [
+            850,
+            1170
+          ],
+          "jul": [
+            950,
+            1310
+          ],
+          "aug": [
+            900,
+            1240
+          ],
+          "sep": [
+            750,
+            1040
+          ],
+          "oct": [
+            650,
+            900
+          ],
+          "nov": [
+            580,
+            800
+          ],
+          "dec": [
+            600,
+            830
+          ]
+        }
+      },
+      "yul": {
+        "hours": 6.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            480,
+            660
+          ],
+          "feb": [
+            500,
+            690
+          ],
+          "mar": [
+            550,
+            760
+          ],
+          "apr": [
+            640,
+            890
+          ],
+          "may": [
+            740,
+            1010
+          ],
+          "jun": [
+            780,
+            1080
+          ],
+          "jul": [
+            870,
+            1210
+          ],
+          "aug": [
+            830,
+            1140
+          ],
+          "sep": [
+            690,
+            960
+          ],
+          "oct": [
+            600,
+            830
+          ],
+          "nov": [
+            530,
+            740
+          ],
+          "dec": [
+            550,
+            760
+          ]
+        }
       }
     },
     "stay": {
@@ -517,7 +695,12 @@
       "beach"
     ],
     "photo_query": "Lisbon Portugal tram street",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1548707309-23edbbbbd84c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TGlzYm9uJTIwUG9ydHVnYWwlMjB0cmFtJTIwc3RyZWV0fGVufDF8MHx8fDE3ODU4NTYyNzd8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Claudio Schwarz", "profile_url": "https://unsplash.com/@purzlbaum", "download_location": "https://api.unsplash.com/photos/UGF22xM1KQU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TGlzYm9uJTIwUG9ydHVnYWwlMjB0cmFtJTIwc3RyZWV0fGVufDF8MHx8fDE3ODU4NTYyNzd8MA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1548707309-23edbbbbd84c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TGlzYm9uJTIwUG9ydHVnYWwlMjB0cmFtJTIwc3RyZWV0fGVufDF8MHx8fDE3ODU4NTYyNzd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Claudio Schwarz",
+      "profile_url": "https://unsplash.com/@purzlbaum",
+      "download_location": "https://api.unsplash.com/photos/UGF22xM1KQU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TGlzYm9uJTIwUG9ydHVnYWwlMjB0cmFtJTIwc3RyZWV0fGVufDF8MHx8fDE3ODU4NTYyNzd8MA"
+    },
     "blurb": "Cheap for Western Europe, warm into November, walkable."
   },
   {
@@ -530,58 +713,114 @@
       21.16,
       -86.85
     ],
-    "flight": {
-      "hours": 4,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          500,
-          690
-        ],
-        "feb": [
-          600,
-          830
-        ],
-        "mar": [
-          650,
-          900
-        ],
-        "apr": [
-          700,
-          970
-        ],
-        "may": [
-          550,
-          760
-        ],
-        "jun": [
-          450,
-          620
-        ],
-        "jul": [
-          500,
-          690
-        ],
-        "aug": [
-          480,
-          660
-        ],
-        "sep": [
-          400,
-          550
-        ],
-        "oct": [
-          400,
-          550
-        ],
-        "nov": [
-          480,
-          660
-        ],
-        "dec": [
-          600,
-          830
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 4,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            500,
+            690
+          ],
+          "feb": [
+            600,
+            830
+          ],
+          "mar": [
+            650,
+            900
+          ],
+          "apr": [
+            700,
+            970
+          ],
+          "may": [
+            550,
+            760
+          ],
+          "jun": [
+            450,
+            620
+          ],
+          "jul": [
+            500,
+            690
+          ],
+          "aug": [
+            480,
+            660
+          ],
+          "sep": [
+            400,
+            550
+          ],
+          "oct": [
+            400,
+            550
+          ],
+          "nov": [
+            480,
+            660
+          ],
+          "dec": [
+            600,
+            830
+          ]
+        }
+      },
+      "yul": {
+        "hours": 4,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            480,
+            660
+          ],
+          "feb": [
+            570,
+            790
+          ],
+          "mar": [
+            620,
+            860
+          ],
+          "apr": [
+            660,
+            920
+          ],
+          "may": [
+            520,
+            720
+          ],
+          "jun": [
+            430,
+            590
+          ],
+          "jul": [
+            480,
+            660
+          ],
+          "aug": [
+            460,
+            630
+          ],
+          "sep": [
+            380,
+            520
+          ],
+          "oct": [
+            380,
+            520
+          ],
+          "nov": [
+            460,
+            630
+          ],
+          "dec": [
+            570,
+            790
+          ]
+        }
       }
     },
     "stay": {
@@ -690,7 +929,12 @@
       "cheap"
     ],
     "photo_query": "Cancun Mexico beach turquoise water",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1602088113235-229c19758e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FuY3VuJTIwTWV4aWNvJTIwYmVhY2glMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwxfDB8fHwxNzg1ODU2MjgwfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "David Vives", "profile_url": "https://unsplash.com/@davidvives", "download_location": "https://api.unsplash.com/photos/ELf8M_YWRTY/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FuY3VuJTIwTWV4aWNvJTIwYmVhY2glMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwxfDB8fHwxNzg1ODU2MjgwfDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1602088113235-229c19758e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FuY3VuJTIwTWV4aWNvJTIwYmVhY2glMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwxfDB8fHwxNzg1ODU2MjgwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "David Vives",
+      "profile_url": "https://unsplash.com/@davidvives",
+      "download_location": "https://api.unsplash.com/photos/ELf8M_YWRTY/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FuY3VuJTIwTWV4aWNvJTIwYmVhY2glMjB0dXJxdW9pc2UlMjB3YXRlcnxlbnwxfDB8fHwxNzg1ODU2MjgwfDA"
+    },
     "blurb": "Short nonstop, warm all winter — the default Toronto escape for a reason."
   },
   {
@@ -703,58 +947,114 @@
       35.68,
       139.69
     ],
-    "flight": {
-      "hours": 13,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          1100,
-          1520
-        ],
-        "feb": [
-          1150,
-          1590
-        ],
-        "mar": [
-          1400,
-          1930
-        ],
-        "apr": [
-          1450,
-          2000
-        ],
-        "may": [
-          1300,
-          1790
-        ],
-        "jun": [
-          1200,
-          1660
-        ],
-        "jul": [
-          1500,
-          2070
-        ],
-        "aug": [
-          1500,
-          2070
-        ],
-        "sep": [
-          1300,
-          1790
-        ],
-        "oct": [
-          1300,
-          1790
-        ],
-        "nov": [
-          1200,
-          1660
-        ],
-        "dec": [
-          1350,
-          1860
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 13,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            1100,
+            1520
+          ],
+          "feb": [
+            1150,
+            1590
+          ],
+          "mar": [
+            1400,
+            1930
+          ],
+          "apr": [
+            1450,
+            2000
+          ],
+          "may": [
+            1300,
+            1790
+          ],
+          "jun": [
+            1200,
+            1660
+          ],
+          "jul": [
+            1500,
+            2070
+          ],
+          "aug": [
+            1500,
+            2070
+          ],
+          "sep": [
+            1300,
+            1790
+          ],
+          "oct": [
+            1300,
+            1790
+          ],
+          "nov": [
+            1200,
+            1660
+          ],
+          "dec": [
+            1350,
+            1860
+          ]
+        }
+      },
+      "yul": {
+        "hours": 13.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            1170,
+            1610
+          ],
+          "feb": [
+            1220,
+            1690
+          ],
+          "mar": [
+            1480,
+            2050
+          ],
+          "apr": [
+            1540,
+            2120
+          ],
+          "may": [
+            1380,
+            1900
+          ],
+          "jun": [
+            1270,
+            1760
+          ],
+          "jul": [
+            1590,
+            2190
+          ],
+          "aug": [
+            1590,
+            2190
+          ],
+          "sep": [
+            1380,
+            1900
+          ],
+          "oct": [
+            1380,
+            1900
+          ],
+          "nov": [
+            1270,
+            1760
+          ],
+          "dec": [
+            1430,
+            1970
+          ]
+        }
       }
     },
     "stay": {
@@ -863,7 +1163,12 @@
       "food"
     ],
     "photo_query": "Tokyo Japan street night",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1573455494060-c5595004fb6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VG9reW8lMjBKYXBhbiUyMHN0cmVldCUyMG5pZ2h0fGVufDF8MHx8fDE3ODU4NTYyODR8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Denys Nevozhai", "profile_url": "https://unsplash.com/@dnevozhai", "download_location": "https://api.unsplash.com/photos/D68ADLeMh5Q/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VG9reW8lMjBKYXBhbiUyMHN0cmVldCUyMG5pZ2h0fGVufDF8MHx8fDE3ODU4NTYyODR8MA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1573455494060-c5595004fb6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VG9reW8lMjBKYXBhbiUyMHN0cmVldCUyMG5pZ2h0fGVufDF8MHx8fDE3ODU4NTYyODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Denys Nevozhai",
+      "profile_url": "https://unsplash.com/@dnevozhai",
+      "download_location": "https://api.unsplash.com/photos/D68ADLeMh5Q/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VG9reW8lMjBKYXBhbiUyMHN0cmVldCUyMG5pZ2h0fGVufDF8MHx8fDE3ODU4NTYyODR8MA"
+    },
     "blurb": "Passes a tight budget at hostel tier, fails it at nice hotels — the tier toggle earns its keep here."
   },
   {
@@ -876,58 +1181,114 @@
       48.86,
       2.35
     ],
-    "flight": {
-      "hours": 7.5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          600,
-          830
-        ],
-        "feb": [
-          620,
-          860
-        ],
-        "mar": [
-          700,
-          970
-        ],
-        "apr": [
-          800,
-          1100
-        ],
-        "may": [
-          900,
-          1240
-        ],
-        "jun": [
-          950,
-          1310
-        ],
-        "jul": [
-          1050,
-          1450
-        ],
-        "aug": [
-          1000,
-          1380
-        ],
-        "sep": [
-          850,
-          1170
-        ],
-        "oct": [
-          750,
-          1040
-        ],
-        "nov": [
-          680,
-          940
-        ],
-        "dec": [
-          700,
-          970
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 7.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            600,
+            830
+          ],
+          "feb": [
+            620,
+            860
+          ],
+          "mar": [
+            700,
+            970
+          ],
+          "apr": [
+            800,
+            1100
+          ],
+          "may": [
+            900,
+            1240
+          ],
+          "jun": [
+            950,
+            1310
+          ],
+          "jul": [
+            1050,
+            1450
+          ],
+          "aug": [
+            1000,
+            1380
+          ],
+          "sep": [
+            850,
+            1170
+          ],
+          "oct": [
+            750,
+            1040
+          ],
+          "nov": [
+            680,
+            940
+          ],
+          "dec": [
+            700,
+            970
+          ]
+        }
+      },
+      "yul": {
+        "hours": 7,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            530,
+            730
+          ],
+          "feb": [
+            550,
+            760
+          ],
+          "mar": [
+            620,
+            850
+          ],
+          "apr": [
+            700,
+            970
+          ],
+          "may": [
+            790,
+            1090
+          ],
+          "jun": [
+            840,
+            1150
+          ],
+          "jul": [
+            920,
+            1280
+          ],
+          "aug": [
+            880,
+            1210
+          ],
+          "sep": [
+            750,
+            1030
+          ],
+          "oct": [
+            660,
+            920
+          ],
+          "nov": [
+            600,
+            830
+          ],
+          "dec": [
+            620,
+            850
+          ]
+        }
       }
     },
     "stay": {
@@ -1036,7 +1397,12 @@
       "food"
     ],
     "photo_query": "Paris France rooftops street",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1471623432079-b009d30b6729?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UGFyaXMlMjBGcmFuY2UlMjByb29mdG9wcyUyMHN0cmVldHxlbnwxfDB8fHwxNzg1ODU2Mjg3fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "JOHN TOWNER", "profile_url": "https://unsplash.com/@heytowner", "download_location": "https://api.unsplash.com/photos/UO02gAW3c0c/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UGFyaXMlMjBGcmFuY2UlMjByb29mdG9wcyUyMHN0cmVldHxlbnwxfDB8fHwxNzg1ODU2Mjg3fDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1471623432079-b009d30b6729?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UGFyaXMlMjBGcmFuY2UlMjByb29mdG9wcyUyMHN0cmVldHxlbnwxfDB8fHwxNzg1ODU2Mjg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "JOHN TOWNER",
+      "profile_url": "https://unsplash.com/@heytowner",
+      "download_location": "https://api.unsplash.com/photos/UO02gAW3c0c/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UGFyaXMlMjBGcmFuY2UlMjByb29mdG9wcyUyMHN0cmVldHxlbnwxfDB8fHwxNzg1ODU2Mjg3fDA"
+    },
     "blurb": "Reasonable flight, but ground costs push it mid-to-high — a fair benchmark for Western Europe."
   },
   {
@@ -1049,58 +1415,114 @@
       19.43,
       -99.13
     ],
-    "flight": {
-      "hours": 5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          520,
-          720
-        ],
-        "feb": [
-          550,
-          760
-        ],
-        "mar": [
-          600,
-          830
-        ],
-        "apr": [
-          650,
-          900
-        ],
-        "may": [
-          550,
-          760
-        ],
-        "jun": [
-          480,
-          660
-        ],
-        "jul": [
-          550,
-          760
-        ],
-        "aug": [
-          530,
-          730
-        ],
-        "sep": [
-          500,
-          690
-        ],
-        "oct": [
-          500,
-          690
-        ],
-        "nov": [
-          560,
-          770
-        ],
-        "dec": [
-          650,
-          900
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            520,
+            720
+          ],
+          "feb": [
+            550,
+            760
+          ],
+          "mar": [
+            600,
+            830
+          ],
+          "apr": [
+            650,
+            900
+          ],
+          "may": [
+            550,
+            760
+          ],
+          "jun": [
+            480,
+            660
+          ],
+          "jul": [
+            550,
+            760
+          ],
+          "aug": [
+            530,
+            730
+          ],
+          "sep": [
+            500,
+            690
+          ],
+          "oct": [
+            500,
+            690
+          ],
+          "nov": [
+            560,
+            770
+          ],
+          "dec": [
+            650,
+            900
+          ]
+        }
+      },
+      "yul": {
+        "hours": 5.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            520,
+            720
+          ],
+          "feb": [
+            550,
+            760
+          ],
+          "mar": [
+            600,
+            830
+          ],
+          "apr": [
+            650,
+            900
+          ],
+          "may": [
+            550,
+            760
+          ],
+          "jun": [
+            480,
+            660
+          ],
+          "jul": [
+            550,
+            760
+          ],
+          "aug": [
+            530,
+            730
+          ],
+          "sep": [
+            500,
+            690
+          ],
+          "oct": [
+            500,
+            690
+          ],
+          "nov": [
+            560,
+            770
+          ],
+          "dec": [
+            650,
+            900
+          ]
+        }
       }
     },
     "stay": {
@@ -1210,7 +1632,12 @@
       "cheap"
     ],
     "photo_query": "Mexico City colourful architecture",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1521216774850-01bc1c5fe0da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWV4aWNvJTIwQ2l0eSUyMGNvbG91cmZ1bCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MjkxfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "david carballar", "profile_url": "https://unsplash.com/@david_carballar", "download_location": "https://api.unsplash.com/photos/FZU-vIW-lk8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWV4aWNvJTIwQ2l0eSUyMGNvbG91cmZ1bCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MjkxfDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1521216774850-01bc1c5fe0da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWV4aWNvJTIwQ2l0eSUyMGNvbG91cmZ1bCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MjkxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "david carballar",
+      "profile_url": "https://unsplash.com/@david_carballar",
+      "download_location": "https://api.unsplash.com/photos/FZU-vIW-lk8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWV4aWNvJTIwQ2l0eSUyMGNvbG91cmZ1bCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MjkxfDA"
+    },
     "blurb": "Cheap, close, world-class food — strong all-round value from YYZ."
   },
   {
@@ -1223,58 +1650,114 @@
       41.39,
       2.17
     ],
-    "flight": {
-      "hours": 8,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          600,
-          830
-        ],
-        "feb": [
-          620,
-          860
-        ],
-        "mar": [
-          700,
-          970
-        ],
-        "apr": [
-          780,
-          1080
-        ],
-        "may": [
-          880,
-          1210
-        ],
-        "jun": [
-          950,
-          1310
-        ],
-        "jul": [
-          1050,
-          1450
-        ],
-        "aug": [
-          1000,
-          1380
-        ],
-        "sep": [
-          850,
-          1170
-        ],
-        "oct": [
-          750,
-          1040
-        ],
-        "nov": [
-          680,
-          940
-        ],
-        "dec": [
-          700,
-          970
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 8,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            600,
+            830
+          ],
+          "feb": [
+            620,
+            860
+          ],
+          "mar": [
+            700,
+            970
+          ],
+          "apr": [
+            780,
+            1080
+          ],
+          "may": [
+            880,
+            1210
+          ],
+          "jun": [
+            950,
+            1310
+          ],
+          "jul": [
+            1050,
+            1450
+          ],
+          "aug": [
+            1000,
+            1380
+          ],
+          "sep": [
+            850,
+            1170
+          ],
+          "oct": [
+            750,
+            1040
+          ],
+          "nov": [
+            680,
+            940
+          ],
+          "dec": [
+            700,
+            970
+          ]
+        }
+      },
+      "yul": {
+        "hours": 7.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            560,
+            770
+          ],
+          "feb": [
+            580,
+            800
+          ],
+          "mar": [
+            650,
+            900
+          ],
+          "apr": [
+            730,
+            1000
+          ],
+          "may": [
+            820,
+            1130
+          ],
+          "jun": [
+            880,
+            1220
+          ],
+          "jul": [
+            980,
+            1350
+          ],
+          "aug": [
+            930,
+            1280
+          ],
+          "sep": [
+            790,
+            1090
+          ],
+          "oct": [
+            700,
+            970
+          ],
+          "nov": [
+            630,
+            870
+          ],
+          "dec": [
+            650,
+            900
+          ]
+        }
       }
     },
     "stay": {
@@ -1384,7 +1867,12 @@
       "food"
     ],
     "photo_query": "Barcelona Spain architecture",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1688680437050-d2cddf4f20b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFyY2Vsb25hJTIwU3BhaW4lMjBhcmNoaXRlY3R1cmV8ZW58MXwwfHx8MTc4NTg1NjI5NXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Taisia Karaseva", "profile_url": "https://unsplash.com/@taisiat", "download_location": "https://api.unsplash.com/photos/s3kdLmeYxXs/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFyY2Vsb25hJTIwU3BhaW4lMjBhcmNoaXRlY3R1cmV8ZW58MXwwfHx8MTc4NTg1NjI5NXww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1688680437050-d2cddf4f20b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFyY2Vsb25hJTIwU3BhaW4lMjBhcmNoaXRlY3R1cmV8ZW58MXwwfHx8MTc4NTg1NjI5NXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Taisia Karaseva",
+      "profile_url": "https://unsplash.com/@taisiat",
+      "download_location": "https://api.unsplash.com/photos/s3kdLmeYxXs/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFyY2Vsb25hJTIwU3BhaW4lMjBhcmNoaXRlY3R1cmV8ZW58MXwwfHx8MTc4NTg1NjI5NXww"
+    },
     "blurb": "Beach and city in one, warm shoulder seasons, mid-range costs."
   },
   {
@@ -1397,58 +1885,114 @@
       9.93,
       -84.08
     ],
-    "flight": {
-      "hours": 6,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          650,
-          900
-        ],
-        "feb": [
-          680,
-          940
-        ],
-        "mar": [
-          700,
-          970
-        ],
-        "apr": [
-          750,
-          1040
-        ],
-        "may": [
-          650,
-          900
-        ],
-        "jun": [
-          550,
-          760
-        ],
-        "jul": [
-          600,
-          830
-        ],
-        "aug": [
-          580,
-          800
-        ],
-        "sep": [
-          520,
-          720
-        ],
-        "oct": [
-          500,
-          690
-        ],
-        "nov": [
-          600,
-          830
-        ],
-        "dec": [
-          800,
-          1100
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 6,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            650,
+            900
+          ],
+          "feb": [
+            680,
+            940
+          ],
+          "mar": [
+            700,
+            970
+          ],
+          "apr": [
+            750,
+            1040
+          ],
+          "may": [
+            650,
+            900
+          ],
+          "jun": [
+            550,
+            760
+          ],
+          "jul": [
+            600,
+            830
+          ],
+          "aug": [
+            580,
+            800
+          ],
+          "sep": [
+            520,
+            720
+          ],
+          "oct": [
+            500,
+            690
+          ],
+          "nov": [
+            600,
+            830
+          ],
+          "dec": [
+            800,
+            1100
+          ]
+        }
+      },
+      "yul": {
+        "hours": 5.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            630,
+            870
+          ],
+          "feb": [
+            660,
+            910
+          ],
+          "mar": [
+            680,
+            940
+          ],
+          "apr": [
+            730,
+            1010
+          ],
+          "may": [
+            630,
+            870
+          ],
+          "jun": [
+            530,
+            740
+          ],
+          "jul": [
+            580,
+            810
+          ],
+          "aug": [
+            560,
+            780
+          ],
+          "sep": [
+            500,
+            700
+          ],
+          "oct": [
+            480,
+            670
+          ],
+          "nov": [
+            580,
+            810
+          ],
+          "dec": [
+            780,
+            1070
+          ]
+        }
       }
     },
     "stay": {
@@ -1557,7 +2101,12 @@
       "beach"
     ],
     "photo_query": "Costa Rica rainforest landscape",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1629494939320-e36ef741dc36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29zdGElMjBSaWNhJTIwcmFpbmZvcmVzdCUyMGxhbmRzY2FwZXxlbnwxfDB8fHwxNzg1ODU2Mjk4fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Christina Victoria Craft", "profile_url": "https://unsplash.com/@victoriabcphotographer", "download_location": "https://api.unsplash.com/photos/bjVoK4pDMj4/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29zdGElMjBSaWNhJTIwcmFpbmZvcmVzdCUyMGxhbmRzY2FwZXxlbnwxfDB8fHwxNzg1ODU2Mjk4fDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1629494939320-e36ef741dc36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29zdGElMjBSaWNhJTIwcmFpbmZvcmVzdCUyMGxhbmRzY2FwZXxlbnwxfDB8fHwxNzg1ODU2Mjk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Christina Victoria Craft",
+      "profile_url": "https://unsplash.com/@victoriabcphotographer",
+      "download_location": "https://api.unsplash.com/photos/bjVoK4pDMj4/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29zdGElMjBSaWNhJTIwcmFpbmZvcmVzdCUyMGxhbmRzY2FwZXxlbnwxfDB8fHwxNzg1ODU2Mjk4fDA"
+    },
     "blurb": "Rainforest and coast within reach — go in the dry months, autumn is a washout."
   },
   {
@@ -1570,58 +2119,114 @@
       31.63,
       -7.99
     ],
-    "flight": {
-      "hours": 10,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          750,
-          1040
-        ],
-        "feb": [
-          780,
-          1080
-        ],
-        "mar": [
-          800,
-          1100
-        ],
-        "apr": [
-          850,
-          1170
-        ],
-        "may": [
-          880,
-          1210
-        ],
-        "jun": [
-          900,
-          1240
-        ],
-        "jul": [
-          950,
-          1310
-        ],
-        "aug": [
-          920,
-          1270
-        ],
-        "sep": [
-          880,
-          1210
-        ],
-        "oct": [
-          850,
-          1170
-        ],
-        "nov": [
-          800,
-          1100
-        ],
-        "dec": [
-          800,
-          1100
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 10,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            750,
+            1040
+          ],
+          "feb": [
+            780,
+            1080
+          ],
+          "mar": [
+            800,
+            1100
+          ],
+          "apr": [
+            850,
+            1170
+          ],
+          "may": [
+            880,
+            1210
+          ],
+          "jun": [
+            900,
+            1240
+          ],
+          "jul": [
+            950,
+            1310
+          ],
+          "aug": [
+            920,
+            1270
+          ],
+          "sep": [
+            880,
+            1210
+          ],
+          "oct": [
+            850,
+            1170
+          ],
+          "nov": [
+            800,
+            1100
+          ],
+          "dec": [
+            800,
+            1100
+          ]
+        }
+      },
+      "yul": {
+        "hours": 9.5,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            710,
+            990
+          ],
+          "feb": [
+            740,
+            1030
+          ],
+          "mar": [
+            760,
+            1040
+          ],
+          "apr": [
+            810,
+            1110
+          ],
+          "may": [
+            840,
+            1150
+          ],
+          "jun": [
+            860,
+            1180
+          ],
+          "jul": [
+            900,
+            1240
+          ],
+          "aug": [
+            870,
+            1210
+          ],
+          "sep": [
+            840,
+            1150
+          ],
+          "oct": [
+            810,
+            1110
+          ],
+          "nov": [
+            760,
+            1040
+          ],
+          "dec": [
+            760,
+            1040
+          ]
+        }
       }
     },
     "stay": {
@@ -1731,7 +2336,12 @@
       "cheap"
     ],
     "photo_query": "Marrakesh Morocco medina",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1597212618440-806262de4f6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWFycmFrZXNoJTIwTW9yb2NjbyUyMG1lZGluYXxlbnwxfDB8fHwxNzg1ODU2MzAxfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Paul Macallan", "profile_url": "https://unsplash.com/@pemacallan", "download_location": "https://api.unsplash.com/photos/CFKksjYRSQ8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWFycmFrZXNoJTIwTW9yb2NjbyUyMG1lZGluYXxlbnwxfDB8fHwxNzg1ODU2MzAxfDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1597212618440-806262de4f6b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWFycmFrZXNoJTIwTW9yb2NjbyUyMG1lZGluYXxlbnwxfDB8fHwxNzg1ODU2MzAxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Paul Macallan",
+      "profile_url": "https://unsplash.com/@pemacallan",
+      "download_location": "https://api.unsplash.com/photos/CFKksjYRSQ8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWFycmFrZXNoJTIwTW9yb2NjbyUyMG1lZGluYXxlbnwxfDB8fHwxNzg1ODU2MzAxfDA"
+    },
     "blurb": "One stop away, but cheap on the ground with strong spring and autumn weather."
   },
   {
@@ -1744,58 +2354,114 @@
       41.9,
       12.5
     ],
-    "flight": {
-      "hours": 9,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          650,
-          900
-        ],
-        "feb": [
-          680,
-          940
-        ],
-        "mar": [
-          750,
-          1040
-        ],
-        "apr": [
-          850,
-          1170
-        ],
-        "may": [
-          950,
-          1310
-        ],
-        "jun": [
-          1000,
-          1380
-        ],
-        "jul": [
-          1150,
-          1590
-        ],
-        "aug": [
-          1100,
-          1520
-        ],
-        "sep": [
-          900,
-          1240
-        ],
-        "oct": [
-          800,
-          1100
-        ],
-        "nov": [
-          720,
-          990
-        ],
-        "dec": [
-          750,
-          1040
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 9,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            650,
+            900
+          ],
+          "feb": [
+            680,
+            940
+          ],
+          "mar": [
+            750,
+            1040
+          ],
+          "apr": [
+            850,
+            1170
+          ],
+          "may": [
+            950,
+            1310
+          ],
+          "jun": [
+            1000,
+            1380
+          ],
+          "jul": [
+            1150,
+            1590
+          ],
+          "aug": [
+            1100,
+            1520
+          ],
+          "sep": [
+            900,
+            1240
+          ],
+          "oct": [
+            800,
+            1100
+          ],
+          "nov": [
+            720,
+            990
+          ],
+          "dec": [
+            750,
+            1040
+          ]
+        }
+      },
+      "yul": {
+        "hours": 8.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            600,
+            840
+          ],
+          "feb": [
+            630,
+            870
+          ],
+          "mar": [
+            700,
+            970
+          ],
+          "apr": [
+            790,
+            1090
+          ],
+          "may": [
+            880,
+            1220
+          ],
+          "jun": [
+            930,
+            1280
+          ],
+          "jul": [
+            1070,
+            1480
+          ],
+          "aug": [
+            1020,
+            1410
+          ],
+          "sep": [
+            840,
+            1150
+          ],
+          "oct": [
+            740,
+            1020
+          ],
+          "nov": [
+            670,
+            920
+          ],
+          "dec": [
+            700,
+            970
+          ]
+        }
       }
     },
     "stay": {
@@ -1904,7 +2570,12 @@
       "food"
     ],
     "photo_query": "Rome Italy ancient architecture",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1588614959060-4d144f28b207?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Um9tZSUyMEl0YWx5JTIwYW5jaWVudCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MzA1fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Clay Banks", "profile_url": "https://unsplash.com/@claybanks", "download_location": "https://api.unsplash.com/photos/hi_52O-h5G8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Um9tZSUyMEl0YWx5JTIwYW5jaWVudCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MzA1fDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1588614959060-4d144f28b207?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Um9tZSUyMEl0YWx5JTIwYW5jaWVudCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MzA1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Clay Banks",
+      "profile_url": "https://unsplash.com/@claybanks",
+      "download_location": "https://api.unsplash.com/photos/hi_52O-h5G8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Um9tZSUyMEl0YWx5JTIwYW5jaWVudCUyMGFyY2hpdGVjdHVyZXxlbnwxfDB8fHwxNzg1ODU2MzA1fDA"
+    },
     "blurb": "Nonstop to the heart of it; shoulder months dodge both crowds and peak fares."
   },
   {
@@ -1917,58 +2588,114 @@
       23.11,
       -82.37
     ],
-    "flight": {
-      "hours": 3.5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          450,
-          620
-        ],
-        "feb": [
-          500,
-          690
-        ],
-        "mar": [
-          550,
-          760
-        ],
-        "apr": [
-          600,
-          830
-        ],
-        "may": [
-          480,
-          660
-        ],
-        "jun": [
-          400,
-          550
-        ],
-        "jul": [
-          450,
-          620
-        ],
-        "aug": [
-          430,
-          590
-        ],
-        "sep": [
-          380,
-          520
-        ],
-        "oct": [
-          380,
-          520
-        ],
-        "nov": [
-          450,
-          620
-        ],
-        "dec": [
-          550,
-          760
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 3.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            450,
+            620
+          ],
+          "feb": [
+            500,
+            690
+          ],
+          "mar": [
+            550,
+            760
+          ],
+          "apr": [
+            600,
+            830
+          ],
+          "may": [
+            480,
+            660
+          ],
+          "jun": [
+            400,
+            550
+          ],
+          "jul": [
+            450,
+            620
+          ],
+          "aug": [
+            430,
+            590
+          ],
+          "sep": [
+            380,
+            520
+          ],
+          "oct": [
+            380,
+            520
+          ],
+          "nov": [
+            450,
+            620
+          ],
+          "dec": [
+            550,
+            760
+          ]
+        }
+      },
+      "yul": {
+        "hours": 3.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            400,
+            550
+          ],
+          "feb": [
+            440,
+            610
+          ],
+          "mar": [
+            480,
+            670
+          ],
+          "apr": [
+            530,
+            730
+          ],
+          "may": [
+            420,
+            580
+          ],
+          "jun": [
+            350,
+            480
+          ],
+          "jul": [
+            400,
+            550
+          ],
+          "aug": [
+            380,
+            520
+          ],
+          "sep": [
+            330,
+            460
+          ],
+          "oct": [
+            330,
+            460
+          ],
+          "nov": [
+            400,
+            550
+          ],
+          "dec": [
+            480,
+            670
+          ]
+        }
       }
     },
     "stay": {
@@ -2078,7 +2805,12 @@
       "cheap"
     ],
     "photo_query": "Havana Cuba colourful street classic car",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1570299437488-d430e1e677c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SGF2YW5hJTIwQ3ViYSUyMGNvbG91cmZ1bCUyMHN0cmVldCUyMGNsYXNzaWMlMjBjYXJ8ZW58MXwwfHx8MTc4NTg1NjMwOHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Spencer Everett", "profile_url": "https://unsplash.com/@sp3v", "download_location": "https://api.unsplash.com/photos/4MTSE39Oqro/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SGF2YW5hJTIwQ3ViYSUyMGNvbG91cmZ1bCUyMHN0cmVldCUyMGNsYXNzaWMlMjBjYXJ8ZW58MXwwfHx8MTc4NTg1NjMwOHww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1570299437488-d430e1e677c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SGF2YW5hJTIwQ3ViYSUyMGNvbG91cmZ1bCUyMHN0cmVldCUyMGNsYXNzaWMlMjBjYXJ8ZW58MXwwfHx8MTc4NTg1NjMwOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Spencer Everett",
+      "profile_url": "https://unsplash.com/@sp3v",
+      "download_location": "https://api.unsplash.com/photos/4MTSE39Oqro/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SGF2YW5hJTIwQ3ViYSUyMGNvbG91cmZ1bCUyMHN0cmVldCUyMGNsYXNzaWMlMjBjYXJ8ZW58MXwwfHx8MTc4NTg1NjMwOHww"
+    },
     "blurb": "The shortest warm-water hop from Toronto, and cheap once you're there."
   },
   {
@@ -2091,58 +2823,114 @@
       37.98,
       23.73
     ],
-    "flight": {
-      "hours": 10,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          650,
-          900
-        ],
-        "feb": [
-          680,
-          940
-        ],
-        "mar": [
-          750,
-          1040
-        ],
-        "apr": [
-          850,
-          1170
-        ],
-        "may": [
-          980,
-          1350
-        ],
-        "jun": [
-          1050,
-          1450
-        ],
-        "jul": [
-          1200,
-          1660
-        ],
-        "aug": [
-          1150,
-          1590
-        ],
-        "sep": [
-          950,
-          1310
-        ],
-        "oct": [
-          800,
-          1100
-        ],
-        "nov": [
-          720,
-          990
-        ],
-        "dec": [
-          700,
-          970
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 10,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            650,
+            900
+          ],
+          "feb": [
+            680,
+            940
+          ],
+          "mar": [
+            750,
+            1040
+          ],
+          "apr": [
+            850,
+            1170
+          ],
+          "may": [
+            980,
+            1350
+          ],
+          "jun": [
+            1050,
+            1450
+          ],
+          "jul": [
+            1200,
+            1660
+          ],
+          "aug": [
+            1150,
+            1590
+          ],
+          "sep": [
+            950,
+            1310
+          ],
+          "oct": [
+            800,
+            1100
+          ],
+          "nov": [
+            720,
+            990
+          ],
+          "dec": [
+            700,
+            970
+          ]
+        }
+      },
+      "yul": {
+        "hours": 9.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            620,
+            860
+          ],
+          "feb": [
+            650,
+            890
+          ],
+          "mar": [
+            710,
+            990
+          ],
+          "apr": [
+            810,
+            1110
+          ],
+          "may": [
+            930,
+            1280
+          ],
+          "jun": [
+            1000,
+            1380
+          ],
+          "jul": [
+            1140,
+            1580
+          ],
+          "aug": [
+            1090,
+            1510
+          ],
+          "sep": [
+            900,
+            1240
+          ],
+          "oct": [
+            760,
+            1040
+          ],
+          "nov": [
+            680,
+            940
+          ],
+          "dec": [
+            660,
+            920
+          ]
+        }
       }
     },
     "stay": {
@@ -2252,7 +3040,12 @@
       "food"
     ],
     "photo_query": "Athens Greece Acropolis",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QXRoZW5zJTIwR3JlZWNlJTIwQWNyb3BvbGlzfGVufDF8MHx8fDE3ODU4NTYzMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Constantinos Kollias", "profile_url": "https://unsplash.com/@ckollias", "download_location": "https://api.unsplash.com/photos/yqBvJJ8jGBQ/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QXRoZW5zJTIwR3JlZWNlJTIwQWNyb3BvbGlzfGVufDF8MHx8fDE3ODU4NTYzMTJ8MA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QXRoZW5zJTIwR3JlZWNlJTIwQWNyb3BvbGlzfGVufDF8MHx8fDE3ODU4NTYzMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Constantinos Kollias",
+      "profile_url": "https://unsplash.com/@ckollias",
+      "download_location": "https://api.unsplash.com/photos/yqBvJJ8jGBQ/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QXRoZW5zJTIwR3JlZWNlJTIwQWNyb3BvbGlzfGVufDF8MHx8fDE3ODU4NTYzMTJ8MA"
+    },
     "blurb": "Gateway to the islands; autumn keeps the warmth without the summer fare spike."
   },
   {
@@ -2265,58 +3058,114 @@
       1.35,
       103.82
     ],
-    "flight": {
-      "hours": 19,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          1400,
-          1930
-        ],
-        "feb": [
-          1380,
-          1900
-        ],
-        "mar": [
-          1350,
-          1860
-        ],
-        "apr": [
-          1350,
-          1860
-        ],
-        "may": [
-          1300,
-          1790
-        ],
-        "jun": [
-          1300,
-          1790
-        ],
-        "jul": [
-          1400,
-          1930
-        ],
-        "aug": [
-          1400,
-          1930
-        ],
-        "sep": [
-          1300,
-          1790
-        ],
-        "oct": [
-          1350,
-          1860
-        ],
-        "nov": [
-          1400,
-          1930
-        ],
-        "dec": [
-          1600,
-          2210
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 19,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1400,
+            1930
+          ],
+          "feb": [
+            1380,
+            1900
+          ],
+          "mar": [
+            1350,
+            1860
+          ],
+          "apr": [
+            1350,
+            1860
+          ],
+          "may": [
+            1300,
+            1790
+          ],
+          "jun": [
+            1300,
+            1790
+          ],
+          "jul": [
+            1400,
+            1930
+          ],
+          "aug": [
+            1400,
+            1930
+          ],
+          "sep": [
+            1300,
+            1790
+          ],
+          "oct": [
+            1350,
+            1860
+          ],
+          "nov": [
+            1400,
+            1930
+          ],
+          "dec": [
+            1600,
+            2210
+          ]
+        }
+      },
+      "yul": {
+        "hours": 20,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1470,
+            2030
+          ],
+          "feb": [
+            1450,
+            2000
+          ],
+          "mar": [
+            1420,
+            1950
+          ],
+          "apr": [
+            1420,
+            1950
+          ],
+          "may": [
+            1360,
+            1880
+          ],
+          "jun": [
+            1360,
+            1880
+          ],
+          "jul": [
+            1470,
+            2030
+          ],
+          "aug": [
+            1470,
+            2030
+          ],
+          "sep": [
+            1360,
+            1880
+          ],
+          "oct": [
+            1420,
+            1950
+          ],
+          "nov": [
+            1470,
+            2030
+          ],
+          "dec": [
+            1680,
+            2320
+          ]
+        }
       }
     },
     "stay": {
@@ -2425,7 +3274,12 @@
       "food"
     ],
     "photo_query": "Singapore skyline gardens",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1496939376851-89342e90adcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2luZ2Fwb3JlJTIwc2t5bGluZSUyMGdhcmRlbnN8ZW58MXwwfHx8MTc4NTg1NjMxNXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Mike Enerio", "profile_url": "https://unsplash.com/@mikeenerio", "download_location": "https://api.unsplash.com/photos/7ryPpZK1qV8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2luZ2Fwb3JlJTIwc2t5bGluZSUyMGdhcmRlbnN8ZW58MXwwfHx8MTc4NTg1NjMxNXww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1496939376851-89342e90adcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2luZ2Fwb3JlJTIwc2t5bGluZSUyMGdhcmRlbnN8ZW58MXwwfHx8MTc4NTg1NjMxNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Mike Enerio",
+      "profile_url": "https://unsplash.com/@mikeenerio",
+      "download_location": "https://api.unsplash.com/photos/7ryPpZK1qV8/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2luZ2Fwb3JlJTIwc2t5bGluZSUyMGdhcmRlbnN8ZW58MXwwfHx8MTc4NTg1NjMxNXww"
+    },
     "blurb": "Long, pricey haul with high ground costs too — the opposite end from Bangkok despite the same region."
   },
   {
@@ -2438,58 +3292,114 @@
       -22.91,
       -43.17
     ],
-    "flight": {
-      "hours": 12,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          1050,
-          1450
-        ],
-        "feb": [
-          1000,
-          1380
-        ],
-        "mar": [
-          950,
-          1310
-        ],
-        "apr": [
-          900,
-          1240
-        ],
-        "may": [
-          880,
-          1210
-        ],
-        "jun": [
-          850,
-          1170
-        ],
-        "jul": [
-          900,
-          1240
-        ],
-        "aug": [
-          880,
-          1210
-        ],
-        "sep": [
-          880,
-          1210
-        ],
-        "oct": [
-          900,
-          1240
-        ],
-        "nov": [
-          1050,
-          1450
-        ],
-        "dec": [
-          1200,
-          1660
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 12,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1050,
+            1450
+          ],
+          "feb": [
+            1000,
+            1380
+          ],
+          "mar": [
+            950,
+            1310
+          ],
+          "apr": [
+            900,
+            1240
+          ],
+          "may": [
+            880,
+            1210
+          ],
+          "jun": [
+            850,
+            1170
+          ],
+          "jul": [
+            900,
+            1240
+          ],
+          "aug": [
+            880,
+            1210
+          ],
+          "sep": [
+            880,
+            1210
+          ],
+          "oct": [
+            900,
+            1240
+          ],
+          "nov": [
+            1050,
+            1450
+          ],
+          "dec": [
+            1200,
+            1660
+          ]
+        }
+      },
+      "yul": {
+        "hours": 12.5,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1090,
+            1510
+          ],
+          "feb": [
+            1040,
+            1440
+          ],
+          "mar": [
+            990,
+            1360
+          ],
+          "apr": [
+            940,
+            1290
+          ],
+          "may": [
+            920,
+            1260
+          ],
+          "jun": [
+            880,
+            1220
+          ],
+          "jul": [
+            940,
+            1290
+          ],
+          "aug": [
+            920,
+            1260
+          ],
+          "sep": [
+            920,
+            1260
+          ],
+          "oct": [
+            940,
+            1290
+          ],
+          "nov": [
+            1090,
+            1510
+          ],
+          "dec": [
+            1250,
+            1730
+          ]
+        }
       }
     },
     "stay": {
@@ -2598,7 +3508,12 @@
       "city"
     ],
     "photo_query": "Rio de Janeiro Brazil beach mountains",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1679957631642-94f406206544?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UmlvJTIwZGUlMjBKYW5laXJvJTIwQnJhemlsJTIwYmVhY2glMjBtb3VudGFpbnN8ZW58MXwwfHx8MTc4NTg1NjMxOXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Johannes Mändle", "profile_url": "https://unsplash.com/@leonardo_64", "download_location": "https://api.unsplash.com/photos/FlVMi4RtHzI/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UmlvJTIwZGUlMjBKYW5laXJvJTIwQnJhemlsJTIwYmVhY2glMjBtb3VudGFpbnN8ZW58MXwwfHx8MTc4NTg1NjMxOXww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1679957631642-94f406206544?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UmlvJTIwZGUlMjBKYW5laXJvJTIwQnJhemlsJTIwYmVhY2glMjBtb3VudGFpbnN8ZW58MXwwfHx8MTc4NTg1NjMxOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Johannes Mändle",
+      "profile_url": "https://unsplash.com/@leonardo_64",
+      "download_location": "https://api.unsplash.com/photos/FlVMi4RtHzI/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UmlvJTIwZGUlMjBKYW5laXJvJTIwQnJhemlsJTIwYmVhY2glMjBtb3VudGFpbnN8ZW58MXwwfHx8MTc4NTg1NjMxOXww"
+    },
     "blurb": "One stop south; cheap on the ground and best value in its cooler, drier winter."
   },
   {
@@ -2611,58 +3526,114 @@
       25.2,
       55.27
     ],
-    "flight": {
-      "hours": 13,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          1000,
-          1380
-        ],
-        "feb": [
-          1020,
-          1410
-        ],
-        "mar": [
-          1050,
-          1450
-        ],
-        "apr": [
-          1050,
-          1450
-        ],
-        "may": [
-          950,
-          1310
-        ],
-        "jun": [
-          900,
-          1240
-        ],
-        "jul": [
-          950,
-          1310
-        ],
-        "aug": [
-          950,
-          1310
-        ],
-        "sep": [
-          950,
-          1310
-        ],
-        "oct": [
-          1000,
-          1380
-        ],
-        "nov": [
-          1150,
-          1590
-        ],
-        "dec": [
-          1250,
-          1720
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 13,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            1000,
+            1380
+          ],
+          "feb": [
+            1020,
+            1410
+          ],
+          "mar": [
+            1050,
+            1450
+          ],
+          "apr": [
+            1050,
+            1450
+          ],
+          "may": [
+            950,
+            1310
+          ],
+          "jun": [
+            900,
+            1240
+          ],
+          "jul": [
+            950,
+            1310
+          ],
+          "aug": [
+            950,
+            1310
+          ],
+          "sep": [
+            950,
+            1310
+          ],
+          "oct": [
+            1000,
+            1380
+          ],
+          "nov": [
+            1150,
+            1590
+          ],
+          "dec": [
+            1250,
+            1720
+          ]
+        }
+      },
+      "yul": {
+        "hours": 14,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1080,
+            1490
+          ],
+          "feb": [
+            1100,
+            1520
+          ],
+          "mar": [
+            1130,
+            1570
+          ],
+          "apr": [
+            1130,
+            1570
+          ],
+          "may": [
+            1030,
+            1410
+          ],
+          "jun": [
+            970,
+            1340
+          ],
+          "jul": [
+            1030,
+            1410
+          ],
+          "aug": [
+            1030,
+            1410
+          ],
+          "sep": [
+            1030,
+            1410
+          ],
+          "oct": [
+            1080,
+            1490
+          ],
+          "nov": [
+            1240,
+            1720
+          ],
+          "dec": [
+            1350,
+            1860
+          ]
+        }
       }
     },
     "stay": {
@@ -2771,7 +3742,12 @@
       "beach"
     ],
     "photo_query": "Dubai skyline desert",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1623725206109-3ef2c2eec00e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RHViYWklMjBza3lsaW5lJTIwZGVzZXJ0fGVufDF8MHx8fDE3ODU4NTYzMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Ahmed Galal", "profile_url": "https://unsplash.com/@ahmadgalal", "download_location": "https://api.unsplash.com/photos/o27Syy2u6wU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RHViYWklMjBza3lsaW5lJTIwZGVzZXJ0fGVufDF8MHx8fDE3ODU4NTYzMjJ8MA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1623725206109-3ef2c2eec00e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RHViYWklMjBza3lsaW5lJTIwZGVzZXJ0fGVufDF8MHx8fDE3ODU4NTYzMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Ahmed Galal",
+      "profile_url": "https://unsplash.com/@ahmadgalal",
+      "download_location": "https://api.unsplash.com/photos/o27Syy2u6wU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RHViYWklMjBza3lsaW5lJTIwZGVzZXJ0fGVufDF8MHx8fDE3ODU4NTYzMjJ8MA"
+    },
     "blurb": "Nonstop and glossy, but ground costs run high — winter only unless you like 40°C."
   },
   {
@@ -2784,58 +3760,114 @@
       55.68,
       12.57
     ],
-    "flight": {
-      "hours": 8,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          600,
-          830
-        ],
-        "feb": [
-          620,
-          860
-        ],
-        "mar": [
-          700,
-          970
-        ],
-        "apr": [
-          800,
-          1100
-        ],
-        "may": [
-          900,
-          1240
-        ],
-        "jun": [
-          950,
-          1310
-        ],
-        "jul": [
-          1050,
-          1450
-        ],
-        "aug": [
-          1000,
-          1380
-        ],
-        "sep": [
-          850,
-          1170
-        ],
-        "oct": [
-          750,
-          1040
-        ],
-        "nov": [
-          700,
-          970
-        ],
-        "dec": [
-          750,
-          1040
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 8,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            600,
+            830
+          ],
+          "feb": [
+            620,
+            860
+          ],
+          "mar": [
+            700,
+            970
+          ],
+          "apr": [
+            800,
+            1100
+          ],
+          "may": [
+            900,
+            1240
+          ],
+          "jun": [
+            950,
+            1310
+          ],
+          "jul": [
+            1050,
+            1450
+          ],
+          "aug": [
+            1000,
+            1380
+          ],
+          "sep": [
+            850,
+            1170
+          ],
+          "oct": [
+            750,
+            1040
+          ],
+          "nov": [
+            700,
+            970
+          ],
+          "dec": [
+            750,
+            1040
+          ]
+        }
+      },
+      "yul": {
+        "hours": 7.5,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            580,
+            810
+          ],
+          "feb": [
+            600,
+            830
+          ],
+          "mar": [
+            680,
+            940
+          ],
+          "apr": [
+            780,
+            1070
+          ],
+          "may": [
+            870,
+            1200
+          ],
+          "jun": [
+            920,
+            1270
+          ],
+          "jul": [
+            1020,
+            1410
+          ],
+          "aug": [
+            970,
+            1340
+          ],
+          "sep": [
+            820,
+            1130
+          ],
+          "oct": [
+            730,
+            1010
+          ],
+          "nov": [
+            680,
+            940
+          ],
+          "dec": [
+            730,
+            1010
+          ]
+        }
       }
     },
     "stay": {
@@ -2944,7 +3976,12 @@
       "food"
     ],
     "photo_query": "Copenhagen Denmark harbour colourful houses",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1604906148235-df407ed053f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29wZW5oYWdlbiUyMERlbm1hcmslMjBoYXJib3VyJTIwY29sb3VyZnVsJTIwaG91c2VzfGVufDF8MHx8fDE3ODU4NTYzMjZ8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Michael Jerrard", "profile_url": "https://unsplash.com/@michaeljerrard", "download_location": "https://api.unsplash.com/photos/q9KIP0iytbU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29wZW5oYWdlbiUyMERlbm1hcmslMjBoYXJib3VyJTIwY29sb3VyZnVsJTIwaG91c2VzfGVufDF8MHx8fDE3ODU4NTYzMjZ8MA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1604906148235-df407ed053f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29wZW5oYWdlbiUyMERlbm1hcmslMjBoYXJib3VyJTIwY29sb3VyZnVsJTIwaG91c2VzfGVufDF8MHx8fDE3ODU4NTYzMjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Michael Jerrard",
+      "profile_url": "https://unsplash.com/@michaeljerrard",
+      "download_location": "https://api.unsplash.com/photos/q9KIP0iytbU/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q29wZW5oYWdlbiUyMERlbm1hcmslMjBoYXJib3VyJTIwY29sb3VyZnVsJTIwaG91c2VzfGVufDF8MHx8fDE3ODU4NTYzMjZ8MA"
+    },
     "blurb": "Scandi design and food, but among the priciest ground costs in Europe."
   },
   {
@@ -2957,58 +3994,114 @@
       6.24,
       -75.58
     ],
-    "flight": {
-      "hours": 8,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          650,
-          900
-        ],
-        "feb": [
-          620,
-          860
-        ],
-        "mar": [
-          600,
-          830
-        ],
-        "apr": [
-          600,
-          830
-        ],
-        "may": [
-          580,
-          800
-        ],
-        "jun": [
-          550,
-          760
-        ],
-        "jul": [
-          600,
-          830
-        ],
-        "aug": [
-          580,
-          800
-        ],
-        "sep": [
-          500,
-          690
-        ],
-        "oct": [
-          500,
-          690
-        ],
-        "nov": [
-          600,
-          830
-        ],
-        "dec": [
-          750,
-          1040
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 8,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            650,
+            900
+          ],
+          "feb": [
+            620,
+            860
+          ],
+          "mar": [
+            600,
+            830
+          ],
+          "apr": [
+            600,
+            830
+          ],
+          "may": [
+            580,
+            800
+          ],
+          "jun": [
+            550,
+            760
+          ],
+          "jul": [
+            600,
+            830
+          ],
+          "aug": [
+            580,
+            800
+          ],
+          "sep": [
+            500,
+            690
+          ],
+          "oct": [
+            500,
+            690
+          ],
+          "nov": [
+            600,
+            830
+          ],
+          "dec": [
+            750,
+            1040
+          ]
+        }
+      },
+      "yul": {
+        "hours": 8.5,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            670,
+            930
+          ],
+          "feb": [
+            640,
+            890
+          ],
+          "mar": [
+            620,
+            850
+          ],
+          "apr": [
+            620,
+            850
+          ],
+          "may": [
+            600,
+            820
+          ],
+          "jun": [
+            570,
+            780
+          ],
+          "jul": [
+            620,
+            850
+          ],
+          "aug": [
+            600,
+            820
+          ],
+          "sep": [
+            520,
+            710
+          ],
+          "oct": [
+            520,
+            710
+          ],
+          "nov": [
+            620,
+            850
+          ],
+          "dec": [
+            770,
+            1070
+          ]
+        }
       }
     },
     "stay": {
@@ -3117,7 +4210,12 @@
       "cheap"
     ],
     "photo_query": "Medellin Colombia valley city",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1590598016835-83cf3357ebc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWVkZWxsaW4lMjBDb2xvbWJpYSUyMHZhbGxleSUyMGNpdHl8ZW58MXwwfHx8MTc4NTg1NjMzMHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Mike Swigunski", "profile_url": "https://unsplash.com/@mike_swigunski", "download_location": "https://api.unsplash.com/photos/JvZ1paoSnHc/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWVkZWxsaW4lMjBDb2xvbWJpYSUyMHZhbGxleSUyMGNpdHl8ZW58MXwwfHx8MTc4NTg1NjMzMHww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1590598016835-83cf3357ebc5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWVkZWxsaW4lMjBDb2xvbWJpYSUyMHZhbGxleSUyMGNpdHl8ZW58MXwwfHx8MTc4NTg1NjMzMHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Mike Swigunski",
+      "profile_url": "https://unsplash.com/@mike_swigunski",
+      "download_location": "https://api.unsplash.com/photos/JvZ1paoSnHc/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TWVkZWxsaW4lMjBDb2xvbWJpYSUyMHZhbGxleSUyMGNpdHl8ZW58MXwwfHx8MTc4NTg1NjMzMHww"
+    },
     "blurb": "'City of eternal spring' — same mild weather year-round and very cheap on the ground."
   },
   {
@@ -3130,58 +4228,114 @@
       18.47,
       -77.92
     ],
-    "flight": {
-      "hours": 4,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          550,
-          760
-        ],
-        "feb": [
-          600,
-          830
-        ],
-        "mar": [
-          650,
-          900
-        ],
-        "apr": [
-          700,
-          970
-        ],
-        "may": [
-          550,
-          760
-        ],
-        "jun": [
-          500,
-          690
-        ],
-        "jul": [
-          550,
-          760
-        ],
-        "aug": [
-          520,
-          720
-        ],
-        "sep": [
-          450,
-          620
-        ],
-        "oct": [
-          450,
-          620
-        ],
-        "nov": [
-          550,
-          760
-        ],
-        "dec": [
-          700,
-          970
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 4,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            550,
+            760
+          ],
+          "feb": [
+            600,
+            830
+          ],
+          "mar": [
+            650,
+            900
+          ],
+          "apr": [
+            700,
+            970
+          ],
+          "may": [
+            550,
+            760
+          ],
+          "jun": [
+            500,
+            690
+          ],
+          "jul": [
+            550,
+            760
+          ],
+          "aug": [
+            520,
+            720
+          ],
+          "sep": [
+            450,
+            620
+          ],
+          "oct": [
+            450,
+            620
+          ],
+          "nov": [
+            550,
+            760
+          ],
+          "dec": [
+            700,
+            970
+          ]
+        }
+      },
+      "yul": {
+        "hours": 4,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            510,
+            700
+          ],
+          "feb": [
+            550,
+            760
+          ],
+          "mar": [
+            600,
+            830
+          ],
+          "apr": [
+            640,
+            890
+          ],
+          "may": [
+            510,
+            700
+          ],
+          "jun": [
+            460,
+            630
+          ],
+          "jul": [
+            510,
+            700
+          ],
+          "aug": [
+            480,
+            660
+          ],
+          "sep": [
+            410,
+            570
+          ],
+          "oct": [
+            410,
+            570
+          ],
+          "nov": [
+            510,
+            700
+          ],
+          "dec": [
+            640,
+            890
+          ]
+        }
       }
     },
     "stay": {
@@ -3290,7 +4444,12 @@
       "cheap"
     ],
     "photo_query": "Jamaica beach palm trees",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1733596679766-3d8f63b30a75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SmFtYWljYSUyMGJlYWNoJTIwcGFsbSUyMHRyZWVzfGVufDF8MHx8fDE3ODU4NTYzMzN8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Clay LeConey", "profile_url": "https://unsplash.com/@clayleconey", "download_location": "https://api.unsplash.com/photos/-cE_WYFod6g/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SmFtYWljYSUyMGJlYWNoJTIwcGFsbSUyMHRyZWVzfGVufDF8MHx8fDE3ODU4NTYzMzN8MA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1733596679766-3d8f63b30a75?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SmFtYWljYSUyMGJlYWNoJTIwcGFsbSUyMHRyZWVzfGVufDF8MHx8fDE3ODU4NTYzMzN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Clay LeConey",
+      "profile_url": "https://unsplash.com/@clayleconey",
+      "download_location": "https://api.unsplash.com/photos/-cE_WYFod6g/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SmFtYWljYSUyMGJlYWNoJTIwcGFsbSUyMHRyZWVzfGVufDF8MHx8fDE3ODU4NTYzMzN8MA"
+    },
     "blurb": "Short nonstop to guaranteed winter sun; all-inclusive stays skew the tiers cheaper than they look."
   },
   {
@@ -3303,58 +4462,114 @@
       34.05,
       -118.24
     ],
-    "flight": {
-      "hours": 5.5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          400,
-          550
-        ],
-        "feb": [
-          450,
-          620
-        ],
-        "mar": [
-          500,
-          690
-        ],
-        "apr": [
-          550,
-          760
-        ],
-        "may": [
-          580,
-          800
-        ],
-        "jun": [
-          600,
-          830
-        ],
-        "jul": [
-          700,
-          970
-        ],
-        "aug": [
-          680,
-          940
-        ],
-        "sep": [
-          600,
-          830
-        ],
-        "oct": [
-          500,
-          690
-        ],
-        "nov": [
-          550,
-          760
-        ],
-        "dec": [
-          650,
-          900
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 5.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            400,
+            550
+          ],
+          "feb": [
+            450,
+            620
+          ],
+          "mar": [
+            500,
+            690
+          ],
+          "apr": [
+            550,
+            760
+          ],
+          "may": [
+            580,
+            800
+          ],
+          "jun": [
+            600,
+            830
+          ],
+          "jul": [
+            700,
+            970
+          ],
+          "aug": [
+            680,
+            940
+          ],
+          "sep": [
+            600,
+            830
+          ],
+          "oct": [
+            500,
+            690
+          ],
+          "nov": [
+            550,
+            760
+          ],
+          "dec": [
+            650,
+            900
+          ]
+        }
+      },
+      "yul": {
+        "hours": 6,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            420,
+            580
+          ],
+          "feb": [
+            470,
+            650
+          ],
+          "mar": [
+            520,
+            720
+          ],
+          "apr": [
+            580,
+            800
+          ],
+          "may": [
+            610,
+            840
+          ],
+          "jun": [
+            630,
+            870
+          ],
+          "jul": [
+            740,
+            1020
+          ],
+          "aug": [
+            710,
+            990
+          ],
+          "sep": [
+            630,
+            870
+          ],
+          "oct": [
+            520,
+            720
+          ],
+          "nov": [
+            580,
+            800
+          ],
+          "dec": [
+            680,
+            940
+          ]
+        }
       }
     },
     "stay": {
@@ -3463,7 +4678,12 @@
       "beach"
     ],
     "photo_query": "Los Angeles California palm trees",
-    "hero_image": { "url": "https://images.unsplash.com/flagged/photo-1575555201693-7cd442b8023f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TG9zJTIwQW5nZWxlcyUyMENhbGlmb3JuaWElMjBwYWxtJTIwdHJlZXN8ZW58MXwwfHx8MTc4NTg1NjMzN3ww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Cedric Letsch", "profile_url": "https://unsplash.com/@cedricletsch", "download_location": "https://api.unsplash.com/photos/UZVlSjrIJ3o/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TG9zJTIwQW5nZWxlcyUyMENhbGlmb3JuaWElMjBwYWxtJTIwdHJlZXN8ZW58MXwwfHx8MTc4NTg1NjMzN3ww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/flagged/photo-1575555201693-7cd442b8023f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TG9zJTIwQW5nZWxlcyUyMENhbGlmb3JuaWElMjBwYWxtJTIwdHJlZXN8ZW58MXwwfHx8MTc4NTg1NjMzN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Cedric Letsch",
+      "profile_url": "https://unsplash.com/@cedricletsch",
+      "download_location": "https://api.unsplash.com/photos/UZVlSjrIJ3o/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TG9zJTIwQW5nZWxlcyUyMENhbGlmb3JuaWElMjBwYWxtJTIwdHJlZXN8ZW58MXwwfHx8MTc4NTg1NjMzN3ww"
+    },
     "blurb": "Cheap short flight, but US ground costs and pricey hotels blunt the value."
   },
   {
@@ -3476,58 +4696,114 @@
       50.08,
       14.44
     ],
-    "flight": {
-      "hours": 8.5,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          600,
-          830
-        ],
-        "feb": [
-          620,
-          860
-        ],
-        "mar": [
-          700,
-          970
-        ],
-        "apr": [
-          800,
-          1100
-        ],
-        "may": [
-          900,
-          1240
-        ],
-        "jun": [
-          950,
-          1310
-        ],
-        "jul": [
-          1050,
-          1450
-        ],
-        "aug": [
-          1000,
-          1380
-        ],
-        "sep": [
-          850,
-          1170
-        ],
-        "oct": [
-          750,
-          1040
-        ],
-        "nov": [
-          680,
-          940
-        ],
-        "dec": [
-          700,
-          970
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 8.5,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            600,
+            830
+          ],
+          "feb": [
+            620,
+            860
+          ],
+          "mar": [
+            700,
+            970
+          ],
+          "apr": [
+            800,
+            1100
+          ],
+          "may": [
+            900,
+            1240
+          ],
+          "jun": [
+            950,
+            1310
+          ],
+          "jul": [
+            1050,
+            1450
+          ],
+          "aug": [
+            1000,
+            1380
+          ],
+          "sep": [
+            850,
+            1170
+          ],
+          "oct": [
+            750,
+            1040
+          ],
+          "nov": [
+            680,
+            940
+          ],
+          "dec": [
+            700,
+            970
+          ]
+        }
+      },
+      "yul": {
+        "hours": 8.5,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            580,
+            810
+          ],
+          "feb": [
+            600,
+            830
+          ],
+          "mar": [
+            680,
+            940
+          ],
+          "apr": [
+            780,
+            1070
+          ],
+          "may": [
+            870,
+            1200
+          ],
+          "jun": [
+            920,
+            1270
+          ],
+          "jul": [
+            1020,
+            1410
+          ],
+          "aug": [
+            970,
+            1340
+          ],
+          "sep": [
+            820,
+            1130
+          ],
+          "oct": [
+            730,
+            1010
+          ],
+          "nov": [
+            660,
+            910
+          ],
+          "dec": [
+            680,
+            940
+          ]
+        }
       }
     },
     "stay": {
@@ -3637,7 +4913,12 @@
       "cheap"
     ],
     "photo_query": "Prague Czechia old town bridge",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1563913801192-bcefb1bb7651?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UHJhZ3VlJTIwQ3plY2hpYSUyMG9sZCUyMHRvd24lMjBicmlkZ2V8ZW58MXwwfHx8MTc4NTg1NjM0MXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Nomadic Julien", "profile_url": "https://unsplash.com/@nomadicjulien", "download_location": "https://api.unsplash.com/photos/Kgt2l8dq8tE/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UHJhZ3VlJTIwQ3plY2hpYSUyMG9sZCUyMHRvd24lMjBicmlkZ2V8ZW58MXwwfHx8MTc4NTg1NjM0MXww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1563913801192-bcefb1bb7651?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UHJhZ3VlJTIwQ3plY2hpYSUyMG9sZCUyMHRvd24lMjBicmlkZ2V8ZW58MXwwfHx8MTc4NTg1NjM0MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Nomadic Julien",
+      "profile_url": "https://unsplash.com/@nomadicjulien",
+      "download_location": "https://api.unsplash.com/photos/Kgt2l8dq8tE/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UHJhZ3VlJTIwQ3plY2hpYSUyMG9sZCUyMHRvd24lMjBicmlkZ2V8ZW58MXwwfHx8MTc4NTg1NjM0MXww"
+    },
     "blurb": "The cheapest way to do a classic European city break — half the ground cost of Paris."
   },
   {
@@ -3650,58 +4931,114 @@
       41.01,
       28.98
     ],
-    "flight": {
-      "hours": 10,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          850,
-          1170
-        ],
-        "feb": [
-          880,
-          1210
-        ],
-        "mar": [
-          900,
-          1240
-        ],
-        "apr": [
-          1000,
-          1380
-        ],
-        "may": [
-          1080,
-          1490
-        ],
-        "jun": [
-          1100,
-          1520
-        ],
-        "jul": [
-          1250,
-          1720
-        ],
-        "aug": [
-          1200,
-          1660
-        ],
-        "sep": [
-          1050,
-          1450
-        ],
-        "oct": [
-          950,
-          1310
-        ],
-        "nov": [
-          900,
-          1240
-        ],
-        "dec": [
-          950,
-          1310
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 10,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            850,
+            1170
+          ],
+          "feb": [
+            880,
+            1210
+          ],
+          "mar": [
+            900,
+            1240
+          ],
+          "apr": [
+            1000,
+            1380
+          ],
+          "may": [
+            1080,
+            1490
+          ],
+          "jun": [
+            1100,
+            1520
+          ],
+          "jul": [
+            1250,
+            1720
+          ],
+          "aug": [
+            1200,
+            1660
+          ],
+          "sep": [
+            1050,
+            1450
+          ],
+          "oct": [
+            950,
+            1310
+          ],
+          "nov": [
+            900,
+            1240
+          ],
+          "dec": [
+            950,
+            1310
+          ]
+        }
+      },
+      "yul": {
+        "hours": 9.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            810,
+            1110
+          ],
+          "feb": [
+            840,
+            1150
+          ],
+          "mar": [
+            860,
+            1180
+          ],
+          "apr": [
+            950,
+            1310
+          ],
+          "may": [
+            1030,
+            1420
+          ],
+          "jun": [
+            1040,
+            1440
+          ],
+          "jul": [
+            1190,
+            1630
+          ],
+          "aug": [
+            1140,
+            1580
+          ],
+          "sep": [
+            1000,
+            1380
+          ],
+          "oct": [
+            900,
+            1240
+          ],
+          "nov": [
+            860,
+            1180
+          ],
+          "dec": [
+            900,
+            1240
+          ]
+        }
       }
     },
     "stay": {
@@ -3811,7 +5148,12 @@
       "cheap"
     ],
     "photo_query": "Istanbul Turkey mosque Bosphorus",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1623439844752-524658b16ce6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SXN0YW5idWwlMjBUdXJrZXklMjBtb3NxdWUlMjBCb3NwaG9ydXN8ZW58MXwwfHx8MTc4NTg1NjM0NHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Ibrahim Uzun", "profile_url": "https://unsplash.com/@ibuzn", "download_location": "https://api.unsplash.com/photos/2uemAqyp9rk/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SXN0YW5idWwlMjBUdXJrZXklMjBtb3NxdWUlMjBCb3NwaG9ydXN8ZW58MXwwfHx8MTc4NTg1NjM0NHww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1623439844752-524658b16ce6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SXN0YW5idWwlMjBUdXJrZXklMjBtb3NxdWUlMjBCb3NwaG9ydXN8ZW58MXwwfHx8MTc4NTg1NjM0NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Ibrahim Uzun",
+      "profile_url": "https://unsplash.com/@ibuzn",
+      "download_location": "https://api.unsplash.com/photos/2uemAqyp9rk/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SXN0YW5idWwlMjBUdXJrZXklMjBtb3NxdWUlMjBCb3NwaG9ydXN8ZW58MXwwfHx8MTc4NTg1NjM0NHww"
+    },
     "blurb": "Nonstop, cheap on the ground, and one of the best food cities anywhere."
   },
   {
@@ -3824,58 +5166,114 @@
       10.82,
       106.63
     ],
-    "flight": {
-      "hours": 22,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          1400,
-          1930
-        ],
-        "feb": [
-          1350,
-          1860
-        ],
-        "mar": [
-          1300,
-          1790
-        ],
-        "apr": [
-          1300,
-          1790
-        ],
-        "may": [
-          1200,
-          1660
-        ],
-        "jun": [
-          1150,
-          1590
-        ],
-        "jul": [
-          1250,
-          1720
-        ],
-        "aug": [
-          1250,
-          1720
-        ],
-        "sep": [
-          1200,
-          1660
-        ],
-        "oct": [
-          1250,
-          1720
-        ],
-        "nov": [
-          1350,
-          1860
-        ],
-        "dec": [
-          1550,
-          2140
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 22,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1400,
+            1930
+          ],
+          "feb": [
+            1350,
+            1860
+          ],
+          "mar": [
+            1300,
+            1790
+          ],
+          "apr": [
+            1300,
+            1790
+          ],
+          "may": [
+            1200,
+            1660
+          ],
+          "jun": [
+            1150,
+            1590
+          ],
+          "jul": [
+            1250,
+            1720
+          ],
+          "aug": [
+            1250,
+            1720
+          ],
+          "sep": [
+            1200,
+            1660
+          ],
+          "oct": [
+            1250,
+            1720
+          ],
+          "nov": [
+            1350,
+            1860
+          ],
+          "dec": [
+            1550,
+            2140
+          ]
+        }
+      },
+      "yul": {
+        "hours": 22,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1460,
+            2010
+          ],
+          "feb": [
+            1400,
+            1930
+          ],
+          "mar": [
+            1350,
+            1860
+          ],
+          "apr": [
+            1350,
+            1860
+          ],
+          "may": [
+            1250,
+            1730
+          ],
+          "jun": [
+            1200,
+            1650
+          ],
+          "jul": [
+            1300,
+            1790
+          ],
+          "aug": [
+            1300,
+            1790
+          ],
+          "sep": [
+            1250,
+            1730
+          ],
+          "oct": [
+            1300,
+            1790
+          ],
+          "nov": [
+            1400,
+            1930
+          ],
+          "dec": [
+            1610,
+            2230
+          ]
+        }
       }
     },
     "stay": {
@@ -3985,7 +5383,12 @@
       "cheap"
     ],
     "photo_query": "Ho Chi Minh City Vietnam street",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1736665813752-f15663994b6f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SG8lMjBDaGklMjBNaW5oJTIwQ2l0eSUyMFZpZXRuYW0lMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg1NjM0OHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Maria Ivanova", "profile_url": "https://unsplash.com/@marishphoto", "download_location": "https://api.unsplash.com/photos/jrzxKKbcT4U/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SG8lMjBDaGklMjBNaW5oJTIwQ2l0eSUyMFZpZXRuYW0lMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg1NjM0OHww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1736665813752-f15663994b6f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SG8lMjBDaGklMjBNaW5oJTIwQ2l0eSUyMFZpZXRuYW0lMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg1NjM0OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Maria Ivanova",
+      "profile_url": "https://unsplash.com/@marishphoto",
+      "download_location": "https://api.unsplash.com/photos/jrzxKKbcT4U/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SG8lMjBDaGklMjBNaW5oJTIwQ2l0eSUyMFZpZXRuYW0lMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg1NjM0OHww"
+    },
     "blurb": "About the cheapest ground costs on this list — the flight is the whole expense."
   },
   {
@@ -3998,58 +5401,114 @@
       -33.92,
       18.42
     ],
-    "flight": {
-      "hours": 20,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          1800,
-          2480
-        ],
-        "feb": [
-          1700,
-          2350
-        ],
-        "mar": [
-          1600,
-          2210
-        ],
-        "apr": [
-          1500,
-          2070
-        ],
-        "may": [
-          1400,
-          1930
-        ],
-        "jun": [
-          1300,
-          1790
-        ],
-        "jul": [
-          1400,
-          1930
-        ],
-        "aug": [
-          1400,
-          1930
-        ],
-        "sep": [
-          1450,
-          2000
-        ],
-        "oct": [
-          1500,
-          2070
-        ],
-        "nov": [
-          1700,
-          2350
-        ],
-        "dec": [
-          1900,
-          2620
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 20,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1800,
+            2480
+          ],
+          "feb": [
+            1700,
+            2350
+          ],
+          "mar": [
+            1600,
+            2210
+          ],
+          "apr": [
+            1500,
+            2070
+          ],
+          "may": [
+            1400,
+            1930
+          ],
+          "jun": [
+            1300,
+            1790
+          ],
+          "jul": [
+            1400,
+            1930
+          ],
+          "aug": [
+            1400,
+            1930
+          ],
+          "sep": [
+            1450,
+            2000
+          ],
+          "oct": [
+            1500,
+            2070
+          ],
+          "nov": [
+            1700,
+            2350
+          ],
+          "dec": [
+            1900,
+            2620
+          ]
+        }
+      },
+      "yul": {
+        "hours": 20,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1850,
+            2550
+          ],
+          "feb": [
+            1750,
+            2420
+          ],
+          "mar": [
+            1650,
+            2280
+          ],
+          "apr": [
+            1540,
+            2130
+          ],
+          "may": [
+            1440,
+            1990
+          ],
+          "jun": [
+            1340,
+            1840
+          ],
+          "jul": [
+            1440,
+            1990
+          ],
+          "aug": [
+            1440,
+            1990
+          ],
+          "sep": [
+            1490,
+            2060
+          ],
+          "oct": [
+            1540,
+            2130
+          ],
+          "nov": [
+            1750,
+            2420
+          ],
+          "dec": [
+            1960,
+            2700
+          ]
+        }
       }
     },
     "stay": {
@@ -4160,7 +5619,12 @@
       "food"
     ],
     "photo_query": "Cape Town South Africa Table Mountain",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1588455471455-4b28e9ab3cd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FwZSUyMFRvd24lMjBTb3V0aCUyMEFmcmljYSUyMFRhYmxlJTIwTW91bnRhaW58ZW58MXwwfHx8MTc4NTg1NjM1MXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Jaman Asad", "profile_url": "https://unsplash.com/@asadsnapper", "download_location": "https://api.unsplash.com/photos/FQ03xcur9As/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FwZSUyMFRvd24lMjBTb3V0aCUyMEFmcmljYSUyMFRhYmxlJTIwTW91bnRhaW58ZW58MXwwfHx8MTc4NTg1NjM1MXww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1588455471455-4b28e9ab3cd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FwZSUyMFRvd24lMjBTb3V0aCUyMEFmcmljYSUyMFRhYmxlJTIwTW91bnRhaW58ZW58MXwwfHx8MTc4NTg1NjM1MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Jaman Asad",
+      "profile_url": "https://unsplash.com/@asadsnapper",
+      "download_location": "https://api.unsplash.com/photos/FQ03xcur9As/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2FwZSUyMFRvd24lMjBTb3V0aCUyMEFmcmljYSUyMFRhYmxlJTIwTW91bnRhaW58ZW58MXwwfHx8MTc4NTg1NjM1MXww"
+    },
     "blurb": "Expensive to reach, cheap once there — mountains, coast and wine in one trip."
   },
   {
@@ -4173,58 +5637,114 @@
       49.28,
       -123.12
     ],
-    "flight": {
-      "hours": 5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          400,
-          550
-        ],
-        "feb": [
-          420,
-          580
-        ],
-        "mar": [
-          480,
-          660
-        ],
-        "apr": [
-          550,
-          760
-        ],
-        "may": [
-          620,
-          860
-        ],
-        "jun": [
-          650,
-          900
-        ],
-        "jul": [
-          750,
-          1040
-        ],
-        "aug": [
-          730,
-          1010
-        ],
-        "sep": [
-          600,
-          830
-        ],
-        "oct": [
-          500,
-          690
-        ],
-        "nov": [
-          480,
-          660
-        ],
-        "dec": [
-          600,
-          830
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            400,
+            550
+          ],
+          "feb": [
+            420,
+            580
+          ],
+          "mar": [
+            480,
+            660
+          ],
+          "apr": [
+            550,
+            760
+          ],
+          "may": [
+            620,
+            860
+          ],
+          "jun": [
+            650,
+            900
+          ],
+          "jul": [
+            750,
+            1040
+          ],
+          "aug": [
+            730,
+            1010
+          ],
+          "sep": [
+            600,
+            830
+          ],
+          "oct": [
+            500,
+            690
+          ],
+          "nov": [
+            480,
+            660
+          ],
+          "dec": [
+            600,
+            830
+          ]
+        }
+      },
+      "yul": {
+        "hours": 5.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            420,
+            580
+          ],
+          "feb": [
+            450,
+            610
+          ],
+          "mar": [
+            510,
+            700
+          ],
+          "apr": [
+            580,
+            810
+          ],
+          "may": [
+            660,
+            910
+          ],
+          "jun": [
+            690,
+            950
+          ],
+          "jul": [
+            800,
+            1100
+          ],
+          "aug": [
+            770,
+            1070
+          ],
+          "sep": [
+            640,
+            880
+          ],
+          "oct": [
+            530,
+            730
+          ],
+          "nov": [
+            510,
+            700
+          ],
+          "dec": [
+            640,
+            880
+          ]
+        }
       }
     },
     "stay": {
@@ -4334,7 +5854,12 @@
       "food"
     ],
     "photo_query": "Vancouver Canada mountains skyline",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1730661906876-18bfc6e95f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmFuY291dmVyJTIwQ2FuYWRhJTIwbW91bnRhaW5zJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MzU1fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Luke Lawreszuk", "profile_url": "https://unsplash.com/@lukel", "download_location": "https://api.unsplash.com/photos/rEDvog99iro/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmFuY291dmVyJTIwQ2FuYWRhJTIwbW91bnRhaW5zJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MzU1fDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1730661906876-18bfc6e95f2f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmFuY291dmVyJTIwQ2FuYWRhJTIwbW91bnRhaW5zJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MzU1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Luke Lawreszuk",
+      "profile_url": "https://unsplash.com/@lukel",
+      "download_location": "https://api.unsplash.com/photos/rEDvog99iro/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmFuY291dmVyJTIwQ2FuYWRhJTIwbW91bnRhaW5zJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MzU1fDA"
+    },
     "blurb": "No passport needed and mountains at the city edge — but hotel costs rival Europe."
   },
   {
@@ -4347,58 +5872,114 @@
       18.47,
       -66.11
     ],
-    "flight": {
-      "hours": 4.5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          550,
-          760
-        ],
-        "feb": [
-          600,
-          830
-        ],
-        "mar": [
-          650,
-          900
-        ],
-        "apr": [
-          700,
-          970
-        ],
-        "may": [
-          550,
-          760
-        ],
-        "jun": [
-          480,
-          660
-        ],
-        "jul": [
-          530,
-          730
-        ],
-        "aug": [
-          510,
-          700
-        ],
-        "sep": [
-          430,
-          590
-        ],
-        "oct": [
-          430,
-          590
-        ],
-        "nov": [
-          530,
-          730
-        ],
-        "dec": [
-          700,
-          970
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 4.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            550,
+            760
+          ],
+          "feb": [
+            600,
+            830
+          ],
+          "mar": [
+            650,
+            900
+          ],
+          "apr": [
+            700,
+            970
+          ],
+          "may": [
+            550,
+            760
+          ],
+          "jun": [
+            480,
+            660
+          ],
+          "jul": [
+            530,
+            730
+          ],
+          "aug": [
+            510,
+            700
+          ],
+          "sep": [
+            430,
+            590
+          ],
+          "oct": [
+            430,
+            590
+          ],
+          "nov": [
+            530,
+            730
+          ],
+          "dec": [
+            700,
+            970
+          ]
+        }
+      },
+      "yul": {
+        "hours": 4.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            530,
+            730
+          ],
+          "feb": [
+            580,
+            800
+          ],
+          "mar": [
+            620,
+            860
+          ],
+          "apr": [
+            670,
+            930
+          ],
+          "may": [
+            530,
+            730
+          ],
+          "jun": [
+            460,
+            630
+          ],
+          "jul": [
+            510,
+            700
+          ],
+          "aug": [
+            490,
+            670
+          ],
+          "sep": [
+            410,
+            570
+          ],
+          "oct": [
+            410,
+            570
+          ],
+          "nov": [
+            510,
+            700
+          ],
+          "dec": [
+            670,
+            930
+          ]
+        }
       }
     },
     "stay": {
@@ -4508,7 +6089,12 @@
       "food"
     ],
     "photo_query": "San Juan Puerto Rico colourful old town",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1782197581525-3276aa2c577c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2FuJTIwSnVhbiUyMFB1ZXJ0byUyMFJpY28lMjBjb2xvdXJmdWwlMjBvbGQlMjB0b3dufGVufDF8MHx8fDE3ODU4ODEzNTN8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Paul Farmer", "profile_url": "https://unsplash.com/@profepabloo", "download_location": "https://api.unsplash.com/photos/a-5huKfabfA/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2FuJTIwSnVhbiUyMFB1ZXJ0byUyMFJpY28lMjBjb2xvdXJmdWwlMjBvbGQlMjB0b3dufGVufDF8MHx8fDE3ODU4ODEzNTN8MA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1782197581525-3276aa2c577c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2FuJTIwSnVhbiUyMFB1ZXJ0byUyMFJpY28lMjBjb2xvdXJmdWwlMjBvbGQlMjB0b3dufGVufDF8MHx8fDE3ODU4ODEzNTN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Paul Farmer",
+      "profile_url": "https://unsplash.com/@profepabloo",
+      "download_location": "https://api.unsplash.com/photos/a-5huKfabfA/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U2FuJTIwSnVhbiUyMFB1ZXJ0byUyMFJpY28lMjBjb2xvdXJmdWwlMjBvbGQlMjB0b3dufGVufDF8MHx8fDE3ODU4ODEzNTN8MA"
+    },
     "blurb": "Caribbean beaches with US infrastructure — pricier than Cuba, far easier to travel."
   },
   {
@@ -4521,58 +6107,114 @@
       -34.6,
       -58.38
     ],
-    "flight": {
-      "hours": 13,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          1400,
-          1930
-        ],
-        "feb": [
-          1300,
-          1790
-        ],
-        "mar": [
-          1250,
-          1720
-        ],
-        "apr": [
-          1200,
-          1660
-        ],
-        "may": [
-          1100,
-          1520
-        ],
-        "jun": [
-          1050,
-          1450
-        ],
-        "jul": [
-          1100,
-          1520
-        ],
-        "aug": [
-          1100,
-          1520
-        ],
-        "sep": [
-          1100,
-          1520
-        ],
-        "oct": [
-          1150,
-          1590
-        ],
-        "nov": [
-          1350,
-          1860
-        ],
-        "dec": [
-          1500,
-          2070
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 13,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1400,
+            1930
+          ],
+          "feb": [
+            1300,
+            1790
+          ],
+          "mar": [
+            1250,
+            1720
+          ],
+          "apr": [
+            1200,
+            1660
+          ],
+          "may": [
+            1100,
+            1520
+          ],
+          "jun": [
+            1050,
+            1450
+          ],
+          "jul": [
+            1100,
+            1520
+          ],
+          "aug": [
+            1100,
+            1520
+          ],
+          "sep": [
+            1100,
+            1520
+          ],
+          "oct": [
+            1150,
+            1590
+          ],
+          "nov": [
+            1350,
+            1860
+          ],
+          "dec": [
+            1500,
+            2070
+          ]
+        }
+      },
+      "yul": {
+        "hours": 13.5,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1440,
+            1990
+          ],
+          "feb": [
+            1340,
+            1840
+          ],
+          "mar": [
+            1290,
+            1770
+          ],
+          "apr": [
+            1240,
+            1710
+          ],
+          "may": [
+            1130,
+            1570
+          ],
+          "jun": [
+            1080,
+            1490
+          ],
+          "jul": [
+            1130,
+            1570
+          ],
+          "aug": [
+            1130,
+            1570
+          ],
+          "sep": [
+            1130,
+            1570
+          ],
+          "oct": [
+            1180,
+            1640
+          ],
+          "nov": [
+            1390,
+            1920
+          ],
+          "dec": [
+            1540,
+            2130
+          ]
+        }
       }
     },
     "stay": {
@@ -4682,7 +6324,12 @@
       "cheap"
     ],
     "photo_query": "Buenos Aires Argentina architecture street",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1706170421190-48b12aa10f5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QnVlbm9zJTIwQWlyZXMlMjBBcmdlbnRpbmElMjBhcmNoaXRlY3R1cmUlMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg4MTM1N3ww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Juan Pablo Mascanfroni", "profile_url": "https://unsplash.com/@juanmascan1978", "download_location": "https://api.unsplash.com/photos/-CJvgl9hmsw/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QnVlbm9zJTIwQWlyZXMlMjBBcmdlbnRpbmElMjBhcmNoaXRlY3R1cmUlMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg4MTM1N3ww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1706170421190-48b12aa10f5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QnVlbm9zJTIwQWlyZXMlMjBBcmdlbnRpbmElMjBhcmNoaXRlY3R1cmUlMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg4MTM1N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Juan Pablo Mascanfroni",
+      "profile_url": "https://unsplash.com/@juanmascan1978",
+      "download_location": "https://api.unsplash.com/photos/-CJvgl9hmsw/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QnVlbm9zJTIwQWlyZXMlMjBBcmdlbnRpbmElMjBhcmNoaXRlY3R1cmUlMjBzdHJlZXR8ZW58MXwwfHx8MTc4NTg4MTM1N3ww"
+    },
     "blurb": "Long flight, then European-feeling city living at South American prices."
   },
   {
@@ -4695,58 +6342,114 @@
       28.61,
       77.21
     ],
-    "flight": {
-      "hours": 15,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          1200,
-          1660
-        ],
-        "feb": [
-          1180,
-          1630
-        ],
-        "mar": [
-          1150,
-          1590
-        ],
-        "apr": [
-          1150,
-          1590
-        ],
-        "may": [
-          1100,
-          1520
-        ],
-        "jun": [
-          1050,
-          1450
-        ],
-        "jul": [
-          1100,
-          1520
-        ],
-        "aug": [
-          1100,
-          1520
-        ],
-        "sep": [
-          1150,
-          1590
-        ],
-        "oct": [
-          1250,
-          1720
-        ],
-        "nov": [
-          1350,
-          1860
-        ],
-        "dec": [
-          1450,
-          2000
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 15,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            1200,
+            1660
+          ],
+          "feb": [
+            1180,
+            1630
+          ],
+          "mar": [
+            1150,
+            1590
+          ],
+          "apr": [
+            1150,
+            1590
+          ],
+          "may": [
+            1100,
+            1520
+          ],
+          "jun": [
+            1050,
+            1450
+          ],
+          "jul": [
+            1100,
+            1520
+          ],
+          "aug": [
+            1100,
+            1520
+          ],
+          "sep": [
+            1150,
+            1590
+          ],
+          "oct": [
+            1250,
+            1720
+          ],
+          "nov": [
+            1350,
+            1860
+          ],
+          "dec": [
+            1450,
+            2000
+          ]
+        }
+      },
+      "yul": {
+        "hours": 14,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            1200,
+            1660
+          ],
+          "feb": [
+            1180,
+            1630
+          ],
+          "mar": [
+            1150,
+            1590
+          ],
+          "apr": [
+            1150,
+            1590
+          ],
+          "may": [
+            1100,
+            1520
+          ],
+          "jun": [
+            1050,
+            1450
+          ],
+          "jul": [
+            1100,
+            1520
+          ],
+          "aug": [
+            1100,
+            1520
+          ],
+          "sep": [
+            1150,
+            1590
+          ],
+          "oct": [
+            1250,
+            1720
+          ],
+          "nov": [
+            1350,
+            1860
+          ],
+          "dec": [
+            1450,
+            2000
+          ]
+        }
       }
     },
     "stay": {
@@ -4856,7 +6559,12 @@
       "cheap"
     ],
     "photo_query": "Delhi India architecture market",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1513014576558-921f00d80b77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RGVsaGklMjBJbmRpYSUyMGFyY2hpdGVjdHVyZSUyMG1hcmtldHxlbnwxfDB8fHwxNzg1ODgxMzYwfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Aquib Akhter", "profile_url": "https://unsplash.com/@aquibakhter", "download_location": "https://api.unsplash.com/photos/oBCc0Hw6LrQ/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RGVsaGklMjBJbmRpYSUyMGFyY2hpdGVjdHVyZSUyMG1hcmtldHxlbnwxfDB8fHwxNzg1ODgxMzYwfDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1513014576558-921f00d80b77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RGVsaGklMjBJbmRpYSUyMGFyY2hpdGVjdHVyZSUyMG1hcmtldHxlbnwxfDB8fHwxNzg1ODgxMzYwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Aquib Akhter",
+      "profile_url": "https://unsplash.com/@aquibakhter",
+      "download_location": "https://api.unsplash.com/photos/oBCc0Hw6LrQ/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8RGVsaGklMjBJbmRpYSUyMGFyY2hpdGVjdHVyZSUyMG1hcmtldHxlbnwxfDB8fHwxNzg1ODgxMzYwfDA"
+    },
     "blurb": "Nonstop and dirt cheap on the ground — but check air quality before booking winter."
   },
   {
@@ -4869,58 +6577,114 @@
       -36.85,
       174.76
     ],
-    "flight": {
-      "hours": 22,
-      "nonstop": false,
-      "bands": {
-        "jan": [
-          2100,
-          2900
-        ],
-        "feb": [
-          2000,
-          2760
-        ],
-        "mar": [
-          1900,
-          2620
-        ],
-        "apr": [
-          1800,
-          2480
-        ],
-        "may": [
-          1700,
-          2350
-        ],
-        "jun": [
-          1650,
-          2280
-        ],
-        "jul": [
-          1700,
-          2350
-        ],
-        "aug": [
-          1700,
-          2350
-        ],
-        "sep": [
-          1750,
-          2420
-        ],
-        "oct": [
-          1800,
-          2480
-        ],
-        "nov": [
-          2000,
-          2760
-        ],
-        "dec": [
-          2200,
-          3040
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 22,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            2100,
+            2900
+          ],
+          "feb": [
+            2000,
+            2760
+          ],
+          "mar": [
+            1900,
+            2620
+          ],
+          "apr": [
+            1800,
+            2480
+          ],
+          "may": [
+            1700,
+            2350
+          ],
+          "jun": [
+            1650,
+            2280
+          ],
+          "jul": [
+            1700,
+            2350
+          ],
+          "aug": [
+            1700,
+            2350
+          ],
+          "sep": [
+            1750,
+            2420
+          ],
+          "oct": [
+            1800,
+            2480
+          ],
+          "nov": [
+            2000,
+            2760
+          ],
+          "dec": [
+            2200,
+            3040
+          ]
+        }
+      },
+      "yul": {
+        "hours": 23,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            2230,
+            3070
+          ],
+          "feb": [
+            2120,
+            2930
+          ],
+          "mar": [
+            2010,
+            2780
+          ],
+          "apr": [
+            1910,
+            2630
+          ],
+          "may": [
+            1800,
+            2490
+          ],
+          "jun": [
+            1750,
+            2420
+          ],
+          "jul": [
+            1800,
+            2490
+          ],
+          "aug": [
+            1800,
+            2490
+          ],
+          "sep": [
+            1860,
+            2570
+          ],
+          "oct": [
+            1910,
+            2630
+          ],
+          "nov": [
+            2120,
+            2930
+          ],
+          "dec": [
+            2330,
+            3220
+          ]
+        }
       }
     },
     "stay": {
@@ -5030,7 +6794,12 @@
       "city"
     ],
     "photo_query": "New Zealand Auckland coast landscape",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1582254905895-cfab294e1d91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TmV3JTIwWmVhbGFuZCUyMEF1Y2tsYW5kJTIwY29hc3QlMjBsYW5kc2NhcGV8ZW58MXwwfHx8MTc4NTg4MTM2NHww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "James Lee", "profile_url": "https://unsplash.com/@picsbyjameslee", "download_location": "https://api.unsplash.com/photos/Qik9CuemxO4/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TmV3JTIwWmVhbGFuZCUyMEF1Y2tsYW5kJTIwY29hc3QlMjBsYW5kc2NhcGV8ZW58MXwwfHx8MTc4NTg4MTM2NHww" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1582254905895-cfab294e1d91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TmV3JTIwWmVhbGFuZCUyMEF1Y2tsYW5kJTIwY29hc3QlMjBsYW5kc2NhcGV8ZW58MXwwfHx8MTc4NTg4MTM2NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "James Lee",
+      "profile_url": "https://unsplash.com/@picsbyjameslee",
+      "download_location": "https://api.unsplash.com/photos/Qik9CuemxO4/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TmV3JTIwWmVhbGFuZCUyMEF1Y2tsYW5kJTIwY29hc3QlMjBsYW5kc2NhcGV8ZW58MXwwfHx8MTc4NTg4MTM2NHww"
+    },
     "blurb": "The furthest and priciest trip here — worth it only with two weeks, not one."
   },
   {
@@ -5043,58 +6812,114 @@
       51.05,
       -114.07
     ],
-    "flight": {
-      "hours": 4.5,
-      "nonstop": true,
-      "bands": {
-        "jan": [
-          350,
-          480
-        ],
-        "feb": [
-          380,
-          520
-        ],
-        "mar": [
-          420,
-          580
-        ],
-        "apr": [
-          480,
-          660
-        ],
-        "may": [
-          550,
-          760
-        ],
-        "jun": [
-          600,
-          830
-        ],
-        "jul": [
-          650,
-          900
-        ],
-        "aug": [
-          630,
-          870
-        ],
-        "sep": [
-          520,
-          720
-        ],
-        "oct": [
-          450,
-          620
-        ],
-        "nov": [
-          480,
-          660
-        ],
-        "dec": [
-          550,
-          760
-        ]
+    "flights": {
+      "yyz": {
+        "hours": 4.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            350,
+            480
+          ],
+          "feb": [
+            380,
+            520
+          ],
+          "mar": [
+            420,
+            580
+          ],
+          "apr": [
+            480,
+            660
+          ],
+          "may": [
+            550,
+            760
+          ],
+          "jun": [
+            600,
+            830
+          ],
+          "jul": [
+            650,
+            900
+          ],
+          "aug": [
+            630,
+            870
+          ],
+          "sep": [
+            520,
+            720
+          ],
+          "oct": [
+            450,
+            620
+          ],
+          "nov": [
+            480,
+            660
+          ],
+          "dec": [
+            550,
+            760
+          ]
+        }
+      },
+      "yul": {
+        "hours": 4.5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            380,
+            520
+          ],
+          "feb": [
+            410,
+            560
+          ],
+          "mar": [
+            450,
+            630
+          ],
+          "apr": [
+            520,
+            710
+          ],
+          "may": [
+            590,
+            820
+          ],
+          "jun": [
+            650,
+            900
+          ],
+          "jul": [
+            700,
+            970
+          ],
+          "aug": [
+            680,
+            940
+          ],
+          "sep": [
+            560,
+            780
+          ],
+          "oct": [
+            490,
+            670
+          ],
+          "nov": [
+            520,
+            710
+          ],
+          "dec": [
+            590,
+            820
+          ]
+        }
       }
     },
     "stay": {
@@ -5202,7 +7027,12 @@
       "hike"
     ],
     "photo_query": "Banff Alberta mountains lake",
-    "hero_image": { "url": "https://images.unsplash.com/photo-1516293635722-a0ae2709d570?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZmYlMjBBbGJlcnRhJTIwbW91bnRhaW5zJTIwbGFrZXxlbnwxfDB8fHwxNzg1ODgxMzY4fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Kevin Noble", "profile_url": "https://unsplash.com/@nobleshots", "download_location": "https://api.unsplash.com/photos/SLzVswyICJM/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZmYlMjBBbGJlcnRhJTIwbW91bnRhaW5zJTIwbGFrZXxlbnwxfDB8fHwxNzg1ODgxMzY4fDA" },
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1516293635722-a0ae2709d570?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZmYlMjBBbGJlcnRhJTIwbW91bnRhaW5zJTIwbGFrZXxlbnwxfDB8fHwxNzg1ODgxMzY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "photographer": "Kevin Noble",
+      "profile_url": "https://unsplash.com/@nobleshots",
+      "download_location": "https://api.unsplash.com/photos/SLzVswyICJM/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZmYlMjBBbGJlcnRhJTIwbW91bnRhaW5zJTIwbGFrZXxlbnwxfDB8fHwxNzg1ODgxMzY4fDA"
+    },
     "blurb": "Cheapest flight on the list and no passport — the Rockies are the whole point."
   }
 ]
