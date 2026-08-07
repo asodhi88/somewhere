@@ -84,6 +84,9 @@ a:hover {
   align-items: center;
   gap: 12px;
 }
+.rc-brand:hover {
+  text-decoration: none;
+}
 .rc-brand__mark {
   width: 34px;
   height: 34px;
@@ -120,6 +123,13 @@ a:hover {
 .rc-nav__link:hover {
   color: var(--text);
   text-decoration: underline;
+}
+.rc-nav__link.is-active {
+  color: var(--text);
+}
+.rc-nav__link.is-active:hover {
+  text-decoration: none;
+  cursor: default;
 }
 .rc-pill {
   padding: 9px 16px;
@@ -1002,6 +1012,264 @@ a:hover {
   }
 }
 
+/* ── How it works page (the "5b" direction) ─────────────────────────────── */
+.rc-hiw {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Starfield hero — the same night sky as home, minus the moon and the mural. */
+.rc-hiw-hero {
+  position: relative;
+  margin: 8px 24px 0;
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--bg);
+  min-height: 360px;
+}
+.rc-hiw-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 96px 56px 100px;
+  text-align: center;
+}
+.rc-hiw-hero__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  max-width: 780px;
+  color: var(--text);
+  text-wrap: pretty;
+}
+.rc-hiw-hero__sub {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.55;
+  max-width: 540px;
+  color: var(--muted);
+}
+
+/* Section intro + two-column body (rail + comparison card). */
+.rc-hiw-body {
+  padding: 52px 56px 0;
+  font-family: var(--font-body);
+}
+.rc-hiw-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rc-hiw-intro__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.rc-hiw-cols {
+  display: flex;
+  gap: 44px;
+  align-items: flex-start;
+  padding: 28px 0 8px;
+}
+
+/* Left: the numbered vertical rail. */
+.rc-hiw-rail {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.rc-hiw-step {
+  display: flex;
+  gap: 22px;
+}
+.rc-hiw-step__marker {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.rc-hiw-step__num {
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: var(--amber);
+  color: var(--on-amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.rc-hiw-step__num.is-muted {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.rc-hiw-step__line {
+  flex: 1;
+  width: 1px;
+  background: var(--border);
+}
+.rc-hiw-step__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 30px;
+}
+.rc-hiw-step:last-child .rc-hiw-step__text {
+  padding-bottom: 0;
+}
+.rc-hiw-step__title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.rc-hiw-step__tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.rc-hiw-step__desc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* Right: the "why total cost" comparison card. */
+.rc-hiw-why {
+  flex: none;
+  width: 400px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.rc-hiw-why__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.rc-hiw-why__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.rc-hiw-compare {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.rc-hiw-compare + .rc-hiw-compare {
+  padding-top: 15px;
+  border-top: 1px solid var(--border);
+}
+.rc-hiw-compare__line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text);
+}
+.rc-hiw-compare__muted {
+  color: var(--muted);
+}
+.rc-hiw-compare__total {
+  font-weight: 600;
+}
+.rc-hiw-bar {
+  display: flex;
+  height: 11px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface-sunken);
+}
+.rc-hiw-bar__seg--flight {
+  background: var(--amber);
+}
+.rc-hiw-bar__seg--stay {
+  background: #8f7a63;
+}
+.rc-hiw-bar__seg--ground {
+  background: #4b4038;
+}
+.rc-hiw-why__note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* Closing CTA row. */
+.rc-hiw-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 34px 56px 40px;
+}
+.rc-hiw-cta__note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 560px;
+}
+.rc-hiw-cta__btn {
+  flex: none;
+  padding: 17px 26px;
+  border-radius: 16px;
+  background: var(--amber);
+  color: var(--on-amber);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.rc-hiw-cta__btn:hover {
+  background: var(--amber-hover);
+  text-decoration: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-motion] {
     animation: none !important;
@@ -1037,6 +1305,18 @@ a:hover {
   .rc-footer {
     padding: 24px 32px 30px;
   }
+  .rc-hiw-hero__content {
+    padding: 72px 32px 76px;
+  }
+  .rc-hiw-hero__title {
+    font-size: 46px;
+  }
+  .rc-hiw-body {
+    padding: 44px 32px 0;
+  }
+  .rc-hiw-cta {
+    padding: 28px 32px 34px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1046,8 +1326,10 @@ a:hover {
   .rc-nav {
     gap: 16px;
   }
-  .rc-nav__link,
-  .rc-nav__text {
+  /* Keep "How it works" reachable; drop the still-inert Shortlist pill and the
+     legacy plain-text nav item to make room on narrow screens. */
+  .rc-nav__text,
+  .rc-pill {
     display: none;
   }
   .rc-hero {
@@ -1127,5 +1409,40 @@ a:hover {
   .rc-backtotop {
     right: 16px;
     bottom: 16px;
+  }
+  .rc-hiw-hero {
+    margin: 6px 12px 0;
+    min-height: 300px;
+  }
+  .rc-hiw-hero__content {
+    padding: 56px 22px 60px;
+    gap: 14px;
+  }
+  .rc-hiw-hero__title {
+    font-size: 34px;
+    letter-spacing: -0.025em;
+  }
+  .rc-hiw-hero__sub {
+    font-size: 16px;
+  }
+  .rc-hiw-body {
+    padding: 36px 20px 0;
+  }
+  .rc-hiw-intro__title {
+    font-size: 30px;
+  }
+  .rc-hiw-cols {
+    flex-direction: column;
+    gap: 28px;
+    padding: 24px 0 4px;
+  }
+  .rc-hiw-why {
+    width: 100%;
+  }
+  .rc-hiw-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px 20px 30px;
   }
 }

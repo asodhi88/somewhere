@@ -84,7 +84,7 @@ const SHOOTERS = [
   { top: '52%', left: '66%', dur: '21s', delay: '16s', rot: '25deg' },
 ]
 
-export default function NightSky() {
+export default function NightSky({ showMoon = true }) {
   const stars = useMemo(() => buildStars(), [])
   const moon = useMemo(() => computeMoon(), [])
   const [moonHover, setMoonHover] = useState(false)
@@ -111,25 +111,27 @@ export default function NightSky() {
         />
       ))}
 
-      <div
-        className="rc-moon"
-        onMouseEnter={() => setMoonHover(true)}
-        onMouseLeave={() => setMoonHover(false)}
-      >
-        <svg viewBox="0 0 50 50" width="52" height="52">
-          <circle
-            cx="25"
-            cy="25"
-            r="24"
-            fill="none"
-            stroke="#F5F0E8"
-            strokeOpacity=".16"
-            strokeWidth="1"
-          />
-          <path d={moon.path} transform={moon.flip} fill="#F5F0E8" fillOpacity=".62" />
-        </svg>
-        {moonHover && <div className="rc-moon__tip">{moon.label}</div>}
-      </div>
+      {showMoon && (
+        <div
+          className="rc-moon"
+          onMouseEnter={() => setMoonHover(true)}
+          onMouseLeave={() => setMoonHover(false)}
+        >
+          <svg viewBox="0 0 50 50" width="52" height="52">
+            <circle
+              cx="25"
+              cy="25"
+              r="24"
+              fill="none"
+              stroke="#F5F0E8"
+              strokeOpacity=".16"
+              strokeWidth="1"
+            />
+            <path d={moon.path} transform={moon.flip} fill="#F5F0E8" fillOpacity=".62" />
+          </svg>
+          {moonHover && <div className="rc-moon__tip">{moon.label}</div>}
+        </div>
+      )}
 
       {SHOOTERS.map((sh, i) => (
         <div
