@@ -288,7 +288,7 @@ a:hover {
 /* Origin control + search bar, one left-aligned group above the mural. */
 .rc-searchgroup {
   width: 100%;
-  max-width: 820px;
+  max-width: 980px;
   margin-top: 14px;
   display: flex;
   flex-direction: column;
@@ -379,7 +379,7 @@ a:hover {
   display: flex;
   align-items: stretch;
   gap: 10px;
-  padding: 13px;
+  padding: 10px;
   border-radius: 24px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -427,7 +427,7 @@ a:hover {
   flex-direction: column;
   gap: 5px;
   text-align: left;
-  padding: 13px 19px;
+  padding: 9px 19px;
   border-radius: 16px;
   background: var(--surface-sunken);
   border: 1px solid var(--border);
@@ -518,7 +518,7 @@ a:hover {
 
 .rc-search__submit {
   flex: none;
-  padding: 19px 27px;
+  padding: 15px 27px;
   border: 0;
   border-radius: 16px;
   background: linear-gradient(180deg, var(--ac-hi) 0%, var(--ac) 55%, var(--ac-lo) 100%);
