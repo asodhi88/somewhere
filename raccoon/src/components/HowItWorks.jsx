@@ -138,7 +138,7 @@ export default function HowItWorks({ onNavigate }) {
 
         <div className="rc-hiw-cta">
           <span className="rc-hiw-cta__note">
-            Estimates, always as ranges. Departing Toronto · YYZ only, for now.
+            Estimates reflected as ranges only.
           </span>
           <a className="rc-hiw-cta__btn" href="/" onClick={goHome}>
             Find my trip →
