@@ -266,6 +266,21 @@ raccoon/
 - Lint: `npm run lint`
 - Deploy: push to `main` — Vercel auto-deploys.
 
+## 12. Design → code handoff (`handoff.md`)
+
+Visual work happens in **Claude Design** (the design doc `Raccoon Directions.dc.html`), which runs ahead of the repo. Design changes that aren't in the code yet are captured in **`handoff.md` at the repo root** — the contract between the two.
+
+**Format.** Newest work first. Each item is self-contained: the final values (no "roughly", no TBD), the CSS/markup snippets, and implementation notes (which file, which component, gotchas). The doc ends with an **"Already in the repo (no action)"** list — things the design already reflects that are *also* shipped — so the implementer reconciles rather than rebuilds.
+
+**Workflow when implementing a handoff:**
+1. **Read `handoff.md` first**, then **confirm each item against the current implementation before writing code** — some items may already be built, or partially. Say what you'll change and what's already there before touching anything.
+2. Implement item by item. Respect the existing seams and conventions (the `[data-motion]` reduced-motion opt-out, the `--ac*` accent tokens, the `getDestinations` data seam).
+3. **Verify against the running app** (`npm run dev` + the browser tools), not by eye alone.
+4. Ship the code changes on a branch → PR → merge. **`handoff.md` is a transient working doc — keep it out of the feature commit** (it's regenerated per design sync, not repo history).
+5. Once merged, the design doc is synced to match shipped code and `handoff.md` is cleared/rewritten for the next batch.
+
+**Related:** the Claude Design project id and the DesignSync re-sync flow live in auto-memory (`raccoon-design-source`), not here.
+
 ## Post-MVP backlog
 - Comparison view (shortlist → side-by-side) — highest portfolio value
 - Detail view (cost breakdown, month strip, Google Flights hand-off)
