@@ -21,7 +21,7 @@ const STEPS = [
   {
     n: '2',
     title: 'We add up all three costs',
-    body: "Fare, seven nights of bed, and what a day on the ground costs in that city. Ranges only — we'd rather be honest than precise.",
+    body: "Fare, every night of bed, and what a day on the ground costs in that city. Ranges only — we'd rather be honest than precise.",
   },
   {
     n: '3',
@@ -65,7 +65,7 @@ export default function HowItWorks({ onNavigate }) {
             <h1 className="rc-hiw-hero__title">A cheap flight isn&rsquo;t a cheap trip.</h1>
             <p className="rc-hiw-hero__sub">
               So we stopped ranking flights. Four steps, one honest number, and a
-              shortlist of places your week actually fits.
+              shortlist of places your trip actually fits.
             </p>
           </div>
         </section>
@@ -121,7 +121,7 @@ export default function HowItWorks({ onNavigate }) {
                       ))}
                     </div>
                     <div className="rc-hiw-compare__line">
-                      <span className="rc-hiw-compare__muted">Whole week</span>
+                      <span className="rc-hiw-compare__muted">Whole trip</span>
                       <span className="rc-hiw-compare__total tnum">{c.total}</span>
                     </div>
                   </div>
@@ -129,8 +129,8 @@ export default function HowItWorks({ onNavigate }) {
               </div>
 
               <p className="rc-hiw-why__note">
-                Half the fare, the costlier week. Flight-first search hides the
-                seven days that follow it.
+                Half the fare, the costlier trip. Flight-first search hides the
+                days that follow it.
               </p>
             </aside>
           </div>
@@ -141,7 +141,7 @@ export default function HowItWorks({ onNavigate }) {
             Estimates, always as ranges. Departing Toronto · YYZ only, for now.
           </span>
           <a className="rc-hiw-cta__btn" href="/" onClick={goHome}>
-            Find my week →
+            Find my trip →
           </a>
         </div>
       </main>

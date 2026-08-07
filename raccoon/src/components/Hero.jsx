@@ -22,11 +22,15 @@ export default function Hero({ defaults, pending, onSearch }) {
 
       <div className="rc-hero__content">
         <h1 className="rc-hero__title">
-          Pick a week and a budget. We&rsquo;ll pick the window seat.
+          {/* Each sentence is a nowrap clause so the headline only ever breaks
+              between sentences, never mid-sentence ("Say how / much"). */}
+          <span className="rc-hero__clause">Say when.</span>{' '}
+          <span className="rc-hero__clause">Say how much.</span>{' '}
+          <span className="rc-hero__clause">We&rsquo;ll say where.</span>
         </h1>
         <p className="rc-hero__sub">
-          Every city ranked by what the whole trip costs — flight, bed, and the
-          week you spend once you land.
+          Destinations ranked by what the whole trip costs — flight, bed, and
+          everything on the ground.
         </p>
 
         <div className="rc-searchgroup">
