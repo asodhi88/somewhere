@@ -3,7 +3,7 @@ import { largeUrl } from '../lib/format'
 
 // Unsplash API terms: photographer credit (linked to their profile) plus a link
 // to Unsplash, both carrying our utm_source. Non-negotiable — see ResultCard.
-const UTM = '?utm_source=raccoon&utm_medium=referral'
+const UTM = '?utm_source=somewhere&utm_medium=referral'
 
 /**
  * Lightbox — an enlarged view of a destination photo. Mounted only while open

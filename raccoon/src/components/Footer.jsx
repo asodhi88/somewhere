@@ -4,7 +4,7 @@
 export default function Footer() {
   return (
     <footer className="rc-footer">
-      <span className="rc-footer__meta tnum">raccoon · v1 · YYZ only</span>
+      <span className="rc-footer__meta tnum">somewhere · v1 · YYZ only</span>
     </footer>
   )
 }

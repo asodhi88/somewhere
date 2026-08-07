@@ -9,7 +9,7 @@ export default function Header() {
         <div className="rc-brand__mark" aria-hidden="true">
           🦝
         </div>
-        <span className="rc-brand__name">raccoon</span>
+        <span className="rc-brand__name">somewhere</span>
       </div>
       <nav className="rc-nav">
         {/* Plain text, not a link: there's no "how it works" page yet, and a

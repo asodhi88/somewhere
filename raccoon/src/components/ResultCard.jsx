@@ -9,7 +9,7 @@ import {
 
 // Unsplash's API guidelines: credit the photographer with a link back to their
 // profile, and link to Unsplash, both tagged with our utm_source.
-const UTM = '?utm_source=raccoon&utm_medium=referral'
+const UTM = '?utm_source=somewhere&utm_medium=referral'
 
 /**
  * ResultCard — one ranked destination. The image is flush to the card's left

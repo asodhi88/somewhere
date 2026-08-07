@@ -1,4 +1,4 @@
-# Raccoon — Project Brief
+# somewhere — Project Brief
 
 *This file lives at the repo root. Claude Code reads it automatically at the start of every session. Keep it current — it's the source of truth for scope and constraints.*
 
@@ -214,7 +214,7 @@ The app is the artifact; the writeup is what hiring managers read.
 
 ## 10. Open items
 
-- Final product name (Raccoon is the working name) and domain
+- Final product name (somewhere is the working name) and domain
 - v1 ships **YYZ-only** (recommended — more origins multiply the dataset without improving the demo)
 
 ---
