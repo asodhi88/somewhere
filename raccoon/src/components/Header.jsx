@@ -18,9 +18,24 @@ export default function Header({ onNavigate, active }) {
   return (
     <header className="rc-header">
       <a className="rc-brand" href="/" onClick={go('/')}>
-        <div className="rc-brand__mark" aria-hidden="true">
-          🦝
-        </div>
+        {/* Four-point star: each arm is one of the four brand accents, split
+            into a light and dark facet. Fixed colors — not the per-load accent. */}
+        <svg
+          viewBox="0 0 100 100"
+          width="30"
+          height="30"
+          aria-hidden="true"
+          style={{ display: 'block', flex: 'none' }}
+        >
+          <path d="M50 6 L39 39 L50 50 Z" fill="#7BC9B8" />
+          <path d="M50 6 L61 39 L50 50 Z" fill="#4B9A89" />
+          <path d="M97 50 L61 39 L50 50 Z" fill="#F2B65C" />
+          <path d="M97 50 L61 61 L50 50 Z" fill="#D8912C" />
+          <path d="M50 94 L61 61 L50 50 Z" fill="#D25E46" />
+          <path d="M50 94 L39 61 L50 50 Z" fill="#F28E78" />
+          <path d="M3 50 L39 61 L50 50 Z" fill="#8C71B6" />
+          <path d="M3 50 L39 39 L50 50 Z" fill="#BCA3DF" />
+        </svg>
         <span className="rc-brand__name">somewhere</span>
       </a>
       <nav className="rc-nav">

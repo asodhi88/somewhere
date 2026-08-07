@@ -20,9 +20,9 @@
   --amber: #e8a33d; /* primary accent — no-JS fallback for --ac */
   --amber-hover: #f2b65c;
   --coral: #e8735a; /* secondary accent — over-budget chip, not part of --ac */
-  --on-amber: #1a1614; /* text on the accent CTA — light enough for all three */
+  --on-amber: #1a1614; /* text on the accent CTA — light enough for all four */
 
-  /* Cycling accent — one of three chosen per page load by the inline picker in
+  /* Cycling accent — one of four chosen per page load by the inline picker in
      index.html (defaults below = Amber, so a no-JS load still renders). Every
      accent usage routes through these four tokens. */
   --ac: #e8a33d;
@@ -94,17 +94,6 @@ a:hover {
 }
 .rc-brand:hover {
   text-decoration: none;
-}
-.rc-brand__mark {
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  display: grid;
-  place-items: center;
-  font-size: 19px;
-  line-height: 1;
 }
 .rc-brand__name {
   font-family: var(--font-display);

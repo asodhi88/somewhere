@@ -10,7 +10,7 @@
     />
     <meta name="theme-color" content="#1A1614" />
     <title>somewhere — pick a week and a budget</title>
-    <!-- Cycling accent: pick one of three on each load and set the --ac tokens on
+    <!-- Cycling accent: pick one of four on each load and set the --ac tokens on
          <html> before React mounts and before first paint, so there's no flash of
          the amber default. Reshuffles every load (design intent). -->
     <script>
@@ -19,6 +19,7 @@
           { ac: '#E8A33D', hi: '#F2B65C', lo: '#D8912C', rgb: '232, 163, 61' }, // amber
           { ac: '#E8735A', hi: '#F28E78', lo: '#D25E46', rgb: '232, 115, 90' }, // coral
           { ac: '#5FB3A1', hi: '#7BC9B8', lo: '#4B9A89', rgb: '95, 179, 161' }, // sea glass
+          { ac: '#A88BD0', hi: '#BCA3DF', lo: '#8C71B6', rgb: '168, 139, 208' }, // dusk
         ]
         var a = accents[Math.floor(Math.random() * accents.length)]
         var s = document.documentElement.style
