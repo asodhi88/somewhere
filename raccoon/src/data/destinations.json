@@ -7261,8 +7261,8 @@
       "food",
       "beach"
     ],
-    "photo_query": "Halifax Nova Scotia waterfront harbour",
-    "hero_image": null,
+    "photo_query": "Halifax Nova Scotia harbour",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1605744494559-cca2036bc783?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SGFsaWZheCUyME5vdmElMjBTY290aWElMjBoYXJib3VyfGVufDF8MHx8fDE3ODYwNzExNjd8MA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "John McArthur", "profile_url": "https://unsplash.com/@snowjam", "download_location": "https://api.unsplash.com/photos/m5nGCr-5fMg/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8SGFsaWZheCUyME5vdmElMjBTY290aWElMjBoYXJib3VyfGVufDF8MHx8fDE3ODYwNzExNjd8MA" },
     "blurb": "Cheap to reach, pricey once there — the Atlantic seafood and coastline are the point."
   },
   {
@@ -8177,8 +8177,8 @@
     "vibes": [
       "hike"
     ],
-    "photo_query": "Yukon northern lights wilderness",
-    "hero_image": null,
+    "photo_query": "Yukon aurora",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1645344261827-6abad97d9593?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8WXVrb24lMjBhdXJvcmF8ZW58MXwwfHx8MTc4NjA3MTE5M3ww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Ellen Borglund", "profile_url": "https://unsplash.com/@ellenborglund", "download_location": "https://api.unsplash.com/photos/5N7jMI67YJI/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8WXVrb24lMjBhdXJvcmF8ZW58MXwwfHx8MTc4NjA3MTE5M3ww" },
     "blurb": "Aurora season runs all winter and the summer days barely end — expensive either way."
   },
   {
@@ -8635,8 +8635,8 @@
       "food",
       "beach"
     ],
-    "photo_query": "Okanagan Kelowna vineyard lake",
-    "hero_image": null,
+    "photo_query": "Okanagan Valley vineyard",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1732159622597-aefade3499a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8T2thbmFnYW4lMjBWYWxsZXklMjB2aW5leWFyZHxlbnwxfDB8fHwxNzg2MDcxMTcyfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Kat", "profile_url": "https://unsplash.com/@northernpaws", "download_location": "https://api.unsplash.com/photos/RENT6PjB2QY/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8T2thbmFnYW4lMjBWYWxsZXklMjB2aW5leWFyZHxlbnwxfDB8fHwxNzg2MDcxMTcyfDA" },
     "blurb": "Canada's wine country — hot dry summers on a big lake, and ski hills in winter."
   }
 ]
