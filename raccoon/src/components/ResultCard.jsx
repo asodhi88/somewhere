@@ -22,7 +22,7 @@ const UTM = '?utm_source=somewhere&utm_medium=referral'
  * `hero_image` is present, with required attribution; when it's null (the whole
  * v1 dataset today, §5) it falls back to the designed placeholder texture.
  */
-export default function ResultCard({ result, nights, onOpenLightbox }) {
+export default function ResultCard({ result, nights, index = 0, onOpenLightbox }) {
   const [open, setOpen] = useState(false)
   const { cost } = result
   const reason = result.blurb || result.reason
@@ -30,7 +30,13 @@ export default function ResultCard({ result, nights, onOpenLightbox }) {
   const hasImg = !!(img && img.url)
 
   return (
-    <article className="rc-card">
+    // data-motion opts the card into the reduced-motion still; the per-card
+    // delay staggers the rise-in (170ms step, matching the design handoff).
+    <article
+      className="rc-card"
+      data-motion="1"
+      style={{ animationDelay: `${index * 0.17}s` }}
+    >
       <div className="rc-card__row">
         <div className={`rc-card__photo${hasImg ? ' rc-card__photo--image' : ''}`}>
           {hasImg ? (

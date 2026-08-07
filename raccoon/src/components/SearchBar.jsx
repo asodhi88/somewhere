@@ -40,6 +40,9 @@ export default function SearchBar({ defaults, pending, onSearch }) {
 
   return (
     <form className="rc-search" onSubmit={submit}>
+      {/* Amber accent light tracing the border — the idle-state affordance.
+          data-motion stills it under prefers-reduced-motion. */}
+      <span className="rc-search__trace" data-motion="1" aria-hidden="true" />
       <label className="rc-field rc-field--budget">
         <span className="rc-field__label">Budget</span>
         <div className="rc-field__control">
