@@ -13,6 +13,7 @@ export default function ResultsList({
   searched,
   monthLabel,
   monthHasData,
+  searchNonce,
   onOpenLightbox,
 }) {
   if (pending) {
@@ -85,11 +86,14 @@ export default function ResultsList({
         </p>
       )}
       <div className="rc-list">
-        {results.map((r) => (
+        {results.map((r, i) => (
+          // Key on the search nonce so a fresh submit remounts the cards and
+          // replays the rise-in — same result id alone wouldn't restart it.
           <ResultCard
-            key={r.id}
+            key={`${searchNonce}-${r.id}`}
             result={r}
             nights={nights}
+            index={i}
             onOpenLightbox={onOpenLightbox}
           />
         ))}

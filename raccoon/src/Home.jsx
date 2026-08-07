@@ -34,6 +34,9 @@ export default function Home({ onNavigate }) {
   const [pending, setPending] = useState(false)
   // Bumped only on browser back/forward so the search bar re-reads the URL.
   const [resetKey, setResetKey] = useState(0)
+  // Bumped on every explicit search so ResultsList remounts the cards and the
+  // rise-in animation replays (starts at 0 so an initial URL-param load animates).
+  const [searchNonce, setSearchNonce] = useState(0)
   // The photo currently enlarged in the lightbox (null when closed).
   const [lightbox, setLightbox] = useState(null)
   // Back-to-top affordance: only once the user has searched and scrolled into
@@ -69,6 +72,7 @@ export default function Home({ onNavigate }) {
       window.clearTimeout(timer.current)
       window.history.pushState({}, '', searchFromFilters(next))
       setPending(true)
+      setSearchNonce((n) => n + 1)
       scrollToResults()
       timer.current = window.setTimeout(() => {
         setFilters(next)
@@ -125,6 +129,7 @@ export default function Home({ onNavigate }) {
           searched={searched}
           monthLabel={monthLabel}
           monthHasData={monthHasData}
+          searchNonce={searchNonce}
           onOpenLightbox={setLightbox}
         />
       </div>

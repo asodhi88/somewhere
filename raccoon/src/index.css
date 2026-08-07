@@ -17,10 +17,18 @@
   --border: #3a322c;
   --text: #f5f0e8; /* primary text */
   --muted: #a89b8f; /* muted text */
-  --amber: #e8a33d; /* primary accent — CTA only */
+  --amber: #e8a33d; /* primary accent — no-JS fallback for --ac */
   --amber-hover: #f2b65c;
-  --coral: #e8735a; /* secondary accent — sparing */
-  --on-amber: #1a1614; /* text on the amber CTA */
+  --coral: #e8735a; /* secondary accent — over-budget chip, not part of --ac */
+  --on-amber: #1a1614; /* text on the accent CTA — light enough for all three */
+
+  /* Cycling accent — one of three chosen per page load by the inline picker in
+     index.html (defaults below = Amber, so a no-JS load still renders). Every
+     accent usage routes through these four tokens. */
+  --ac: #e8a33d;
+  --ac-hi: #f2b65c;
+  --ac-lo: #d8912c;
+  --ac-rgb: 232, 163, 61;
 
   /* Type */
   --font-display: 'Cabinet Grotesk', 'Inter', system-ui, sans-serif;
@@ -231,7 +239,7 @@ a:hover {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--ac);
 }
 .rc-hero__title {
   margin: 0;
@@ -310,7 +318,7 @@ a:hover {
   transition: border-color 0.15s ease;
 }
 .rc-origin__btn:hover {
-  border-color: color-mix(in srgb, var(--amber) 50%, var(--border));
+  border-color: rgba(var(--ac-rgb), 0.55);
 }
 .rc-origin__chev {
   font-size: 11px;
@@ -354,7 +362,7 @@ a:hover {
   background: var(--surface-inset);
 }
 .rc-origin__check {
-  color: var(--amber);
+  color: var(--ac);
   font-size: 12px;
 }
 .rc-origin__soon {
@@ -366,6 +374,7 @@ a:hover {
 }
 
 .rc-search {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: stretch;
@@ -375,6 +384,43 @@ a:hover {
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 0 24px 50px -22px rgba(0, 0, 0, 0.75);
+}
+/* A continuous accent light travels the widget's 1px border — the main idle
+   affordance. Border-only: a two-layer mask keeps the fill on the 1px padding
+   ring and excludes the content box. data-motion stills it under reduced motion. */
+.rc-search__trace {
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  padding: 1px;
+  pointer-events: none;
+  background-image: linear-gradient(
+    90deg,
+    rgba(var(--ac-rgb), 0) 0%,
+    rgba(var(--ac-rgb), 0) 32%,
+    rgba(var(--ac-rgb), 0.9) 46%,
+    var(--ac-hi) 50%,
+    rgba(var(--ac-rgb), 0.9) 54%,
+    rgba(var(--ac-rgb), 0) 68%,
+    rgba(var(--ac-rgb), 0) 100%
+  );
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  animation: rc-bar-trace 4.2s linear infinite;
+  -webkit-mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+  -webkit-mask-clip: content-box, border-box;
+  mask-clip: content-box, border-box;
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+@keyframes rc-bar-trace {
+  from {
+    background-position: -60% 0;
+  }
+  to {
+    background-position: 160% 0;
+  }
 }
 .rc-field {
   display: flex;
@@ -389,7 +435,7 @@ a:hover {
   transition: border-color 0.15s ease;
 }
 .rc-field:focus-within {
-  border-color: var(--amber);
+  border-color: var(--ac);
 }
 .rc-field--budget {
   flex: 1.15;
@@ -472,20 +518,38 @@ a:hover {
 
 .rc-search__submit {
   flex: none;
-  padding: 19px 26px;
+  padding: 19px 27px;
   border: 0;
   border-radius: 16px;
-  background: var(--amber);
+  background: linear-gradient(180deg, var(--ac-hi) 0%, var(--ac) 55%, var(--ac-lo) 100%);
   color: var(--on-amber);
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 700;
+  letter-spacing: -0.005em;
   cursor: pointer;
-  transition: background 0.15s ease;
+  box-shadow:
+    0 8px 18px -6px rgba(var(--ac-rgb), 0.55),
+    inset 0 0 0 1px rgba(255, 225, 178, 0.45),
+    inset 0 1px 0 rgba(255, 238, 214, 0.6);
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.18s ease,
+    filter 0.18s ease;
   white-space: nowrap;
 }
 .rc-search__submit:hover {
-  background: var(--amber-hover);
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 26px -6px rgba(var(--ac-rgb), 0.7),
+    inset 0 0 0 1px rgba(255, 225, 178, 0.45),
+    inset 0 1px 0 rgba(255, 238, 214, 0.6);
+}
+.rc-search__submit:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 5px 12px -6px rgba(var(--ac-rgb), 0.5),
+    inset 0 0 0 1px rgba(255, 225, 178, 0.45),
+    inset 0 1px 0 rgba(255, 238, 214, 0.6);
 }
 .rc-search__submit:disabled {
   opacity: 0.7;
@@ -536,6 +600,20 @@ a:hover {
 }
 
 /* ── Result card ────────────────────────────────────────────────────────── */
+/* Cards rise in with a per-card stagger on each search (delay set inline in
+   ResultsList; ~170ms step). The resting rule carries no opacity, so a no-JS
+   or reduced-motion load renders them solid — the animation only holds the
+   invisible `from` state via its fill, and data-motion drops it entirely below. */
+@keyframes rc-card-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 46px, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
 .rc-card {
   display: flex;
   flex-direction: column;
@@ -544,6 +622,7 @@ a:hover {
   border: 1px solid var(--border);
   box-shadow: 0 14px 30px -20px rgba(0, 0, 0, 0.7);
   overflow: hidden;
+  animation: rc-card-rise 0.85s cubic-bezier(0.16, 0.84, 0.34, 1) both;
 }
 .rc-card__row {
   display: flex;
@@ -600,7 +679,7 @@ a:hover {
   cursor: zoom-in;
 }
 .rc-card__enlarge:focus-visible {
-  outline: 2px solid var(--amber);
+  outline: 2px solid var(--ac);
   outline-offset: -3px;
 }
 .rc-card__region {
@@ -725,7 +804,7 @@ a:hover {
   transition: border-color 0.15s ease;
 }
 .rc-price:hover {
-  border-color: color-mix(in srgb, var(--amber) 50%, var(--border));
+  border-color: rgba(var(--ac-rgb), 0.55);
 }
 .rc-price__range {
   font-size: 20px;
@@ -854,7 +933,7 @@ a:hover {
   pointer-events: auto;
 }
 .rc-backtotop:hover {
-  border-color: color-mix(in srgb, var(--amber) 55%, var(--border));
+  border-color: color-mix(in srgb, var(--ac) 55%, var(--border));
 }
 
 /* ── Lightbox ───────────────────────────────────────────────────────────── */
@@ -904,7 +983,7 @@ a:hover {
   transition: border-color 0.15s ease;
 }
 .rc-lightbox__close:hover {
-  border-color: color-mix(in srgb, var(--amber) 55%, var(--border));
+  border-color: color-mix(in srgb, var(--ac) 55%, var(--border));
 }
 .rc-lightbox__attr {
   font-size: 13px;
@@ -1107,7 +1186,7 @@ a:hover {
   width: 34px;
   height: 34px;
   border-radius: 11px;
-  background: var(--amber);
+  background: var(--ac);
   color: var(--on-amber);
   display: flex;
   align-items: center;
@@ -1159,7 +1238,7 @@ a:hover {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--ac);
 }
 .rc-hiw-step__desc {
   margin: 0;
@@ -1225,7 +1304,7 @@ a:hover {
   background: var(--surface-sunken);
 }
 .rc-hiw-bar__seg--flight {
-  background: var(--amber);
+  background: var(--ac);
 }
 .rc-hiw-bar__seg--stay {
   background: #8f7a63;
@@ -1259,14 +1338,14 @@ a:hover {
   flex: none;
   padding: 17px 26px;
   border-radius: 16px;
-  background: var(--amber);
+  background: var(--ac);
   color: var(--on-amber);
   font-size: 15px;
   font-weight: 700;
   white-space: nowrap;
 }
 .rc-hiw-cta__btn:hover {
-  background: var(--amber-hover);
+  background: var(--ac-hi);
   text-decoration: none;
 }
 
