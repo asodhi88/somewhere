@@ -5632,7 +5632,7 @@
     "city": "Vancouver",
     "country": "Canada",
     "airport": "YVR",
-    "region": "North America",
+    "region": "Canada",
     "coords": [
       49.28,
       -123.12
@@ -6807,7 +6807,7 @@
     "city": "Calgary & Banff",
     "country": "Canada",
     "airport": "YYC",
-    "region": "North America",
+    "region": "Canada",
     "coords": [
       51.05,
       -114.07
@@ -7034,5 +7034,1609 @@
       "download_location": "https://api.unsplash.com/photos/SLzVswyICJM/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZmYlMjBBbGJlcnRhJTIwbW91bnRhaW5zJTIwbGFrZXxlbnwxfDB8fHwxNzg1ODgxMzY4fDA"
     },
     "blurb": "Cheapest flight on the list and no passport — the Rockies are the whole point."
+  },
+  {
+    "id": "yhz",
+    "city": "Halifax",
+    "country": "Canada",
+    "airport": "YHZ",
+    "region": "Canada",
+    "coords": [
+      44.65,
+      -63.58
+    ],
+    "flights": {
+      "yyz": {
+        "hours": 2.2,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            300,
+            410
+          ],
+          "feb": [
+            310,
+            430
+          ],
+          "mar": [
+            330,
+            460
+          ],
+          "apr": [
+            380,
+            520
+          ],
+          "may": [
+            450,
+            620
+          ],
+          "jun": [
+            520,
+            720
+          ],
+          "jul": [
+            580,
+            800
+          ],
+          "aug": [
+            570,
+            790
+          ],
+          "sep": [
+            480,
+            660
+          ],
+          "oct": [
+            400,
+            550
+          ],
+          "nov": [
+            340,
+            470
+          ],
+          "dec": [
+            380,
+            520
+          ]
+        }
+      },
+      "yul": {
+        "hours": 1.7,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            280,
+            390
+          ],
+          "feb": [
+            290,
+            400
+          ],
+          "mar": [
+            300,
+            410
+          ],
+          "apr": [
+            340,
+            470
+          ],
+          "may": [
+            410,
+            570
+          ],
+          "jun": [
+            470,
+            650
+          ],
+          "jul": [
+            520,
+            720
+          ],
+          "aug": [
+            510,
+            700
+          ],
+          "sep": [
+            430,
+            590
+          ],
+          "oct": [
+            360,
+            500
+          ],
+          "nov": [
+            310,
+            430
+          ],
+          "dec": [
+            350,
+            480
+          ]
+        }
+      }
+    },
+    "stay": {
+      "budget": [
+        50,
+        85
+      ],
+      "mid": [
+        130,
+        210
+      ],
+      "nice": [
+        260,
+        450
+      ]
+    },
+    "ground_daily": [
+      65,
+      115
+    ],
+    "climate": {
+      "jan": {
+        "high_c": 0,
+        "low_c": -9,
+        "rain_days": 15,
+        "label": "very cold, wet"
+      },
+      "feb": {
+        "high_c": 0,
+        "low_c": -9,
+        "rain_days": 13,
+        "label": "very cold, wet"
+      },
+      "mar": {
+        "high_c": 4,
+        "low_c": -5,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "apr": {
+        "high_c": 9,
+        "low_c": 0,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "may": {
+        "high_c": 15,
+        "low_c": 5,
+        "rain_days": 13,
+        "label": "cool, wet"
+      },
+      "jun": {
+        "high_c": 20,
+        "low_c": 10,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "jul": {
+        "high_c": 23,
+        "low_c": 14,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "aug": {
+        "high_c": 23,
+        "low_c": 14,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "sep": {
+        "high_c": 19,
+        "low_c": 10,
+        "rain_days": 11,
+        "label": "mild, some rain"
+      },
+      "oct": {
+        "high_c": 13,
+        "low_c": 5,
+        "rain_days": 13,
+        "label": "cool, wet"
+      },
+      "nov": {
+        "high_c": 7,
+        "low_c": 0,
+        "rain_days": 14,
+        "label": "cold, wet"
+      },
+      "dec": {
+        "high_c": 2,
+        "low_c": -5,
+        "rain_days": 15,
+        "label": "very cold, wet"
+      }
+    },
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": [
+      "city",
+      "food",
+      "beach"
+    ],
+    "photo_query": "Halifax Nova Scotia waterfront harbour",
+    "hero_image": null,
+    "blurb": "Cheap to reach, pricey once there — the Atlantic seafood and coastline are the point."
+  },
+  {
+    "id": "yqb",
+    "city": "Quebec City",
+    "country": "Canada",
+    "airport": "YQB",
+    "region": "Canada",
+    "coords": [
+      46.81,
+      -71.21
+    ],
+    "flights": {
+      "yyz": {
+        "hours": 1.7,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            300,
+            410
+          ],
+          "feb": [
+            310,
+            430
+          ],
+          "mar": [
+            330,
+            460
+          ],
+          "apr": [
+            370,
+            510
+          ],
+          "may": [
+            430,
+            590
+          ],
+          "jun": [
+            490,
+            680
+          ],
+          "jul": [
+            540,
+            750
+          ],
+          "aug": [
+            530,
+            730
+          ],
+          "sep": [
+            450,
+            620
+          ],
+          "oct": [
+            380,
+            520
+          ],
+          "nov": [
+            330,
+            460
+          ],
+          "dec": [
+            380,
+            520
+          ]
+        }
+      },
+      "yul": {
+        "hours": 0.8,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            220,
+            300
+          ],
+          "feb": [
+            230,
+            320
+          ],
+          "mar": [
+            240,
+            330
+          ],
+          "apr": [
+            270,
+            370
+          ],
+          "may": [
+            310,
+            430
+          ],
+          "jun": [
+            350,
+            480
+          ],
+          "jul": [
+            390,
+            540
+          ],
+          "aug": [
+            380,
+            520
+          ],
+          "sep": [
+            330,
+            460
+          ],
+          "oct": [
+            280,
+            390
+          ],
+          "nov": [
+            240,
+            330
+          ],
+          "dec": [
+            280,
+            390
+          ]
+        }
+      }
+    },
+    "stay": {
+      "budget": [
+        50,
+        85
+      ],
+      "mid": [
+        130,
+        220
+      ],
+      "nice": [
+        280,
+        500
+      ]
+    },
+    "ground_daily": [
+      65,
+      115
+    ],
+    "climate": {
+      "jan": {
+        "high_c": -8,
+        "low_c": -18,
+        "rain_days": 14,
+        "label": "very cold, wet"
+      },
+      "feb": {
+        "high_c": -6,
+        "low_c": -16,
+        "rain_days": 11,
+        "label": "very cold, some rain"
+      },
+      "mar": {
+        "high_c": 0,
+        "low_c": -9,
+        "rain_days": 11,
+        "label": "very cold, some rain"
+      },
+      "apr": {
+        "high_c": 8,
+        "low_c": -1,
+        "rain_days": 11,
+        "label": "cold, some rain"
+      },
+      "may": {
+        "high_c": 17,
+        "low_c": 5,
+        "rain_days": 13,
+        "label": "cool, wet"
+      },
+      "jun": {
+        "high_c": 23,
+        "low_c": 11,
+        "rain_days": 14,
+        "label": "mild, wet"
+      },
+      "jul": {
+        "high_c": 25,
+        "low_c": 14,
+        "rain_days": 13,
+        "label": "warm, wet"
+      },
+      "aug": {
+        "high_c": 24,
+        "low_c": 13,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "sep": {
+        "high_c": 18,
+        "low_c": 8,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "oct": {
+        "high_c": 11,
+        "low_c": 2,
+        "rain_days": 13,
+        "label": "cool, wet"
+      },
+      "nov": {
+        "high_c": 3,
+        "low_c": -3,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "dec": {
+        "high_c": -5,
+        "low_c": -13,
+        "rain_days": 15,
+        "label": "very cold, wet"
+      }
+    },
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": [
+      "city",
+      "food"
+    ],
+    "photo_query": "Quebec City old town winter street",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1767076281095-f1f62670db78?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UXVlYmVjJTIwQ2l0eSUyMG9sZCUyMHRvd24lMjB3aW50ZXIlMjBzdHJlZXR8ZW58MXwwfHx8MTc4NjA3MDkzM3ww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "John Zhou", "profile_url": "https://unsplash.com/@johnnzhou", "download_location": "https://api.unsplash.com/photos/HTvQjlrMCvM/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8UXVlYmVjJTIwQ2l0eSUyMG9sZCUyMHRvd24lMjB3aW50ZXIlMjBzdHJlZXR8ZW58MXwwfHx8MTc4NjA3MDkzM3ww" },
+    "blurb": "The most European city in North America, and no passport required."
+  },
+  {
+    "id": "yyj",
+    "city": "Victoria",
+    "country": "Canada",
+    "airport": "YYJ",
+    "region": "Canada",
+    "coords": [
+      48.43,
+      -123.37
+    ],
+    "flights": {
+      "yyz": {
+        "hours": 5.3,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            500,
+            690
+          ],
+          "feb": [
+            520,
+            720
+          ],
+          "mar": [
+            560,
+            770
+          ],
+          "apr": [
+            620,
+            860
+          ],
+          "may": [
+            700,
+            970
+          ],
+          "jun": [
+            780,
+            1080
+          ],
+          "jul": [
+            860,
+            1190
+          ],
+          "aug": [
+            840,
+            1160
+          ],
+          "sep": [
+            720,
+            990
+          ],
+          "oct": [
+            600,
+            830
+          ],
+          "nov": [
+            540,
+            750
+          ],
+          "dec": [
+            620,
+            860
+          ]
+        }
+      },
+      "yul": {
+        "hours": 6,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            550,
+            760
+          ],
+          "feb": [
+            570,
+            790
+          ],
+          "mar": [
+            610,
+            840
+          ],
+          "apr": [
+            680,
+            940
+          ],
+          "may": [
+            760,
+            1050
+          ],
+          "jun": [
+            850,
+            1170
+          ],
+          "jul": [
+            930,
+            1280
+          ],
+          "aug": [
+            910,
+            1260
+          ],
+          "sep": [
+            780,
+            1080
+          ],
+          "oct": [
+            650,
+            900
+          ],
+          "nov": [
+            590,
+            810
+          ],
+          "dec": [
+            680,
+            940
+          ]
+        }
+      }
+    },
+    "stay": {
+      "budget": [
+        55,
+        95
+      ],
+      "mid": [
+        150,
+        250
+      ],
+      "nice": [
+        320,
+        580
+      ]
+    },
+    "ground_daily": [
+      70,
+      125
+    ],
+    "climate": {
+      "jan": {
+        "high_c": 7,
+        "low_c": 2,
+        "rain_days": 18,
+        "label": "cold, very wet"
+      },
+      "feb": {
+        "high_c": 8,
+        "low_c": 2,
+        "rain_days": 14,
+        "label": "cold, wet"
+      },
+      "mar": {
+        "high_c": 11,
+        "low_c": 3,
+        "rain_days": 15,
+        "label": "cool, wet"
+      },
+      "apr": {
+        "high_c": 14,
+        "low_c": 5,
+        "rain_days": 11,
+        "label": "cool, some rain"
+      },
+      "may": {
+        "high_c": 17,
+        "low_c": 8,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      },
+      "jun": {
+        "high_c": 20,
+        "low_c": 11,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "jul": {
+        "high_c": 22,
+        "low_c": 12,
+        "rain_days": 4,
+        "label": "mild, mostly dry"
+      },
+      "aug": {
+        "high_c": 22,
+        "low_c": 12,
+        "rain_days": 4,
+        "label": "mild, mostly dry"
+      },
+      "sep": {
+        "high_c": 19,
+        "low_c": 10,
+        "rain_days": 7,
+        "label": "mild, mostly dry"
+      },
+      "oct": {
+        "high_c": 14,
+        "low_c": 7,
+        "rain_days": 15,
+        "label": "cool, wet"
+      },
+      "nov": {
+        "high_c": 9,
+        "low_c": 4,
+        "rain_days": 20,
+        "label": "cold, very wet"
+      },
+      "dec": {
+        "high_c": 7,
+        "low_c": 2,
+        "rain_days": 19,
+        "label": "cold, very wet"
+      }
+    },
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": [
+      "city",
+      "hike",
+      "food"
+    ],
+    "photo_query": "Victoria BC inner harbour",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1688713866885-4cb1310b4939?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmljdG9yaWElMjBCQyUyMGlubmVyJTIwaGFyYm91cnxlbnwxfDB8fHwxNzg2MDcwOTM2fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Vlad D", "profile_url": "https://unsplash.com/@hiking_corgi", "download_location": "https://api.unsplash.com/photos/qb1yWj0GZ8I/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmljdG9yaWElMjBCQyUyMGlubmVyJTIwaGFyYm91cnxlbnwxfDB8fHwxNzg2MDcwOTM2fDA" },
+    "blurb": "The mildest winter in Canada — but a long flight and West Coast hotel prices."
+  },
+  {
+    "id": "yyt",
+    "city": "St. John's",
+    "country": "Canada",
+    "airport": "YYT",
+    "region": "Canada",
+    "coords": [
+      47.56,
+      -52.71
+    ],
+    "flights": {
+      "yyz": {
+        "hours": 3.2,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            450,
+            620
+          ],
+          "feb": [
+            460,
+            630
+          ],
+          "mar": [
+            490,
+            680
+          ],
+          "apr": [
+            540,
+            750
+          ],
+          "may": [
+            620,
+            860
+          ],
+          "jun": [
+            700,
+            970
+          ],
+          "jul": [
+            780,
+            1080
+          ],
+          "aug": [
+            760,
+            1050
+          ],
+          "sep": [
+            650,
+            900
+          ],
+          "oct": [
+            550,
+            760
+          ],
+          "nov": [
+            490,
+            680
+          ],
+          "dec": [
+            550,
+            760
+          ]
+        }
+      },
+      "yul": {
+        "hours": 2.8,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            430,
+            590
+          ],
+          "feb": [
+            440,
+            610
+          ],
+          "mar": [
+            470,
+            650
+          ],
+          "apr": [
+            510,
+            700
+          ],
+          "may": [
+            590,
+            810
+          ],
+          "jun": [
+            670,
+            920
+          ],
+          "jul": [
+            740,
+            1020
+          ],
+          "aug": [
+            720,
+            990
+          ],
+          "sep": [
+            620,
+            860
+          ],
+          "oct": [
+            520,
+            720
+          ],
+          "nov": [
+            470,
+            650
+          ],
+          "dec": [
+            520,
+            720
+          ]
+        }
+      }
+    },
+    "stay": {
+      "budget": [
+        50,
+        85
+      ],
+      "mid": [
+        130,
+        210
+      ],
+      "nice": [
+        250,
+        430
+      ]
+    },
+    "ground_daily": [
+      65,
+      115
+    ],
+    "climate": {
+      "jan": {
+        "high_c": -1,
+        "low_c": -8,
+        "rain_days": 16,
+        "label": "very cold, very wet"
+      },
+      "feb": {
+        "high_c": -1,
+        "low_c": -9,
+        "rain_days": 14,
+        "label": "very cold, wet"
+      },
+      "mar": {
+        "high_c": 2,
+        "low_c": -5,
+        "rain_days": 14,
+        "label": "very cold, wet"
+      },
+      "apr": {
+        "high_c": 6,
+        "low_c": -1,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "may": {
+        "high_c": 11,
+        "low_c": 3,
+        "rain_days": 13,
+        "label": "cool, wet"
+      },
+      "jun": {
+        "high_c": 16,
+        "low_c": 7,
+        "rain_days": 12,
+        "label": "cool, wet"
+      },
+      "jul": {
+        "high_c": 21,
+        "low_c": 12,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "aug": {
+        "high_c": 21,
+        "low_c": 13,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "sep": {
+        "high_c": 17,
+        "low_c": 9,
+        "rain_days": 12,
+        "label": "cool, wet"
+      },
+      "oct": {
+        "high_c": 11,
+        "low_c": 4,
+        "rain_days": 14,
+        "label": "cool, wet"
+      },
+      "nov": {
+        "high_c": 6,
+        "low_c": 0,
+        "rain_days": 15,
+        "label": "cold, wet"
+      },
+      "dec": {
+        "high_c": 2,
+        "low_c": -4,
+        "rain_days": 17,
+        "label": "very cold, very wet"
+      }
+    },
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": [
+      "city",
+      "hike"
+    ],
+    "photo_query": "St John's Newfoundland colourful houses",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1704003220843-6a16392c5e25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U3QlMjBKb2huJTI3cyUyME5ld2ZvdW5kbGFuZCUyMGNvbG91cmZ1bCUyMGhvdXNlc3xlbnwxfDB8fHwxNzg2MDcwOTQwfDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "JC Gellidon", "profile_url": "https://unsplash.com/@jcgellidon", "download_location": "https://api.unsplash.com/photos/LeOOqMmRn1Y/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8U3QlMjBKb2huJTI3cyUyME5ld2ZvdW5kbGFuZCUyMGNvbG91cmZ1bCUyMGhvdXNlc3xlbnwxfDB8fHwxNzg2MDcwOTQwfDA" },
+    "blurb": "Icebergs, whales and the oldest street in North America — go in summer or not at all."
+  },
+  {
+    "id": "yxy",
+    "city": "Whitehorse",
+    "country": "Canada",
+    "airport": "YXY",
+    "region": "Canada",
+    "coords": [
+      60.72,
+      -135.05
+    ],
+    "flights": {
+      "yyz": {
+        "hours": 8,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            700,
+            970
+          ],
+          "feb": [
+            720,
+            990
+          ],
+          "mar": [
+            760,
+            1050
+          ],
+          "apr": [
+            820,
+            1130
+          ],
+          "may": [
+            900,
+            1240
+          ],
+          "jun": [
+            1000,
+            1380
+          ],
+          "jul": [
+            1100,
+            1520
+          ],
+          "aug": [
+            1080,
+            1490
+          ],
+          "sep": [
+            920,
+            1270
+          ],
+          "oct": [
+            800,
+            1100
+          ],
+          "nov": [
+            740,
+            1020
+          ],
+          "dec": [
+            820,
+            1130
+          ]
+        }
+      },
+      "yul": {
+        "hours": 9,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            780,
+            1080
+          ],
+          "feb": [
+            800,
+            1100
+          ],
+          "mar": [
+            840,
+            1160
+          ],
+          "apr": [
+            910,
+            1260
+          ],
+          "may": [
+            1000,
+            1380
+          ],
+          "jun": [
+            1110,
+            1530
+          ],
+          "jul": [
+            1220,
+            1680
+          ],
+          "aug": [
+            1200,
+            1660
+          ],
+          "sep": [
+            1020,
+            1410
+          ],
+          "oct": [
+            890,
+            1230
+          ],
+          "nov": [
+            820,
+            1130
+          ],
+          "dec": [
+            910,
+            1260
+          ]
+        }
+      }
+    },
+    "stay": {
+      "budget": [
+        60,
+        100
+      ],
+      "mid": [
+        150,
+        240
+      ],
+      "nice": [
+        280,
+        480
+      ]
+    },
+    "ground_daily": [
+      75,
+      135
+    ],
+    "climate": {
+      "jan": {
+        "high_c": -13,
+        "low_c": -22,
+        "rain_days": 10,
+        "label": "very cold, some rain"
+      },
+      "feb": {
+        "high_c": -8,
+        "low_c": -19,
+        "rain_days": 8,
+        "label": "very cold, some rain"
+      },
+      "mar": {
+        "high_c": -1,
+        "low_c": -13,
+        "rain_days": 6,
+        "label": "very cold, mostly dry"
+      },
+      "apr": {
+        "high_c": 7,
+        "low_c": -5,
+        "rain_days": 5,
+        "label": "cold, mostly dry"
+      },
+      "may": {
+        "high_c": 14,
+        "low_c": 1,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "jun": {
+        "high_c": 19,
+        "low_c": 6,
+        "rain_days": 10,
+        "label": "mild, some rain"
+      },
+      "jul": {
+        "high_c": 21,
+        "low_c": 8,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "aug": {
+        "high_c": 19,
+        "low_c": 7,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "sep": {
+        "high_c": 13,
+        "low_c": 2,
+        "rain_days": 10,
+        "label": "cool, some rain"
+      },
+      "oct": {
+        "high_c": 4,
+        "low_c": -4,
+        "rain_days": 11,
+        "label": "cold, some rain"
+      },
+      "nov": {
+        "high_c": -7,
+        "low_c": -14,
+        "rain_days": 12,
+        "label": "very cold, wet"
+      },
+      "dec": {
+        "high_c": -11,
+        "low_c": -19,
+        "rain_days": 11,
+        "label": "very cold, some rain"
+      }
+    },
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": [
+      "hike"
+    ],
+    "photo_query": "Yukon northern lights wilderness",
+    "hero_image": null,
+    "blurb": "Aurora season runs all winter and the summer days barely end — expensive either way."
+  },
+  {
+    "id": "yyq",
+    "city": "Churchill",
+    "country": "Canada",
+    "airport": "YYQ",
+    "region": "Canada",
+    "coords": [
+      58.77,
+      -94.17
+    ],
+    "flights": {
+      "yyz": {
+        "hours": 7,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1100,
+            1520
+          ],
+          "feb": [
+            1120,
+            1550
+          ],
+          "mar": [
+            1180,
+            1630
+          ],
+          "apr": [
+            1250,
+            1720
+          ],
+          "may": [
+            1350,
+            1860
+          ],
+          "jun": [
+            1500,
+            2070
+          ],
+          "jul": [
+            1650,
+            2280
+          ],
+          "aug": [
+            1620,
+            2240
+          ],
+          "sep": [
+            1750,
+            2420
+          ],
+          "oct": [
+            1800,
+            2480
+          ],
+          "nov": [
+            1350,
+            1860
+          ],
+          "dec": [
+            1200,
+            1660
+          ]
+        }
+      },
+      "yul": {
+        "hours": 8,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            1200,
+            1660
+          ],
+          "feb": [
+            1220,
+            1680
+          ],
+          "mar": [
+            1280,
+            1770
+          ],
+          "apr": [
+            1360,
+            1880
+          ],
+          "may": [
+            1470,
+            2030
+          ],
+          "jun": [
+            1630,
+            2250
+          ],
+          "jul": [
+            1790,
+            2470
+          ],
+          "aug": [
+            1760,
+            2430
+          ],
+          "sep": [
+            1900,
+            2620
+          ],
+          "oct": [
+            1950,
+            2690
+          ],
+          "nov": [
+            1470,
+            2030
+          ],
+          "dec": [
+            1300,
+            1790
+          ]
+        }
+      }
+    },
+    "stay": {
+      "budget": [
+        90,
+        140
+      ],
+      "mid": [
+        220,
+        350
+      ],
+      "nice": [
+        400,
+        650
+      ]
+    },
+    "ground_daily": [
+      110,
+      200
+    ],
+    "climate": {
+      "jan": {
+        "high_c": -23,
+        "low_c": -31,
+        "rain_days": 9,
+        "label": "very cold, some rain"
+      },
+      "feb": {
+        "high_c": -22,
+        "low_c": -30,
+        "rain_days": 8,
+        "label": "very cold, some rain"
+      },
+      "mar": {
+        "high_c": -15,
+        "low_c": -24,
+        "rain_days": 8,
+        "label": "very cold, some rain"
+      },
+      "apr": {
+        "high_c": -5,
+        "low_c": -14,
+        "rain_days": 7,
+        "label": "very cold, mostly dry"
+      },
+      "may": {
+        "high_c": 3,
+        "low_c": -3,
+        "rain_days": 7,
+        "label": "cold, mostly dry"
+      },
+      "jun": {
+        "high_c": 12,
+        "low_c": 3,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      },
+      "jul": {
+        "high_c": 18,
+        "low_c": 8,
+        "rain_days": 12,
+        "label": "mild, wet"
+      },
+      "aug": {
+        "high_c": 17,
+        "low_c": 9,
+        "rain_days": 13,
+        "label": "cool, wet"
+      },
+      "sep": {
+        "high_c": 10,
+        "low_c": 3,
+        "rain_days": 13,
+        "label": "cool, wet"
+      },
+      "oct": {
+        "high_c": 1,
+        "low_c": -4,
+        "rain_days": 12,
+        "label": "very cold, wet"
+      },
+      "nov": {
+        "high_c": -9,
+        "low_c": -16,
+        "rain_days": 13,
+        "label": "very cold, wet"
+      },
+      "dec": {
+        "high_c": -19,
+        "low_c": -26,
+        "rain_days": 11,
+        "label": "very cold, some rain"
+      }
+    },
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": [
+      "hike"
+    ],
+    "photo_query": "Churchill Manitoba polar bear tundra",
+    "hero_image": { "url": "https://images.unsplash.com/photo-1577941533467-0b0b8166d638?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2h1cmNoaWxsJTIwTWFuaXRvYmElMjBwb2xhciUyMGJlYXIlMjB0dW5kcmF8ZW58MXwwfHx8MTc4NjA3MDk0NXww&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Dan Bolton", "profile_url": "https://unsplash.com/@teajourney", "download_location": "https://api.unsplash.com/photos/FM-Ozpu_bro/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8Q2h1cmNoaWxsJTIwTWFuaXRvYmElMjBwb2xhciUyMGJlYXIlMjB0dW5kcmF8ZW58MXwwfHx8MTc4NjA3MDk0NXww" },
+    "blurb": "Polar bears in autumn, beluga whales in summer — the priciest way to stay in Canada."
+  },
+  {
+    "id": "ylw",
+    "city": "Kelowna & the Okanagan",
+    "country": "Canada",
+    "airport": "YLW",
+    "region": "Canada",
+    "coords": [
+      49.89,
+      -119.5
+    ],
+    "flights": {
+      "yyz": {
+        "hours": 5,
+        "nonstop": true,
+        "bands": {
+          "jan": [
+            450,
+            620
+          ],
+          "feb": [
+            470,
+            650
+          ],
+          "mar": [
+            510,
+            700
+          ],
+          "apr": [
+            570,
+            790
+          ],
+          "may": [
+            650,
+            900
+          ],
+          "jun": [
+            730,
+            1010
+          ],
+          "jul": [
+            810,
+            1120
+          ],
+          "aug": [
+            790,
+            1090
+          ],
+          "sep": [
+            680,
+            940
+          ],
+          "oct": [
+            570,
+            790
+          ],
+          "nov": [
+            510,
+            700
+          ],
+          "dec": [
+            590,
+            810
+          ]
+        }
+      },
+      "yul": {
+        "hours": 6,
+        "nonstop": false,
+        "bands": {
+          "jan": [
+            520,
+            720
+          ],
+          "feb": [
+            540,
+            750
+          ],
+          "mar": [
+            590,
+            810
+          ],
+          "apr": [
+            660,
+            910
+          ],
+          "may": [
+            750,
+            1040
+          ],
+          "jun": [
+            840,
+            1160
+          ],
+          "jul": [
+            930,
+            1280
+          ],
+          "aug": [
+            910,
+            1260
+          ],
+          "sep": [
+            780,
+            1080
+          ],
+          "oct": [
+            650,
+            900
+          ],
+          "nov": [
+            590,
+            810
+          ],
+          "dec": [
+            680,
+            940
+          ]
+        }
+      }
+    },
+    "stay": {
+      "budget": [
+        55,
+        90
+      ],
+      "mid": [
+        150,
+        250
+      ],
+      "nice": [
+        320,
+        600
+      ]
+    },
+    "ground_daily": [
+      70,
+      130
+    ],
+    "climate": {
+      "jan": {
+        "high_c": -1,
+        "low_c": -6,
+        "rain_days": 12,
+        "label": "very cold, wet"
+      },
+      "feb": {
+        "high_c": 3,
+        "low_c": -4,
+        "rain_days": 9,
+        "label": "cold, some rain"
+      },
+      "mar": {
+        "high_c": 9,
+        "low_c": -1,
+        "rain_days": 9,
+        "label": "cold, some rain"
+      },
+      "apr": {
+        "high_c": 15,
+        "low_c": 3,
+        "rain_days": 7,
+        "label": "cool, mostly dry"
+      },
+      "may": {
+        "high_c": 20,
+        "low_c": 7,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "jun": {
+        "high_c": 24,
+        "low_c": 11,
+        "rain_days": 8,
+        "label": "mild, some rain"
+      },
+      "jul": {
+        "high_c": 29,
+        "low_c": 14,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      },
+      "aug": {
+        "high_c": 29,
+        "low_c": 14,
+        "rain_days": 5,
+        "label": "warm, mostly dry"
+      },
+      "sep": {
+        "high_c": 23,
+        "low_c": 9,
+        "rain_days": 6,
+        "label": "mild, mostly dry"
+      },
+      "oct": {
+        "high_c": 14,
+        "low_c": 3,
+        "rain_days": 9,
+        "label": "cool, some rain"
+      },
+      "nov": {
+        "high_c": 5,
+        "low_c": -2,
+        "rain_days": 13,
+        "label": "cold, wet"
+      },
+      "dec": {
+        "high_c": 0,
+        "low_c": -5,
+        "rain_days": 13,
+        "label": "very cold, wet"
+      }
+    },
+    "best_months": [
+      "may",
+      "jun",
+      "jul",
+      "aug",
+      "sep"
+    ],
+    "visa_ca": "domestic",
+    "advisory": "normal",
+    "vibes": [
+      "hike",
+      "food",
+      "beach"
+    ],
+    "photo_query": "Okanagan Kelowna vineyard lake",
+    "hero_image": null,
+    "blurb": "Canada's wine country — hot dry summers on a big lake, and ski hills in winter."
   }
 ]
