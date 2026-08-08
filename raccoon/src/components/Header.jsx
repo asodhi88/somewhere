@@ -6,13 +6,24 @@
  * brand are real anchors — so middle-click / open-in-new-tab and crawlers get a
  * true URL — but left-click SPA-navigates instead of doing a full reload.
  * `active` marks the current page so the matching nav item reads as current.
+ *
+ * `onHowItWorks`, when passed (by Home), makes the "How it works" link lower the
+ * blind overlay in place rather than route to the standalone page — same
+ * `/how-it-works` URL, so middle-click, refresh, and crawlers still get the page.
  */
-export default function Header({ onNavigate, active }) {
+export default function Header({ onNavigate, active, onHowItWorks }) {
   const go = (to) => (e) => {
     // Let modified clicks (new tab, etc.) fall through to the real navigation.
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
     e.preventDefault()
     onNavigate?.(to)
+  }
+
+  const goHowItWorks = (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+    e.preventDefault()
+    if (onHowItWorks) onHowItWorks()
+    else onNavigate?.('/how-it-works')
   }
 
   return (
@@ -42,7 +53,7 @@ export default function Header({ onNavigate, active }) {
         <a
           className={`rc-nav__link${active === 'how-it-works' ? ' is-active' : ''}`}
           href="/how-it-works"
-          onClick={go('/how-it-works')}
+          onClick={goHowItWorks}
           aria-current={active === 'how-it-works' ? 'page' : undefined}
         >
           How it works
