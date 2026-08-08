@@ -41,6 +41,20 @@ export function searchWithDetails(filters = {}) {
 }
 
 /**
+ * A light {id, city, country} list of every destination, alphabetical by city —
+ * for populating the feedback form's optional "tag a city" dropdown so cost
+ * corrections arrive labelled with a destination. Routed through the seam so the
+ * component never reads the raw JSON directly (§7).
+ *
+ * @returns {Array<{id: string, city: string, country: string}>}
+ */
+export function getDestinationOptions() {
+  return destinations
+    .map((d) => ({ id: d.id, city: d.city, country: d.country }))
+    .sort((a, b) => a.city.localeCompare(b.city))
+}
+
+/**
  * The set of 3-letter month keys the dataset can actually price and describe
  * from a given origin (a destination counts a month only if it has both a flight
  * band from that origin and a climate normal for it). The UI uses this to tell
