@@ -232,7 +232,7 @@
       "profile_url": "https://unsplash.com/@ahmetyuksek",
       "download_location": "https://api.unsplash.com/photos/7enOiBayyPg/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8QmFuZ2tvayUyMFRoYWlsYW5kJTIwdGVtcGxlJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MjY5fDA"
     },
-    "blurb": "Long haul, but a week on the ground costs less than a Toronto weekend."
+    "blurb": "Long haul, but time on the ground costs less than a Toronto weekend."
   },
   {
     "id": "rek",
@@ -1169,7 +1169,7 @@
       "profile_url": "https://unsplash.com/@dnevozhai",
       "download_location": "https://api.unsplash.com/photos/D68ADLeMh5Q/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VG9reW8lMjBKYXBhbiUyMHN0cmVldCUyMG5pZ2h0fGVufDF8MHx8fDE3ODU4NTYyODR8MA"
     },
-    "blurb": "Passes a tight budget at hostel tier, fails it at nice hotels — the tier toggle earns its keep here."
+    "blurb": "Passes a tight budget at hostel tier, fails it at the nice one — the tier toggle earns its keep here."
   },
   {
     "id": "par",
@@ -4684,7 +4684,7 @@
       "profile_url": "https://unsplash.com/@cedricletsch",
       "download_location": "https://api.unsplash.com/photos/UZVlSjrIJ3o/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TG9zJTIwQW5nZWxlcyUyMENhbGlmb3JuaWElMjBwYWxtJTIwdHJlZXN8ZW58MXwwfHx8MTc4NTg1NjMzN3ww"
     },
-    "blurb": "Cheap short flight, but US ground costs and pricey hotels blunt the value."
+    "blurb": "Cheap short flight, but US ground costs and pricey stays blunt the value."
   },
   {
     "id": "prg",
@@ -5860,7 +5860,7 @@
       "profile_url": "https://unsplash.com/@lukel",
       "download_location": "https://api.unsplash.com/photos/rEDvog99iro/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmFuY291dmVyJTIwQ2FuYWRhJTIwbW91bnRhaW5zJTIwc2t5bGluZXxlbnwxfDB8fHwxNzg1ODU2MzU1fDA"
     },
-    "blurb": "No passport needed and mountains at the city edge — but hotel costs rival Europe."
+    "blurb": "No passport needed and mountains at the city edge — but stay costs rival Europe."
   },
   {
     "id": "sju",
@@ -6800,7 +6800,7 @@
       "profile_url": "https://unsplash.com/@picsbyjameslee",
       "download_location": "https://api.unsplash.com/photos/Qik9CuemxO4/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8TmV3JTIwWmVhbGFuZCUyMEF1Y2tsYW5kJTIwY29hc3QlMjBsYW5kc2NhcGV8ZW58MXwwfHx8MTc4NTg4MTM2NHww"
     },
-    "blurb": "The furthest and priciest trip here — worth it only with two weeks, not one."
+    "blurb": "The furthest and priciest trip here — worth it only if you're staying a while."
   },
   {
     "id": "yyc",
@@ -7722,7 +7722,7 @@
     ],
     "photo_query": "Victoria BC inner harbour",
     "hero_image": { "url": "https://images.unsplash.com/photo-1688713866885-4cb1310b4939?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmljdG9yaWElMjBCQyUyMGlubmVyJTIwaGFyYm91cnxlbnwxfDB8fHwxNzg2MDcwOTM2fDA&ixlib=rb-4.1.0&q=80&w=1080", "photographer": "Vlad D", "profile_url": "https://unsplash.com/@hiking_corgi", "download_location": "https://api.unsplash.com/photos/qb1yWj0GZ8I/download?ixid=M3wxMDE1MDg2fDB8MXxzZWFyY2h8MXx8VmljdG9yaWElMjBCQyUyMGlubmVyJTIwaGFyYm91cnxlbnwxfDB8fHwxNzg2MDcwOTM2fDA" },
-    "blurb": "The mildest winter in Canada — but a long flight and West Coast hotel prices."
+    "blurb": "The mildest winter in Canada — but a long flight and West Coast stay prices."
   },
   {
     "id": "yyt",
