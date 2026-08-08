@@ -1410,6 +1410,16 @@ a:hover {
   .rc-hero__content {
     padding: 44px 22px 0;
     gap: 16px;
+    /* Sit the pitch + search widget above the mural, whatever the source order. */
+    z-index: 2;
+  }
+  /* Mobile: the mural drops fully below the search widget with a clear gap
+     (desktop lets it rise behind the content via a negative margin). The top-edge
+     fade is kept but now lives well below the CTA, so it can't blend into or
+     obscure the button. */
+  .rc-hero__image {
+    margin-top: 22px;
+    z-index: 1;
   }
   .rc-eyebrow {
     letter-spacing: 0.12em;
@@ -1427,12 +1437,22 @@ a:hover {
     padding: 10px;
     border-radius: 20px;
   }
+  /* Budget + Nights (short values) pair on one row; When + Stay take the full
+     width so "Oct 2026" and "Mid-range" render in full — nothing truncates. */
   .rc-field {
     flex: 1 1 calc(50% - 4px) !important;
+    padding: 9px 16px;
   }
+  .rc-field--when,
+  .rc-field--stay {
+    flex: 1 1 100% !important;
+  }
+  /* The CTA is the loudest element here: full width, its own row, unobstructed
+     by the mural (which is pushed below — see .rc-hero__image). */
   .rc-search__submit {
     flex: 1 1 100%;
-    padding: 16px 24px;
+    padding: 17px 24px;
+    font-size: 16px;
   }
   .rc-results {
     padding: 32px 20px 40px;
