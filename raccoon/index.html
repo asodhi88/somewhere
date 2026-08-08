@@ -10,6 +10,27 @@
     />
     <meta name="theme-color" content="#1A1614" />
     <title>somewhere — pick a week and a budget</title>
+
+    <!-- Open Graph / Twitter card. og:image and og:url must be absolute — social
+         scrapers don't resolve relative paths. Image lives at /og-image.png (1200×630). -->
+    <meta property="og:title" content="somewhere" />
+    <meta
+      property="og:description"
+      content="Destinations ranked by what the whole trip costs — flight, bed, and everything on the ground."
+    />
+    <meta property="og:image" content="https://somewhere-mvp.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://somewhere-mvp.vercel.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="somewhere" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="somewhere" />
+    <meta
+      name="twitter:description"
+      content="Destinations ranked by what the whole trip costs — flight, bed, and everything on the ground."
+    />
+    <meta name="twitter:image" content="https://somewhere-mvp.vercel.app/og-image.png" />
     <!-- Cycling accent: pick one of four on each load and set the --ac tokens on
          <html> before React mounts and before first paint, so there's no flash of
          the amber default. Reshuffles every load (design intent). -->
