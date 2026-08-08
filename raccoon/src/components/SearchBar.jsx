@@ -1,5 +1,27 @@
-import { useState } from 'react'
+import { useCallback, useState, useSyncExternalStore } from 'react'
 import { MONTH_OPTIONS, STAY_OPTIONS } from '../lib/searchState'
+
+/**
+ * Tracks a media query so the month picker can switch to short labels ("Oct
+ * 2026") at phone width, where the full name clips. Matches the 720px mobile
+ * breakpoint in index.css. useSyncExternalStore subscribes to the MediaQueryList
+ * directly — no effect-setState race, and it re-reads on every viewport change.
+ */
+function useMediaQuery(query) {
+  const subscribe = useCallback(
+    (onChange) => {
+      const mql = window.matchMedia(query)
+      mql.addEventListener('change', onChange)
+      return () => mql.removeEventListener('change', onChange)
+    },
+    [query],
+  )
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(query).matches,
+    () => false, // server snapshot — app is client-only, defaults to desktop
+  )
+}
 
 /**
  * SearchBar — the product's single input (CLAUDE.md: "search-first hero").
@@ -14,6 +36,9 @@ export default function SearchBar({ defaults, pending, onSearch }) {
   const [nights, setNights] = useState(defaults.nights)
   const [month, setMonth] = useState(defaults.month)
   const [stay, setStay] = useState(defaults.stay)
+
+  // Abbreviate months to fit the narrow single-line field on phones.
+  const shortMonths = useMediaQuery('(max-width: 720px)')
 
   const budgetText = budget == null ? '' : budget.toLocaleString('en-US')
 
@@ -79,7 +104,7 @@ export default function SearchBar({ defaults, pending, onSearch }) {
           >
             {MONTH_OPTIONS.map((m) => (
               <option key={m.value} value={m.value}>
-                {m.label}
+                {shortMonths ? m.short : m.label}
               </option>
             ))}
           </select>

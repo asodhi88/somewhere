@@ -35,6 +35,13 @@ const MONTH_NAMES = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
 ]
+// Three-letter display abbreviations (distinct from MONTH_KEYS, which are the
+// lowercase dataset keys). Used for the narrow/mobile month picker where the
+// full name clips — see SearchBar.
+const MONTH_ABBR = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+]
 const MONTH_KEYS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
 
 /**
@@ -52,7 +59,12 @@ export function buildMonthOptions(now = new Date()) {
     const d = new Date(y, m + i, 1)
     const mi = d.getMonth()
     const yr = d.getFullYear()
-    opts.push({ value: `${MONTH_KEYS[mi]}-${yr}`, key: MONTH_KEYS[mi], label: `${MONTH_NAMES[mi]} ${yr}` })
+    opts.push({
+      value: `${MONTH_KEYS[mi]}-${yr}`,
+      key: MONTH_KEYS[mi],
+      label: `${MONTH_NAMES[mi]} ${yr}`,
+      short: `${MONTH_ABBR[mi]} ${yr}`,
+    })
   }
   return opts
 }
