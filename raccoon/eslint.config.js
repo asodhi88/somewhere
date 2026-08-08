@@ -5,7 +5,9 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // `handoff/` holds transient design-sync bundles (CLAUDE.md §12) — reference
+  // prototypes, not project source, and never committed. Don't lint them.
+  globalIgnores(['dist', 'handoff']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

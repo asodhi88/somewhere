@@ -9,6 +9,10 @@ import { useMemo, useState } from 'react'
  * Motion is opt-out: every animated node carries data-motion, and transient
  * one-shots carry data-motion="transient" so `prefers-reduced-motion: reduce`
  * stills the twinkle and removes the shooters/satellite entirely (see index.css).
+ *
+ * `starsOnly` renders just the seeded field — no moon, shooters, or satellite —
+ * for the How-it-works blind, which reuses the exact same star build at reduced
+ * opacity rather than duplicating it (Blind.jsx).
  */
 
 // Deterministic star field — same seed every render so the sky doesn't reshuffle.
@@ -84,7 +88,7 @@ const SHOOTERS = [
   { top: '52%', left: '66%', dur: '21s', delay: '16s', rot: '25deg' },
 ]
 
-export default function NightSky({ showMoon = true }) {
+export default function NightSky({ showMoon = true, starsOnly = false }) {
   const stars = useMemo(() => buildStars(), [])
   const moon = useMemo(() => computeMoon(), [])
   const [moonHover, setMoonHover] = useState(false)
@@ -111,7 +115,7 @@ export default function NightSky({ showMoon = true }) {
         />
       ))}
 
-      {showMoon && (
+      {!starsOnly && showMoon && (
         <div
           className="rc-moon"
           onMouseEnter={() => setMoonHover(true)}
@@ -133,24 +137,27 @@ export default function NightSky({ showMoon = true }) {
         </div>
       )}
 
-      {SHOOTERS.map((sh, i) => (
-        <div
-          key={i}
-          data-motion="transient"
-          className="rc-shooter"
-          style={{
-            left: sh.left,
-            top: sh.top,
-            rotate: sh.rot,
-            animationDuration: sh.dur,
-            animationDelay: sh.delay,
-          }}
-        />
-      ))}
+      {!starsOnly &&
+        SHOOTERS.map((sh, i) => (
+          <div
+            key={i}
+            data-motion="transient"
+            className="rc-shooter"
+            style={{
+              left: sh.left,
+              top: sh.top,
+              rotate: sh.rot,
+              animationDuration: sh.dur,
+              animationDelay: sh.delay,
+            }}
+          />
+        ))}
 
-      <div data-motion="transient" className="rc-sat">
-        <div className="rc-sat__dot" />
-      </div>
+      {!starsOnly && (
+        <div data-motion="transient" className="rc-sat">
+          <div className="rc-sat__dot" />
+        </div>
+      )}
     </div>
   )
 }

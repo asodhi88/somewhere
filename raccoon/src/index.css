@@ -1342,6 +1342,282 @@ a:hover {
   text-decoration: none;
 }
 
+/* ==========================================================================
+   "How it works" blind — a roller blind that lowers over the top 80vh of the
+   homepage instead of routing away (Blind.jsx, owned by Home.jsx). Tokens only,
+   so the badges, cord, and CTA follow the per-load --ac accent.
+   ========================================================================== */
+
+/* The homepage is the "window": it blurs while the blind is down, over ~0.9× the
+   450ms drop. On close the filter is dropped entirely (no residual blur, so text
+   rendering is unaffected). */
+.rc-app {
+  transition: filter 405ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.rc-app--blurred {
+  filter: blur(9px) saturate(0.85);
+}
+
+.rc-blind {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80vh; /* coverage — the one tunable value (handoff README) */
+  z-index: 80;
+  transform: translateY(-100%);
+  transition: transform 450ms cubic-bezier(0.22, 0.61, 0.36, 1); /* no overshoot */
+  will-change: transform;
+  /* Root ignores pointers; the panel and cord opt back in only while open, so a
+     closed (off-screen) blind can't swallow clicks and the CTA stays clickable. */
+  pointer-events: none;
+  font-family: var(--font-body);
+  color: var(--text);
+}
+.rc-blind.is-open {
+  /* --rc-dy is the live drag offset (Blind.jsx); the open rule consumes it so it
+     keeps winning over any stale inline transform. */
+  transform: translateY(var(--rc-dy, 0px));
+}
+.rc-blind.is-open .rc-blind__panel,
+.rc-blind.is-open .rc-blind__cord-hit {
+  pointer-events: auto;
+}
+
+.rc-blind__panel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-bottom-left-radius: 26px;
+  border-bottom-right-radius: 26px;
+  background: var(--surface);
+  box-shadow:
+    0 34px 70px -24px rgba(0, 0, 0, 0.85),
+    inset 0 -1px 0 var(--border);
+}
+/* Reused hero starfield at reduced opacity (NightSky starsOnly). */
+.rc-blind__sky {
+  position: absolute;
+  inset: 0;
+  opacity: 0.35;
+  overflow: hidden;
+}
+/* Darkens top and bottom so copy stays legible over the stars. */
+.rc-blind__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 16, 14, 0.55) 0%,
+    rgba(20, 16, 14, 0) 34%,
+    rgba(20, 16, 14, 0.5) 100%
+  );
+}
+
+.rc-blind__col {
+  position: relative;
+  height: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Clamps keep the CTA on screen at short viewport heights. */
+  padding: clamp(16px, 2.4vh, 26px) 56px clamp(18px, 3vh, 34px);
+}
+
+/* Repeated brand mark — the blind covers the header. */
+.rc-blind__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rc-blind__wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* Hero block flexes to fill the gap between brand and steps. */
+.rc-blind__hero {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.4vh, 14px);
+  text-align: center;
+  padding: clamp(4px, 1.4vh, 14px) 0;
+}
+.rc-blind__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(28px, 4.6vh, 44px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  max-width: 780px;
+  color: var(--text);
+  text-wrap: pretty;
+}
+.rc-blind__sub {
+  margin: 0;
+  font-size: clamp(14px, 2.4vh, 17px);
+  line-height: 1.5;
+  max-width: 540px;
+  color: var(--muted);
+}
+
+/* Four steps across the bottom. */
+.rc-blind__steps {
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 2vw, 20px);
+  align-content: start;
+}
+.rc-blind__step {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.1vh, 9px);
+}
+.rc-blind__step-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(15px, 2.7vh, 18px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.rc-blind__tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ac);
+}
+.rc-blind__step-desc {
+  margin: 0;
+  font-size: clamp(12px, 2vh, 14px);
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+/* CTA row. */
+.rc-blind__cta {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-top: clamp(12px, 2.2vh, 22px);
+  padding-top: clamp(12px, 2vh, 20px);
+  border-top: 1px solid var(--border);
+}
+.rc-blind__cta-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.rc-blind__cta-btn {
+  flex: none;
+  padding: 15px 24px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--ac);
+  color: var(--on-amber);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.rc-blind__cta-btn:hover {
+  background: var(--ac-hi);
+}
+
+/* Staggered reveal — each row rises/fades in as the blind's edge passes it. The
+   per-row delay is set inline (scaled to the drop duration in Blind.jsx). */
+.rc-blind__reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+.rc-blind.is-open .rc-blind__reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Pull-cord — hangs below the blind's bottom edge (top:100%) and travels with
+   it. Fades in once the blind has landed (~0.9× the drop). */
+.rc-blind__cord {
+  position: absolute;
+  top: 100%;
+  right: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  transition-delay: 405ms;
+}
+.rc-blind.is-open .rc-blind__cord {
+  opacity: 1;
+}
+.rc-blind__cord-hit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: grab;
+  padding-bottom: 10px;
+}
+.rc-blind__cord-hit:hover {
+  opacity: 0.85;
+}
+.rc-blind__cord-line {
+  width: 1.5px;
+  height: 54px;
+  background: linear-gradient(180deg, rgba(var(--ac-rgb), 0.85), rgba(var(--ac-rgb), 0.35));
+}
+.rc-blind__cord-ring {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 2px solid var(--ac);
+  background: rgba(var(--ac-rgb), 0.12);
+  box-shadow: 0 6px 16px -6px rgba(var(--ac-rgb), 0.7);
+}
+.rc-blind__hint {
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+.rc-blind__hint.is-hidden {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-motion] {
     animation: none !important;
@@ -1357,6 +1633,18 @@ a:hover {
   }
   .rc-lightbox {
     animation: none !important;
+  }
+  /* Blind appears/disappears without the glide, and the reveal stagger is
+     dropped (blur still applies — it isn't motion). */
+  .rc-app,
+  .rc-blind,
+  .rc-blind__cord {
+    transition: none !important;
+  }
+  .rc-blind__reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
@@ -1536,5 +1824,54 @@ a:hover {
     align-items: flex-start;
     gap: 16px;
     padding: 24px 20px 30px;
+  }
+  /* Blind: on a phone the condensed content (hero + 2x2 steps + CTA) is tight,
+     so coverage goes up and the type scale + vertical rhythm come down to keep
+     everything on screen without scrolling or the rows overlapping. Cord tucks
+     closer to the edge. */
+  .rc-blind {
+    height: 88vh;
+  }
+  .rc-blind__col {
+    padding: 14px 20px 16px;
+  }
+  .rc-blind__brand {
+    gap: 10px;
+  }
+  .rc-blind__wordmark {
+    font-size: 18px;
+  }
+  .rc-blind__hero {
+    gap: 6px;
+    padding: 0;
+  }
+  .rc-blind__title {
+    font-size: clamp(22px, 6.4vw, 27px);
+    line-height: 1.08;
+  }
+  .rc-blind__sub {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .rc-blind__steps {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+  }
+  .rc-blind__step {
+    gap: 5px;
+  }
+  .rc-blind__step-title {
+    font-size: 15px;
+  }
+  .rc-blind__step-desc {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .rc-blind__cta {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+  .rc-blind__cord {
+    right: 24px;
   }
 }

@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import ResultsList from './components/ResultsList'
 import Footer from './components/Footer'
 import Lightbox from './components/Lightbox'
+import Blind from './components/Blind'
 import { getDestinations, getAvailableMonths } from './lib/getDestinations'
 import {
   filtersFromSearch,
@@ -39,6 +40,13 @@ export default function Home({ onNavigate }) {
   const [searchNonce, setSearchNonce] = useState(0)
   // The photo currently enlarged in the lightbox (null when closed).
   const [lightbox, setLightbox] = useState(null)
+  // The "How it works" blind. It's the /how-it-works presentation when the user
+  // arrives from Home — Home owns the pushState and this flag, so App keeps
+  // rendering Home (path stays "/") rather than swapping to the standalone page.
+  // A direct hit / refresh on /how-it-works still renders HowItWorks (App.jsx).
+  const [blindOpen, setBlindOpen] = useState(false)
+  // Session flag: the "pull to close" cord hint shows until the first close.
+  const [cordHintSeen, setCordHintSeen] = useState(false)
   // Back-to-top affordance: only once the user has searched and scrolled into
   // the results.
   const [showTop, setShowTop] = useState(false)
@@ -67,6 +75,23 @@ export default function Home({ onNavigate }) {
     })
   }, [])
 
+  // Lower the blind: push /how-it-works so Back closes it for free, but don't
+  // route through App's navigate — Home stays mounted and shows the overlay.
+  const openBlind = useCallback(() => {
+    if (window.location.pathname === '/how-it-works') return
+    window.history.pushState({}, '', '/how-it-works')
+    setBlindOpen(true)
+  }, [])
+
+  // Raise the blind. Stepping back through history keeps Back and the cord in
+  // agreement; the popstate handler below reflects the flag and restores the
+  // search URL (pushState kept the query on the entry underneath).
+  const closeBlind = useCallback(() => {
+    setBlindOpen(false)
+    setCordHintSeen(true)
+    if (window.location.pathname === '/how-it-works') window.history.back()
+  }, [])
+
   const runSearch = useCallback(
     (next) => {
       window.clearTimeout(timer.current)
@@ -86,10 +111,18 @@ export default function Home({ onNavigate }) {
   useEffect(() => {
     const onPop = () => {
       window.clearTimeout(timer.current)
-      setFilters(filtersFromSearch(window.location.search))
-      setSearched(hasSearchParams(window.location.search))
       setPending(false)
-      setResetKey((k) => k + 1)
+      // Popping onto /how-it-works only re-opens the blind; leave the search
+      // state untouched so the page behind it is preserved. Popping back to "/"
+      // restores filters/results from the URL (the query rode the entry beneath
+      // the pushed /how-it-works).
+      const onHiw = window.location.pathname === '/how-it-works'
+      setBlindOpen(onHiw)
+      if (!onHiw) {
+        setFilters(filtersFromSearch(window.location.search))
+        setSearched(hasSearchParams(window.location.search))
+        setResetKey((k) => k + 1)
+      }
     }
     window.addEventListener('popstate', onPop)
     return () => {
@@ -97,6 +130,22 @@ export default function Home({ onNavigate }) {
       window.clearTimeout(timer.current)
     }
   }, [])
+
+  // While the blind is down: lock page scroll and let Escape raise it (mirrors
+  // the Lightbox pattern).
+  useEffect(() => {
+    if (!blindOpen) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeBlind()
+    }
+    document.addEventListener('keydown', onKey)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [blindOpen, closeBlind])
 
   // Reveal the back-to-top button once the results have scrolled up past the fold.
   useEffect(() => {
@@ -118,35 +167,42 @@ export default function Home({ onNavigate }) {
   }, [])
 
   return (
-    <div className="rc-app">
-      <Header onNavigate={onNavigate} />
-      <Hero key={resetKey} defaults={filters} pending={pending} onSearch={runSearch} />
-      <div id="results" ref={resultsRef}>
-        <ResultsList
-          results={results}
-          nights={filters.nights}
-          pending={pending}
-          searched={searched}
-          monthLabel={monthLabel}
-          monthHasData={monthHasData}
-          searchNonce={searchNonce}
-          onOpenLightbox={setLightbox}
-        />
+    <>
+      {/* The homepage is the "window" — it blurs while the blind is down. The
+          blind is a sibling, not a child, so its position:fixed stays anchored
+          to the viewport (a filter on .rc-app would otherwise trap it). */}
+      <div className={`rc-app${blindOpen ? ' rc-app--blurred' : ''}`}>
+        <Header onNavigate={onNavigate} onHowItWorks={openBlind} />
+        <Hero key={resetKey} defaults={filters} pending={pending} onSearch={runSearch} />
+        <div id="results" ref={resultsRef}>
+          <ResultsList
+            results={results}
+            nights={filters.nights}
+            pending={pending}
+            searched={searched}
+            monthLabel={monthLabel}
+            monthHasData={monthHasData}
+            searchNonce={searchNonce}
+            onOpenLightbox={setLightbox}
+          />
+        </div>
+        <Footer />
+
+        <button
+          type="button"
+          className={`rc-backtotop${showTop ? ' is-visible' : ''}`}
+          onClick={scrollToTop}
+          aria-label="Back to top"
+          aria-hidden={!showTop}
+          tabIndex={showTop ? 0 : -1}
+        >
+          <span aria-hidden="true">↑</span> Top
+        </button>
+
+        {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}
       </div>
-      <Footer />
 
-      <button
-        type="button"
-        className={`rc-backtotop${showTop ? ' is-visible' : ''}`}
-        onClick={scrollToTop}
-        aria-label="Back to top"
-        aria-hidden={!showTop}
-        tabIndex={showTop ? 0 : -1}
-      >
-        <span aria-hidden="true">↑</span> Top
-      </button>
-
-      {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}
-    </div>
+      <Blind open={blindOpen} onClose={closeBlind} cordHintSeen={cordHintSeen} />
+    </>
   )
 }
