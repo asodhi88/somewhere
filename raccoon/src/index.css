@@ -896,6 +896,218 @@ a:hover {
   flex: none;
 }
 
+/* ── Feedback (quiet popover — shared by the footer and the blind CTA row) ──
+   Deliberately understated so it never competes with the search widget or the
+   amber CTA. Every accent routes through the --ac tokens, so the trigger hover,
+   focus rings, and Send button follow the per-load session colour. */
+.rc-fb {
+  position: relative;
+  display: inline-flex;
+  font-family: var(--font-body);
+}
+.rc-fb__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 2px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.rc-fb__trigger svg {
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+.rc-fb__trigger:hover,
+.rc-fb__trigger[aria-expanded='true'] {
+  color: var(--text);
+}
+.rc-fb__trigger:hover svg,
+.rc-fb__trigger[aria-expanded='true'] svg {
+  color: var(--ac);
+}
+.rc-fb__trigger:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Opens upward (both placements sit near the bottom of their row) and is
+   right-anchored so it stays on-screen. z-index clears the blind's reveal rows. */
+.rc-fb__panel {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  z-index: 90;
+  width: min(320px, calc(100vw - 32px));
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.8);
+  animation: rc-fb-pop 0.16s ease;
+}
+@keyframes rc-fb-pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rc-fb__form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.rc-fb__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rc-fb__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.rc-fb__opt {
+  margin-left: 6px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--muted);
+  opacity: 0.7;
+}
+.rc-fb__textarea,
+.rc-fb__input,
+.rc-fb__select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.45;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.rc-fb__textarea {
+  resize: vertical;
+  min-height: 66px;
+}
+.rc-fb__textarea::placeholder,
+.rc-fb__input::placeholder {
+  color: var(--muted);
+}
+.rc-fb__textarea:focus,
+.rc-fb__input:focus,
+.rc-fb__select:focus {
+  border-color: var(--ac);
+}
+.rc-fb__selectwrap {
+  position: relative;
+}
+.rc-fb__select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 30px;
+  cursor: pointer;
+}
+.rc-fb__select option {
+  background: var(--surface);
+  color: var(--text);
+}
+.rc-fb__caret {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--muted);
+  pointer-events: none;
+}
+/* Honeypot — off-screen but still submitted; bots fill it, humans never see it. */
+.rc-fb__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.rc-fb__error {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--coral);
+}
+.rc-fb__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 2px;
+}
+.rc-fb__hint {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.rc-fb__submit {
+  flex: none;
+  padding: 9px 18px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--ac);
+  color: var(--on-amber);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+.rc-fb__submit:hover {
+  background: var(--ac-hi);
+}
+.rc-fb__submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.rc-fb__submit:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+.rc-fb__done {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 2px;
+}
+.rc-fb__done-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text);
+}
+.rc-fb__done-sub {
+  font-size: 13px;
+  color: var(--muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rc-fb__panel {
+    animation: none !important;
+  }
+}
+
 /* ── Back to top ────────────────────────────────────────────────────────── */
 .rc-backtotop {
   position: fixed;
@@ -1523,10 +1735,19 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  flex-wrap: wrap;
+  gap: 12px 24px;
   margin-top: clamp(12px, 2.2vh, 22px);
   padding-top: clamp(12px, 2vh, 20px);
   border-top: 1px solid var(--border);
+}
+/* The quiet feedback trigger sits left of the amber CTA on the right; grouped so
+   it stays put and, when the row wraps on a phone, both keep to the right. */
+.rc-blind__cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
 }
 .rc-blind__cta-note {
   font-size: 13px;
@@ -1785,6 +2006,17 @@ a:hover {
     align-items: flex-start;
     gap: 10px;
     padding: 22px 20px 28px;
+  }
+  /* On a phone the popover becomes a bottom sheet pinned to the viewport, so it
+     can't run off-screen wherever the trigger happens to sit (footer or blind).
+     position:fixed escapes the blind column's overflow clip too. */
+  .rc-fb__panel {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    top: auto;
+    width: auto;
   }
   .rc-backtotop {
     right: 16px;
