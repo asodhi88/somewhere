@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import NightSky from './NightSky'
+import FeedbackForm from './FeedbackForm'
 
 /**
  * Blind — the "How it works" roller blind. Instead of routing to a separate
@@ -173,9 +174,12 @@ export default function Blind({ open, onClose, cordHintSeen }) {
 
           <div className="rc-blind__reveal rc-blind__cta" style={stagger(1080)}>
             <span className="rc-blind__cta-note">Estimates reflected as ranges only.</span>
-            <button type="button" className="rc-blind__cta-btn" onClick={onClose}>
-              Find my trip &rarr;
-            </button>
+            <div className="rc-blind__cta-actions">
+              <FeedbackForm placement="blind" />
+              <button type="button" className="rc-blind__cta-btn" onClick={onClose}>
+                Find my trip &rarr;
+              </button>
+            </div>
           </div>
         </div>
       </div>
