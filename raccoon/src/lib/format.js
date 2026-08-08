@@ -55,11 +55,11 @@ export const largeUrl = (url) =>
 export const rankLabel = (rank) => String(rank).padStart(2, '0')
 
 /**
- * Results heading count phrase: "Six places that fit your week",
- * "One place that fits your week". Falls back to digits past twelve.
+ * Results heading count phrase: "Six places that fit your trip",
+ * "One place that fits your trip". Falls back to digits past twelve.
  */
 export function countPhrase(n) {
   const word = NUMBER_WORDS[n] ?? String(n)
   const noun = n === 1 ? 'place that fits' : 'places that fit'
-  return `${word} ${noun} your week`
+  return `${word} ${noun} your trip`
 }

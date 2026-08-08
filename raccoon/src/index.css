@@ -241,6 +241,10 @@ a:hover {
   color: var(--text);
   text-wrap: pretty;
 }
+/* Keep each headline sentence whole; wrapping happens only between clauses. */
+.rc-hero__clause {
+  white-space: nowrap;
+}
 .rc-hero__sub {
   margin: 0;
   font-size: 18px;
