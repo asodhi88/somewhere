@@ -128,16 +128,6 @@ a:hover {
   text-decoration: none;
   cursor: default;
 }
-.rc-pill {
-  padding: 9px 16px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  white-space: nowrap;
-}
 
 /* ── Hero panel ─────────────────────────────────────────────────────────── */
 .rc-hero {
@@ -234,7 +224,7 @@ a:hover {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 60px;
+  font-size: 52px;
   line-height: 1.03;
   letter-spacing: -0.035em;
   max-width: 860px;
@@ -245,9 +235,15 @@ a:hover {
 .rc-hero__clause {
   white-space: nowrap;
 }
+/* Mobile gets shorter hero copy; the small variants are hidden until the phone
+   breakpoint swaps them in (see the 720px query). */
+.rc-hero__title-sm,
+.rc-hero__sub-sm {
+  display: none;
+}
 .rc-hero__sub {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.55;
   max-width: 560px;
   color: var(--muted);
@@ -1878,7 +1874,7 @@ a:hover {
     padding: 60px 32px 0;
   }
   .rc-hero__title {
-    font-size: 48px;
+    font-size: 42px;
   }
   .rc-results {
     padding: 40px 32px 44px;
@@ -1907,60 +1903,78 @@ a:hover {
   .rc-nav {
     gap: 16px;
   }
-  /* Keep "How it works" reachable; drop the still-inert Shortlist pill and the
-     legacy plain-text nav item to make room on narrow screens. */
-  .rc-nav__text,
-  .rc-pill {
-    display: none;
-  }
   .rc-hero {
     margin: 6px 12px 0;
   }
   .rc-hero__content {
-    padding: 44px 22px 0;
-    gap: 16px;
-    /* Sit the pitch + search widget above the mural, whatever the source order. */
+    padding: 44px 22px 28px;
+    gap: 14px;
     z-index: 2;
   }
-  /* Mobile: the mural drops fully below the search widget with a clear gap
-     (desktop lets it rise behind the content via a negative margin). The top-edge
-     fade is kept but now lives well below the CTA, so it can't blend into or
-     obscure the button. */
+  /* Mobile: drop the landmark mural entirely — on phones it costs vertical space
+     and pushes the pitch + search widget down without earning its keep. */
   .rc-hero__image {
-    margin-top: 22px;
-    z-index: 1;
+    display: none;
+  }
+  /* On phones the headline sits close under the header, so the full-size moon
+     lands on it. Tuck a slightly smaller moon into the top-right corner, above
+     the heading, so it clears the text. */
+  .rc-moon {
+    top: 2px;
+    right: 8%;
+    width: 40px;
+    height: 40px;
+  }
+  .rc-moon svg {
+    width: 40px;
+    height: 40px;
   }
   .rc-eyebrow {
     letter-spacing: 0.12em;
   }
   .rc-hero__title {
-    font-size: 34px;
+    font-size: 30px;
     letter-spacing: -0.025em;
   }
   .rc-hero__sub {
-    font-size: 16px;
+    font-size: 15px;
   }
+  /* Swap in the shorter phone-only headline + subhead. */
+  .rc-hero__title-lg,
+  .rc-hero__sub-lg {
+    display: none;
+  }
+  .rc-hero__title-sm,
+  .rc-hero__sub-sm {
+    display: inline;
+  }
+  /* Tighter widget on phones: less padding around and inside the fields so the
+     whole search block sits shorter without cramping the tap targets. */
   .rc-search {
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 10px;
+    gap: 7px;
+    padding: 7px;
     border-radius: 20px;
   }
-  /* Budget + Nights (short values) pair on one row; When + Stay take the full
-     width so "Oct 2026" and "Mid-range" render in full — nothing truncates. */
+  /* All four fields pair two-to-a-row — Budget|Nights, then When|Stay — the same
+     way the short-value fields sit. "Oct 2026" / "Mid-range" still fit at half
+     width, so nothing truncates. */
   .rc-field {
     flex: 1 1 calc(50% - 4px) !important;
-    padding: 9px 16px;
+    gap: 3px;
+    padding: 6px 14px;
   }
-  .rc-field--when,
-  .rc-field--stay {
-    flex: 1 1 100% !important;
+  /* 16px keeps the values readable and short enough to shave field height while
+     staying at/above iOS's 16px zoom-on-focus threshold. */
+  .rc-field input,
+  .rc-field select,
+  .rc-field__prefix {
+    font-size: 16px;
   }
-  /* The CTA is the loudest element here: full width, its own row, unobstructed
-     by the mural (which is pushed below — see .rc-hero__image). */
+  /* The CTA is the loudest element here: full width on its own row. */
   .rc-search__submit {
     flex: 1 1 100%;
-    padding: 17px 24px;
+    padding: 13px 24px;
     font-size: 16px;
   }
   .rc-results {

@@ -22,15 +22,25 @@ export default function Hero({ defaults, pending, onSearch }) {
 
       <div className="rc-hero__content">
         <h1 className="rc-hero__title">
-          {/* Each sentence is a nowrap clause so the headline only ever breaks
-              between sentences, never mid-sentence ("Say how / much"). */}
-          <span className="rc-hero__clause">Say when.</span>{' '}
-          <span className="rc-hero__clause">Say how much.</span>{' '}
-          <span className="rc-hero__clause">We&rsquo;ll say where.</span>
+          {/* Desktop headline: each sentence is a nowrap clause so it only ever
+              breaks between sentences, never mid-sentence ("Say how / much").
+              Mobile swaps in a shorter single line (toggled in index.css). */}
+          <span className="rc-hero__title-lg">
+            <span className="rc-hero__clause">Say when.</span>{' '}
+            <span className="rc-hero__clause">Say how much.</span>{' '}
+            <span className="rc-hero__clause">We&rsquo;ll say where.</span>
+          </span>
+          <span className="rc-hero__title-sm">find somewhere to go</span>
         </h1>
         <p className="rc-hero__sub">
-          Destinations ranked by what the whole trip costs — flight, bed, and
-          everything on the ground.
+          <span className="rc-hero__sub-lg">
+            Destinations ranked by what the whole trip costs — flight, bed, and
+            everything on the ground… so you can go somewhere!
+          </span>
+          <span className="rc-hero__sub-sm">
+            We rank destinations by what the whole trip costs — flight, bed &amp;
+            everything on the ground.
+          </span>
         </p>
 
         <div className="rc-searchgroup">
