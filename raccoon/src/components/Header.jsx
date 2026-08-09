@@ -1,6 +1,6 @@
 /**
  * Header — brand + light nav. The shortlist/comparison flow is post-MVP
- * (CLAUDE.md §7b), so the "Shortlist" pill is present but inert for now.
+ * (CLAUDE.md §7b); its nav pill is left out until the feature exists.
  *
  * `onNavigate(path)` is the app's tiny router (App.jsx). "How it works" and the
  * brand are real anchors — so middle-click / open-in-new-tab and crawlers get a
@@ -58,7 +58,6 @@ export default function Header({ onNavigate, active, onHowItWorks }) {
         >
           How it works
         </a>
-        <span className="rc-pill">Shortlist · 0</span>
       </nav>
     </header>
   )

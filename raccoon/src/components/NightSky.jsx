@@ -64,7 +64,9 @@ function computeMoon() {
   const top = cx - R
   const bot = cx + R
   const rx = Math.max(0.001, R * Math.abs(1 - 2 * f))
-  const sweep = f < 0.5 ? 1 : 0
+  // Crescent (< half lit): terminator bows toward the lit limb, carving the disc
+  // down to a sliver. Gibbous (≥ half): it bows the other way, leaving most lit.
+  const sweep = f < 0.5 ? 0 : 1
   const path = `M ${cx} ${top} A ${R} ${R} 0 0 1 ${cx} ${bot} A ${rx} ${R} 0 0 ${sweep} ${cx} ${top} Z`
   let name
   if (f < 0.02) name = 'New moon'

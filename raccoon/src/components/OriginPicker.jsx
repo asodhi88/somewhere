@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ORIGIN_OPTIONS } from '../lib/searchState'
 
 /**
- * OriginPicker — the "Departing" kicker plus a clickable origin control that
+ * OriginPicker — the "Leaving from" kicker plus a clickable origin control that
  * sits directly above the search widget. The control borrows the result tile's
  * price-CTA surface treatment so it reads as clearly tappable. Controlled: the
  * chosen origin is a real search parameter, applied with the rest of the filters
@@ -39,7 +39,7 @@ export default function OriginPicker({ value, onChange }) {
 
   return (
     <div className="rc-originbar">
-      <span className="rc-eyebrow">Departing</span>
+      <span className="rc-eyebrow">Leaving from</span>
       <div className="rc-origin" ref={ref}>
         <button
           type="button"
