@@ -45,8 +45,6 @@ export default function Home({ onNavigate }) {
   // rendering Home (path stays "/") rather than swapping to the standalone page.
   // A direct hit / refresh on /how-it-works still renders HowItWorks (App.jsx).
   const [blindOpen, setBlindOpen] = useState(false)
-  // Session flag: the "pull to close" cord hint shows until the first close.
-  const [cordHintSeen, setCordHintSeen] = useState(false)
   // Back-to-top affordance: only once the user has searched and scrolled into
   // the results.
   const [showTop, setShowTop] = useState(false)
@@ -83,13 +81,27 @@ export default function Home({ onNavigate }) {
     setBlindOpen(true)
   }, [])
 
-  // Raise the blind. Stepping back through history keeps Back and the cord in
-  // agreement; the popstate handler below reflects the flag and restores the
-  // search URL (pushState kept the query on the entry underneath).
+  // Raise the blind. Stepping back through history keeps Back and the close
+  // controls in agreement; the popstate handler below reflects the flag and
+  // restores the search URL (pushState kept the query on the entry underneath).
   const closeBlind = useCallback(() => {
     setBlindOpen(false)
-    setCordHintSeen(true)
     if (window.location.pathname === '/how-it-works') window.history.back()
+  }, [])
+
+  // Reset to a clean homepage: clear the search, results, and any open blind, and
+  // land on "/". Wired to every "somewhere" mark (header + blind), so the brand is
+  // a uniform "start over" from anywhere in the app.
+  const resetToHome = useCallback(() => {
+    window.clearTimeout(timer.current)
+    window.history.pushState({}, '', '/')
+    setBlindOpen(false)
+    setFilters(filtersFromSearch(''))
+    setSearched(false)
+    setPending(false)
+    setResetKey((k) => k + 1)
+    setSearchNonce(0)
+    window.scrollTo({ top: 0 })
   }, [])
 
   const runSearch = useCallback(
@@ -172,7 +184,7 @@ export default function Home({ onNavigate }) {
           blind is a sibling, not a child, so its position:fixed stays anchored
           to the viewport (a filter on .rc-app would otherwise trap it). */}
       <div className={`rc-app${blindOpen ? ' rc-app--blurred' : ''}`}>
-        <Header onNavigate={onNavigate} onHowItWorks={openBlind} />
+        <Header onNavigate={onNavigate} onHowItWorks={openBlind} onHome={resetToHome} />
         <Hero key={resetKey} defaults={filters} pending={pending} onSearch={runSearch} />
         <div id="results" ref={resultsRef}>
           <ResultsList
@@ -202,7 +214,7 @@ export default function Home({ onNavigate }) {
         {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}
       </div>
 
-      <Blind open={blindOpen} onClose={closeBlind} cordHintSeen={cordHintSeen} />
+      <Blind open={blindOpen} onClose={closeBlind} onHome={resetToHome} />
     </>
   )
 }

@@ -1553,7 +1553,7 @@ a:hover {
 /* ==========================================================================
    "How it works" blind — a roller blind that lowers over the top 80vh of the
    homepage instead of routing away (Blind.jsx, owned by Home.jsx). Tokens only,
-   so the badges, cord, and CTA follow the per-load --ac accent.
+   so the stage numbers and CTA follow the per-load --ac accent.
    ========================================================================== */
 
 /* The homepage is the "window": it blurs while the blind is down, over ~0.9× the
@@ -1576,19 +1576,17 @@ a:hover {
   transform: translateY(-100%);
   transition: transform 450ms cubic-bezier(0.22, 0.61, 0.36, 1); /* no overshoot */
   will-change: transform;
-  /* Root ignores pointers; the panel and cord opt back in only while open, so a
-     closed (off-screen) blind can't swallow clicks and the CTA stays clickable. */
+  /* Root ignores pointers; the panel opts back in only while open, so a closed
+     (off-screen) blind can't swallow clicks and the page below stays clickable.
+     The click-outside backdrop is a separate fixed sibling (Blind.jsx). */
   pointer-events: none;
   font-family: var(--font-body);
   color: var(--text);
 }
 .rc-blind.is-open {
-  /* --rc-dy is the live drag offset (Blind.jsx); the open rule consumes it so it
-     keeps winning over any stale inline transform. */
-  transform: translateY(var(--rc-dy, 0px));
+  transform: translateY(0);
 }
-.rc-blind.is-open .rc-blind__panel,
-.rc-blind.is-open .rc-blind__cord-hit {
+.rc-blind.is-open .rc-blind__panel {
   pointer-events: auto;
 }
 
@@ -1671,11 +1669,13 @@ a:hover {
   font-style: italic;
 }
 
-/* The single traveling mark. Held large + centre + spinning, then flies up-left
-   to rest at the header slot. The held offset is computed from the live panel
-   size (not the prototype's fixed px): the mark's rest origin is 56px/26px in,
-   the panel centre is 50vw / 40vh, and min() keeps it centred once the reading
-   column caps at 1180. */
+/* The single traveling mark — also the home link (resets to a clean homepage).
+   Held large + centred + spinning, then flies up-left to rest at the header slot.
+   The held offset is computed from the live panel size (not the prototype's fixed
+   px). transform-origin is the left edge, so scale(8) grows the rose rightward by
+   half its scaled width (120px); centring it means offsetting the rest inset (56)
+   plus that 120 from the panel centre (50vw / 40vh). min() holds the centre once
+   the reading column caps at 1180. */
 .rc-blind__brand {
   position: absolute;
   left: 56px;
@@ -1683,10 +1683,16 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
   transform-origin: left center;
-  --rc-hold-x: calc(min(50vw, 590px) - 71px);
+  --rc-hold-x: calc(min(50vw, 590px) - 176px);
   --rc-hold-y: calc(40vh - 41px);
   animation: rc-travel 1.45s cubic-bezier(0.5, 0, 0.2, 1) both;
+}
+.rc-blind__brand:hover {
+  text-decoration: none;
 }
 .rc-blind__rose {
   display: block;
@@ -2065,57 +2071,15 @@ a:hover {
   }
 }
 
-/* Pull-cord — hangs below the blind's bottom edge (top:100%) and travels with
-   it. Fades in once the blind has landed (~0.9× the drop). */
-.rc-blind__cord {
-  position: absolute;
-  top: 100%;
-  right: 64px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  transition-delay: 405ms;
-}
-.rc-blind.is-open .rc-blind__cord {
-  opacity: 1;
-}
-.rc-blind__cord-hit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: grab;
-  padding-bottom: 10px;
-}
-.rc-blind__cord-hit:hover {
-  opacity: 0.85;
-}
-.rc-blind__cord-line {
-  width: 1.5px;
-  height: 54px;
-  background: linear-gradient(180deg, rgba(var(--ac-rgb), 0.85), rgba(var(--ac-rgb), 0.35));
-}
-.rc-blind__cord-ring {
-  width: 20px;
-  height: 20px;
-  border-radius: 999px;
-  border: 2px solid var(--ac);
-  background: rgba(var(--ac-rgb), 0.12);
-  box-shadow: 0 6px 16px -6px rgba(var(--ac-rgb), 0.7);
-}
-.rc-blind__hint {
-  margin-top: 6px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
-  transition: opacity 0.3s ease;
-}
-.rc-blind__hint.is-hidden {
-  opacity: 0;
+/* Backdrop — full-viewport click target behind the panel. A click anywhere
+   outside the panel closes the blind (Blind.jsx). Transparent: the homepage is
+   already blurred, so this only needs to catch the click, not darken. It sits
+   under the blind's z-index, so clicks on the panel don't reach it. */
+.rc-blind__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 79;
+  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2140,8 +2104,7 @@ a:hover {
      visible, and the glow (data-motion="transient") is removed. Belt-and-braces
      the two intro transforms so nothing is left mid-keyframe. */
   .rc-app,
-  .rc-blind,
-  .rc-blind__cord {
+  .rc-blind {
     transition: none !important;
   }
   .rc-blind__brand,
@@ -2359,7 +2322,7 @@ a:hover {
   /* Blind: the long-form copy scrolls internally, so the phone pass just narrows
      the insets and stacks the multi-column grids to a single column (the 2-/3-col
      formula and score blocks are unreadable side-by-side on a phone). Coverage
-     goes up; the cord tucks closer to the edge. */
+     goes up. */
   .rc-blind {
     height: 88vh;
   }
@@ -2414,8 +2377,5 @@ a:hover {
     align-items: flex-start;
     gap: 20px;
     padding: 40px 24px 40px;
-  }
-  .rc-blind__cord {
-    right: 24px;
   }
 }
