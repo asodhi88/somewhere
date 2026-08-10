@@ -1598,7 +1598,9 @@ a:hover {
   overflow: hidden;
   border-bottom-left-radius: 26px;
   border-bottom-right-radius: 26px;
-  background: var(--surface);
+  /* Flat near-black, matching the approved mock — the panel reads as the page,
+     not an elevated surface (the design reference draws #1a1614 = --bg here). */
+  background: var(--bg);
   box-shadow:
     0 34px 70px -24px rgba(0, 0, 0, 0.85),
     inset 0 -1px 0 var(--border);
@@ -1622,143 +1624,379 @@ a:hover {
   );
 }
 
-.rc-blind__col {
-  position: relative;
-  height: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  /* Clamps keep the CTA on screen at short viewport heights. */
-  padding: clamp(16px, 2.4vh, 26px) 56px clamp(18px, 3vh, 34px);
+/* ── Content: internal scroll + compass-rose intro (redesign 1c) ──────────
+   The panel scrolls internally (the copy is taller than 80vh). A single rose
+   flies from large+centre into the header slot to become the brand mark, and the
+   copy rises in behind it. Every animated node carries data-motion, so the
+   existing reduced-motion seam stills the intro; the glow is transient so it's
+   removed at rest. Colours are tokens; the three score-column accents and the
+   sub-subhead divider have no token and are scoped literals. */
+
+/* Scroll viewport. Re-keyed per open in Blind.jsx, which replays the CSS intro
+   and resets scrollTop to the heading. Sky + scrim sit behind it, fixed. */
+.rc-blind__scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: var(--text);
+  /* Mono stack for stage numbers and every formula (a deliberate exception to
+     the product's no-monospace rule, for the ranking-engine formulas). */
+  --rc-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
-/* Repeated brand mark — the blind covers the header. */
+/* Amber radial glow beneath the rose; a transient one-shot that fades out. Kept
+   a direct child of the scroll viewport so it's viewport-height, not content. */
+.rc-blind__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 90% at 50% 26%,
+    rgba(var(--ac-rgb), 0.1),
+    rgba(20, 16, 14, 0) 62%
+  );
+  animation: rc-fade-out 0.7s ease 1.3s both;
+}
+
+/* Width-capped reading column; the absolute overlays anchor to it so they line
+   up with the content inset on wide screens. */
+.rc-blind__page {
+  position: relative;
+  max-width: 1180px;
+  min-height: 100%;
+  margin: 0 auto;
+}
+.rc-blind__scroll em {
+  font-style: italic;
+}
+
+/* The single traveling mark. Held large + centre + spinning, then flies up-left
+   to rest at the header slot. The held offset is computed from the live panel
+   size (not the prototype's fixed px): the mark's rest origin is 56px/26px in,
+   the panel centre is 50vw / 40vh, and min() keeps it centred once the reading
+   column caps at 1180. */
 .rc-blind__brand {
+  position: absolute;
+  left: 56px;
+  top: 26px;
   display: flex;
   align-items: center;
   gap: 12px;
+  transform-origin: left center;
+  --rc-hold-x: calc(min(50vw, 590px) - 71px);
+  --rc-hold-y: calc(40vh - 41px);
+  animation: rc-travel 1.45s cubic-bezier(0.5, 0, 0.2, 1) both;
+}
+.rc-blind__rose {
+  display: block;
+  flex: none;
+  transform-origin: 50% 50%;
+  animation: rc-whirl 1.45s linear both;
 }
 .rc-blind__wordmark {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 20px;
+  font-size: 23px;
   letter-spacing: -0.02em;
+  color: var(--text);
+  animation: rc-fade 0.5s ease 1.35s both;
+}
+
+/* Top-right header row. Shortlist pill is static (not an MVP feature). */
+.rc-blind__headerrow {
+  position: absolute;
+  right: 56px;
+  top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 14px;
+  color: var(--muted);
+  animation: rc-fade 0.5s ease 1.5s both;
+}
+.rc-blind__headerrow-label {
+  color: var(--text);
+}
+.rc-blind__pill {
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 13px;
   color: var(--text);
 }
 
-/* Hero block flexes to fill the gap between brand and steps. */
-.rc-blind__hero {
-  flex: 1 1 auto;
-  min-height: 0;
+/* Heading. Uppercased via CSS; the markup keeps sentence case for readers. */
+.rc-blind__heading {
+  padding: 132px 56px 0;
+  max-width: 940px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(8px, 1.4vh, 14px);
-  text-align: center;
-  padding: clamp(4px, 1.4vh, 14px) 0;
+  gap: 20px;
+  animation: rc-rise 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 1.55s both;
 }
-.rc-blind__title {
+.rc-blind__h1 {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(28px, 4.6vh, 44px);
-  line-height: 1.04;
-  letter-spacing: -0.035em;
-  max-width: 780px;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   color: var(--text);
+}
+.rc-blind__lede {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 640px;
   text-wrap: pretty;
 }
-.rc-blind__sub {
-  margin: 0;
-  font-size: clamp(14px, 2.4vh, 17px);
-  line-height: 1.5;
-  max-width: 540px;
-  color: var(--muted);
+
+/* A breath, not a rule — deliberately lighter than --border (no token maps). */
+.rc-blind__divider {
+  margin: 26px 56px 0;
+  height: 1px;
+  background: #2a231f;
+  animation: rc-fade 0.6s ease 1.75s both;
 }
 
-/* Four steps across the bottom. */
-.rc-blind__steps {
-  flex: none;
+/* Stages 01 + 02 — two columns on the panel surface, no gap. */
+.rc-blind__stages {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(14px, 2vw, 20px);
-  align-content: start;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 14px;
+  animation: rc-rise 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 1.85s both;
 }
-.rc-blind__step {
+.rc-blind__stage {
   display: flex;
   flex-direction: column;
-  gap: clamp(6px, 1.1vh, 9px);
+  gap: 14px;
+  padding: 26px 44px;
 }
-.rc-blind__step-title {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(15px, 2.7vh, 18px);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--text);
-}
-.rc-blind__tag {
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--surface-sunken);
-  border: 1px solid var(--border);
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.rc-blind__stage-num {
+  font-family: var(--rc-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
   color: var(--ac);
 }
-.rc-blind__step-desc {
+.rc-blind__stage-title {
   margin: 0;
-  font-size: clamp(12px, 2vh, 14px);
-  line-height: 1.5;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text);
+}
+.rc-blind__body {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.7;
   color: var(--muted);
   text-wrap: pretty;
 }
+.rc-blind__body--wide {
+  font-size: 16px;
+  max-width: 660px;
+}
 
-/* CTA row. */
-.rc-blind__cta {
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  margin-top: clamp(12px, 2.2vh, 22px);
-  padding-top: clamp(12px, 2vh, 20px);
-  border-top: 1px solid var(--border);
-}
-/* The quiet feedback trigger sits left of the amber CTA on the right; grouped so
-   it stays put and, when the row wraps on a phone, both keep to the right. */
-.rc-blind__cta-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-left: auto;
-}
-.rc-blind__cta-note {
+/* Formula blocks — mono, left-ruled. Primary rule + variables in accent; the
+   low/high pair sits entirely muted; the over-budget rule uses coral. */
+.rc-blind__formula {
+  font-family: var(--rc-mono);
   font-size: 13px;
+  line-height: 1.9;
+  white-space: pre;
+  overflow-x: auto;
+  padding: 4px 0 4px 16px;
+  border-left: 2px solid var(--ac);
+  color: var(--text);
+}
+.rc-blind__var {
+  color: var(--ac);
+}
+.rc-blind__formula--muted {
+  border-left-color: var(--border);
+  color: var(--muted);
+}
+.rc-blind__formula--over {
+  border-left-color: var(--coral);
+  white-space: pre-wrap;
+}
+
+/* Stage 03 — full width: score formula + three weighted columns. */
+.rc-blind__score {
+  padding: 52px 56px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: rc-rise 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 1.95s both;
+}
+.rc-blind__h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 38px;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  max-width: 640px;
+  color: var(--text);
+}
+.rc-blind__score-formula {
+  font-family: var(--rc-mono);
+  font-size: 15px;
+  line-height: 2;
+  white-space: pre;
+  overflow-x: auto;
+  padding: 26px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+/* Weights coloured to match the three columns below. Headroom is pinned to the
+   fixed amber token, not the per-load --ac: the cycling accent includes sea-glass
+   and dusk, which would otherwise collide with the weather / flight columns and
+   break the three-colour legend. Amber also reads as the budget/money colour. */
+.rc-blind__w-headroom {
+  color: var(--amber);
+}
+.rc-blind__w-weather {
+  color: #7bc9b8;
+}
+.rc-blind__w-flight {
+  color: #a88bd0;
+}
+.rc-blind__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding-top: 6px;
+}
+.rc-blind__col-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 2px solid var(--border);
+  padding-top: 14px;
+}
+.rc-blind__col-card--headroom {
+  border-top-color: var(--amber);
+}
+.rc-blind__col-card--weather {
+  border-top-color: #5fb3a1;
+}
+.rc-blind__col-card--flight {
+  border-top-color: #a88bd0;
+}
+.rc-blind__col-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+}
+.rc-blind__col-desc {
+  margin: 0;
+  font-size: 14.5px;
   line-height: 1.6;
   color: var(--muted);
 }
+.rc-blind__mono {
+  font-family: var(--rc-mono);
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+/* Headroom comparison bars. */
+.rc-blind__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-top: 4px;
+}
+.rc-blind__bar-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.rc-blind__bar-val {
+  color: var(--text);
+}
+.rc-blind__bar-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-inset);
+  overflow: hidden;
+}
+.rc-blind__bar-fill {
+  height: 100%;
+  /* Fixed amber, matching the headroom column legend (see --w-headroom). */
+  background: var(--amber);
+}
+.rc-blind__bar-fill--over {
+  background: var(--coral);
+}
+.rc-blind__bar-caption {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* Stage 04 — two override rules. */
+.rc-blind__rules {
+  padding: 56px 56px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: rc-rise 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 2.05s both;
+}
+.rc-blind__rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+}
+.rc-blind__rule {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rc-blind__rule-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text);
+}
+
+/* Footer — ranges note + amber CTA (wired to onClose, as before). */
+.rc-blind__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 56px 56px 44px;
+  animation: rc-rise 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 2.15s both;
+}
+.rc-blind__footer-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 560px;
+}
 .rc-blind__cta-btn {
   flex: none;
-  padding: 15px 24px;
+  padding: 17px 26px;
   border: 0;
-  border-radius: 16px;
+  border-radius: 18px;
   background: var(--ac);
   color: var(--on-amber);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   white-space: nowrap;
   cursor: pointer;
@@ -1768,18 +2006,63 @@ a:hover {
   background: var(--ac-hi);
 }
 
-/* Staggered reveal — each row rises/fades in as the blind's edge passes it. The
-   per-row delay is set inline (scaled to the drop duration in Blind.jsx). */
-.rc-blind__reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.55s ease,
-    transform 0.55s cubic-bezier(0.2, 0.8, 0.3, 1);
+/* Intro + reveal keyframes. The rose holds large + centre through 42%, then
+   flies to rest; the whirl front-loads 3.5 turns while held, easing to 4 total
+   so the mark lands upright. Reveals rise/fade in behind it on absolute delays. */
+@keyframes rc-travel {
+  0% {
+    transform: translate(var(--rc-hold-x), var(--rc-hold-y)) scale(8);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  42% {
+    transform: translate(var(--rc-hold-x), var(--rc-hold-y)) scale(8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
 }
-.rc-blind.is-open .rc-blind__reveal {
-  opacity: 1;
-  transform: none;
+@keyframes rc-whirl {
+  0% {
+    transform: rotate(0);
+  }
+  42% {
+    transform: rotate(1260deg);
+  }
+  100% {
+    transform: rotate(1440deg);
+  }
+}
+@keyframes rc-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes rc-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes rc-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 /* Pull-cord — hangs below the blind's bottom edge (top:100%) and travels with
@@ -1851,16 +2134,18 @@ a:hover {
   .rc-lightbox {
     animation: none !important;
   }
-  /* Blind appears/disappears without the glide, and the reveal stagger is
-     dropped (blur still applies — it isn't motion). */
+  /* Blind appears/disappears without the glide (blur still applies — it isn't
+     motion). The compass-rose intro and the reveal cascade are stilled by the
+     [data-motion] rule above: the mark renders at rest in the header, the copy is
+     visible, and the glow (data-motion="transient") is removed. Belt-and-braces
+     the two intro transforms so nothing is left mid-keyframe. */
   .rc-app,
   .rc-blind,
   .rc-blind__cord {
     transition: none !important;
   }
-  .rc-blind__reveal {
-    transition: none !important;
-    opacity: 1 !important;
+  .rc-blind__brand,
+  .rc-blind__rose {
     transform: none !important;
   }
 }
@@ -2071,51 +2356,64 @@ a:hover {
     gap: 16px;
     padding: 24px 20px 30px;
   }
-  /* Blind: on a phone the condensed content (hero + 2x2 steps + CTA) is tight,
-     so coverage goes up and the type scale + vertical rhythm come down to keep
-     everything on screen without scrolling or the rows overlapping. Cord tucks
-     closer to the edge. */
+  /* Blind: the long-form copy scrolls internally, so the phone pass just narrows
+     the insets and stacks the multi-column grids to a single column (the 2-/3-col
+     formula and score blocks are unreadable side-by-side on a phone). Coverage
+     goes up; the cord tucks closer to the edge. */
   .rc-blind {
     height: 88vh;
   }
-  .rc-blind__col {
-    padding: 14px 20px 16px;
-  }
   .rc-blind__brand {
+    left: 24px;
     gap: 10px;
   }
-  .rc-blind__wordmark {
-    font-size: 18px;
+  .rc-blind__headerrow {
+    right: 24px;
   }
-  .rc-blind__hero {
-    gap: 6px;
-    padding: 0;
+  .rc-blind__heading {
+    padding: 120px 24px 0;
   }
-  .rc-blind__title {
-    font-size: clamp(22px, 6.4vw, 27px);
-    line-height: 1.08;
+  .rc-blind__divider {
+    margin: 24px 24px 0;
   }
-  .rc-blind__sub {
-    font-size: 14px;
-    line-height: 1.45;
+  .rc-blind__h1 {
+    font-size: 26px;
   }
-  .rc-blind__steps {
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 16px;
+  .rc-blind__lede {
+    font-size: 17px;
   }
-  .rc-blind__step {
-    gap: 5px;
+  .rc-blind__stages {
+    grid-template-columns: 1fr;
+    margin-top: 16px;
   }
-  .rc-blind__step-title {
-    font-size: 15px;
+  .rc-blind__stage {
+    padding: 22px 24px;
   }
-  .rc-blind__step-desc {
-    font-size: 13px;
-    line-height: 1.45;
+  .rc-blind__stage-title {
+    font-size: 26px;
   }
-  .rc-blind__cta {
-    margin-top: 12px;
-    padding-top: 12px;
+  .rc-blind__score {
+    padding: 40px 24px 0;
+  }
+  .rc-blind__h2 {
+    font-size: 30px;
+  }
+  .rc-blind__cols {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .rc-blind__rules {
+    padding: 40px 24px 0;
+  }
+  .rc-blind__rules-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .rc-blind__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 40px 24px 40px;
   }
   .rc-blind__cord {
     right: 24px;
