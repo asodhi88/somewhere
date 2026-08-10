@@ -12,28 +12,39 @@ import { useMemo, useState } from 'react'
  *
  * `starsOnly` renders just the seeded field — no moon, shooters, or satellite —
  * for the How-it-works blind, which reuses the exact same star build at reduced
- * opacity rather than duplicating it (Blind.jsx).
+ * opacity rather than duplicating it (Blind.jsx). `fullField` (blind only) spreads
+ * the field across the whole panel instead of reserving the hero's headline gap.
  */
 
 // Deterministic star field — same seed every render so the sky doesn't reshuffle.
-function buildStars() {
+// `fullField` scatters stars across the whole area (full-height bands, no reading
+// gap) for the How-it-works blind; the default reserves the hero's headline space.
+function buildStars(fullField = false) {
   let seed = 7
   const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647
   const out = []
-  const bands = [
-    { x: [0, 22], y: [3, 76], n: 72 },
-    { x: [78, 100], y: [3, 76], n: 72 },
-    { x: [20, 80], y: [1, 16], n: 38 },
-    { x: [22, 78], y: [56, 78], n: 24 },
-  ]
+  // Blind: three full-height bands cover the whole panel. Hero: bands hug the
+  // edges and leave the centre for the headline (see `blocked` below).
+  const bands = fullField
+    ? [
+        { x: [0, 22], y: [0, 100], n: 78 },
+        { x: [78, 100], y: [0, 100], n: 78 },
+        { x: [20, 80], y: [0, 100], n: 96 },
+      ]
+    : [
+        { x: [0, 22], y: [3, 76], n: 72 },
+        { x: [78, 100], y: [3, 76], n: 72 },
+        { x: [20, 80], y: [1, 16], n: 38 },
+        { x: [22, 78], y: [56, 78], n: 24 },
+      ]
   const anims = ['rc-twinkleA', 'rc-twinkleB', 'rc-twinkleC']
-  // Keep stars out of the headline's reading area.
+  // Keep stars out of the headline's reading area (hero only).
   const blocked = (x, y) => x > 6 && x < 94 && y > 13 && y < 38
   bands.forEach((b, bi) => {
     for (let i = 0; i < b.n; i++) {
       const x = b.x[0] + rnd() * (b.x[1] - b.x[0])
       const y = b.y[0] + rnd() * (b.y[1] - b.y[0])
-      if (blocked(x, y)) continue
+      if (!fullField && blocked(x, y)) continue
       const r = rnd()
       const size = r < 0.06 ? 4 : r < 0.24 ? 3 : r < 0.58 ? 2 : 1
       const edge = bi < 2 ? 1 : 0.88
@@ -90,8 +101,8 @@ const SHOOTERS = [
   { top: '52%', left: '66%', dur: '21s', delay: '16s', rot: '25deg' },
 ]
 
-export default function NightSky({ showMoon = true, starsOnly = false }) {
-  const stars = useMemo(() => buildStars(), [])
+export default function NightSky({ showMoon = true, starsOnly = false, fullField = false }) {
+  const stars = useMemo(() => buildStars(fullField), [fullField])
   const moon = useMemo(() => computeMoon(), [])
   const [moonHover, setMoonHover] = useState(false)
 

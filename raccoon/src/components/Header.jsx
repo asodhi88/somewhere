@@ -10,17 +10,26 @@
  * `onHowItWorks`, when passed (by Home), makes the "How it works" link lower the
  * blind overlay in place rather than route to the standalone page — same
  * `/how-it-works` URL, so middle-click, refresh, and crawlers still get the page.
+ *
+ * `onHome`, when passed (by Home), makes the brand a uniform "start over": it
+ * clears the search + results and lands on a clean "/". Falls back to a plain
+ * route to "/" (e.g. from the standalone How-it-works page, which just needs to
+ * get back to the homepage).
  */
-export default function Header({ onNavigate, active, onHowItWorks }) {
-  const go = (to) => (e) => {
-    // Let modified clicks (new tab, etc.) fall through to the real navigation.
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+export default function Header({ onNavigate, active, onHowItWorks, onHome }) {
+  // Modified clicks (new tab, etc.) fall through to the real anchor navigation.
+  const modified = (e) =>
+    e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0
+
+  const goHome = (e) => {
+    if (modified(e)) return
     e.preventDefault()
-    onNavigate?.(to)
+    if (onHome) onHome()
+    else onNavigate?.('/')
   }
 
   const goHowItWorks = (e) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+    if (modified(e)) return
     e.preventDefault()
     if (onHowItWorks) onHowItWorks()
     else onNavigate?.('/how-it-works')
@@ -28,7 +37,7 @@ export default function Header({ onNavigate, active, onHowItWorks }) {
 
   return (
     <header className="rc-header">
-      <a className="rc-brand" href="/" onClick={go('/')}>
+      <a className="rc-brand" href="/" onClick={goHome}>
         {/* Four-point star: each arm is one of the four brand accents, split
             into a light and dark facet. Fixed colors — not the per-load accent. */}
         <svg
