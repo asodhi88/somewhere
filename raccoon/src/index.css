@@ -1985,7 +1985,8 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 56px 56px 44px;
+  /* Extra bottom padding clears the fixed close-hint at full scroll. */
+  padding: 56px 56px 64px;
   animation: rc-rise 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 2.15s both;
 }
 .rc-blind__footer-note {
@@ -2082,6 +2083,33 @@ a:hover {
   cursor: pointer;
 }
 
+/* One-line dismissal hint. Fixed to the panel bottom (a sibling of the scroll
+   layer), so it stays put as the copy scrolls. A faint pill keeps it legible over
+   the stars; it fades in once the drop has settled. pointer-events:none so it
+   never intercepts a click. */
+.rc-blind__closehint {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 7px 15px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.rc-blind.is-open .rc-blind__closehint {
+  opacity: 1;
+  transition-delay: 1.5s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-motion] {
     animation: none !important;
@@ -2104,7 +2132,8 @@ a:hover {
      visible, and the glow (data-motion="transient") is removed. Belt-and-braces
      the two intro transforms so nothing is left mid-keyframe. */
   .rc-app,
-  .rc-blind {
+  .rc-blind,
+  .rc-blind__closehint {
     transition: none !important;
   }
   .rc-blind__brand,
@@ -2376,6 +2405,6 @@ a:hover {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
-    padding: 40px 24px 40px;
+    padding: 40px 24px 56px;
   }
 }

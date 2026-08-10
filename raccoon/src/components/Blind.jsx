@@ -267,6 +267,10 @@ export default function Blind({ open, onClose, onHome }) {
               </div>
             </div>
           </div>
+
+          {/* Persistent one-line dismissal hint — fixed to the panel bottom, so it
+              stays put as the copy scrolls. Fades in once the drop has settled. */}
+          <div className="rc-blind__closehint">Click anywhere outside to close</div>
         </div>
       </div>
     </>
