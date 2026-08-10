@@ -1713,7 +1713,7 @@ a:hover {
   animation: rc-fade 0.5s ease 1.35s both;
 }
 
-/* Top-right header row. Shortlist pill is static (not an MVP feature). */
+/* Top-right header label. */
 .rc-blind__headerrow {
   position: absolute;
   right: 56px;
@@ -1721,20 +1721,11 @@ a:hover {
   z-index: 3;
   display: flex;
   align-items: center;
-  gap: 26px;
   font-size: 14px;
   color: var(--muted);
   animation: rc-fade 0.5s ease 1.5s both;
 }
 .rc-blind__headerrow-label {
-  color: var(--text);
-}
-.rc-blind__pill {
-  padding: 9px 16px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-size: 13px;
   color: var(--text);
 }
 
