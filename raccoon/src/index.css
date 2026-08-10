@@ -1680,6 +1680,10 @@ a:hover {
   position: absolute;
   left: 56px;
   top: 26px;
+  /* Above the reveal blocks: the heading's 132px top padding overlaps this
+     corner, and while it animates it forms a stacking context painted after the
+     brand (DOM order), which would otherwise swallow clicks on the home link. */
+  z-index: 3;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1714,6 +1718,7 @@ a:hover {
   position: absolute;
   right: 56px;
   top: 30px;
+  z-index: 3;
   display: flex;
   align-items: center;
   gap: 26px;
