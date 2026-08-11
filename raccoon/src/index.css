@@ -1713,20 +1713,35 @@ a:hover {
   animation: rc-fade 0.5s ease 1.35s both;
 }
 
-/* Top-right header label. */
-.rc-blind__headerrow {
+/* Close (X) button, top-right. z-index lifts it above the heading's overlapping
+   top padding (same reason as the brand), so the click always lands. */
+.rc-blind__close {
   position: absolute;
-  right: 56px;
-  top: 30px;
+  right: 44px;
+  top: 24px;
   z-index: 3;
   display: flex;
   align-items: center;
-  font-size: 14px;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
   color: var(--muted);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
   animation: rc-fade 0.5s ease 1.5s both;
 }
-.rc-blind__headerrow-label {
+.rc-blind__close:hover {
   color: var(--text);
+  border-color: color-mix(in srgb, var(--ac) 55%, var(--border));
+}
+.rc-blind__close svg {
+  display: block;
 }
 
 /* Heading. Uppercased via CSS; the markup keeps sentence case for readers. */
@@ -1777,6 +1792,13 @@ a:hover {
   flex-direction: column;
   gap: 14px;
   padding: 26px 44px;
+}
+/* Number above title on desktop (matches the mock); the mobile pass flips this
+   to a single inline row. */
+.rc-blind__stage-head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 .rc-blind__stage-num {
   font-family: var(--rc-mono);
@@ -2354,41 +2376,60 @@ a:hover {
   .rc-blind__brand {
     left: 24px;
     gap: 10px;
+    /* Recompute the held centre for the 24px inset (desktop is 56px → 176) and
+       the 88vh panel (half = 44vh), so the intro rose lands dead-centre here too. */
+    --rc-hold-x: calc(50vw - 144px);
+    --rc-hold-y: calc(44vh - 41px);
   }
-  .rc-blind__headerrow {
-    right: 24px;
+  .rc-blind__close {
+    right: 14px;
+    top: 14px;
+    width: 36px;
+    height: 36px;
   }
   .rc-blind__heading {
-    padding: 120px 24px 0;
+    padding: 100px 24px 0;
   }
   .rc-blind__divider {
     margin: 24px 24px 0;
   }
   .rc-blind__h1 {
-    font-size: 26px;
+    font-size: 22px;
   }
   .rc-blind__lede {
-    font-size: 17px;
+    font-size: 15px;
+    line-height: 1.55;
   }
   .rc-blind__stages {
     grid-template-columns: 1fr;
     margin-top: 16px;
   }
   .rc-blind__stage {
+    min-width: 0;
     padding: 22px 24px;
   }
+  /* Number inline with the title on a single line. */
+  .rc-blind__stage-head {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
   .rc-blind__stage-title {
-    font-size: 26px;
+    font-size: 20px;
   }
   .rc-blind__score {
+    min-width: 0;
     padding: 40px 24px 0;
   }
   .rc-blind__h2 {
-    font-size: 30px;
+    font-size: 26px;
   }
   .rc-blind__cols {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+  .rc-blind__col-card {
+    min-width: 0;
   }
   .rc-blind__rules {
     padding: 40px 24px 0;
@@ -2402,5 +2443,20 @@ a:hover {
     align-items: flex-start;
     gap: 20px;
     padding: 40px 24px 56px;
+  }
+  /* Formulas wrap instead of forcing a horizontal scroll (which was widening the
+     whole column and clipping the body text on the right). */
+  .rc-blind__formula,
+  .rc-blind__score-formula {
+    white-space: pre-wrap;
+    overflow-x: visible;
+    overflow-wrap: break-word;
+  }
+  .rc-blind__formula {
+    font-size: 12px;
+  }
+  .rc-blind__score-formula {
+    font-size: 13px;
+    padding: 20px 0;
   }
 }

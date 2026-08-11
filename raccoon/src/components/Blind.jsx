@@ -102,11 +102,24 @@ export default function Blind({ open, onClose, onHome }) {
                 <span className="rc-blind__wordmark" data-motion="1">somewhere</span>
               </a>
 
-              {/* Top-right header label. (No shortlist pill — shortlist isn't an
-                  MVP feature; CLAUDE.md §7b — and it's gone from the header too.) */}
-              <div className="rc-blind__headerrow" data-motion="1">
-                <span className="rc-blind__headerrow-label">How it works</span>
-              </div>
+              {/* Close (X), top-right — the primary dismiss control, alongside
+                  Escape, click-outside, and the CTA. */}
+              <button
+                type="button"
+                className="rc-blind__close"
+                data-motion="1"
+                onClick={onClose}
+                aria-label="Close How it works"
+              >
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                  <path
+                    d="M6 6 L18 18 M18 6 L6 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
 
               <div className="rc-blind__content">
                 {/* Heading. Uppercased via CSS; sentence-case in markup for readers. */}
@@ -123,8 +136,10 @@ export default function Blind({ open, onClose, onHome }) {
                 {/* Stages 01 + 02 — two columns on the panel surface, no gap. */}
                 <div className="rc-blind__stages" data-motion="1">
                   <div className="rc-blind__stage">
-                    <span className="rc-blind__stage-num">01</span>
-                    <h3 className="rc-blind__stage-title">What you give us</h3>
+                    <div className="rc-blind__stage-head">
+                      <span className="rc-blind__stage-num">01</span>
+                      <h3 className="rc-blind__stage-title">What you give us</h3>
+                    </div>
                     <p className="rc-blind__body">
                       You define the trip, not the destination: what you&rsquo;re
                       willing to spend, how long you want to go, when you want to go,
@@ -132,8 +147,10 @@ export default function Blind({ open, onClose, onHome }) {
                     </p>
                   </div>
                   <div className="rc-blind__stage">
-                    <span className="rc-blind__stage-num">02</span>
-                    <h3 className="rc-blind__stage-title">Every destination gets a price</h3>
+                    <div className="rc-blind__stage-head">
+                      <span className="rc-blind__stage-num">02</span>
+                      <h3 className="rc-blind__stage-title">Every destination gets a price</h3>
+                    </div>
                     <p className="rc-blind__body">
                       <em>somewhere</em> costs each destination against your criteria.
                     </p>
