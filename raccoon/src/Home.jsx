@@ -40,11 +40,17 @@ export default function Home({ onNavigate }) {
   const [searchNonce, setSearchNonce] = useState(0)
   // The photo currently enlarged in the lightbox (null when closed).
   const [lightbox, setLightbox] = useState(null)
-  // The "How it works" blind. It's the /how-it-works presentation when the user
-  // arrives from Home — Home owns the pushState and this flag, so App keeps
-  // rendering Home (path stays "/") rather than swapping to the standalone page.
-  // A direct hit / refresh on /how-it-works still renders HowItWorks (App.jsx).
-  const [blindOpen, setBlindOpen] = useState(false)
+  // The "How it works" blind — the sole /how-it-works presentation. Home owns the
+  // open state and the pushState; a direct hit / refresh on /how-it-works opens
+  // the blind on load (App always renders Home), so the URL and the header link
+  // show the same current version.
+  const [blindOpen, setBlindOpen] = useState(
+    () => typeof window !== 'undefined' && window.location.pathname === '/how-it-works',
+  )
+  // Did we push /how-it-works ourselves (vs. landing on it directly)? Decides
+  // whether closing goes Back (restoring the search underneath) or replaces the
+  // entry with "/" (a direct load has nothing to fall back to).
+  const blindPushedRef = useRef(false)
   // Back-to-top affordance: only once the user has searched and scrolled into
   // the results.
   const [showTop, setShowTop] = useState(false)
@@ -78,15 +84,23 @@ export default function Home({ onNavigate }) {
   const openBlind = useCallback(() => {
     if (window.location.pathname === '/how-it-works') return
     window.history.pushState({}, '', '/how-it-works')
+    blindPushedRef.current = true
     setBlindOpen(true)
   }, [])
 
-  // Raise the blind. Stepping back through history keeps Back and the close
-  // controls in agreement; the popstate handler below reflects the flag and
-  // restores the search URL (pushState kept the query on the entry underneath).
+  // Raise the blind. If we pushed /how-it-works ourselves, Back restores the
+  // search URL underneath (pushState kept the query on the entry beneath). If the
+  // user landed on /how-it-works directly, there's nothing to go back to, so we
+  // replace the entry with a clean "/". The popstate handler keeps the flag honest.
   const closeBlind = useCallback(() => {
     setBlindOpen(false)
-    if (window.location.pathname === '/how-it-works') window.history.back()
+    if (window.location.pathname !== '/how-it-works') return
+    if (blindPushedRef.current) {
+      blindPushedRef.current = false
+      window.history.back()
+    } else {
+      window.history.replaceState({}, '', '/')
+    }
   }, [])
 
   // Reset to a clean homepage: clear the search, results, and any open blind, and
@@ -130,6 +144,9 @@ export default function Home({ onNavigate }) {
       // the pushed /how-it-works).
       const onHiw = window.location.pathname === '/how-it-works'
       setBlindOpen(onHiw)
+      // Reached /how-it-works via history → there's an adjacent entry, so closing
+      // can safely go Back.
+      blindPushedRef.current = onHiw
       if (!onHiw) {
         setFilters(filtersFromSearch(window.location.search))
         setSearched(hasSearchParams(window.location.search))
