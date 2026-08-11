@@ -102,11 +102,10 @@ export default function Blind({ open, onClose, onHome }) {
                 <span className="rc-blind__wordmark" data-motion="1">somewhere</span>
               </a>
 
-              {/* Top-right header row. The shortlist pill is static (shortlist is not
-                  an MVP feature yet — CLAUDE.md §7b — so the count is always 0). */}
+              {/* Top-right header label. (No shortlist pill — shortlist isn't an
+                  MVP feature; CLAUDE.md §7b — and it's gone from the header too.) */}
               <div className="rc-blind__headerrow" data-motion="1">
                 <span className="rc-blind__headerrow-label">How it works</span>
-                <span className="rc-blind__pill">Shortlist &middot; 0</span>
               </div>
 
               <div className="rc-blind__content">
