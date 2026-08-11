@@ -172,8 +172,10 @@ export default function Blind({ open, onClose, onHome }) {
 
                 {/* Stage 03 — full width: score formula + three weighted columns. */}
                 <div className="rc-blind__score" data-motion="1">
-                  <span className="rc-blind__stage-num">03</span>
-                  <h3 className="rc-blind__h2">Every price gets a score</h3>
+                  <div className="rc-blind__stage-head">
+                    <span className="rc-blind__stage-num">03</span>
+                    <h3 className="rc-blind__h2">Every price gets a score</h3>
+                  </div>
                   <p className="rc-blind__body rc-blind__body--wide">
                     Cost alone is a blunt instrument &mdash; the cheapest place in a
                     monsoon is not the best answer. <em>somewhere</em> scores each
@@ -234,8 +236,10 @@ export default function Blind({ open, onClose, onHome }) {
 
                 {/* Stage 04 — two override rules. */}
                 <div className="rc-blind__rules" data-motion="1">
-                  <span className="rc-blind__stage-num">04</span>
-                  <h3 className="rc-blind__h2">Two rules that override raw score</h3>
+                  <div className="rc-blind__stage-head">
+                    <span className="rc-blind__stage-num">04</span>
+                    <h3 className="rc-blind__h2">Two rules that override raw score</h3>
+                  </div>
                   <div className="rc-blind__rules-grid">
                     <div className="rc-blind__rule">
                       <h4 className="rc-blind__rule-title">Over budget is demoted, not deleted.</h4>
