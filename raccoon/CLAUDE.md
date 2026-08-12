@@ -294,3 +294,15 @@ Visual work happens in **Claude Design** (the design doc `Raccoon Directions.dc.
   requests ≈ 240 calls against the 50/hr free cap (~5hrs of resume runs).
   Open question: carousels may suit the detail view better than the results
   list, where users are scanning to compare rather than lingering.
+- **Neighbourhood guidance per destination.** Second-order problem: once a
+  user knows *where* to go, they don't know *where in it* to stay. Same
+  shape as the core problem — too many options, no way to compare on what
+  matters. Would show 3–5 neighbourhoods per city with price level,
+  character, and who it suits.
+  Notes: data cost is an order of magnitude above destinations (37 cities ×
+  5–8 neighbourhoods), and neighbourhood knowledge is harder to source
+  reliably than climate or cost-of-living data — likely needs local/community
+  input rather than published datasets. Ties directly to the community
+  cost-validation item. Also interacts with stay tiers: "budget in Lisbon"
+  means something different in Alfama than in the suburbs, which the current
+  model can't express.
