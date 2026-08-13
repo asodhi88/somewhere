@@ -26,3 +26,8 @@ dist-ssr
 # Environment / secrets — never commit (see .env.example)
 .env
 .env.*.local
+
+# Design handoff bundles — prototype HTML + duplicated assets extracted from
+# Claude Design, one live bundle at a time (see CLAUDE.md §12). Working input,
+# never repo history.
+handoff/
