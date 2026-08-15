@@ -4,7 +4,7 @@ import SearchBar from './SearchBar'
 import OriginPicker from './OriginPicker'
 import MobileSearch from './MobileSearch'
 import { useMediaQuery } from '../lib/useMediaQuery'
-import heroImg from '../assets/hero-base-warm.png'
+import heroImg from '../assets/mural-cutout.png'
 
 /**
  * Hero — the search-first panel: night sky behind, the pitch stacked in the
@@ -30,20 +30,10 @@ export default function Hero({ defaults, pending, onSearch }) {
         <MobileSearch defaults={defaults} pending={pending} onSearch={onSearch} />
       ) : (
         <div className="rc-hero__content">
-          <h1 className="rc-hero__title">
-            {/* Desktop headline: each sentence is a nowrap clause so it only ever
-                breaks between sentences, never mid-sentence ("Say how / much"). */}
-            <span className="rc-hero__title-lg">
-              <span className="rc-hero__clause">Say when.</span>{' '}
-              <span className="rc-hero__clause">Say how much.</span>{' '}
-              <span className="rc-hero__clause">We&rsquo;ll say where.</span>
-            </span>
-          </h1>
+          <h1 className="rc-hero__title">Find somewhere to go</h1>
           <p className="rc-hero__sub">
-            <span className="rc-hero__sub-lg">
-              Destinations ranked by what the whole trip costs — flight, bed, and
-              everything on the ground… so you can go somewhere!
-            </span>
+            Set your budget, month, and stay tier — we find places by what the
+            whole trip costs.
           </p>
 
           <div className="rc-searchgroup">
