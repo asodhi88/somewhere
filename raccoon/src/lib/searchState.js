@@ -64,6 +64,11 @@ export function buildMonthOptions(now = new Date()) {
       key: MONTH_KEYS[mi],
       label: `${MONTH_NAMES[mi]} ${yr}`,
       short: `${MONTH_ABBR[mi]} ${yr}`,
+      // Bare pieces for the mobile sentence (pill: "September") and the month
+      // sheet's tiles (label "Sep" over sub "2026").
+      name: MONTH_NAMES[mi],
+      abbr: MONTH_ABBR[mi],
+      year: yr,
     })
   }
   return opts
@@ -154,4 +159,56 @@ export function searchFromFilters(filters) {
   p.set('month', filters.month)
   p.set('stay', filters.stay)
   return '?' + p.toString()
+}
+
+// ── Remembered search (CLAUDE.md §4.3, layer 2) ────────────────────────────
+// localStorage backs the mobile helper copy's promise — "we remember what you
+// pick". The URL (layer 1) already restores a shared/bookmarked search; this
+// covers the returning user who lands on a bare "/", prefilling their last picks
+// into the composer (it does NOT auto-run the search — results still wait for an
+// explicit "Show me where"). Wrapped in try/catch: private-mode and blocked
+// storage must degrade to "no memory", never throw.
+const PREFS_KEY = 'somewhere:last-search'
+
+/** Persist the five search values. Called on every explicit search. */
+export function storeFilters(filters) {
+  try {
+    window.localStorage.setItem(
+      PREFS_KEY,
+      JSON.stringify({
+        origin: filters.origin,
+        budget: filters.budget,
+        nights: filters.nights,
+        month: filters.month,
+        stay: filters.stay,
+      }),
+    )
+  } catch {
+    /* storage unavailable — the search still works, just isn't remembered */
+  }
+}
+
+/**
+ * Read back the remembered search, re-validated through the same normalisers as
+ * the URL path so a stale/out-of-window value (e.g. last year's month) lands on
+ * a valid option. Returns null when nothing is stored or storage is unreadable.
+ */
+export function loadStoredFilters() {
+  try {
+    const raw = window.localStorage.getItem(PREFS_KEY)
+    if (!raw) return null
+    const p = JSON.parse(raw)
+    return {
+      origin: normalizeOrigin(p.origin),
+      budget:
+        p.budget == null
+          ? DEFAULT_FILTERS.budget
+          : clampInt(p.budget, 0, 100000, DEFAULT_FILTERS.budget),
+      nights: clampInt(p.nights, 1, 30, DEFAULT_FILTERS.nights),
+      month: normalizeMonth(p.month),
+      stay: STAYS.includes(p.stay) ? p.stay : DEFAULT_FILTERS.stay,
+    }
+  } catch {
+    return null
+  }
 }

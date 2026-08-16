@@ -30,6 +30,19 @@
   --ac-lo: #d8912c;
   --ac-rgb: 232, 163, 61;
 
+  /* Neumorphic surface for the mobile search composer (handoff: Mobile search
+     widget redesign). One base tint carries every raised / pressed element; the
+     light/dark shadow pair sculpts them. Fixed (does not cycle with --ac). Only
+     the ≤720px search classes consume these, so they're inert on desktop. */
+  --nm-base: #211a17;
+  --nm-hi: #2e2622; /* shadow highlight (top-left) */
+  --nm-depth: #15100e; /* shadow depth (bottom-right) */
+  --nm-raise: 6px 6px 13px var(--nm-depth), -6px -6px 13px var(--nm-hi);
+  --nm-soft: 3px 3px 7px var(--nm-depth), -3px -3px 7px var(--nm-hi);
+  --nm-press: inset 4px 4px 9px var(--nm-depth), inset -4px -4px 9px var(--nm-hi);
+  --nm-dim: #8d8177; /* static sentence words, sub-labels */
+  --nm-disabled: #6f635a;
+
   /* Type */
   --font-display: 'Cabinet Grotesk', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
@@ -193,7 +206,13 @@ a:hover {
   left: -30px;
   top: 22%;
   opacity: 0;
-  animation: rc-sat-pass 16s linear infinite 5s;
+  /* Duration + delay come from per-satellite inline styles (NightSky.jsx). */
+  animation: rc-sat-pass linear infinite;
+}
+/* Mirrored satellites enter from the right and drift left (--sat-dx is negative). */
+.rc-sat--mirror {
+  left: auto;
+  right: -30px;
 }
 .rc-sat__dot {
   width: 4px;
@@ -1265,11 +1284,11 @@ a:hover {
     opacity: 0.9;
   }
   80% {
-    transform: translate3d(1180px, -52px, 0);
+    transform: translate3d(var(--sat-dx, 1180px), var(--sat-dy, -52px), 0);
     opacity: 0;
   }
   100% {
-    transform: translate3d(1180px, -52px, 0);
+    transform: translate3d(var(--sat-dx, 1180px), var(--sat-dy, -52px), 0);
     opacity: 0;
   }
 }
@@ -1928,25 +1947,58 @@ a:hover {
   .rc-nav {
     gap: 16px;
   }
+  /* ── Mobile search: sentence composer (handoff: Mobile search widget) ──────
+     Below 720px the hero becomes a near-full-height phone panel: sky behind, the
+     landmark mural as a horizon band, the sentence composer centred, and the
+     amber CTA pinned near the bottom. The desktop pitch + field grid aren't
+     mounted here (Hero renders <MobileSearch> instead), so their old mobile
+     rules are gone with them. */
   .rc-hero {
-    margin: 6px 12px 0;
+    margin: 0;
+    border-radius: 0;
+    /* Header sits above the hero in flow; fill the rest of the viewport so the
+       CTA lands near the bottom. Falls back to content height where dvh is
+       unsupported. Tune the header offset against the real 390px viewport. */
+    min-height: calc(100dvh - 72px);
+    display: flex;
+    flex-direction: column;
   }
-  .rc-hero__content {
-    padding: 44px 22px 28px;
-    gap: 14px;
-    z-index: 2;
-  }
-  /* Mobile: drop the landmark mural entirely — on phones it costs vertical space
-     and pushes the pitch + search widget down without earning its keep. */
+  /* Mural returns as a horizon band, masked to fade into the sky at the top and
+     out above the CTA so the button stays unobstructed. */
   .rc-hero__image {
-    display: none;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 104px;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.8) 16%,
+      #000 42%,
+      #000 82%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.8) 16%,
+      #000 42%,
+      #000 82%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
-  /* On phones the headline sits close under the header, so the full-size moon
-     lands on it. Tuck a slightly smaller moon into the top-right corner, above
-     the heading, so it clears the text. */
+  .rc-hero__image img {
+    opacity: 0.85;
+  }
+  /* Moon drops into the upper-right sky, clear of the header and the eyebrow. */
   .rc-moon {
-    top: 2px;
-    right: 8%;
+    top: 112px;
+    right: 17%;
     width: 40px;
     height: 40px;
   }
@@ -1954,53 +2006,282 @@ a:hover {
     width: 40px;
     height: 40px;
   }
-  .rc-eyebrow {
-    letter-spacing: 0.12em;
+
+  /* Composer column: main block flexes to centre the sentence; CTA sits below. */
+  .rc-msearch {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
-  .rc-hero__title {
-    font-size: 30px;
-    letter-spacing: -0.025em;
+  .rc-msearch__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 26px 20px 100px;
   }
-  .rc-hero__sub {
-    font-size: 15px;
-  }
-  /* Swap in the shorter phone-only headline + subhead. */
-  .rc-hero__title-lg,
-  .rc-hero__sub-lg {
-    display: none;
-  }
-  .rc-hero__title-sm,
-  .rc-hero__sub-sm {
-    display: inline;
-  }
-  /* Tighter widget on phones: less padding around and inside the fields so the
-     whole search block sits shorter without cramping the tap targets. */
-  .rc-search {
+
+  /* Eyebrow: static label + origin pill, both at the eyebrow's own type scale. */
+  .rc-msearch__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
     flex-wrap: wrap;
+    margin: 0;
+  }
+  .rc-msearch__eyebrow-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ac);
+  }
+
+  .rc-msearch__sentence {
+    margin: 18px 0 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 29px;
+    line-height: 1.42;
+    letter-spacing: -0.03em;
+    color: var(--nm-dim);
+    text-wrap: pretty;
+  }
+  /* Static words carry their own paint layer so an adjacent pill's raised shadow
+     doesn't wash out the letter beside it ("fo·r", "i·n"). */
+  .rc-msearch__static {
+    position: relative;
+    z-index: 1;
+  }
+  .rc-msearch__helper {
+    margin: 20px 0 0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--nm-dim);
+  }
+
+  /* Pills — tappable values. white-space:nowrap keeps each whole; the vertical
+     margin (not line-height) sets the row pitch when the sentence wraps. */
+  .rc-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    line-height: 1.15;
+    margin: 7px 0;
+    padding: 1px 10px;
+    border: 0;
+    border-radius: 11px;
+    background: var(--nm-base);
+    box-shadow: var(--nm-raise);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 29px;
+    letter-spacing: -0.03em;
+    cursor: pointer;
+  }
+  .rc-pill.is-open {
+    box-shadow: var(--nm-press);
+  }
+  .rc-pill__chev {
+    font-size: 12px;
+    color: var(--ac);
+  }
+  /* Eyebrow origin pill: eyebrow type scale, and a padded 44px touch target for
+     its small height. */
+  .rc-pill--eyebrow {
+    position: relative;
+    margin: 0;
+    padding: 6px 12px;
     gap: 7px;
-    padding: 7px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .rc-pill--eyebrow .rc-pill__chev {
+    font-size: 10px;
+  }
+  .rc-pill--eyebrow::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 44px;
+    transform: translateY(-50%);
+  }
+
+  /* CTA. */
+  .rc-msearch__cta-wrap {
+    position: relative;
+    z-index: 2;
+    padding: 0 20px 30px;
+  }
+  .rc-msearch__cta {
+    width: 100%;
+    min-height: 56px;
+    border: 0;
     border-radius: 20px;
+    background: linear-gradient(180deg, var(--ac-hi) 0%, var(--ac) 55%, var(--ac-lo) 100%);
+    color: var(--on-amber);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 8px 8px 18px var(--nm-depth), -6px -6px 14px var(--nm-hi);
   }
-  /* All four fields pair two-to-a-row — Budget|Nights, then When|Stay — the same
-     way the short-value fields sit. "Oct 2026" / "Mid-range" still fit at half
-     width, so nothing truncates. */
-  .rc-field {
-    flex: 1 1 calc(50% - 4px) !important;
-    gap: 3px;
-    padding: 6px 14px;
+  .rc-msearch__cta:disabled {
+    opacity: 0.7;
+    cursor: default;
   }
-  /* 16px keeps the values readable and short enough to shave field height while
-     staying at/above iOS's 16px zoom-on-focus threshold. */
-  .rc-field input,
-  .rc-field select,
-  .rc-field__prefix {
+
+  /* ── Picker bottom sheet ─────────────────────────────────────────────────── */
+  .rc-sheet__scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(15, 11, 9, 0.55);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+  }
+  .rc-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 61;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 14px 18px 30px;
+    border-radius: 34px 34px 0 0;
+    background: var(--nm-base);
+    box-shadow: 0 -18px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(245, 240, 232, 0.06);
+  }
+  .rc-sheet__handle {
+    align-self: center;
+    width: 44px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--nm-base);
+    box-shadow: var(--nm-press);
+  }
+  .rc-sheet__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--text);
+  }
+  .rc-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .rc-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    min-height: 60px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 17px;
+    background: var(--nm-base);
+    box-shadow: var(--nm-soft);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+  }
+  .rc-tile.is-selected {
+    box-shadow: var(--nm-press);
+  }
+  .rc-tile.is-selected .rc-tile__label {
+    color: var(--ac-hi);
+  }
+  .rc-tile--full {
+    flex: 0 0 100%;
+  }
+  .rc-tile--half {
+    flex: 0 0 calc(50% - 5px);
+  }
+  .rc-tile--third {
+    flex: 0 0 calc(33.333% - 7px);
+  }
+  .rc-tile__label {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+  .rc-tile__sub {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--nm-dim);
+  }
+  .rc-sheet__well {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    border-radius: 17px;
+    background: var(--nm-base);
+    box-shadow: var(--nm-press);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--nm-disabled);
+  }
+  /* Nights: a numeric field + Done rather than option tiles. */
+  .rc-sheet__nights {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .rc-sheet__nights-input {
+    flex: 1;
+    min-width: 0;
+    min-height: 60px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 17px;
+    background: var(--nm-base);
+    box-shadow: var(--nm-press);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    outline: none;
+  }
+  .rc-sheet__nights-unit {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--nm-dim);
+  }
+  .rc-sheet__done {
+    flex: none;
+    min-height: 60px;
+    padding: 0 26px;
+    border: 0;
+    border-radius: 17px;
+    background: linear-gradient(180deg, var(--ac-hi) 0%, var(--ac) 55%, var(--ac-lo) 100%);
+    color: var(--on-amber);
+    font-family: var(--font-body);
+    font-weight: 700;
     font-size: 16px;
-  }
-  /* The CTA is the loudest element here: full width on its own row. */
-  .rc-search__submit {
-    flex: 1 1 100%;
-    padding: 13px 24px;
-    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 6px 6px 13px var(--nm-depth), -5px -5px 11px var(--nm-hi);
   }
   .rc-results {
     padding: 32px 20px 40px;

@@ -101,6 +101,17 @@ const SHOOTERS = [
   { top: '52%', left: '66%', dur: '21s', delay: '16s', rot: '25deg' },
 ]
 
+// Three slow-blinking satellites drifting across the sky. Randomised top /
+// duration / delay / rise, ~35% mirrored (right→left). The horizontal travel is
+// 120vw so a dot always clears the panel regardless of viewport; the rise is fed
+// to the keyframe as --sat-dy. data-motion="transient" removes them all under
+// prefers-reduced-motion (the existing [data-motion='transient'] rule).
+const SATS = [
+  { top: '14%', dur: '15s', delay: '-3s', rise: -64, mirror: false },
+  { top: '58%', dur: '22s', delay: '-11s', rise: -38, mirror: true },
+  { top: '34%', dur: '18s', delay: '-7s', rise: -76, mirror: false },
+]
+
 export default function NightSky({ showMoon = true, starsOnly = false, fullField = false }) {
   const stars = useMemo(() => buildStars(fullField), [fullField])
   const moon = useMemo(() => computeMoon(), [])
@@ -166,11 +177,24 @@ export default function NightSky({ showMoon = true, starsOnly = false, fullField
           />
         ))}
 
-      {!starsOnly && (
-        <div data-motion="transient" className="rc-sat">
-          <div className="rc-sat__dot" />
-        </div>
-      )}
+      {!starsOnly &&
+        SATS.map((s, i) => (
+          <div
+            key={i}
+            data-motion="transient"
+            className={`rc-sat${s.mirror ? ' rc-sat--mirror' : ''}`}
+            style={{
+              top: s.top,
+              animationDuration: s.dur,
+              animationDelay: s.delay,
+              // Travel direction flips for mirrored dots; --sat-dy is the rise.
+              '--sat-dx': s.mirror ? '-120vw' : '120vw',
+              '--sat-dy': `${s.rise}px`,
+            }}
+          >
+            <div className="rc-sat__dot" />
+          </div>
+        ))}
     </div>
   )
 }

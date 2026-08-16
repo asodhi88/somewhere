@@ -10,6 +10,8 @@ import {
   filtersFromSearch,
   searchFromFilters,
   hasSearchParams,
+  loadStoredFilters,
+  storeFilters,
   monthKeyOf,
   MONTH_OPTIONS,
 } from './lib/searchState'
@@ -27,7 +29,12 @@ const SEARCH_DELAY_MS = 380
 // other pages (the How-it-works link in the header); search state stays on "/".
 export default function Home({ onNavigate }) {
   const search = typeof window !== 'undefined' ? window.location.search : ''
-  const [filters, setFilters] = useState(() => filtersFromSearch(search))
+  // A shared/bookmarked link (query present) always wins. On a bare "/", fall
+  // back to the remembered last search so the composer opens on the user's own
+  // picks (§4.3 layer 2) — this prefills only; results still wait for a search.
+  const [filters, setFilters] = useState(
+    () => (hasSearchParams(search) ? filtersFromSearch(search) : loadStoredFilters()) || filtersFromSearch(search),
+  )
   // Results stay hidden until an explicit search. A bare visit shows the prompt;
   // a shared/bookmarked link (query present) counts as that search, so the link
   // still lands on results (CLAUDE.md §4.3 — the share link is the prize).
@@ -122,6 +129,7 @@ export default function Home({ onNavigate }) {
     (next) => {
       window.clearTimeout(timer.current)
       window.history.pushState({}, '', searchFromFilters(next))
+      storeFilters(next) // remember these picks for the next bare visit
       setPending(true)
       setSearchNonce((n) => n + 1)
       scrollToResults()
