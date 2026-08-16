@@ -14,6 +14,13 @@ import { useMemo, useState } from 'react'
  * for the How-it-works blind, which reuses the exact same star build at reduced
  * opacity rather than duplicating it (Blind.jsx). `fullField` (blind only) spreads
  * the field across the whole panel instead of reserving the hero's headline gap.
+ *
+ * The day ambient (data-ambient="day", desktop only) swaps the starfield/moon for
+ * a sun disc + drifting cloud band. Both the night and day layers are always
+ * rendered here; index.css decides which is visible per data-ambient and viewport,
+ * scoped to the hero — so the blind (starsOnly) and the mobile hero always keep
+ * the stars, and a resize can't strand the wrong sky. The sun/cloud only exist on
+ * the full hero build, not the blind's starsOnly one.
  */
 
 // Deterministic star field — same seed every render so the sky doesn't reshuffle.
@@ -195,6 +202,16 @@ export default function NightSky({ showMoon = true, starsOnly = false, fullField
             <div className="rc-sat__dot" />
           </div>
         ))}
+
+      {/* Day layer — a glowing sun disc + drifting cloud band. Hidden by CSS
+          except in the desktop day hero (index.css). Only on the full build, not
+          the blind's starsOnly field. data-motion so reduced motion stills them. */}
+      {!starsOnly && (
+        <>
+          <div className="rc-sun" data-motion="1" />
+          <div className="rc-clouds" data-motion="1" />
+        </>
+      )}
     </div>
   )
 }

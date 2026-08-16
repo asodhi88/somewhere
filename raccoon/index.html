@@ -31,11 +31,21 @@
       content="Destinations ranked by what the whole trip costs — flight, bed, and everything on the ground."
     />
     <meta name="twitter:image" content="https://somewhere-mvp.vercel.app/og-image.png" />
-    <!-- Cycling accent: pick one of four on each load and set the --ac tokens on
-         <html> before React mounts and before first paint, so there's no flash of
-         the amber default. Reshuffles every load (design intent). -->
+    <!-- Pre-paint setup, run before React mounts so there's no flash of the wrong
+         theme. Two independent things:
+         1. Cycling accent — pick one of four and set the --ac tokens on <html>.
+            Reshuffles every load (design intent).
+         2. Ambient mode — resolve day vs night once from the client clock and set
+            data-ambient on <html>. The ambient theme itself is desktop-only (its
+            tokens are gated to >=1025px in index.css), so on phones/tablets the
+            attribute is inert and the warm-dark theme still shows; that's also why
+            theme-color is only re-synced on desktop widths (mobile chrome stays
+            warm-dark). Page-load granularity — not re-evaluated on an interval. -->
     <script>
       (function () {
+        var docEl = document.documentElement
+        var s = docEl.style
+
         var accents = [
           { ac: '#E8A33D', hi: '#F2B65C', lo: '#D8912C', rgb: '232, 163, 61' }, // amber
           { ac: '#E8735A', hi: '#F28E78', lo: '#D25E46', rgb: '232, 115, 90' }, // coral
@@ -43,11 +53,20 @@
           { ac: '#A88BD0', hi: '#BCA3DF', lo: '#8C71B6', rgb: '168, 139, 208' }, // dusk
         ]
         var a = accents[Math.floor(Math.random() * accents.length)]
-        var s = document.documentElement.style
         s.setProperty('--ac', a.ac)
         s.setProperty('--ac-hi', a.hi)
         s.setProperty('--ac-lo', a.lo)
         s.setProperty('--ac-rgb', a.rgb)
+
+        var h = new Date().getHours()
+        var mode = h >= 6 && h < 19 ? 'day' : 'night'
+        docEl.setAttribute('data-ambient', mode)
+        // Ambient paint only kicks in >=1025px, so only re-sync the browser-chrome
+        // colour there; below that the page is warm-dark and keeps #1A1614.
+        if (window.matchMedia && window.matchMedia('(min-width: 1025px)').matches) {
+          var tc = document.querySelector('meta[name="theme-color"]')
+          if (tc) tc.setAttribute('content', mode === 'day' ? '#a8d3ea' : '#0a1428')
+        }
       })()
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />

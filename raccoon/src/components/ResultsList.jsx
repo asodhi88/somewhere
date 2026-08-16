@@ -2,9 +2,10 @@ import ResultCard from './ResultCard'
 
 /**
  * ResultsList — the ranked grid plus its off-happy-path states (CLAUDE.md §7b):
- * the pre-search prompt (nothing has been searched yet), a loading shimmer, a
- * no-matches state that tells "no data for this month yet" apart from "filters
- * too tight", and a thin-results nudge when only one or two clear the filters.
+ * a loading shimmer, a no-matches state that tells "no data for this month yet"
+ * apart from "filters too tight", and a thin-results nudge when only one or two
+ * clear the filters. Before the first search it renders nothing (handoff: Ambient
+ * landing refresh) so a bare visit is just hero + footer.
  */
 export default function ResultsList({
   results,
@@ -31,20 +32,10 @@ export default function ResultsList({
     )
   }
 
-  if (!searched) {
-    return (
-      <section className="rc-results">
-        <div className="rc-empty">
-          <div className="rc-empty__title">Where can you actually go?</div>
-          <p className="rc-empty__text">
-            Set a budget, a month, and a stay tier above, then hit{' '}
-            <strong>Show me where</strong> — we&rsquo;ll rank every destination by
-            what the whole trip really costs.
-          </p>
-        </div>
-      </section>
-    )
-  }
+  // Pre-search: render nothing so the footer follows the hero directly (handoff:
+  // Ambient landing refresh). A shared/bookmarked link counts as searched, so it
+  // still lands on results.
+  if (!searched) return null
 
   if (results.length === 0) {
     return (

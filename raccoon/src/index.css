@@ -62,7 +62,10 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  /* Ambient tokens (--page-bg etc.) are only defined >=1025px, so below that this
+     falls back to the warm-dark --bg. Same fallback pattern throughout: the
+     ambient layer never touches mobile/tablet. */
+  background: var(--page-bg, var(--bg));
 }
 
 a {
@@ -90,7 +93,7 @@ a:hover {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
+  background: var(--page-bg, var(--bg));
 }
 
 /* ── Header ─────────────────────────────────────────────────────────────── */
@@ -113,14 +116,14 @@ a:hover {
   font-weight: 800;
   font-size: 23px;
   letter-spacing: -0.02em;
-  color: var(--text);
+  color: var(--ink, var(--text));
 }
 .rc-nav {
   display: flex;
   align-items: center;
   gap: 26px;
   font-size: 14px;
-  color: var(--muted);
+  color: var(--ink-muted, var(--muted));
 }
 .rc-nav__link {
   background: none;
@@ -131,11 +134,11 @@ a:hover {
   cursor: pointer;
 }
 .rc-nav__link:hover {
-  color: var(--text);
+  color: var(--ink, var(--text));
   text-decoration: underline;
 }
 .rc-nav__link.is-active {
-  color: var(--text);
+  color: var(--ink, var(--text));
 }
 .rc-nav__link.is-active:hover {
   text-decoration: none;
@@ -148,7 +151,12 @@ a:hover {
   margin: 8px 24px 0;
   border-radius: 26px;
   overflow: hidden;
-  background: var(--bg);
+  /* Ambient sky, folded into the panel background as two layers (wash over the
+     base gradient) so no extra element or z-index juggling is needed — the sky,
+     content and mural still paint above it exactly as before. Both tokens are
+     undefined <=1024px, so the panel falls back to warm-dark --bg there. */
+  background-color: var(--bg);
+  background-image: var(--hero-wash, none), var(--hero-bg, none);
 }
 .rc-sky {
   position: absolute;
@@ -229,7 +237,10 @@ a:hover {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding: 74px 56px 0;
+  /* Tightened so the mural sits directly below the widget with a clean 30px gap
+     (no negative pull needed on the image). The <=1024px block re-tightens the
+     insets for narrower desktop; mobile uses MobileSearch instead. */
+  padding: 62px 56px 30px;
   text-align: center;
 }
 .rc-eyebrow {
@@ -247,7 +258,8 @@ a:hover {
   line-height: 1.03;
   letter-spacing: -0.035em;
   max-width: 860px;
-  color: var(--text);
+  color: var(--ink, var(--text));
+  text-shadow: var(--headline-shadow, none);
   text-wrap: pretty;
 }
 /* Keep each headline sentence whole; wrapping happens only between clauses. */
@@ -265,7 +277,7 @@ a:hover {
   font-size: 16px;
   line-height: 1.55;
   max-width: 560px;
-  color: var(--muted);
+  color: var(--ink-muted, var(--muted));
 }
 
 .rc-hero__image {
@@ -289,7 +301,8 @@ a:hover {
   display: block;
   width: 100%;
   height: auto;
-  opacity: 0.9;
+  opacity: var(--mural-opacity, 0.9);
+  filter: var(--mural-filter, none);
 }
 
 /* ── Search bar ─────────────────────────────────────────────────────────── */
@@ -316,21 +329,26 @@ a:hover {
   gap: 8px;
   padding: 8px 14px;
   border-radius: 12px;
-  background: var(--surface-sunken);
-  border: 1px solid var(--border);
-  color: var(--text);
+  background: var(--origin-bg, var(--surface-sunken));
+  border: 1px solid var(--origin-border, var(--border));
+  box-shadow: var(--origin-shadow, none);
+  -webkit-backdrop-filter: var(--origin-blur, none);
+  backdrop-filter: var(--origin-blur, none);
+  color: var(--field-val, var(--text));
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: border-color 0.15s ease;
 }
+/* Hover keeps the per-load accent (kept on the --ac cycle so the hero stays in
+   sync with the results below). */
 .rc-origin__btn:hover {
   border-color: rgba(var(--ac-rgb), 0.55);
 }
 .rc-origin__chev {
   font-size: 11px;
-  color: var(--muted);
+  color: var(--field-label, var(--muted));
 }
 .rc-origin__menu {
   position: absolute;
@@ -389,9 +407,12 @@ a:hover {
   gap: 10px;
   padding: 10px;
   border-radius: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: 0 24px 50px -22px rgba(0, 0, 0, 0.75);
+  /* Frosted glass on desktop ambient; warm-dark solid elsewhere (fallbacks). */
+  background: var(--glass, var(--surface));
+  border: 1px solid var(--glass-border, var(--border));
+  box-shadow: var(--glass-shadow, 0 24px 50px -22px rgba(0, 0, 0, 0.75));
+  -webkit-backdrop-filter: var(--glass-blur, none);
+  backdrop-filter: var(--glass-blur, none);
 }
 /* A continuous accent light travels the widget's 1px border — the main idle
    affordance. Border-only: a two-layer mask keeps the fill on the 1px padding
@@ -437,8 +458,8 @@ a:hover {
   text-align: left;
   padding: 9px 19px;
   border-radius: 16px;
-  background: var(--surface-sunken);
-  border: 1px solid var(--border);
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--field-border, var(--border));
   min-width: 0;
   transition: border-color 0.15s ease;
 }
@@ -462,7 +483,7 @@ a:hover {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--field-label, var(--muted));
 }
 .rc-field__control {
   display: flex;
@@ -473,7 +494,7 @@ a:hover {
 .rc-field__prefix {
   font-size: 18px;
   font-weight: 500;
-  color: var(--text);
+  color: var(--field-val, var(--text));
 }
 .rc-field input,
 .rc-field select {
@@ -485,7 +506,7 @@ a:hover {
   padding: 0;
   margin: 0;
   background: transparent;
-  color: var(--text);
+  color: var(--field-val, var(--text));
   font-family: var(--font-body);
   font-size: 18px;
   font-weight: 500;
@@ -508,7 +529,8 @@ a:hover {
   position: absolute;
   right: 0;
   font-size: 11px;
-  color: var(--muted);
+  color: var(--field-val, var(--muted));
+  opacity: var(--caret-opacity, 1);
   pointer-events: none;
 }
 .rc-field select {
@@ -904,7 +926,7 @@ a:hover {
   margin-top: auto;
   border-top: 1px solid var(--border);
   font-size: 13px;
-  color: var(--muted);
+  color: var(--ink-muted, var(--muted));
 }
 .rc-footer__meta {
   font-size: 12px;
@@ -927,7 +949,7 @@ a:hover {
   padding: 6px 2px;
   border: 0;
   background: none;
-  color: var(--muted);
+  color: var(--ink-muted, var(--muted));
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
@@ -935,12 +957,12 @@ a:hover {
   transition: color 0.15s ease;
 }
 .rc-fb__trigger svg {
-  color: var(--muted);
+  color: var(--ink-muted, var(--muted));
   transition: color 0.15s ease;
 }
 .rc-fb__trigger:hover,
 .rc-fb__trigger[aria-expanded='true'] {
-  color: var(--text);
+  color: var(--ink, var(--text));
 }
 .rc-fb__trigger:hover svg,
 .rc-fb__trigger[aria-expanded='true'] svg {
@@ -1918,6 +1940,162 @@ a:hover {
   .rc-blind__brand,
   .rc-blind__rose {
     transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Ambient theme (handoff: Ambient landing refresh) — a time-aware paint over the
+   landing page, resolved once from the client clock into data-ambient on <html>
+   (see index.html). DESKTOP ONLY: every token is defined inside the
+   min-width:1025px block below, so mobile/tablet fall through to the warm-dark
+   --bg/--surface/--text values via the var(..., fallback) seams above and the
+   existing <=1024px blocks are left untouched.
+
+   Deliberate deviation from the design bundle (per product decision): the hero
+   CTA, eyebrow, border-trace and field focus stay on the per-load --ac accent
+   cycle rather than the bundle's ambient-fixed accents, so the loudest element
+   on the page stays in sync with the results below. Only the day eyebrow is
+   nudged darker (still derived from --ac) for contrast on the bright sky.
+
+   The day sky swaps the night starfield/moon for a sun disc + drifting cloud
+   band. Both layers are always in the DOM (NightSky renders them); CSS decides
+   which shows, scoped to .rc-hero so the How-it-works blind — which reuses the
+   same starfield — keeps its stars in every mode, and so the mobile hero keeps
+   its night sky regardless of the clock. Both new layers carry data-motion="1",
+   so the existing reduced-motion seam stills them.
+   ========================================================================== */
+.rc-sun,
+.rc-clouds {
+  position: absolute;
+  pointer-events: none;
+  display: none; /* shown only in the desktop day hero (block below) */
+}
+.rc-sun {
+  right: 6.4%;
+  top: 4%;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #fff8e6 34%,
+    rgba(255, 214, 138, 0.9) 58%,
+    rgba(255, 199, 120, 0) 74%
+  );
+  animation: rc-glowpulse 7s ease-in-out infinite;
+}
+.rc-clouds {
+  inset: 0;
+  opacity: 0.5;
+  background: radial-gradient(38% 22% at 18% 14%, rgba(255, 255, 255, 0.9), transparent 70%),
+    radial-gradient(30% 18% at 72% 22%, rgba(255, 255, 255, 0.75), transparent 70%);
+  animation: rc-drift 26s ease-in-out infinite alternate;
+}
+@keyframes rc-glowpulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+@keyframes rc-drift {
+  from {
+    transform: translateX(-6%);
+  }
+  to {
+    transform: translateX(6%);
+  }
+}
+
+@media (min-width: 1025px) {
+  /* ── Ambient token definitions (desktop only) ─────────────────────────── */
+  html[data-ambient='night'] {
+    --page-bg: linear-gradient(180deg, #0a1428 0%, #101f3c 42%, #1e2331 100%);
+    --hero-bg: linear-gradient(176deg, #081123 0%, #0e1c37 42%, #212632 78%, #252934 100%);
+    --hero-wash: radial-gradient(
+        40% 34% at 86% 7%,
+        rgba(180, 206, 255, 0.22),
+        rgba(180, 206, 255, 0) 70%
+      ),
+      radial-gradient(90% 60% at 50% 100%, rgba(95, 179, 161, 0.14), rgba(95, 179, 161, 0) 70%);
+    --ink: #eef4ff;
+    --ink-muted: rgba(226, 236, 252, 0.68);
+    --headline-shadow: 0 1px 22px rgba(120, 160, 230, 0.28);
+    --glass: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.16);
+    --glass-sunken: rgba(255, 255, 255, 0.06);
+    --field-border: rgba(255, 255, 255, 0.16);
+    --glass-blur: blur(18px) saturate(1.35);
+    --glass-shadow: 0 24px 50px -24px rgba(10, 25, 45, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    --origin-bg: rgba(255, 255, 255, 0.06);
+    --origin-border: rgba(255, 255, 255, 0.16);
+    --origin-blur: blur(14px) saturate(1.3);
+    --origin-shadow: none;
+    --field-val: #ffffff;
+    --field-label: rgba(255, 255, 255, 0.9);
+    --caret-opacity: 0.7;
+    --mural-opacity: 0.72;
+    --mural-filter: saturate(0.96) brightness(0.98);
+  }
+  html[data-ambient='day'] {
+    --page-bg: linear-gradient(178deg, #a8d3ea 0%, #d6e7ef 26%, #f3ead9 62%, #fbf2e3 100%);
+    --hero-bg: linear-gradient(172deg, #8ec6e6 0%, #bedcea 22%, #e9e2d4 58%, #f6ecdb 100%);
+    --hero-wash: radial-gradient(
+        46% 40% at 88% 6%,
+        rgba(255, 222, 160, 0.95),
+        rgba(255, 222, 160, 0) 68%
+      ),
+      radial-gradient(70% 50% at 12% 92%, rgba(255, 197, 150, 0.4), rgba(255, 197, 150, 0) 70%);
+    --ink: #0f2530;
+    --ink-muted: rgba(15, 37, 48, 0.72);
+    --headline-shadow: none;
+    --glass: rgba(255, 255, 255, 0.42);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-sunken: rgba(255, 255, 255, 0.55);
+    --field-border: rgba(255, 255, 255, 0.9);
+    --glass-blur: blur(20px) saturate(1.3);
+    --glass-shadow: 0 26px 54px -26px rgba(20, 60, 90, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    --origin-bg: rgba(255, 255, 255, 0.5);
+    --origin-border: rgba(255, 255, 255, 0.85);
+    --origin-blur: blur(14px) saturate(1.2);
+    --origin-shadow: 0 6px 16px -10px rgba(20, 60, 90, 0.5);
+    --field-val: #0f2530;
+    --field-label: rgba(15, 37, 48, 0.6);
+    --caret-opacity: 0.5;
+    --mural-opacity: 0.92;
+    --mural-filter: saturate(1.06) brightness(1.03) drop-shadow(0 10px 22px rgba(30, 60, 90, 0.2));
+  }
+
+  /* ── Desktop-only structural tweaks ───────────────────────────────────── */
+  /* The mural sits fully visible below the widget: no negative pull, no top fade
+     (the new cutout is transparent, so it needs no mask to blend). */
+  .rc-hero__image {
+    margin-top: 0;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  /* Day eyebrow: keep the session accent's identity but deepen it for legibility
+     on the bright sky (white-on-sky and raw --ac both fail contrast here). */
+  html[data-ambient='day'] .rc-eyebrow {
+    color: color-mix(in srgb, var(--ac) 58%, #17110a);
+  }
+
+  /* Day sky: reveal the sun + clouds, hide the night field/moon/transients —
+     scoped to the hero so the blind's reused starfield is never affected. */
+  html[data-ambient='day'] .rc-hero .rc-sun,
+  html[data-ambient='day'] .rc-hero .rc-clouds {
+    display: block;
+  }
+  html[data-ambient='day'] .rc-hero .rc-star,
+  html[data-ambient='day'] .rc-hero .rc-moon,
+  html[data-ambient='day'] .rc-hero .rc-shooter,
+  html[data-ambient='day'] .rc-hero .rc-sat {
+    display: none;
   }
 }
 
