@@ -40,7 +40,10 @@
             tokens are gated to >=1025px in index.css), so on phones/tablets the
             attribute is inert and the warm-dark theme still shows; that's also why
             theme-color is only re-synced on desktop widths (mobile chrome stays
-            warm-dark). Page-load granularity — not re-evaluated on an interval. -->
+            warm-dark). Page-load granularity — not re-evaluated on an interval.
+            On localhost only, a ?theme=dark|light query forces night|day so both
+            ambients can be checked without changing the system clock. Dev-only and
+            deliberately not surfaced in the UI — production always follows the clock. -->
     <script>
       (function () {
         var docEl = document.documentElement
@@ -60,6 +63,21 @@
 
         var h = new Date().getHours()
         var mode = h >= 6 && h < 19 ? 'day' : 'night'
+
+        // Dev-only override: on localhost, ?theme=dark|light forces night|day so
+        // both ambients can be checked without touching the system clock. Never
+        // active in production (gated on hostname), so it can't affect real users.
+        var isLocalDev =
+          location.hostname === 'localhost' ||
+          location.hostname === '127.0.0.1' ||
+          location.hostname === '[::1]' ||
+          location.hostname === ''
+        if (isLocalDev) {
+          var forced = new URLSearchParams(location.search).get('theme')
+          if (forced === 'dark' || forced === 'night') mode = 'night'
+          else if (forced === 'light' || forced === 'day') mode = 'day'
+        }
+
         docEl.setAttribute('data-ambient', mode)
         // Ambient paint only kicks in >=1025px, so only re-sync the browser-chrome
         // colour there; below that the page is warm-dark and keeps #1A1614.
