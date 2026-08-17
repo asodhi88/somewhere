@@ -2886,6 +2886,20 @@ html[data-ambient='day'] .rc-eyebrow {
     top: auto;
     width: auto;
   }
+  /* 16px inputs + 48px targets on the elements that reach the phone — the
+     feedback fields and the shared menu rows/triggers (handoff §1/§4): anything
+     smaller triggers iOS zoom-on-focus on a text field. */
+  .rc-fb__textarea,
+  .rc-fb__input,
+  .rc-menu__trigger--form {
+    font-size: 16px;
+    min-height: 48px;
+  }
+  .rc-menu__opt {
+    min-height: 48px;
+    padding: 13px 15px;
+    font-size: 16px;
+  }
   /* Collapses to a 52px round icon-only button on a phone (handoff §4). */
   .rc-backtotop {
     right: 16px;
