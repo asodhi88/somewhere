@@ -1,27 +1,15 @@
-import { useCallback, useState, useSyncExternalStore } from 'react'
+import { useState } from 'react'
+import Menu from './Menu'
 import { MONTH_OPTIONS, STAY_OPTIONS } from '../lib/searchState'
 
-/**
- * Tracks a media query so the month picker can switch to short labels ("Oct
- * 2026") at phone width, where the full name clips. Matches the 720px mobile
- * breakpoint in index.css. useSyncExternalStore subscribes to the MediaQueryList
- * directly — no effect-setState race, and it re-reads on every viewport change.
- */
-function useMediaQuery(query) {
-  const subscribe = useCallback(
-    (onChange) => {
-      const mql = window.matchMedia(query)
-      mql.addEventListener('change', onChange)
-      return () => mql.removeEventListener('change', onChange)
-    },
-    [query],
-  )
-  return useSyncExternalStore(
-    subscribe,
-    () => window.matchMedia(query).matches,
-    () => false, // server snapshot — app is client-only, defaults to desktop
-  )
-}
+// Month rows read as the month name under a year group header (handoff §1); the
+// trigger still shows the full "October 2026". Stay rows are the plain labels.
+const MONTH_MENU = MONTH_OPTIONS.map((m) => ({
+  value: m.value,
+  label: m.name,
+  group: String(m.year),
+}))
+const monthTriggerLabel = (opt) => (opt ? `${opt.label} ${opt.group}` : 'Month')
 
 /**
  * SearchBar — the product's single input (CLAUDE.md: "search-first hero").
@@ -29,16 +17,14 @@ function useMediaQuery(query) {
  * "Show me where" button stays the one loud action the design calls for.
  *
  * Origin lives in the OriginPicker control above the widget, not here — these
- * four fields are budget, nights, month and stay tier.
+ * four fields are budget, nights, month and stay tier. Month and stay use the
+ * shared Menu listbox (handoff §1) rather than native selects.
  */
 export default function SearchBar({ defaults, pending, onSearch }) {
   const [budget, setBudget] = useState(defaults.budget)
   const [nights, setNights] = useState(defaults.nights)
   const [month, setMonth] = useState(defaults.month)
   const [stay, setStay] = useState(defaults.stay)
-
-  // Abbreviate months to fit the narrow single-line field on phones.
-  const shortMonths = useMediaQuery('(max-width: 720px)')
 
   const budgetText = budget == null ? '' : budget.toLocaleString('en-US')
 
@@ -94,45 +80,33 @@ export default function SearchBar({ defaults, pending, onSearch }) {
         </div>
       </label>
 
-      <label className="rc-field rc-field--when">
+      <div className="rc-field rc-field--when">
         <span className="rc-field__label">When</span>
         <div className="rc-field__control">
-          <select
-            aria-label="Travel month"
+          <Menu
+            variant="field"
+            ariaLabel="Travel month"
             value={month}
-            onChange={(e) => setMonth(e.target.value)}
-          >
-            {MONTH_OPTIONS.map((m) => (
-              <option key={m.value} value={m.value}>
-                {shortMonths ? m.short : m.label}
-              </option>
-            ))}
-          </select>
-          <span className="rc-field__caret" aria-hidden="true">
-            ▾
-          </span>
+            onChange={setMonth}
+            options={MONTH_MENU}
+            formatValue={monthTriggerLabel}
+            scrollable
+          />
         </div>
-      </label>
+      </div>
 
-      <label className="rc-field rc-field--stay">
+      <div className="rc-field rc-field--stay">
         <span className="rc-field__label">Stay</span>
         <div className="rc-field__control">
-          <select
-            aria-label="Stay tier"
+          <Menu
+            variant="field"
+            ariaLabel="Stay tier"
             value={stay}
-            onChange={(e) => setStay(e.target.value)}
-          >
-            {STAY_OPTIONS.map((s) => (
-              <option key={s.value} value={s.value}>
-                {s.label}
-              </option>
-            ))}
-          </select>
-          <span className="rc-field__caret" aria-hidden="true">
-            ▾
-          </span>
+            onChange={setStay}
+            options={STAY_OPTIONS}
+          />
         </div>
-      </label>
+      </div>
 
       <button type="submit" className="rc-search__submit" disabled={pending}>
         {pending ? 'Searching…' : 'Show me where →'}

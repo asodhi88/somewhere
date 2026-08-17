@@ -36,11 +36,10 @@
          1. Cycling accent — pick one of four and set the --ac tokens on <html>.
             Reshuffles every load (design intent).
          2. Ambient mode — resolve day vs night once from the client clock and set
-            data-ambient on <html>. The ambient theme itself is desktop-only (its
-            tokens are gated to >=1025px in index.css), so on phones/tablets the
-            attribute is inert and the warm-dark theme still shows; that's also why
-            theme-color is only re-synced on desktop widths (mobile chrome stays
-            warm-dark). Page-load granularity — not re-evaluated on an interval.
+            data-ambient on <html>. Both themes are first-class at every width (the
+            ambient tokens in index.css apply on mobile too), so theme-color is
+            re-synced to the top-of-sky colour on every load, all sizes.
+            Page-load granularity — not re-evaluated on an interval.
             On localhost only, a ?theme=dark|light query forces night|day so both
             ambients can be checked without changing the system clock. Dev-only and
             deliberately not surfaced in the UI — production always follows the clock. -->
@@ -49,17 +48,23 @@
         var docEl = document.documentElement
         var s = docEl.style
 
+        // ink = the day-theme accent variant. Night --ac values sit at ~2.5:1 on
+        // a light ground, so accent *text/icons* in the day theme use --ac-ink
+        // instead (clears 4.5:1). Accent *fills* (CTA gradient, tint washes) keep
+        // --ac in both themes. See the handoff "accent system" table.
         var accents = [
-          { ac: '#E8A33D', hi: '#F2B65C', lo: '#D8912C', rgb: '232, 163, 61' }, // amber
-          { ac: '#E8735A', hi: '#F28E78', lo: '#D25E46', rgb: '232, 115, 90' }, // coral
-          { ac: '#5FB3A1', hi: '#7BC9B8', lo: '#4B9A89', rgb: '95, 179, 161' }, // sea glass
-          { ac: '#A88BD0', hi: '#BCA3DF', lo: '#8C71B6', rgb: '168, 139, 208' }, // dusk
+          { ac: '#E8A33D', hi: '#F2B65C', lo: '#D8912C', rgb: '232, 163, 61', ink: '#8A5A0F', inkRgb: '138, 90, 15' }, // amber
+          { ac: '#E8735A', hi: '#F28E78', lo: '#D25E46', rgb: '232, 115, 90', ink: '#A93E26', inkRgb: '169, 62, 38' }, // coral
+          { ac: '#5FB3A1', hi: '#7BC9B8', lo: '#4B9A89', rgb: '95, 179, 161', ink: '#1D6659', inkRgb: '29, 102, 89' }, // sea glass
+          { ac: '#A88BD0', hi: '#BCA3DF', lo: '#8C71B6', rgb: '168, 139, 208', ink: '#5E4494', inkRgb: '94, 68, 148' }, // dusk
         ]
         var a = accents[Math.floor(Math.random() * accents.length)]
         s.setProperty('--ac', a.ac)
         s.setProperty('--ac-hi', a.hi)
         s.setProperty('--ac-lo', a.lo)
         s.setProperty('--ac-rgb', a.rgb)
+        s.setProperty('--ac-ink', a.ink)
+        s.setProperty('--ac-ink-rgb', a.inkRgb)
 
         var h = new Date().getHours()
         var mode = h >= 6 && h < 19 ? 'day' : 'night'
@@ -79,12 +84,11 @@
         }
 
         docEl.setAttribute('data-ambient', mode)
-        // Ambient paint only kicks in >=1025px, so only re-sync the browser-chrome
-        // colour there; below that the page is warm-dark and keeps #1A1614.
-        if (window.matchMedia && window.matchMedia('(min-width: 1025px)').matches) {
-          var tc = document.querySelector('meta[name="theme-color"]')
-          if (tc) tc.setAttribute('content', mode === 'day' ? '#a8d3ea' : '#0a1428')
-        }
+        // Ambient paint applies at every width now (both themes are first-class on
+        // mobile too), so re-sync the browser-chrome colour to the top-of-sky at all
+        // sizes: #a8d3ea day / #0a1428 night, matching html/body in index.css.
+        var tc = document.querySelector('meta[name="theme-color"]')
+        if (tc) tc.setAttribute('content', mode === 'day' ? '#a8d3ea' : '#0a1428')
       })()
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
