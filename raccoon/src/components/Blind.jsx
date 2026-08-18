@@ -191,25 +191,33 @@ export default function Blind({ open, onClose, onHome }) {
                           How comfortably the trip fits, not merely whether it does.
                         </p>
                         <div className="rc-blind__mono">
-                          clamp( (budget &minus; trip_typical) / budget , 0 , 1 )
+                          clamp( (budget &minus; trip_typical) / (0.25 &times; budget) , 0 , 1 )
                         </div>
                         <div className="rc-blind__bars">
                           <div className="rc-blind__bar-row">
-                            <span>$1,400 of $2,000</span>
-                            <span className="rc-blind__bar-val">0.30</span>
+                            <span>$1,500 of $2,000 &mdash; comfortable</span>
+                            <span className="rc-blind__bar-val">1.00</span>
                           </div>
                           <div className="rc-blind__bar-track">
-                            <div className="rc-blind__bar-fill" style={{ width: '30%' }} />
+                            <div className="rc-blind__bar-fill" style={{ width: '100%' }} />
                           </div>
                           <div className="rc-blind__bar-row">
-                            <span>$1,980 of $2,000</span>
-                            <span className="rc-blind__bar-val">0.01</span>
+                            <span>$1,800 of $2,000 &mdash; getting tight</span>
+                            <span className="rc-blind__bar-val">0.40</span>
                           </div>
                           <div className="rc-blind__bar-track">
-                            <div className="rc-blind__bar-fill rc-blind__bar-fill--over" style={{ width: '1%' }} />
+                            <div className="rc-blind__bar-fill" style={{ width: '40%' }} />
+                          </div>
+                          <div className="rc-blind__bar-row">
+                            <span>$1,980 of $2,000 &mdash; scraping the bottom</span>
+                            <span className="rc-blind__bar-val">0.04</span>
+                          </div>
+                          <div className="rc-blind__bar-track">
+                            <div className="rc-blind__bar-fill rc-blind__bar-fill--over" style={{ width: '4%' }} />
                           </div>
                           <span className="rc-blind__bar-caption">
-                            Both fit. Only one leaves you room.
+                            Room to be comfortable, not the cheapest &mdash; among trips you
+                            can afford, fit decides.
                           </span>
                         </div>
                       </div>

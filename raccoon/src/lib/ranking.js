@@ -59,6 +59,13 @@ const FLIGHT_NONE_H = 15
 
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n))
 
+// Comfort buffer for the headroom score (see headroomScore). The fraction of
+// budget that counts as "comfortably under": once a trip is this far below
+// budget, headroom saturates at 1 and cheaper no longer buys rank. At 0.25 a
+// trip earns full headroom once it's ~25% under budget. Note K_COMFORT = 1
+// reproduces the old linear curve exactly, so this is a strict generalisation.
+const K_COMFORT = 0.25
+
 /**
  * How much the user cares about flight length, 0..1, inferred from the
  * max-flight cap. Unset → 0 (don't reward short flights the user never asked
@@ -159,10 +166,18 @@ export function estimateCost(dest, { month, nights, stay, origin }) {
 
 // ── Scoring components (each returns 0..1) ──────────────────────────────────
 
-/** How comfortably the (typical) cost fits the budget. No budget → 0. */
+/**
+ * How comfortably the (typical) cost fits the budget. No budget → 0.
+ *
+ * Saturating, not linear: headroom rewards having room to be comfortable, not
+ * being the cheapest. Below the comfort buffer (K_COMFORT × budget) a tighter
+ * trip scores lower; at or past it the score maxes out at 1, so among trips you
+ * can comfortably afford the tiebreak passes to weather and flight. Measured on
+ * the typical (mid) cost, the same end the old linear curve read.
+ */
 export function headroomScore(cost, budget) {
   if (!budget || !cost) return 0
-  return clamp((budget - cost.mid) / budget, 0, 1)
+  return clamp((budget - cost.mid) / (K_COMFORT * budget), 0, 1)
 }
 
 /**
@@ -287,12 +302,19 @@ export function matchReason(dest, filters, cost, parts) {
   const monthName = MONTH_NAMES[filters.month] || filters.month
   const bits = []
 
-  // Budget framing (only when a budget was supplied).
+  // Budget framing (only when a budget was supplied). This branches on the RAW
+  // fraction of budget left (== the old, pre-saturation linear headroom), not on
+  // parts.headroom. Saturation collapses everything from 0–75% spent to 1.0, so
+  // the saturated value can no longer tell "plenty to spare" from "fits" — the
+  // copy needs the un-saturated quantity the ranking no longer carries. Over
+  // budget (cost.mid > budget) makes frac_left negative, which correctly falls
+  // through to the lowest bucket. Uses cost.mid, the same field the score uses.
   if (filters.budget && cost) {
     const overBy = Math.round(cost.low - filters.budget)
+    const fracLeft = (filters.budget - cost.mid) / filters.budget
     if (overBy > 0) bits.push(`~$${overBy.toLocaleString('en-US')} over budget`)
-    else if (parts.headroom >= 0.45) bits.push('leaves plenty of budget to spare')
-    else if (parts.headroom >= 0.2) bits.push('fits your budget comfortably')
+    else if (fracLeft >= 0.45) bits.push('leaves plenty of budget to spare')
+    else if (fracLeft >= 0.2) bits.push('fits your budget comfortably')
     else if (cost.high > filters.budget) bits.push('doable at the low end of the range')
     else bits.push('fits your budget')
   }
