@@ -5,7 +5,7 @@ import SearchBar from './SearchBar'
 import OriginPicker from './OriginPicker'
 import MobileSearch from './MobileSearch'
 import { useMediaQuery } from '../lib/useMediaQuery'
-import heroImg from '../assets/hero-mural.png'
+import heroImg from '../assets/hero-mural.webp'
 
 /**
  * Hero — the full-bleed, search-first band (handoff: menus/HIW/hero §5). The sky
