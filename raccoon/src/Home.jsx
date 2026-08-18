@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import Header from './components/Header'
 import Hero from './components/Hero'
 import ResultsList from './components/ResultsList'
 import Footer from './components/Footer'
@@ -209,21 +208,32 @@ export default function Home({ onNavigate }) {
           blind is a sibling, not a child, so its position:fixed stays anchored
           to the viewport (a filter on .rc-app would otherwise trap it). */}
       <div className={`rc-app${blindOpen ? ' rc-app--blurred' : ''}`}>
-        <Header onNavigate={onNavigate} onHowItWorks={openBlind} onHome={resetToHome} />
-        <Hero key={resetKey} defaults={filters} pending={pending} onSearch={runSearch} />
-        <div id="results" ref={resultsRef}>
-          <ResultsList
-            results={results}
-            nights={filters.nights}
-            pending={pending}
-            searched={searched}
-            monthLabel={monthLabel}
-            monthHasData={monthHasData}
-            searchNonce={searchNonce}
-            onOpenLightbox={setLightbox}
-          />
+        {/* The hero is full-bleed (its own sky + mural edge to edge, header inside);
+            everything below it stays in the measured 1180 column (.rc-main). */}
+        <Hero
+          key={resetKey}
+          defaults={filters}
+          pending={pending}
+          onSearch={runSearch}
+          onNavigate={onNavigate}
+          onHowItWorks={openBlind}
+          onHome={resetToHome}
+        />
+        <div className="rc-main">
+          <div id="results" ref={resultsRef}>
+            <ResultsList
+              results={results}
+              nights={filters.nights}
+              pending={pending}
+              searched={searched}
+              monthLabel={monthLabel}
+              monthHasData={monthHasData}
+              searchNonce={searchNonce}
+              onOpenLightbox={setLightbox}
+            />
+          </div>
+          <Footer />
         </div>
-        <Footer />
 
         <button
           type="button"
@@ -233,7 +243,8 @@ export default function Home({ onNavigate }) {
           aria-hidden={!showTop}
           tabIndex={showTop ? 0 : -1}
         >
-          <span aria-hidden="true">↑</span> Top
+          <span className="rc-backtotop__arrow" aria-hidden="true">↑</span>
+          <span className="rc-backtotop__label">Top</span>
         </button>
 
         {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}

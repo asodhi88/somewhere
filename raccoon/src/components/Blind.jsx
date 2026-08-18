@@ -122,8 +122,9 @@ export default function Blind({ open, onClose, onHome }) {
               </button>
 
               <div className="rc-blind__content">
-                {/* Heading. Uppercased via CSS; sentence-case in markup for readers. */}
-                <div className="rc-blind__heading" data-motion="1">
+                {/* Intro block above the numbered sections. Heading uppercased via
+                    CSS; sentence-case in markup for readers. */}
+                <div className="rc-blind__intro" data-motion="1" style={{ animationDelay: '1.55s' }}>
                   <h2 className="rc-blind__h1">How it works</h2>
                   <p className="rc-blind__lede">
                     You set the criteria. <em>somewhere</em> returns the shortlisted
@@ -131,26 +132,24 @@ export default function Blind({ open, onClose, onHome }) {
                   </p>
                 </div>
 
-                <div className="rc-blind__divider" data-motion="1" aria-hidden="true" />
-
-                {/* Stages 01 + 02 — two columns on the panel surface, no gap. */}
-                <div className="rc-blind__stages" data-motion="1">
-                  <div className="rc-blind__stage">
-                    <div className="rc-blind__stage-head">
-                      <span className="rc-blind__stage-num">01</span>
-                      <h3 className="rc-blind__stage-title">What you give us</h3>
-                    </div>
+                {/* One column of full-width numbered sections; the 96px spine holds
+                    the section number (handoff §2.1). */}
+                <section className="rc-blind__section" data-motion="1" style={{ animationDelay: '1.8s' }}>
+                  <div className="rc-blind__num">01</div>
+                  <div className="rc-blind__col">
+                    <h3 className="rc-blind__section-title">What you give us</h3>
                     <p className="rc-blind__body">
                       You define the trip, not the destination: what you&rsquo;re
                       willing to spend, how long you want to go, when you want to go,
-                      and your trip vibe.
+                      and how you want to stay.
                     </p>
                   </div>
-                  <div className="rc-blind__stage">
-                    <div className="rc-blind__stage-head">
-                      <span className="rc-blind__stage-num">02</span>
-                      <h3 className="rc-blind__stage-title">Every destination gets a price</h3>
-                    </div>
+                </section>
+
+                <section className="rc-blind__section rc-blind__section--wide" data-motion="1" style={{ animationDelay: '1.9s' }}>
+                  <div className="rc-blind__num">02</div>
+                  <div className="rc-blind__col">
+                    <h3 className="rc-blind__section-title">Every destination gets a price</h3>
                     <p className="rc-blind__body">
                       <em>somewhere</em> costs each destination against your criteria.
                     </p>
@@ -168,114 +167,112 @@ export default function Blind({ open, onClose, onHome }) {
                       {'high = fare_high + (rate_high × n) + (ground_high × n)'}
                     </div>
                   </div>
-                </div>
+                </section>
 
-                {/* Stage 03 — full width: score formula + three weighted columns. */}
-                <div className="rc-blind__score" data-motion="1">
-                  <div className="rc-blind__stage-head">
-                    <span className="rc-blind__stage-num">03</span>
-                    <h3 className="rc-blind__h2">Every price gets a score</h3>
-                  </div>
-                  <p className="rc-blind__body rc-blind__body--wide">
-                    Cost alone is a blunt instrument &mdash; the cheapest place in a
-                    monsoon is not the best answer. <em>somewhere</em> scores each
-                    destination on weighted components:
-                  </p>
-                  <div className="rc-blind__score-formula">
-                    {'score = 100 × ( '}
-                    <span className="rc-blind__w-headroom">0.444</span>{' × headroom  +  '}
-                    <span className="rc-blind__w-weather">0.389</span>{' × weather  +  '}
-                    <span className="rc-blind__w-flight">0.167</span>{' × flight )'}
-                  </div>
-                  <div className="rc-blind__cols">
-                    <div className="rc-blind__col-card rc-blind__col-card--headroom">
-                      <h4 className="rc-blind__col-title">Headroom</h4>
-                      <p className="rc-blind__col-desc">
-                        How comfortably the trip fits, not merely whether it does.
-                      </p>
-                      <div className="rc-blind__mono">
-                        clamp( (budget &minus; trip_typical) / budget , 0 , 1 )
+                <section className="rc-blind__section rc-blind__section--wide" data-motion="1" style={{ animationDelay: '2s' }}>
+                  <div className="rc-blind__num">03</div>
+                  <div className="rc-blind__col">
+                    <h3 className="rc-blind__section-title">Every price gets a score</h3>
+                    <p className="rc-blind__body rc-blind__body--wide">
+                      Cost alone is a blunt instrument &mdash; the cheapest place in a
+                      monsoon is not the best answer. <em>somewhere</em> scores each
+                      destination on weighted components:
+                    </p>
+                    <div className="rc-blind__score-formula">
+                      {'score = 100 × ( '}
+                      <span className="rc-blind__w-headroom">0.444</span>{' × headroom  +  '}
+                      <span className="rc-blind__w-weather">0.389</span>{' × weather  +  '}
+                      <span className="rc-blind__w-flight">0.167</span>{' × flight )'}
+                    </div>
+                    <div className="rc-blind__cols">
+                      <div className="rc-blind__col-card rc-blind__col-card--headroom">
+                        <h4 className="rc-blind__col-title">Headroom</h4>
+                        <p className="rc-blind__col-desc">
+                          How comfortably the trip fits, not merely whether it does.
+                        </p>
+                        <div className="rc-blind__mono">
+                          clamp( (budget &minus; trip_typical) / budget , 0 , 1 )
+                        </div>
+                        <div className="rc-blind__bars">
+                          <div className="rc-blind__bar-row">
+                            <span>$1,400 of $2,000</span>
+                            <span className="rc-blind__bar-val">0.30</span>
+                          </div>
+                          <div className="rc-blind__bar-track">
+                            <div className="rc-blind__bar-fill" style={{ width: '30%' }} />
+                          </div>
+                          <div className="rc-blind__bar-row">
+                            <span>$1,980 of $2,000</span>
+                            <span className="rc-blind__bar-val">0.01</span>
+                          </div>
+                          <div className="rc-blind__bar-track">
+                            <div className="rc-blind__bar-fill rc-blind__bar-fill--over" style={{ width: '1%' }} />
+                          </div>
+                          <span className="rc-blind__bar-caption">
+                            Both fit. Only one leaves you room.
+                          </span>
+                        </div>
                       </div>
-                      <div className="rc-blind__bars">
-                        <div className="rc-blind__bar-row">
-                          <span>$1,400 of $2,000</span>
-                          <span className="rc-blind__bar-val">0.30</span>
-                        </div>
-                        <div className="rc-blind__bar-track">
-                          <div className="rc-blind__bar-fill" style={{ width: '30%' }} />
-                        </div>
-                        <div className="rc-blind__bar-row">
-                          <span>$1,980 of $2,000</span>
-                          <span className="rc-blind__bar-val">0.01</span>
-                        </div>
-                        <div className="rc-blind__bar-track">
-                          <div className="rc-blind__bar-fill rc-blind__bar-fill--over" style={{ width: '1%' }} />
-                        </div>
-                        <span className="rc-blind__bar-caption">
-                          Both fit. Only one leaves you room.
-                        </span>
+                      <div className="rc-blind__col-card rc-blind__col-card--weather">
+                        <h4 className="rc-blind__col-title">Weather</h4>
+                        <p className="rc-blind__col-desc">
+                          Temperature and rainfall for the month you picked. Cheap and
+                          warm loses to cheap, warm, and dry.
+                        </p>
+                      </div>
+                      <div className="rc-blind__col-card rc-blind__col-card--flight">
+                        <h4 className="rc-blind__col-title">Flight</h4>
+                        <div className="rc-blind__mono">w_flight → 0   when no cap is set</div>
+                        <p className="rc-blind__col-desc">
+                          If you haven&rsquo;t capped travel time, a long flight isn&rsquo;t
+                          a fault. The weight redistributes across the other components.
+                        </p>
                       </div>
                     </div>
-                    <div className="rc-blind__col-card rc-blind__col-card--weather">
-                      <h4 className="rc-blind__col-title">Weather</h4>
-                      <p className="rc-blind__col-desc">
-                        Temperature and rainfall for the month you picked. Cheap and
-                        warm loses to cheap, warm, and dry.
-                      </p>
-                    </div>
-                    <div className="rc-blind__col-card rc-blind__col-card--flight">
-                      <h4 className="rc-blind__col-title">Flight</h4>
-                      <div className="rc-blind__mono">w_flight → 0   when no cap is set</div>
-                      <p className="rc-blind__col-desc">
-                        If you haven&rsquo;t capped travel time, a long flight isn&rsquo;t
-                        a fault. The weight redistributes across the other components.
-                      </p>
-                    </div>
                   </div>
-                </div>
+                </section>
 
-                {/* Stage 04 — two override rules. */}
-                <div className="rc-blind__rules" data-motion="1">
-                  <div className="rc-blind__stage-head">
-                    <span className="rc-blind__stage-num">04</span>
-                    <h3 className="rc-blind__h2">Two rules that override raw score</h3>
-                  </div>
-                  <div className="rc-blind__rules-grid">
-                    <div className="rc-blind__rule">
-                      <h4 className="rc-blind__rule-title">Over budget is demoted, not deleted.</h4>
-                      <p className="rc-blind__body">
-                        Anything up to 15% above your number still appears, tagged with
-                        the overage, ranked beneath everything that fits. The penalty
-                        scales with distance:
-                      </p>
-                      <div className="rc-blind__formula rc-blind__formula--over">
-                        {'score_final = − (overage / budget)\n'}
-                        {'where overage ≤ 0.15 × budget'}
+                <section className="rc-blind__section rc-blind__section--wide" data-motion="1" style={{ animationDelay: '2.1s' }}>
+                  <div className="rc-blind__num">04</div>
+                  <div className="rc-blind__col">
+                    <h3 className="rc-blind__section-title">Two rules that override raw score</h3>
+                    <div className="rc-blind__rules-grid">
+                      <div className="rc-blind__rule">
+                        <h4 className="rc-blind__rule-title">Over budget is demoted, not deleted.</h4>
+                        <p className="rc-blind__body">
+                          Anything up to 15% above your number still appears, tagged with
+                          the overage, ranked beneath everything that fits. The penalty
+                          scales with distance:
+                        </p>
+                        <div className="rc-blind__formula rc-blind__formula--over">
+                          {'score_final = − (overage / budget)\n'}
+                          {'where overage ≤ 0.15 × budget'}
+                        </div>
+                        <p className="rc-blind__body">
+                          A trip $40 over is worth your attention. One $600 over is not.
+                          The gap between them should be visible, not hidden.
+                        </p>
                       </div>
-                      <p className="rc-blind__body">
-                        A trip $40 over is worth your attention. One $600 over is not.
-                        The gap between them should be visible, not hidden.
-                      </p>
-                    </div>
-                    <div className="rc-blind__rule">
-                      <h4 className="rc-blind__rule-title">No region dominates.</h4>
-                      <p className="rc-blind__body">
-                        Sorted purely by score, a cheap search returns the same answer
-                        five times &mdash; five Caribbean beaches, technically correct,
-                        practically useless. <em>somewhere</em> caps how many results
-                        come from any one region.
-                      </p>
-                      <p className="rc-blind__body">
-                        You get a shortlist you could genuinely choose between. Open any
-                        row for the full breakdown, or drop the cap and see the raw
-                        ranking.
-                      </p>
+                      <div className="rc-blind__rule">
+                        <h4 className="rc-blind__rule-title">No region dominates.</h4>
+                        <p className="rc-blind__body">
+                          Sorted purely by score, a cheap search returns the same answer
+                          five times &mdash; five Caribbean beaches, technically correct,
+                          practically useless. <em>somewhere</em> caps how many results
+                          come from any one region.
+                        </p>
+                        <p className="rc-blind__body">
+                          You get a shortlist you could genuinely choose between. Open any
+                          row for the full breakdown, or drop the cap and see the raw
+                          ranking.
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </section>
 
                 {/* Footer — ranges note + amber CTA (wired to onClose, as today). */}
-                <div className="rc-blind__footer" data-motion="1">
+                <div className="rc-blind__footer" data-motion="1" style={{ animationDelay: '2.2s' }}>
                   <span className="rc-blind__footer-note">
                     Estimates are always shown as ranges &mdash; they are not live
                     inventory.
@@ -288,9 +285,11 @@ export default function Blind({ open, onClose, onHome }) {
             </div>
           </div>
 
-          {/* Persistent one-line dismissal hint — fixed to the panel bottom, so it
-              stays put as the copy scrolls. Fades in once the drop has settled. */}
-          <div className="rc-blind__closehint">Click anywhere outside to close</div>
+          {/* Scroll fade — cues that the panel scrolls (content used to cut mid-
+              heading at the bottom edge). Decorative, pointer-events:none, so it
+              never intercepts a click or hides the last focusable element; the
+              footer's bottom padding clears it (handoff §2.6). */}
+          <div className="rc-blind__fade" aria-hidden="true" />
         </div>
       </div>
     </>

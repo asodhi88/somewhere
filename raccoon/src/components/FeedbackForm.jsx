@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react'
+import Menu from './Menu'
 import { getDestinationOptions } from '../lib/getDestinations'
 
 /**
@@ -20,6 +21,12 @@ import { getDestinationOptions } from '../lib/getDestinations'
 
 // Loaded once through the data seam (§7); the component never reads the JSON.
 const DESTINATIONS = getDestinationOptions()
+
+// City rows for the shared Menu (handoff §1); "" is the real "No city" row.
+const CITY_MENU = [
+  { value: '', label: 'No city' },
+  ...DESTINATIONS.map((d) => ({ value: d.id, label: `${d.city}, ${d.country}` })),
+]
 
 export default function FeedbackForm({ placement = 'footer' }) {
   const [open, setOpen] = useState(false)
@@ -138,6 +145,21 @@ export default function FeedbackForm({ placement = 'footer' }) {
 
       {open && (
         <div className="rc-fb__panel" role="dialog" aria-label="Send feedback">
+          <button
+            type="button"
+            className="rc-fb__close"
+            onClick={close}
+            aria-label="Close feedback"
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <path
+                d="M6 6 L18 18 M18 6 L6 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
           {status === 'success' ? (
             <div className="rc-fb__done" role="status">
               <span className="rc-fb__done-title">Thanks — got it.</span>
@@ -160,25 +182,17 @@ export default function FeedbackForm({ placement = 'footer' }) {
               />
 
               <div className="rc-fb__field">
-                <label className="rc-fb__label" htmlFor={`${uid}-city`}>
+                <span className="rc-fb__label">
                   Tag a city <span className="rc-fb__opt">optional</span>
-                </label>
-                <div className="rc-fb__selectwrap">
-                  <select
-                    id={`${uid}-city`}
-                    className="rc-fb__select"
-                    value={destinationId}
-                    onChange={(e) => setDestinationId(e.target.value)}
-                  >
-                    <option value="">No city</option>
-                    {DESTINATIONS.map((d) => (
-                      <option key={d.id} value={d.id}>
-                        {d.city}, {d.country}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="rc-fb__caret" aria-hidden="true">▾</span>
-                </div>
+                </span>
+                <Menu
+                  variant="form"
+                  ariaLabel="Tag a city"
+                  value={destinationId}
+                  onChange={setDestinationId}
+                  options={CITY_MENU}
+                  scrollable
+                />
               </div>
 
               <div className="rc-fb__field">
