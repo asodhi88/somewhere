@@ -302,12 +302,19 @@ export function matchReason(dest, filters, cost, parts) {
   const monthName = MONTH_NAMES[filters.month] || filters.month
   const bits = []
 
-  // Budget framing (only when a budget was supplied).
+  // Budget framing (only when a budget was supplied). This branches on the RAW
+  // fraction of budget left (== the old, pre-saturation linear headroom), not on
+  // parts.headroom. Saturation collapses everything from 0–75% spent to 1.0, so
+  // the saturated value can no longer tell "plenty to spare" from "fits" — the
+  // copy needs the un-saturated quantity the ranking no longer carries. Over
+  // budget (cost.mid > budget) makes frac_left negative, which correctly falls
+  // through to the lowest bucket. Uses cost.mid, the same field the score uses.
   if (filters.budget && cost) {
     const overBy = Math.round(cost.low - filters.budget)
+    const fracLeft = (filters.budget - cost.mid) / filters.budget
     if (overBy > 0) bits.push(`~$${overBy.toLocaleString('en-US')} over budget`)
-    else if (parts.headroom >= 0.45) bits.push('leaves plenty of budget to spare')
-    else if (parts.headroom >= 0.2) bits.push('fits your budget comfortably')
+    else if (fracLeft >= 0.45) bits.push('leaves plenty of budget to spare')
+    else if (fracLeft >= 0.2) bits.push('fits your budget comfortably')
     else if (cost.high > filters.budget) bits.push('doable at the low end of the range')
     else bits.push('fits your budget')
   }
