@@ -5,7 +5,7 @@ import SearchBar from './SearchBar'
 import OriginPicker from './OriginPicker'
 import MobileSearch from './MobileSearch'
 import { useMediaQuery } from '../lib/useMediaQuery'
-import heroImg from '../assets/mural-cutout.png'
+import heroImg from '../assets/hero-mural.webp'
 
 /**
  * Hero — the full-bleed, search-first band (handoff: menus/HIW/hero §5). The sky
@@ -59,9 +59,10 @@ export default function Hero({
         </div>
       )}
 
-      {/* Mural — full natural aspect ratio, never cropped: width:100% height:auto,
-          width-capped (never height-capped) so the peaks stay visible at any size.
-          Grounded at the hero's bottom edge as a horizon band. */}
+      {/* Mural — a transparent-sky panorama (real alpha): full-bleed to the left,
+          right, and bottom edges at width:100% height:auto, uncropped. The sky is
+          transparent, so the hero's own theme background (night sky / day gradient)
+          shows through behind the landmarks — no fill or frame of its own. */}
       <div className="rc-hero__image" data-motion="1">
         <img src={heroImg} alt="" />
       </div>

@@ -315,24 +315,22 @@ a:hover {
   color: var(--ink-muted, var(--muted));
 }
 
-/* Mural wrapper — width-capped, never height-capped, so the illustration renders
-   at full natural aspect ratio and no landmark is ever clipped (handoff §5.2).
-   Under 1560 it spans the viewport; over it, the whole scene scales as one and
-   stays centred while the sky fills the rest. Grounded at the band's bottom edge. */
+/* Mural wrapper — full-bleed: the transparent-sky panorama spans the whole hero
+   width and bleeds to the left, right, and bottom edges, uncropped at its natural
+   aspect ratio (~4.5:1, ≈ the bottom third of the viewport). No width cap, no
+   margin, no frame — its transparent sky composites directly over the hero's theme
+   background, so the night sky / day gradient shows through behind the landmarks. */
 .rc-hero__image {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1560px;
-  margin: 26px auto 0;
+  margin: 0;
   pointer-events: none;
 }
 .rc-hero__image img {
   display: block;
   width: 100%;
   height: auto;
-  opacity: var(--mural-opacity, 0.9);
-  filter: var(--mural-filter, none);
 }
 
 /* ── Search bar ─────────────────────────────────────────────────────────── */
@@ -2355,8 +2353,6 @@ html[data-ambient='night'] {
   --field-val: #ffffff;
   --field-label: rgba(255, 255, 255, 0.9);
   --caret-opacity: 0.7;
-  --mural-opacity: 0.72;
-  --mural-filter: saturate(0.96) brightness(0.98);
   background-color: #0a1428;
 }
 html[data-ambient='day'] {
@@ -2402,8 +2398,6 @@ html[data-ambient='day'] {
   --field-val: #0f2530;
   --field-label: rgba(15, 37, 48, 0.6);
   --caret-opacity: 0.5;
-  --mural-opacity: 1;
-  --mural-filter: saturate(1.04) brightness(1.02);
   background-color: #a8d3ea;
 }
 
