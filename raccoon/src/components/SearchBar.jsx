@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Menu from './Menu'
-import { MONTH_OPTIONS, STAY_OPTIONS } from '../lib/searchState'
+import { MONTH_OPTIONS, STAY_OPTIONS, CLIMATE_OPTIONS } from '../lib/searchState'
 
 // Month rows read as the month name under a year group header (handoff §1); the
 // trigger still shows the full "October 2026". Stay rows are the plain labels.
@@ -25,6 +25,7 @@ export default function SearchBar({ defaults, pending, onSearch }) {
   const [nights, setNights] = useState(defaults.nights)
   const [month, setMonth] = useState(defaults.month)
   const [stay, setStay] = useState(defaults.stay)
+  const [climate, setClimate] = useState(defaults.climate)
 
   const budgetText = budget == null ? '' : budget.toLocaleString('en-US')
 
@@ -46,6 +47,7 @@ export default function SearchBar({ defaults, pending, onSearch }) {
       nights: nights === '' || nights < 1 ? 1 : nights,
       month,
       stay,
+      climate,
     })
   }
 
@@ -104,6 +106,19 @@ export default function SearchBar({ defaults, pending, onSearch }) {
             value={stay}
             onChange={setStay}
             options={STAY_OPTIONS}
+          />
+        </div>
+      </div>
+
+      <div className="rc-field rc-field--climate">
+        <span className="rc-field__label">Climate</span>
+        <div className="rc-field__control">
+          <Menu
+            variant="field"
+            ariaLabel="Climate preference"
+            value={climate}
+            onChange={setClimate}
+            options={CLIMATE_OPTIONS}
           />
         </div>
       </div>

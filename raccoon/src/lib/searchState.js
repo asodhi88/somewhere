@@ -90,6 +90,25 @@ export const STAY_OPTIONS = [
 ]
 const STAYS = STAY_OPTIONS.map((s) => s.value)
 
+// ── Climate intent ─────────────────────────────────────────────────────────
+// The traveller's stated temperature preference. 'any' ("no preference") is a
+// REAL, selectable, default value — not the absence of a choice — so the scoring
+// layer can tell "didn't ask to be judged on weather" apart from "unset". With
+// 'any', the preference term collapses and only the always-on adverse floor
+// (extreme heat / monsoon) scores weather; warm/mild/cool shift a temperature
+// target the preference term aims at. See ranking.js.
+// `label` is the full menu/sheet row (capitalised, like STAY_OPTIONS); `short`
+// is the lowercase in-sentence word the mobile composer drops into "in ___
+// weather" — so 'any' reads "in any weather", not "in no preference weather".
+export const CLIMATE_OPTIONS = [
+  { value: 'warm', label: 'Warm', short: 'warm' },
+  { value: 'mild', label: 'Mild', short: 'mild' },
+  { value: 'cool', label: 'Cool', short: 'cool' },
+  { value: 'any', label: 'No preference', short: 'any' },
+]
+const CLIMATES = CLIMATE_OPTIONS.map((c) => c.value)
+export const DEFAULT_CLIMATE = 'any'
+
 // The defaults the design mockup shows: $2,000 · 7 nights · October · Mid-range,
 // departing Toronto.
 export const DEFAULT_FILTERS = {
@@ -98,6 +117,7 @@ export const DEFAULT_FILTERS = {
   nights: 7,
   month: DEFAULT_MONTH,
   stay: 'mid',
+  climate: DEFAULT_CLIMATE,
 }
 
 const clampInt = (v, lo, hi, fallback) => {
@@ -117,7 +137,7 @@ function normalizeMonth(raw) {
   return DEFAULT_MONTH
 }
 
-const SEARCH_KEYS = ['budget', 'nights', 'month', 'stay']
+const SEARCH_KEYS = ['budget', 'nights', 'month', 'stay', 'climate']
 
 /** True when the URL carries an explicit search (a shared/bookmarked link). */
 export function hasSearchParams(search) {
@@ -137,6 +157,10 @@ export function filtersFromSearch(search) {
 
   const stay = STAYS.includes(p.get('stay')) ? p.get('stay') : DEFAULT_FILTERS.stay
 
+  const climate = CLIMATES.includes(p.get('climate'))
+    ? p.get('climate')
+    : DEFAULT_FILTERS.climate
+
   const nights = p.has('nights')
     ? clampInt(p.get('nights'), 1, 30, DEFAULT_FILTERS.nights)
     : DEFAULT_FILTERS.nights
@@ -147,6 +171,7 @@ export function filtersFromSearch(search) {
     nights,
     month: normalizeMonth(p.get('month')),
     stay,
+    climate,
   }
 }
 
@@ -158,6 +183,7 @@ export function searchFromFilters(filters) {
   p.set('nights', String(filters.nights))
   p.set('month', filters.month)
   p.set('stay', filters.stay)
+  p.set('climate', filters.climate || DEFAULT_CLIMATE)
   return '?' + p.toString()
 }
 
@@ -181,6 +207,7 @@ export function storeFilters(filters) {
         nights: filters.nights,
         month: filters.month,
         stay: filters.stay,
+        climate: filters.climate,
       }),
     )
   } catch {
@@ -207,6 +234,7 @@ export function loadStoredFilters() {
       nights: clampInt(p.nights, 1, 30, DEFAULT_FILTERS.nights),
       month: normalizeMonth(p.month),
       stay: STAYS.includes(p.stay) ? p.stay : DEFAULT_FILTERS.stay,
+      climate: CLIMATES.includes(p.climate) ? p.climate : DEFAULT_FILTERS.climate,
     }
   } catch {
     return null

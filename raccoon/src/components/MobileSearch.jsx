@@ -3,6 +3,7 @@ import {
   ORIGIN_OPTIONS,
   MONTH_OPTIONS,
   STAY_OPTIONS,
+  CLIMATE_OPTIONS,
 } from '../lib/searchState'
 
 /**
@@ -43,6 +44,14 @@ const STAY_CHOICES = STAY_OPTIONS.map((s) => ({
 const NIGHTS_MIN = 1
 const NIGHTS_MAX = 30
 
+// Climate reads into the sentence as "in ___ weather" (warm / mild / cool /
+// any), while the sheet tiles show the fuller labels (Warm … No preference).
+const CLIMATE_CHOICES = CLIMATE_OPTIONS.map((c) => ({
+  value: c.value,
+  label: c.label,
+  short: c.short,
+}))
+
 const money = (n) => '$' + n.toLocaleString('en-US')
 
 const SHEET_TITLES = {
@@ -51,6 +60,7 @@ const SHEET_TITLES = {
   month: 'Which month',
   stay: 'Where you stay',
   budget: 'Total budget',
+  climate: 'Climate you want',
 }
 
 /** A tappable value inside the sentence / eyebrow. Never wraps mid-pill. */
@@ -152,6 +162,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
   const [nights, setNights] = useState(defaults.nights)
   const [month, setMonth] = useState(defaults.month)
   const [stay, setStay] = useState(defaults.stay)
+  const [climate, setClimate] = useState(defaults.climate)
   // A desktop link can carry budget=null ("no limit"); mobile expresses a
   // concrete amount, so fall back to the default when none is set.
   const [budget, setBudget] = useState(defaults.budget ?? 2000)
@@ -164,6 +175,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
   const openMonth = MONTH_OPTIONS.find((o) => o.value === month) || MONTH_OPTIONS[0]
   const selectedOrigin = ORIGINS.find((o) => o.value === origin) || ORIGINS[0]
   const stayLabel = STAY_CHOICES.find((s) => s.value === stay)?.label || stay
+  const climateShort = CLIMATE_CHOICES.find((c) => c.value === climate)?.short || climate
 
   const open = (id, el) => {
     triggerRef.current = el
@@ -198,7 +210,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
   }
 
   const submit = () => {
-    onSearch({ origin, budget, nights, month, stay })
+    onSearch({ origin, budget, nights, month, stay, climate })
   }
 
   const nightsLabel = `${nights} night${nights === 1 ? '' : 's'}`
@@ -230,7 +242,9 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
           <Pill id="stay" label={stayLabel} open={openSheet === 'stay'} onOpen={open} />
           <span className="rc-msearch__static">, under</span>{' '}
           <Pill id="budget" label={money(budget)} open={openSheet === 'budget'} onOpen={open} />
-          <span className="rc-msearch__static">.</span>
+          <span className="rc-msearch__static">, in</span>{' '}
+          <Pill id="climate" label={climateShort} open={openSheet === 'climate'} onOpen={open} />{' '}
+          <span className="rc-msearch__static">weather.</span>
         </p>
 
         <p className="rc-msearch__helper">
@@ -339,6 +353,23 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
                   selected={b === budget}
                   onClick={() => {
                     setBudget(b)
+                    close()
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {openSheet === 'climate' && (
+            <div className="rc-tiles">
+              {CLIMATE_CHOICES.map((c) => (
+                <Tile
+                  key={c.value}
+                  size="half"
+                  label={c.label}
+                  selected={c.value === climate}
+                  onClick={() => {
+                    setClimate(c.value)
                     close()
                   }}
                 />

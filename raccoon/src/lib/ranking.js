@@ -28,6 +28,11 @@ export const MONTH_NAMES = {
 
 export const STAY_TIERS = ['budget', 'mid', 'nice']
 
+// Climate-intent values. 'any' ("no preference") is the explicit default: the
+// scoring layer treats it as "don't judge on temperature", distinct from an
+// unset field. warm/mild/cool state a preference (see CLIMATE_TARGET_HIGH).
+export const CLIMATES = ['warm', 'mild', 'cool', 'any']
+
 // Base scoring weights. Order/priority follows CLAUDE.md §6.1. Sum to 1.
 // The nonstop weight is *conditional*: it only applies to the degree the user
 // has constrained flight time (see flightSensitivity / effectiveWeights). If
@@ -101,6 +106,11 @@ export function normalizeFilters(filters = {}) {
     // Accept "october" or "oct"; the dataset keys are the 3-letter form.
     month: filters.month ? String(filters.month).toLowerCase().slice(0, 3) : null,
     vibe: filters.vibe ? String(filters.vibe).toLowerCase() : null,
+    // Climate intent. Anything unrecognised (or absent) is treated as 'any' —
+    // no stated preference — so the preference term stays collapsed by default.
+    climate: CLIMATES.includes(String(filters.climate || '').toLowerCase())
+      ? String(filters.climate).toLowerCase()
+      : 'any',
     // Origin airport (lower-case IATA), keyed into each dest's flights map.
     origin: String(filters.origin || 'yyz').toLowerCase(),
     stay: STAY_TIERS.includes(stay) ? stay : 'mid',
