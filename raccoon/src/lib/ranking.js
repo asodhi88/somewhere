@@ -28,6 +28,14 @@ export const MONTH_NAMES = {
 
 export const STAY_TIERS = ['budget', 'mid', 'nice']
 
+// Default per-region diversification cap (CLAUDE.md §6.1 step 3): at most this
+// many destinations from any one region in the ranked grid, so results feel like
+// a real set of options rather than nine cities from one region. Overridable via
+// filters.maxPerRegion.
+// NOTE: the not-yet-built region-filter feature is expected to disable this cap
+// when a user explicitly narrows to a single region.
+export const MAX_PER_REGION = 3
+
 // Base scoring weights. Order/priority follows CLAUDE.md §6.1. Sum to 1.
 // The nonstop weight is *conditional*: it only applies to the degree the user
 // has constrained flight time (see flightSensitivity / effectiveWeights). If
@@ -114,7 +122,7 @@ export function normalizeFilters(filters = {}) {
     // maxFlightHours is the canonical name; accept maxFlight as an alias.
     maxFlightHours: num(filters.maxFlightHours ?? filters.maxFlight),
     limit: num(filters.limit) ?? 12,
-    maxPerRegion: num(filters.maxPerRegion) ?? 2,
+    maxPerRegion: num(filters.maxPerRegion) ?? MAX_PER_REGION,
   }
 }
 
