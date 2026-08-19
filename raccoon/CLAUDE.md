@@ -310,3 +310,8 @@ Visual work happens in **Claude Design**, which runs ahead of the repo. Each bat
   cost-validation item. Also interacts with stay tiers: "budget in Lisbon"
   means something different in Alfama than in the suburbs, which the current
   model can't express.
+- **Things to do per destination.** Curated activities/attractions per city
+  (e.g. Lisbon — what to actually do there). Fills the "I'll go, but don't know
+  what to do" gap. Lives on the detail view alongside neighbourhood guidance —
+  the two together turn a ranked pick into an actionable plan. Future commercial
+  angle: activity booking / affiliate (Viator / GetYourGuide-style).
