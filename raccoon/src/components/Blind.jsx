@@ -126,10 +126,6 @@ export default function Blind({ open, onClose, onHome }) {
                     CSS; sentence-case in markup for readers. */}
                 <div className="rc-blind__intro" data-motion="1" style={{ animationDelay: '1.55s' }}>
                   <h2 className="rc-blind__h1">How it works</h2>
-                  <p className="rc-blind__lede">
-                    You set the criteria. <em>somewhere</em> returns the shortlisted
-                    destinations.
-                  </p>
                 </div>
 
                 {/* One column of full-width numbered sections; the 96px spine holds

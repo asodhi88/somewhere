@@ -143,7 +143,7 @@ a:hover {
 .rc-brand__name {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 23px;
+  font-size: 27px;
   letter-spacing: -0.02em;
   color: var(--ink, var(--text));
 }
@@ -1520,11 +1520,11 @@ html[data-ambient='day'] .rc-backtotop {
     opacity: 0;
   }
   1% {
-    opacity: 1;
+    opacity: 0.45;
   }
   5% {
     transform: translate3d(300px, 190px, 0) scaleX(1);
-    opacity: 1;
+    opacity: 0.45;
   }
   8% {
     transform: translate3d(400px, 250px, 0) scaleX(0.5);
@@ -3014,9 +3014,10 @@ html[data-ambient='day'] .rc-eyebrow {
     grid-template-columns: 1fr;
   }
   .rc-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     padding: 22px 20px 28px;
   }
   /* On a phone the popover becomes a bottom sheet pinned to the viewport, so it
@@ -3064,15 +3065,15 @@ html[data-ambient='day'] .rc-eyebrow {
      formula and score blocks are unreadable side-by-side on a phone). Coverage
      goes up. */
   .rc-blind {
-    height: 88vh;
+    height: 82vh;
   }
   .rc-blind__brand {
     left: 24px;
     gap: 10px;
     /* Recompute the held centre for the 24px inset (desktop is 56px → 176) and
-       the 88vh panel (half = 44vh), so the intro rose lands dead-centre here too. */
+       the 82vh panel (half = 41vh), so the intro rose lands dead-centre here too. */
     --rc-hold-x: calc(50vw - 144px);
-    --rc-hold-y: calc(44vh - 41px);
+    --rc-hold-y: calc(41vh - 41px);
   }
   .rc-blind__close {
     right: 14px;
