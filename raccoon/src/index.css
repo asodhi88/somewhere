@@ -202,6 +202,26 @@ a:hover {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
   opacity: 0.07;
+  /* Keep the grain off the flat top band (so the status-bar sample stays a clean
+     solid colour) and off the very bottom edge (so it can't lift the hero's last
+     row above the flat body colour below it). It only dithers the middle, which
+     is where the wide ramp could actually band. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 64px,
+    #000 128px,
+    #000 calc(100% - 12px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 64px,
+    #000 128px,
+    #000 calc(100% - 12px),
+    transparent 100%
+  );
 }
 .rc-sky {
   position: absolute;
@@ -2334,10 +2354,14 @@ html[data-ambient='night'] {
   --page-bg: #1e2331;
   /* Deep sky → warm-dark, true vertical with closely-spaced stops. Starts at
      #081123 (= html bg + theme-color, no status-bar seam), ends at #1e2331
-     (= --page-bg, no hero→content seam). */
+     (= --page-bg, no hero→content seam). The first 64px are held FLAT at the
+     start colour: iOS Safari (bottom address bar) tints the status-bar strip by
+     sampling the content directly behind it, so the top band must be one solid
+     colour or the sampled tint seams against the sky. */
   --hero-bg: linear-gradient(
     180deg,
-    #081123 0%,
+    #081123 0,
+    #081123 64px,
     #0a1730 16%,
     #0d1b35 32%,
     #121e33 50%,
@@ -2397,10 +2421,14 @@ html[data-ambient='day'] {
   /* Sky blue → warm cream, true vertical, many closely-spaced stops that stay
      high in lightness through the crossover so the mid never dips into grey
      "mud". Starts at #8ec6e6 to match the html bg + theme-color (no status-bar
-     seam); ends at #fbf2e3 to match --page-bg (no hero→content seam). */
+     seam); ends at #fbf2e3 to match --page-bg (no hero→content seam). The first
+     64px are held FLAT at the start colour so the region iOS Safari samples for
+     the status-bar tint (bottom address bar) is one solid colour and can't seam
+     against the sky. */
   --hero-bg: linear-gradient(
     180deg,
-    #8ec6e6 0%,
+    #8ec6e6 0,
+    #8ec6e6 64px,
     #9ccce4 10%,
     #aed1e1 20%,
     #c1d5dd 30%,
