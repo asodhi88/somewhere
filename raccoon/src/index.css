@@ -190,6 +190,19 @@ a:hover {
   background-color: var(--bg);
   background-image: var(--hero-wash, none), var(--hero-bg, none);
 }
+/* Grain/dither overlay — a faint grayscale noise blended over the sky gradient
+   so the wide sky→cream ramp can't show colour banding on 8-bit displays. It
+   sits above the gradient but beneath the stars/sun (.rc-sky) and the content,
+   and is inert to input. */
+.rc-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  opacity: 0.07;
+}
 .rc-sky {
   position: absolute;
   inset: 0;
@@ -2264,16 +2277,21 @@ html[data-ambient='day'] .rc-hero .rc-shooter,
 html[data-ambient='day'] .rc-hero .rc-sat {
   display: none;
 }
+/* A soft luminous core inside the corner glow (--hero-wash) — a bright centre
+   that feathers fully to transparent, so it reads as the sun without a hard-edged
+   disc. Sized/positioned so its faded edge stays clear of the "How it works"
+   link and never meets the hero's clipped right edge as a hard arc. */
 .rc-sun {
-  right: 6.4%;
-  top: 4%;
-  width: 64px;
-  height: 64px;
+  right: 5%;
+  top: 1%;
+  width: 132px;
+  height: 132px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    #fff8e6 34%,
-    rgba(255, 214, 138, 0.9) 58%,
+    rgba(255, 251, 238, 0.95) 16%,
+    rgba(255, 226, 154, 0.55) 40%,
+    rgba(255, 214, 138, 0.18) 58%,
     rgba(255, 199, 120, 0) 74%
   );
   animation: rc-glowpulse 7s ease-in-out infinite;
@@ -2311,8 +2329,22 @@ html[data-ambient='day'] .rc-hero .rc-sat {
    --ink-faint, --drop-shadow, --glass-tile, --menu-inner-hi) back the custom
    dropdowns, result tiles, feedback form and How-it-works panel. */
 html[data-ambient='night'] {
-  --page-bg: linear-gradient(180deg, #0a1428 0%, #101f3c 42%, #1e2331 100%);
-  --hero-bg: linear-gradient(176deg, #081123 0%, #0e1c37 42%, #212632 78%, #252934 100%);
+  /* Body below the hero is a flat warm-dark that EQUALS the hero gradient's
+     final stop — no hero→content seam. */
+  --page-bg: #1e2331;
+  /* Deep sky → warm-dark, true vertical with closely-spaced stops. Starts at
+     #081123 (= html bg + theme-color, no status-bar seam), ends at #1e2331
+     (= --page-bg, no hero→content seam). */
+  --hero-bg: linear-gradient(
+    180deg,
+    #081123 0%,
+    #0a1730 16%,
+    #0d1b35 32%,
+    #121e33 50%,
+    #16202f 68%,
+    #1a222d 84%,
+    #1e2331 100%
+  );
   --hero-wash: radial-gradient(
       40% 34% at 86% 7%,
       rgba(180, 206, 255, 0.22),
@@ -2353,17 +2385,42 @@ html[data-ambient='night'] {
   --field-val: #ffffff;
   --field-label: rgba(255, 255, 255, 0.9);
   --caret-opacity: 0.7;
-  background-color: #0a1428;
+  /* Overscroll / safe-area ground = the hero gradient's start colour (and the
+     theme-color set in index.html) so the status-bar region never seams. */
+  background-color: #081123;
 }
 html[data-ambient='day'] {
-  --page-bg: linear-gradient(178deg, #a8d3ea 0%, #d6e7ef 26%, #f3ead9 62%, #fbf2e3 100%);
-  --hero-bg: linear-gradient(172deg, #8ec6e6 0%, #bedcea 22%, #e9e2d4 58%, #f6ecdb 100%);
+  /* Body below the hero is a flat cream that EQUALS the hero gradient's final
+     stop, so the hero→content boundary has no seam (the hero's own gradient does
+     the sky→cream transition; everything under it is this same cream). */
+  --page-bg: #fbf2e3;
+  /* Sky blue → warm cream, true vertical, many closely-spaced stops that stay
+     high in lightness through the crossover so the mid never dips into grey
+     "mud". Starts at #8ec6e6 to match the html bg + theme-color (no status-bar
+     seam); ends at #fbf2e3 to match --page-bg (no hero→content seam). */
+  --hero-bg: linear-gradient(
+    180deg,
+    #8ec6e6 0%,
+    #9ccce4 10%,
+    #aed1e1 20%,
+    #c1d5dd 30%,
+    #d2d7d9 40%,
+    #e0d9d4 49%,
+    #ecdcd0 58%,
+    #f2e3d3 70%,
+    #f7ebdc 84%,
+    #fbf2e3 100%
+  );
+  /* Sun: a soft warm glow spilling from just off the top-right corner — the
+     centre sits above the frame (at 96% -8%) so there's no hard disc on-screen
+     and nothing clips against the "How it works" link; it fades to nothing well
+     inside the sky. Paired with a faint warm lift near the mural (bottom-left). */
   --hero-wash: radial-gradient(
-      46% 40% at 88% 6%,
-      rgba(255, 222, 160, 0.95),
-      rgba(255, 222, 160, 0) 68%
+      62% 56% at 96% -8%,
+      rgba(255, 226, 168, 0.82),
+      rgba(255, 226, 168, 0) 72%
     ),
-    radial-gradient(70% 50% at 12% 92%, rgba(255, 197, 150, 0.4), rgba(255, 197, 150, 0) 70%);
+    radial-gradient(70% 50% at 12% 96%, rgba(255, 197, 150, 0.34), rgba(255, 197, 150, 0) 72%);
   --ink: #0f2530;
   --ink-muted: rgba(15, 37, 48, 0.72);
   --ink-faint: rgba(15, 37, 48, 0.45);
@@ -2398,7 +2455,9 @@ html[data-ambient='day'] {
   --field-val: #0f2530;
   --field-label: rgba(15, 37, 48, 0.6);
   --caret-opacity: 0.5;
-  background-color: #a8d3ea;
+  /* Overscroll / safe-area ground = the hero gradient's start colour (and the
+     theme-color set in index.html) so the status-bar region never seams. */
+  background-color: #8ec6e6;
 }
 
 /* Day eyebrow (desktop pitch): keep the session accent's identity but deepen it

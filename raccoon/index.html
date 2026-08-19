@@ -86,9 +86,11 @@
         docEl.setAttribute('data-ambient', mode)
         // Ambient paint applies at every width now (both themes are first-class on
         // mobile too), so re-sync the browser-chrome colour to the top-of-sky at all
-        // sizes: #a8d3ea day / #0a1428 night, matching html/body in index.css.
+        // sizes. This MUST equal the hero gradient's start colour and the html
+        // background-color in index.css (#8ec6e6 day / #081123 night) so the
+        // status-bar / safe-area region has no seam against the top of the hero.
         var tc = document.querySelector('meta[name="theme-color"]')
-        if (tc) tc.setAttribute('content', mode === 'day' ? '#a8d3ea' : '#0a1428')
+        if (tc) tc.setAttribute('content', mode === 'day' ? '#8ec6e6' : '#081123')
       })()
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
