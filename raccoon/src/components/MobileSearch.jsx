@@ -42,6 +42,8 @@ const STAY_CHOICES = STAY_OPTIONS.map((s) => ({
 
 const NIGHTS_MIN = 1
 const NIGHTS_MAX = 30
+// Quick-pick chips inside the nights sheet — the common trip lengths.
+const NIGHTS_QUICK = [3, 5, 7, 10, 14]
 
 const money = (n) => '$' + n.toLocaleString('en-US')
 
@@ -157,7 +159,8 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
   const [budget, setBudget] = useState(defaults.budget ?? 2000)
 
   const [openSheet, setOpenSheet] = useState(null)
-  const [nightsDraft, setNightsDraft] = useState('')
+  // The nights sheet edits a numeric draft (stepper + chips), committed on Done.
+  const [nightsDraft, setNightsDraft] = useState(NIGHTS_MIN)
   // The pill that opened the current sheet, so focus can return to it on close.
   const triggerRef = useRef(null)
 
@@ -167,7 +170,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
 
   const open = (id, el) => {
     triggerRef.current = el
-    if (id === 'nights') setNightsDraft(String(nights))
+    if (id === 'nights') setNightsDraft(nights)
     setOpenSheet(id)
   }
 
@@ -188,14 +191,14 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
     }
   }, [openSheet])
 
+  const clampNights = (n) => Math.min(NIGHTS_MAX, Math.max(NIGHTS_MIN, n))
+
   const commitNights = () => {
-    const n = parseInt(nightsDraft, 10)
-    if (Number.isFinite(n)) {
-      setNights(Math.min(NIGHTS_MAX, Math.max(NIGHTS_MIN, n)))
-    }
-    // Empty / invalid keeps the previous value.
+    setNights(clampNights(nightsDraft))
     close()
   }
+
+  const draftUnit = nightsDraft === 1 ? 'night' : 'nights'
 
   const submit = () => {
     onSearch({ origin, budget, nights, month, stay })
@@ -276,18 +279,45 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
 
           {openSheet === 'nights' && (
             <div className="rc-sheet__nights">
-              <input
-                className="rc-sheet__nights-input"
-                inputMode="numeric"
-                aria-label="Number of nights"
-                value={nightsDraft}
-                onChange={(e) => setNightsDraft(e.target.value.replace(/[^0-9]/g, ''))}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') commitNights()
-                }}
-                autoFocus
-              />
-              <span className="rc-sheet__nights-unit">nights</span>
+              {/* Keyboard-free entry: a stepper flanking a large live value, then
+                  quick-pick chips. No <input> — nothing raises the OS keypad. */}
+              <div className="rc-stepper">
+                <button
+                  type="button"
+                  className="rc-stepper__btn"
+                  aria-label="One fewer night"
+                  disabled={nightsDraft <= NIGHTS_MIN}
+                  onClick={() => setNightsDraft((n) => clampNights(n - 1))}
+                >
+                  −
+                </button>
+                <span className="rc-stepper__value" aria-live="polite">
+                  <span className="rc-stepper__num">{nightsDraft}</span>
+                  <span className="rc-stepper__unit">{draftUnit}</span>
+                </span>
+                <button
+                  type="button"
+                  className="rc-stepper__btn"
+                  aria-label="One more night"
+                  disabled={nightsDraft >= NIGHTS_MAX}
+                  onClick={() => setNightsDraft((n) => clampNights(n + 1))}
+                >
+                  +
+                </button>
+              </div>
+              <div className="rc-nights-chips">
+                {NIGHTS_QUICK.map((q) => (
+                  <button
+                    key={q}
+                    type="button"
+                    className={`rc-nights-chip${q === nightsDraft ? ' is-selected' : ''}`}
+                    aria-pressed={q === nightsDraft}
+                    onClick={() => setNightsDraft(q)}
+                  >
+                    {q}
+                  </button>
+                ))}
+              </div>
               <button type="button" className="rc-sheet__done" onClick={commitNights}>
                 Done
               </button>

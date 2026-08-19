@@ -2461,7 +2461,8 @@ html[data-ambient='day'] .rc-eyebrow {
   html[data-ambient='day'] .rc-tile,
   html[data-ambient='day'] .rc-tile__label,
   html[data-ambient='day'] .rc-sheet__title,
-  html[data-ambient='day'] .rc-sheet__nights-input {
+  html[data-ambient='day'] .rc-stepper__num,
+  html[data-ambient='day'] .rc-nights-chip {
     color: var(--ink);
   }
   html[data-ambient='day'] .rc-sheet {
@@ -2682,9 +2683,15 @@ html[data-ambient='day'] .rc-eyebrow {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 14px 18px 30px;
+    /* Content-height sheet; never taller than the (visual) viewport, scroll if it
+       would be. Extra bottom padding clears the iOS home indicator. */
+    max-height: 90dvh;
+    overflow-y: auto;
+    padding: 14px 18px calc(30px + env(safe-area-inset-bottom, 0px));
     border-radius: 34px 34px 0 0;
-    background: var(--nm-base);
+    /* Opaque panel — --nm-base is solid in dark, ~0.97 in day (override below).
+       Fall back to the app background so nothing behind the sheet shows through. */
+    background: var(--nm-base, var(--bg));
     box-shadow: 0 -18px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(245, 240, 232, 0.06);
   }
   .rc-sheet__handle {
@@ -2763,33 +2770,89 @@ html[data-ambient='day'] .rc-eyebrow {
     font-size: 14px;
     color: var(--nm-disabled);
   }
-  /* Nights: a numeric field + Done rather than option tiles. */
+  /* Nights: keyboard-free stepper + quick-pick chips, no numeric field. */
   .rc-sheet__nights {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 18px;
   }
-  .rc-sheet__nights-input {
-    flex: 1;
-    min-width: 0;
-    min-height: 60px;
-    padding: 0 20px;
+  /* Stepper: − / + buttons flanking a large, live-updating value. */
+  .rc-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .rc-stepper__btn {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
     border: 0;
-    border-radius: 17px;
+    border-radius: 50%;
     background: var(--nm-base);
+    box-shadow: var(--nm-raise);
+    color: var(--accent-text);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .rc-stepper__btn:active {
     box-shadow: var(--nm-press);
-    color: var(--text);
+  }
+  .rc-stepper__btn:disabled {
+    color: var(--nm-disabled);
+    box-shadow: var(--nm-soft);
+    cursor: default;
+  }
+  .rc-stepper__value {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .rc-stepper__num {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 22px;
-    letter-spacing: -0.02em;
-    outline: none;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
   }
-  .rc-sheet__nights-unit {
+  .rc-stepper__unit {
     font-family: var(--font-body);
     font-weight: 500;
     font-size: 14px;
     color: var(--nm-dim);
+  }
+  /* Quick-pick chips: equal-width common trip lengths. */
+  .rc-nights-chips {
+    display: flex;
+    gap: 10px;
+  }
+  .rc-nights-chip {
+    flex: 1;
+    min-height: 48px;
+    border: 0;
+    border-radius: 15px;
+    background: var(--nm-base);
+    box-shadow: var(--nm-soft);
+    color: var(--text);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    cursor: pointer;
+  }
+  .rc-nights-chip.is-selected {
+    box-shadow: var(--nm-press);
+    color: var(--accent-text);
   }
   .rc-sheet__done {
     flex: none;
