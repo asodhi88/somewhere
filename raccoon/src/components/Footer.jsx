@@ -7,7 +7,10 @@ import FeedbackForm from './FeedbackForm'
 export default function Footer() {
   return (
     <footer className="rc-footer">
-      <span className="rc-footer__meta tnum">somewhere · v1</span>
+      <div className="rc-footer__left">
+        <span className="rc-footer__meta tnum">somewhere · v1</span>
+        <span className="rc-footer__meta">designed &amp; built by Aman in Toronto</span>
+      </div>
       <FeedbackForm placement="footer" />
     </footer>
   )

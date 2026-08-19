@@ -1143,6 +1143,14 @@ a:hover {
   font-size: 13px;
   color: var(--ink-muted, var(--muted));
 }
+.rc-footer__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
 .rc-footer__meta {
   font-size: 12px;
   flex: none;
