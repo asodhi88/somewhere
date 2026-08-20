@@ -1522,19 +1522,23 @@ html[data-ambient='day'] .rc-backtotop {
     opacity: 0.75;
   }
 }
+/* The streak lives entirely in the first ~3.5% of the cycle, then the shooter
+   sits idle for the long remainder. Compressing the active window keeps each
+   streak quick and crisp even though the durations are long (NightSky SHOOTERS),
+   which is what makes them rare rather than slow. */
 @keyframes rc-shoot {
   0% {
     transform: translate3d(0, 0, 0) scaleX(0.15);
     opacity: 0;
   }
-  1% {
+  0.5% {
     opacity: 0.45;
   }
-  5% {
+  2.2% {
     transform: translate3d(300px, 190px, 0) scaleX(1);
     opacity: 0.45;
   }
-  8% {
+  3.5% {
     transform: translate3d(400px, 250px, 0) scaleX(0.5);
     opacity: 0;
   }

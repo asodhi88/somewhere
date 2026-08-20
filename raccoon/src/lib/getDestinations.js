@@ -17,7 +17,7 @@
  *   stay            {string}  'budget' | 'mid' | 'nice' (default 'mid')
  *   maxFlightHours  {number}  max flight time in hours (optional)
  *   limit           {number}  max results returned (default 12)
- *   maxPerRegion    {number}  per-region cap for diversification (default 2)
+ *   maxPerRegion    {number}  per-region cap for diversification (default 3)
  * @returns {Array} Ranked, diversified list of destination result objects.
  */
 import destinations from '../data/destinations.json' with { type: 'json' }
