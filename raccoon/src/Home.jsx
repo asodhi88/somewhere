@@ -15,9 +15,9 @@ import {
   MONTH_OPTIONS,
 } from './lib/searchState'
 
-// The grid shows up to six (CLAUDE.md §6.2 mockup); the ranking's per-region
-// cap and diversification still apply underneath.
-const RESULT_LIMIT = 6
+// The grid shows up to twelve; the ranking's per-region cap and diversification
+// still apply underneath.
+const RESULT_LIMIT = 12
 
 // A brief, deliberate pause on each search so the loading state is real UI and
 // not a flash. The data is static/synchronous today; when it moves behind
