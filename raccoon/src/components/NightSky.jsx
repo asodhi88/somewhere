@@ -99,13 +99,14 @@ function computeMoon() {
   }
 }
 
+// Kept deliberately sparse: a shooting star should be a rare, "did I just see
+// that" event, not a steady drizzle. Each streak is only visible for ~3.5% of
+// its cycle (see rc-shoot), so these long durations leave ~40s idle gaps; the
+// three staggered delays spread them so one crosses the sky roughly every ~13s.
 const SHOOTERS = [
-  { top: '7%', left: '3%', dur: '17s', delay: '1s', rot: '27deg' },
-  { top: '30%', left: '76%', dur: '19s', delay: '4s', rot: '39deg' },
-  { top: '4%', left: '54%', dur: '16s', delay: '7s', rot: '21deg' },
-  { top: '44%', left: '2%', dur: '18s', delay: '10s', rot: '33deg' },
-  { top: '15%', left: '84%', dur: '20s', delay: '13s', rot: '46deg' },
-  { top: '52%', left: '66%', dur: '21s', delay: '16s', rot: '25deg' },
+  { top: '7%', left: '3%', dur: '40s', delay: '3s', rot: '27deg' },
+  { top: '15%', left: '84%', dur: '48s', delay: '19s', rot: '46deg' },
+  { top: '44%', left: '2%', dur: '54s', delay: '36s', rot: '33deg' },
 ]
 
 // Three slow-blinking satellites drifting across the sky. Randomised top /
