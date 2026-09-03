@@ -8,7 +8,6 @@ import {
   rankLabel,
 } from '../lib/format'
 import { buildFlightSearchUrl, resolveSearchMonth } from '../lib/links'
-import { MONTH_OPTIONS } from '../lib/searchState'
 
 // Unsplash's API guidelines: credit the photographer with a link back to their
 // profile, and link to Unsplash, both tagged with our utm_source.
@@ -44,8 +43,6 @@ export default function ResultCard({ result, nights, originIata, month, index = 
     month,
     nights,
   })
-
-  const monthName = MONTH_OPTIONS.find((o) => o.value === month)?.name
 
   const handleFlightClick = () => {
     track('flight_handoff', {
@@ -136,33 +133,38 @@ export default function ResultCard({ result, nights, originIata, month, index = 
               from the Sherpa Requirements API. */}
         </div>
 
-        {/* The card's one outbound action — a month-price calendar, not a fare
-            (flight-handoff-task.md §3). Visually secondary to the city name and
-            price above; never rendered when buildFlightSearchUrl can't resolve
-            a valid link. */}
-        {flightUrl && (
-          <a
-            className="rc-card__handoff"
-            href={flightUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleFlightClick}
-          >
-            See fares for {monthName || 'this month'}
-            <span className="rc-card__handoff-arrow" aria-hidden="true">↗</span>
-          </a>
-        )}
-
         {/* Breakdown lives in the body column, beneath the chips — aligned to the
             text, never under the image. */}
         {open && (
           <div className="rc-card__breakdown">
-            <div className="rc-break">
-              <span className="rc-break__label">Flight</span>
-              <span className="rc-break__value tnum">
-                {moneyRange(cost.breakdown.flight.low, cost.breakdown.flight.high)}
-              </span>
-            </div>
+            {/* The Flight box doubles as the card's one outbound action — a
+                month-price calendar, not a fare (flight-handoff-task.md §3) —
+                when buildFlightSearchUrl resolves a link. Otherwise it's a
+                plain box like the other two: no link, arrow, or hover. */}
+            {flightUrl ? (
+              <a
+                className="rc-break rc-break--link"
+                href={flightUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleFlightClick}
+              >
+                <span className="rc-break__label">
+                  Flight
+                  <span className="rc-break__arrow" aria-hidden="true">↗</span>
+                </span>
+                <span className="rc-break__value tnum">
+                  {moneyRange(cost.breakdown.flight.low, cost.breakdown.flight.high)}
+                </span>
+              </a>
+            ) : (
+              <div className="rc-break">
+                <span className="rc-break__label">Flight</span>
+                <span className="rc-break__value tnum">
+                  {moneyRange(cost.breakdown.flight.low, cost.breakdown.flight.high)}
+                </span>
+              </div>
+            )}
             <div className="rc-break">
               <span className="rc-break__label">Stay · {nights} nights</span>
               <span className="rc-break__value tnum">
