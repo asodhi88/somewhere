@@ -109,15 +109,13 @@ const SHOOTERS = [
   { top: '44%', left: '2%', dur: '54s', delay: '36s', rot: '33deg' },
 ]
 
-// Three slow-blinking satellites drifting across the sky. Randomised top /
-// duration / delay / rise, ~35% mirrored (right→left). The horizontal travel is
-// 120vw so a dot always clears the panel regardless of viewport; the rise is fed
-// to the keyframe as --sat-dy. data-motion="transient" removes them all under
-// prefers-reduced-motion (the existing [data-motion='transient'] rule).
+// A single slow-blinking satellite drifting across the sky. The horizontal travel
+// is 120vw so the dot always clears the panel regardless of viewport; the rise is
+// fed to the keyframe as --sat-dy. data-motion="transient" removes it under
+// prefers-reduced-motion (the existing [data-motion='transient'] rule). Satellites
+// only exist in the night sky, so this is inherently dark-mode-only.
 const SATS = [
-  { top: '14%', dur: '15s', delay: '-3s', rise: -64, mirror: false },
-  { top: '58%', dur: '22s', delay: '-11s', rise: -38, mirror: true },
-  { top: '34%', dur: '18s', delay: '-7s', rise: -76, mirror: false },
+  { top: '14%', dur: '38s', delay: '-3s', rise: -64, mirror: false },
 ]
 
 export default function NightSky({ showMoon = true, starsOnly = false, fullField = false }) {
