@@ -349,6 +349,7 @@ function toResult(entry, filters, rank) {
   return {
     rank,
     id: dest.id,
+    airport: dest.airport,
     city: dest.city,
     country: dest.country,
     region: dest.region,

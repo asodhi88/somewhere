@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { track } from '@vercel/analytics'
 import {
   moneyRange,
   flightMeta,
@@ -6,6 +7,8 @@ import {
   overTag,
   rankLabel,
 } from '../lib/format'
+import { buildFlightSearchUrl, resolveSearchMonth } from '../lib/links'
+import { MONTH_OPTIONS } from '../lib/searchState'
 
 // Unsplash's API guidelines: credit the photographer with a link back to their
 // profile, and link to Unsplash, both tagged with our utm_source.
@@ -25,12 +28,33 @@ const UTM = '?utm_source=somewhere&utm_medium=referral'
  * `hero_image` is present, with required attribution; when it's null (the whole
  * v1 dataset today, §5) it falls back to the designed placeholder texture.
  */
-export default function ResultCard({ result, nights, index = 0, onOpenLightbox }) {
+export default function ResultCard({ result, nights, originIata, month, index = 0, onOpenLightbox }) {
   const [open, setOpen] = useState(false)
   const { cost } = result
   const reason = result.blurb || result.reason
   const img = result.hero_image
   const hasImg = !!(img && img.url)
+
+  // The one outbound action a card offers (flight-handoff-task.md). null
+  // means required inputs are missing or the month can't be resolved — in
+  // that case render nothing, no disabled state.
+  const flightUrl = buildFlightSearchUrl({
+    originIata,
+    destinationIata: result.airport,
+    month,
+    nights,
+  })
+
+  const monthName = MONTH_OPTIONS.find((o) => o.value === month)?.name
+
+  const handleFlightClick = () => {
+    track('flight_handoff', {
+      destination: result.id,
+      origin: originIata,
+      month: resolveSearchMonth(month),
+      rank: result.rank,
+    })
+  }
 
   return (
     // data-motion opts the card into the reduced-motion still; the per-card
@@ -111,6 +135,23 @@ export default function ResultCard({ result, nights, index = 0, onOpenLightbox }
               WEIGHTS in ranking.js); restore once passport-aware data lands
               from the Sherpa Requirements API. */}
         </div>
+
+        {/* The card's one outbound action — a month-price calendar, not a fare
+            (flight-handoff-task.md §3). Visually secondary to the city name and
+            price above; never rendered when buildFlightSearchUrl can't resolve
+            a valid link. */}
+        {flightUrl && (
+          <a
+            className="rc-card__handoff"
+            href={flightUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleFlightClick}
+          >
+            See fares for {monthName || 'this month'}
+            <span className="rc-card__handoff-arrow" aria-hidden="true">↗</span>
+          </a>
+        )}
 
         {/* Breakdown lives in the body column, beneath the chips — aligned to the
             text, never under the image. */}
