@@ -224,6 +224,8 @@ export default function Home({ onNavigate }) {
             <ResultsList
               results={results}
               nights={filters.nights}
+              originIata={filters.origin.toUpperCase()}
+              month={filters.month}
               pending={pending}
               searched={searched}
               monthLabel={monthLabel}

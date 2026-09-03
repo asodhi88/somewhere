@@ -1085,6 +1085,35 @@ a:hover {
   text-decoration-thickness: 2px;
 }
 
+/* The Flight breakdown box doubles as the card's outbound flight handoff when
+   a search link resolves. A distinct hover/focus (accent ring + soft fill,
+   echoing the open-card accent) marks it interactive next to the static Stay
+   and Ground boxes; the whole box is the touch target. */
+a.rc-break--link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+a.rc-break--link:hover {
+  border-color: var(--accent-ring);
+  background: var(--accent-soft);
+}
+a.rc-break--link:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+}
+.rc-break--link .rc-break__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.rc-break__arrow {
+  font-size: 12px;
+  color: var(--accent-text);
+}
+
 /* ── Empty / loading states ─────────────────────────────────────────────── */
 .rc-empty {
   border: 1px solid var(--glass-border, var(--border));
@@ -2116,11 +2145,16 @@ html[data-ambient='day'] .rc-blind__bar-fill {
   padding: 44px 56px 96px;
   border-top: 1px solid var(--hairline, var(--border));
 }
+.rc-blind__footer-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 560px;
+}
 .rc-blind__footer-note {
   font-size: 13px;
   line-height: 1.6;
   color: var(--ink-muted, var(--muted));
-  max-width: 560px;
 }
 .rc-blind__cta-btn {
   flex: none;

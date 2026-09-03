@@ -10,6 +10,8 @@ import ResultCard from './ResultCard'
 export default function ResultsList({
   results,
   nights,
+  originIata,
+  month,
   pending,
   searched,
   monthLabel,
@@ -84,6 +86,8 @@ export default function ResultsList({
             key={`${searchNonce}-${r.id}`}
             result={r}
             nights={nights}
+            originIata={originIata}
+            month={month}
             index={i}
             onOpenLightbox={onOpenLightbox}
           />

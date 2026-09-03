@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { track } from '@vercel/analytics'
 import {
   moneyRange,
   flightMeta,
@@ -6,6 +7,7 @@ import {
   overTag,
   rankLabel,
 } from '../lib/format'
+import { buildFlightSearchUrl, resolveSearchMonth } from '../lib/links'
 
 // Unsplash's API guidelines: credit the photographer with a link back to their
 // profile, and link to Unsplash, both tagged with our utm_source.
@@ -25,12 +27,31 @@ const UTM = '?utm_source=somewhere&utm_medium=referral'
  * `hero_image` is present, with required attribution; when it's null (the whole
  * v1 dataset today, §5) it falls back to the designed placeholder texture.
  */
-export default function ResultCard({ result, nights, index = 0, onOpenLightbox }) {
+export default function ResultCard({ result, nights, originIata, month, index = 0, onOpenLightbox }) {
   const [open, setOpen] = useState(false)
   const { cost } = result
   const reason = result.blurb || result.reason
   const img = result.hero_image
   const hasImg = !!(img && img.url)
+
+  // The one outbound action a card offers (flight-handoff-task.md). null
+  // means required inputs are missing or the month can't be resolved — in
+  // that case render nothing, no disabled state.
+  const flightUrl = buildFlightSearchUrl({
+    originIata,
+    destinationIata: result.airport,
+    month,
+    nights,
+  })
+
+  const handleFlightClick = () => {
+    track('flight_handoff', {
+      destination: result.id,
+      origin: originIata,
+      month: resolveSearchMonth(month),
+      rank: result.rank,
+    })
+  }
 
   return (
     // data-motion opts the card into the reduced-motion still; the per-card
@@ -116,12 +137,34 @@ export default function ResultCard({ result, nights, index = 0, onOpenLightbox }
             text, never under the image. */}
         {open && (
           <div className="rc-card__breakdown">
-            <div className="rc-break">
-              <span className="rc-break__label">Flight</span>
-              <span className="rc-break__value tnum">
-                {moneyRange(cost.breakdown.flight.low, cost.breakdown.flight.high)}
-              </span>
-            </div>
+            {/* The Flight box doubles as the card's one outbound action — a
+                month-price calendar, not a fare (flight-handoff-task.md §3) —
+                when buildFlightSearchUrl resolves a link. Otherwise it's a
+                plain box like the other two: no link, arrow, or hover. */}
+            {flightUrl ? (
+              <a
+                className="rc-break rc-break--link"
+                href={flightUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleFlightClick}
+              >
+                <span className="rc-break__label">
+                  Flight
+                  <span className="rc-break__arrow" aria-hidden="true">↗</span>
+                </span>
+                <span className="rc-break__value tnum">
+                  {moneyRange(cost.breakdown.flight.low, cost.breakdown.flight.high)}
+                </span>
+              </a>
+            ) : (
+              <div className="rc-break">
+                <span className="rc-break__label">Flight</span>
+                <span className="rc-break__value tnum">
+                  {moneyRange(cost.breakdown.flight.low, cost.breakdown.flight.high)}
+                </span>
+              </div>
+            )}
             <div className="rc-break">
               <span className="rc-break__label">Stay · {nights} nights</span>
               <span className="rc-break__value tnum">

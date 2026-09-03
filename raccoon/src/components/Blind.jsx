@@ -275,12 +275,29 @@ export default function Blind({ open, onClose, onHome }) {
                   </div>
                 </section>
 
-                {/* Footer — ranges note + amber CTA (wired to onClose, as today). */}
+                {/* Footer — honesty notes + amber CTA (wired to onClose, as today).
+                    Three things every result card now implies get spelled out
+                    here: the numbers are estimates, the outbound link hands off
+                    to a calendar (not a fare), and — only when the site actually
+                    carries one — that the link is an affiliate link. */}
                 <div className="rc-blind__footer" data-motion="1" style={{ animationDelay: '2.2s' }}>
-                  <span className="rc-blind__footer-note">
-                    Estimates are always shown as ranges &mdash; they are not live
-                    inventory.
-                  </span>
+                  <div className="rc-blind__footer-notes">
+                    <span className="rc-blind__footer-note">
+                      Estimates are always shown as ranges &mdash; they come from a
+                      curated dataset we hand-built, not a live fare feed.
+                    </span>
+                    <span className="rc-blind__footer-note">
+                      &ldquo;See fares&rdquo; sends you to a Skyscanner month-price
+                      calendar, where you pick your own dates. <em>somewhere</em>{' '}
+                      doesn&rsquo;t choose dates or fares on your behalf.
+                    </span>
+                    {import.meta.env.VITE_SKYSCANNER_PARTNER_ID && (
+                      <span className="rc-blind__footer-note">
+                        That link is an affiliate link &mdash; we may earn a
+                        commission if you book through it, at no extra cost to you.
+                      </span>
+                    )}
+                  </div>
                   <button type="button" className="rc-blind__cta-btn" onClick={onClose}>
                     Find my trip &rarr;
                   </button>
