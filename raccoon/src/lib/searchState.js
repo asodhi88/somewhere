@@ -91,13 +91,28 @@ export const STAY_OPTIONS = [
 const STAYS = STAY_OPTIONS.map((s) => s.value)
 
 // The defaults the design mockup shows: $2,000 · 7 nights · October · Mid-range,
-// departing Toronto.
+// departing Toronto. Used to resolve any field left blank when a search is run,
+// and as the fallback for invalid URL params — NOT as the landing display.
 export const DEFAULT_FILTERS = {
   origin: DEFAULT_ORIGIN,
   budget: 2000,
   nights: 7,
   month: DEFAULT_MONTH,
   stay: 'mid',
+}
+
+// The blank composer state: what the search bar shows on a fresh visit and after
+// the "somewhere" brand is clicked (Home.resetToHome). Every field is empty so
+// the floating labels rest as the field names — "budget / nights / when / stay" —
+// exactly as the Trip Search Bar handoff designed the default state. Origin is
+// fixed to YYZ (v1) rather than blank. Blanks are resolved to DEFAULT_FILTERS when
+// a search is actually run (SearchBar.submit / MobileSearch seed).
+export const BLANK_FILTERS = {
+  origin: DEFAULT_ORIGIN,
+  budget: null,
+  nights: '',
+  month: '',
+  stay: '',
 }
 
 const clampInt = (v, lo, hi, fallback) => {

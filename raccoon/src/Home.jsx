@@ -9,9 +9,9 @@ import {
   filtersFromSearch,
   searchFromFilters,
   hasSearchParams,
-  loadStoredFilters,
   storeFilters,
   monthKeyOf,
+  BLANK_FILTERS,
   MONTH_OPTIONS,
 } from './lib/searchState'
 
@@ -28,11 +28,12 @@ const SEARCH_DELAY_MS = 380
 // other pages (the How-it-works link in the header); search state stays on "/".
 export default function Home({ onNavigate }) {
   const search = typeof window !== 'undefined' ? window.location.search : ''
-  // A shared/bookmarked link (query present) always wins. On a bare "/", fall
-  // back to the remembered last search so the composer opens on the user's own
-  // picks (§4.3 layer 2) — this prefills only; results still wait for a search.
+  // A shared/bookmarked link (query present) always wins and prefills the composer
+  // from the URL. A bare "/" — a fresh visit — opens on the blank composer so the
+  // fields rest as their names (the handoff's default state), not on prefilled
+  // values; results still wait for an explicit search either way.
   const [filters, setFilters] = useState(
-    () => (hasSearchParams(search) ? filtersFromSearch(search) : loadStoredFilters()) || filtersFromSearch(search),
+    () => (hasSearchParams(search) ? filtersFromSearch(search) : BLANK_FILTERS),
   )
   // Results stay hidden until an explicit search. A bare visit shows the prompt;
   // a shared/bookmarked link (query present) counts as that search, so the link
@@ -116,7 +117,7 @@ export default function Home({ onNavigate }) {
     window.clearTimeout(timer.current)
     window.history.pushState({}, '', '/')
     setBlindOpen(false)
-    setFilters(filtersFromSearch(''))
+    setFilters(BLANK_FILTERS)
     setSearched(false)
     setPending(false)
     setResetKey((k) => k + 1)
@@ -155,8 +156,9 @@ export default function Home({ onNavigate }) {
       // can safely go Back.
       blindPushedRef.current = onHiw
       if (!onHiw) {
-        setFilters(filtersFromSearch(window.location.search))
-        setSearched(hasSearchParams(window.location.search))
+        const hasParams = hasSearchParams(window.location.search)
+        setFilters(hasParams ? filtersFromSearch(window.location.search) : BLANK_FILTERS)
+        setSearched(hasParams)
         setResetKey((k) => k + 1)
       }
     }
