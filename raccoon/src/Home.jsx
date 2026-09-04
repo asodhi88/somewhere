@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Lightbox from './components/Lightbox'
 import Blind from './components/Blind'
 import { getDestinations, getAvailableMonths } from './lib/getDestinations'
+import { applyAmbient } from './lib/ambient'
 import {
   filtersFromSearch,
   searchFromFilters,
@@ -112,10 +113,14 @@ export default function Home({ onNavigate }) {
 
   // Reset to a clean homepage: clear the search, results, and any open blind, and
   // land on "/". Wired to every "somewhere" mark (header + blind), so the brand is
-  // a uniform "start over" from anywhere in the app.
+  // a uniform "start over" from anywhere in the app. Also re-resolves the day/night
+  // ambient from the current clock: the pre-paint script (index.html) fixes the
+  // theme once at load, so a session opened at night would otherwise stay dark past
+  // dawn — clicking the brand re-syncs it (night → day, or day → night).
   const resetToHome = useCallback(() => {
     window.clearTimeout(timer.current)
     window.history.pushState({}, '', '/')
+    applyAmbient()
     setBlindOpen(false)
     setFilters(BLANK_FILTERS)
     setSearched(false)
