@@ -416,9 +416,13 @@ a:hover {
 /* Field variant — fills the .rc-field control (search widget stay/when). */
 .rc-menu--field {
   width: 100%;
+  /* Fill the field so the dropdown panel (top: 100%) still drops from the field's
+     bottom edge even though the floating-label control is top-padded. */
+  height: 100%;
 }
 .rc-menu__trigger--field {
   width: 100%;
+  height: 100%;
   justify-content: space-between;
   gap: 2px;
   padding: 0;
@@ -667,11 +671,9 @@ a:hover {
   }
 }
 .rc-field {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  position: relative;
+  height: 58px;
   text-align: left;
-  padding: 9px 19px;
   border-radius: 16px;
   background: var(--glass-sunken, var(--surface-sunken));
   border: 1px solid var(--field-border, var(--border));
@@ -693,23 +695,56 @@ a:hover {
 .rc-field--stay {
   flex: 1;
 }
+/* Floating label (Trip Search Bar handoff — the design element). The label rests
+   centred over the value like a placeholder, then rises to a small cap at the top
+   on focus or once the field holds a value (.is-filled, set by SearchBar). Mapped
+   onto the warm-dark field rather than the handoff's light card; text is lowercase
+   per the same handoff. */
 .rc-field__label {
-  font-size: 11px;
+  position: absolute;
+  left: 19px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transform-origin: left center;
+  white-space: nowrap;
+  pointer-events: none;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
   color: var(--field-label, var(--muted));
+  opacity: 0.72;
+  transition: transform 0.26s cubic-bezier(0.32, 1.14, 0.52, 1),
+    font-size 0.18s ease, letter-spacing 0.18s ease, opacity 0.18s ease;
+}
+.rc-field.is-filled .rc-field__label,
+.rc-field:focus-within .rc-field__label {
+  transform: translateY(-13px);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  opacity: 1;
 }
 .rc-field__control {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   gap: 2px;
-  position: relative;
+  padding: 13px 19px 0;
 }
 .rc-field__prefix {
   font-size: 18px;
   font-weight: 500;
   color: var(--field-val, var(--text));
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+/* The $ only appears once the field carries a value, so the resting state shows a
+   single clean "budget" label. */
+.rc-field--budget.is-filled .rc-field__prefix {
+  opacity: 1;
 }
 .rc-field input {
   appearance: none;
@@ -738,6 +773,17 @@ a:hover {
 .rc-field input[type='number'] {
   -moz-appearance: textfield;
 }
+/* The floating label already names the field, so the input's own placeholder
+   ("no limit") is redundant and stays hidden in every state — focus included. */
+.rc-field input::placeholder {
+  color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rc-field__label,
+  .rc-field__prefix {
+    transition: none;
+  }
+}
 
 .rc-search__submit {
   flex: none;
@@ -750,6 +796,7 @@ a:hover {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.005em;
+  text-transform: lowercase;
   cursor: pointer;
   box-shadow:
     0 8px 18px -6px rgba(var(--ac-rgb), 0.55),

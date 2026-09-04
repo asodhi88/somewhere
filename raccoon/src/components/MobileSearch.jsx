@@ -3,6 +3,8 @@ import {
   ORIGIN_OPTIONS,
   MONTH_OPTIONS,
   STAY_OPTIONS,
+  DEFAULT_FILTERS,
+  DEFAULT_MONTH,
 } from '../lib/searchState'
 
 /**
@@ -150,13 +152,17 @@ function Tile({ label, sub, selected, size, onClick }) {
 }
 
 export default function MobileSearch({ defaults, pending, onSearch }) {
-  const [origin, setOrigin] = useState(defaults.origin)
-  const [nights, setNights] = useState(defaults.nights)
-  const [month, setMonth] = useState(defaults.month)
-  const [stay, setStay] = useState(defaults.stay)
+  const [origin, setOrigin] = useState(defaults.origin || DEFAULT_FILTERS.origin)
+  // The mobile composer is a sentence, so it can't rest on empty field names the
+  // way the desktop bar does — a blank landing (BLANK_FILTERS) would read
+  // "for  nights in ...". Every value falls back to the default so the sentence
+  // always reads whole; a search from here still commits concrete picks.
+  const [nights, setNights] = useState(defaults.nights || DEFAULT_FILTERS.nights)
+  const [month, setMonth] = useState(defaults.month || DEFAULT_MONTH)
+  const [stay, setStay] = useState(defaults.stay || DEFAULT_FILTERS.stay)
   // A desktop link can carry budget=null ("no limit"); mobile expresses a
   // concrete amount, so fall back to the default when none is set.
-  const [budget, setBudget] = useState(defaults.budget ?? 2000)
+  const [budget, setBudget] = useState(defaults.budget ?? DEFAULT_FILTERS.budget)
 
   const [openSheet, setOpenSheet] = useState(null)
   // The nights sheet edits a numeric draft (stepper + chips), committed on Done.
