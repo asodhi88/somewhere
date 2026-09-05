@@ -42,7 +42,7 @@ export default function Hero({
         <MobileSearch defaults={defaults} pending={pending} onSearch={onSearch} />
       ) : (
         <div className="rc-hero__content">
-          <h1 className="rc-hero__title">Find somewhere to go</h1>
+          <h1 className="rc-hero__title">find somewhere to go</h1>
           <p className="rc-hero__sub">
             Set your budget, month, and stay tier — we find places by what the
             whole trip costs.
