@@ -1,0 +1,134 @@
+{
+  "hav": {
+    "cityId": "hav",
+    "tier": "full",
+    "reviewedOn": "2026-09",
+    "anchor": {
+      "name": "Parque Central",
+      "lat": 23.1367,
+      "lng": -82.3589
+    },
+    "areas": [
+      {
+        "id": "habana-vieja",
+        "name": "Habana Vieja",
+        "lean": "above",
+        "friction": "walkable",
+        "character": "The restored colonial core — plazas, cathedrals and museums packed into a few walkable blocks by the harbour.",
+        "stayIf": [
+          "You want the headline sights outside your door",
+          "You'd rather walk everywhere than arrange rides",
+          "Restaurants, bars and live music within a few blocks matter"
+        ],
+        "skipIf": [
+          "Stretching your nightly budget further matters more to you than being in the middle of it",
+          "You need quiet to sleep — the streets stay lively late"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-82.3520, 23.1480],
+              [-82.3380, 23.1450],
+              [-82.3400, 23.1280],
+              [-82.3530, 23.1320],
+              [-82.3520, 23.1480]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "centro-habana",
+        "name": "Centro Habana",
+        "lean": "below",
+        "friction": "walkable",
+        "character": "Dense, lived-in blocks between the old town and Vedado — everyday Havana rather than the postcard.",
+        "stayIf": [
+          "You want the lowest nightly rates still within walking distance of the core",
+          "Staying among residents appeals more than staying among visitors",
+          "Being a short walk from both Habana Vieja and the Malecón suits you"
+        ],
+        "skipIf": [
+          "You want polished, restored surroundings rather than a working neighbourhood",
+          "You're set on stepping straight out into the main sights each morning"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-82.3660, 23.1480],
+              [-82.3520, 23.1480],
+              [-82.3530, 23.1300],
+              [-82.3660, 23.1300],
+              [-82.3660, 23.1480]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "vedado",
+        "name": "Vedado",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "Leafy mid-century avenues — grand hotels, jazz venues and a calmer pace set back from the crowds.",
+        "stayIf": [
+          "You want a quieter base on tree-lined streets",
+          "A short ride into the old town each day works for you",
+          "You like cinemas, cafés and music venues spread around you"
+        ],
+        "skipIf": [
+          "You'd rather walk to the historic core than take a ride to it each time",
+          "You want to be in the thick of the old town, not a residential district"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-82.4020, 23.1480],
+              [-82.3760, 23.1460],
+              [-82.3780, 23.1220],
+              [-82.4040, 23.1250],
+              [-82.4020, 23.1480]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "miramar",
+        "name": "Miramar",
+        "lean": "above",
+        "friction": "taxi-reliant",
+        "character": "Spacious embassy district across the river — large villas, private restaurants and room to breathe.",
+        "stayIf": [
+          "You want space, calm and larger rooms over being central",
+          "You're happy to rely on taxis to reach the sights",
+          "Private restaurants and a residential feel appeal more than street bustle"
+        ],
+        "skipIf": [
+          "You want to reach the old town without depending on taxis",
+          "Being within walking distance of the main sights is important to you"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-82.4380, 23.1320],
+              [-82.4150, 23.1280],
+              [-82.4180, 23.1080],
+              [-82.4380, 23.1120],
+              [-82.4380, 23.1320]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+
+  "sjo": {
+    "cityId": "sjo",
+    "tier": "minimal",
+    "reviewedOn": "2026-09",
+    "note": "Most trips treat San José as a short central stay before the coast or the volcanoes. Base yourself downtown, near Barrio Escalante, and it's walkable — there's no neighbourhood puzzle to solve here.",
+    "areas": []
+  }
+}

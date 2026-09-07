@@ -3240,3 +3240,370 @@ html[data-ambient='day'] .rc-eyebrow {
     height: 80px;
   }
 }
+
+/* ============================================================================
+   Neighbourhood guidance — "where to stay" detail overlay + map module
+   (neighbourhood-guidance-mechanism-task.md). Colour on the map encodes price
+   lean ONLY (below/about/above); it is a disclosed editorial judgment, not a
+   computed figure, and never a good/bad or safety scale.
+   ========================================================================== */
+
+/* The card affordance that opens the overlay — a quiet secondary action, never
+   competing with the amber CTA rule. */
+.rc-card__where {
+  align-self: flex-start;
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--surface-inset);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.rc-card__where:hover {
+  border-color: var(--accent-ring);
+  color: var(--accent-text);
+}
+.rc-card__where-arrow {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* Overlay — mirrors the Lightbox modal (fixed, backdrop-dismiss, Escape). */
+.rc-detail {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 4vw;
+  overflow-y: auto;
+  background: rgba(10, 8, 7, 0.86);
+  animation: rc-fade 0.15s ease;
+}
+.rc-detail__inner {
+  position: relative;
+  width: min(980px, 100%);
+  margin: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px clamp(20px, 3vw, 36px) 32px;
+  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.6);
+}
+.rc-detail__close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-inset);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.rc-detail__close:hover {
+  border-color: var(--accent-ring);
+  color: var(--accent-text);
+}
+.rc-detail__head {
+  margin-bottom: 20px;
+}
+.rc-detail__eyebrow {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.rc-detail__city {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 650;
+  color: var(--text);
+  line-height: 1.05;
+}
+.rc-detail__country {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* Module layout: map beside a panel on wide screens, stacked on narrow. */
+.rc-nb__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 20px;
+}
+.rc-nb__mapwrap {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+.rc-nb__map {
+  width: 100%;
+  height: clamp(300px, 46vh, 440px);
+}
+
+/* Three-band legend — exactly the three price-lean bands, nothing else. */
+.rc-nb__legend {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 9px 11px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 11.5px;
+  color: var(--text);
+  backdrop-filter: blur(6px);
+}
+.rc-nb__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+.rc-nb__legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* Anchor marker — one labelled pin, visually distinct from the area fills. */
+.rc-nb__anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(4px);
+  pointer-events: none;
+}
+.rc-nb__anchor-label {
+  order: -1;
+  margin-bottom: 4px;
+  padding: 2px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  white-space: nowrap;
+}
+.rc-nb__anchor-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 999px;
+  background: var(--ac);
+  border: 2.5px solid var(--bg);
+  box-shadow: 0 0 0 1.5px var(--ac), 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Panel — area switcher + selected-area detail. */
+.rc-nb__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+.rc-nb__tab {
+  --nb-lean: var(--muted);
+  padding: 6px 12px;
+  background: var(--surface-inset);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--nb-lean);
+  border-radius: 8px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.rc-nb__tab:hover {
+  color: var(--text);
+}
+.rc-nb__tab.is-active {
+  color: var(--text);
+  background: var(--surface-breakdown);
+  border-color: var(--border);
+  border-left-color: var(--nb-lean);
+}
+.rc-nb__detail-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.rc-nb__area-name {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 640;
+  color: var(--text);
+}
+.rc-nb__lean-chip {
+  --nb-lean: var(--muted);
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--nb-lean);
+  background: color-mix(in srgb, var(--nb-lean) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--nb-lean) 45%, transparent);
+  border-radius: 999px;
+}
+.rc-nb__friction {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.rc-nb__friction-icon {
+  color: var(--accent-text);
+  font-size: 12px;
+}
+.rc-nb__character {
+  margin: 0 0 16px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.rc-nb__fit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.rc-nb__fit-title {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.rc-nb__fit-title--stay {
+  color: #5ba890;
+}
+.rc-nb__fit-title--skip {
+  color: var(--muted);
+}
+.rc-nb__fit-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rc-nb__fit-list li {
+  position: relative;
+  padding-left: 15px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.rc-nb__fit-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--border);
+}
+.rc-nb__fit-col:first-child .rc-nb__fit-list li::before {
+  background: #5ba890;
+}
+
+/* Disclosure line — the honesty statement, always visible for full-tier. */
+.rc-nb__disclosure {
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Minimal tier — a designed editorial callout with the SAME visual weight as
+   the full module, never a greyed-out or "no data" empty state. */
+.rc-nb__callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px 24px;
+  background: var(--surface-breakdown);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ac);
+  border-radius: 14px;
+}
+.rc-nb__callout-mark {
+  flex: none;
+  margin-top: 2px;
+}
+.rc-nb__callout-title {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 640;
+  color: var(--text);
+}
+.rc-nb__callout-text {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* MapLibre control chrome, themed to the warm-dark surfaces. */
+.rc-nb__mapwrap .maplibregl-ctrl-attrib {
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  color: var(--muted);
+  font-size: 10.5px;
+}
+.rc-nb__mapwrap .maplibregl-ctrl-attrib a {
+  color: var(--muted);
+}
+.rc-nb__mapwrap .maplibregl-ctrl-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.rc-nb__mapwrap .maplibregl-ctrl-group button + button {
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 760px) {
+  .rc-nb__grid {
+    grid-template-columns: 1fr;
+  }
+  .rc-detail__inner {
+    padding: 24px 16px 26px;
+  }
+  .rc-nb__fit {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}

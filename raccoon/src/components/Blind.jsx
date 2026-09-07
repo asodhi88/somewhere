@@ -291,6 +291,13 @@ export default function Blind({ open, onClose, onHome }) {
                       calendar, where you pick your own dates. <em>somewhere</em>{' '}
                       doesn&rsquo;t choose dates or fares on your behalf.
                     </span>
+                    <span className="rc-blind__footer-note">
+                      Where a place has a &ldquo;where to stay&rdquo; map, the areas are
+                      shaded by how each one&rsquo;s nightly stay leans against that
+                      city&rsquo;s estimate &mdash; below, about, or above. That lean is a
+                      dated editorial judgment we review by hand, not a live calculation,
+                      and it never changes the ranking or the estimate.
+                    </span>
                     {import.meta.env.VITE_SKYSCANNER_PARTNER_ID && (
                       <span className="rc-blind__footer-note">
                         That link is an affiliate link &mdash; we may earn a

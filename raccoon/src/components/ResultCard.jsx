@@ -8,6 +8,7 @@ import {
   rankLabel,
 } from '../lib/format'
 import { buildFlightSearchUrl, resolveSearchMonth } from '../lib/links'
+import { getNeighbourhoods } from '../lib/getNeighbourhoods'
 
 // Unsplash's API guidelines: credit the photographer with a link back to their
 // profile, and link to Unsplash, both tagged with our utm_source.
@@ -27,12 +28,18 @@ const UTM = '?utm_source=somewhere&utm_medium=referral'
  * `hero_image` is present, with required attribution; when it's null (the whole
  * v1 dataset today, §5) it falls back to the designed placeholder texture.
  */
-export default function ResultCard({ result, nights, originIata, month, index = 0, onOpenLightbox }) {
+export default function ResultCard({ result, nights, originIata, month, index = 0, onOpenLightbox, onOpenDetail }) {
   const [open, setOpen] = useState(false)
   const { cost } = result
   const reason = result.blurb || result.reason
   const img = result.hero_image
   const hasImg = !!(img && img.url)
+
+  // Show the "where to stay" affordance only for cities that actually carry a
+  // neighbourhood guide (full or minimal). Cards without an entry are untouched,
+  // so a city with no guidance never advertises one. Routed through the seam.
+  const guide = getNeighbourhoods(result.id)
+  const hasGuide = !!(guide && guide.tier !== 'none')
 
   // The one outbound action a card offers (flight-handoff-task.md). null
   // means required inputs are missing or the month can't be resolved — in
@@ -132,6 +139,17 @@ export default function ResultCard({ result, nights, originIata, month, index = 
               WEIGHTS in ranking.js); restore once passport-aware data lands
               from the Sherpa Requirements API. */}
         </div>
+
+        {hasGuide && (
+          <button
+            type="button"
+            className="rc-card__where"
+            onClick={() => onOpenDetail?.(result)}
+          >
+            Where to stay
+            <span className="rc-card__where-arrow" aria-hidden="true">↗</span>
+          </button>
+        )}
 
         {/* Breakdown lives in the body column, beneath the chips — aligned to the
             text, never under the image. */}
