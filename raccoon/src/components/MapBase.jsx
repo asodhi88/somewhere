@@ -157,8 +157,15 @@ export default function MapBase({
       onReadyRef.current?.(map)
     })
 
+    // The container is not a fixed box: it appears when a card expands, and its
+    // width changes with the viewport and the full-screen layout. Without this
+    // the GL canvas keeps whatever size it had at creation.
+    const ro = new ResizeObserver(() => map.resize())
+    ro.observe(el)
+
     return () => {
       cancelled = true
+      ro.disconnect()
       map.remove()
     }
     // Read once at mount; callers remount (via React key) when the city changes.

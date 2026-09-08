@@ -32,8 +32,10 @@ export function CompactCityBand({ note }) {
   return (
     <div className="rc-nb__compact">
       <svg width="46" height="46" viewBox="0 0 46 46" fill="none" aria-hidden="true" className="rc-nb__compact-mark">
-        <circle cx="23" cy="23" r="21" stroke={LEAN.below.ink} strokeWidth="1.5" strokeOpacity="0.45" />
-        <circle cx="23" cy="23" r="13" stroke={LEAN.below.ink} strokeWidth="1.5" strokeOpacity="0.65" />
+        {/* Rings use the band colour rather than its darker ink: the ink reads on
+            the light ambient but disappears against the night surface. */}
+        <circle cx="23" cy="23" r="21" stroke={LEAN.below.color} strokeWidth="1.5" strokeOpacity="0.5" />
+        <circle cx="23" cy="23" r="13" stroke={LEAN.below.color} strokeWidth="1.5" strokeOpacity="0.7" />
         <circle cx="23" cy="23" r="4.5" fill={LEAN.below.color} />
       </svg>
       <div className="rc-nb__compact-body">

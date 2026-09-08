@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import maplibregl from 'maplibre-gl'
 import MapBase from './MapBase'
 import { moneyRange } from '../lib/format'
@@ -509,7 +510,11 @@ export default function NeighbourhoodExpansion({ city, result, id, onCollapse })
 
       {disclosure}
 
-      {fsOpen && (
+      {/* Portalled to <body> on purpose: .rc-card carries a backdrop-filter, which
+          makes it the containing block for position:fixed descendants — the
+          overlay would otherwise be trapped inside the card and scroll with it.
+          Same trap the How-it-works blind avoids by being a sibling of .rc-app. */}
+      {fsOpen && createPortal(
         <div className="rc-nb__fs" role="dialog" aria-modal="true" aria-label={`${result.city} neighbourhoods`}>
           <div className="rc-nb__fs-inner">
             <aside className="rc-nb__rail">
@@ -584,7 +589,8 @@ export default function NeighbourhoodExpansion({ city, result, id, onCollapse })
               {disclosure}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </div>
   )

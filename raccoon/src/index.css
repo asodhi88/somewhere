@@ -3399,11 +3399,23 @@ html[data-ambient='day'] .rc-eyebrow {
 .rc-nb__canvas {
   position: relative;
   height: 360px;
-  background: var(--surface-sunken, #f2ece1);
+  /* Only visible until the GL canvas paints, so it must match MapBase's
+     background palette for the same ambient — keep the two in step. Note these
+     are literal values, not --surface-* tokens: those carry the night palette
+     on :root as the no-JS fallback and are not re-declared per ambient. */
+  background: #f2ece1;
 }
-.rc-nb__map {
+[data-ambient='night'] .rc-nb__canvas {
+  background: #101821;
+}
+/* Two classes deep on purpose: maplibre-gl.css ships `.maplibregl-map {
+   position: relative }` and rides in the lazy chunk, so it loads after this
+   file and would otherwise win on source order — collapsing the map to 0px. */
+.rc-nb__canvas .rc-nb__map {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
 }
 .rc-nb__mapctl {
   position: absolute;
@@ -3853,6 +3865,17 @@ html[data-ambient='day'] .rc-eyebrow {
 @media (max-width: 900px) {
   .rc-nb__body {
     grid-template-columns: 1fr;
+  }
+  /* Stacked, the bar would run to four rows (title / chips / chips / collapse).
+     Pull Collapse up beside the title and let the filters take the row below,
+     so the map isn't pushed down the screen. */
+  .rc-nb__legend--bar {
+    order: 3;
+    flex-basis: 100%;
+    margin-right: 0;
+  }
+  .rc-nb__collapse {
+    margin-left: auto;
   }
   .rc-nb__side {
     border-left: 0;
