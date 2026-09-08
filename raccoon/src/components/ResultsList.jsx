@@ -18,7 +18,6 @@ export default function ResultsList({
   monthHasData,
   searchNonce,
   onOpenLightbox,
-  onOpenDetail,
 }) {
   if (pending) {
     return (
@@ -91,7 +90,6 @@ export default function ResultsList({
             month={month}
             index={i}
             onOpenLightbox={onOpenLightbox}
-            onOpenDetail={onOpenDetail}
           />
         ))}
       </div>

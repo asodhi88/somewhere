@@ -1,14 +1,9 @@
-import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Hero from './components/Hero'
 import ResultsList from './components/ResultsList'
 import Footer from './components/Footer'
 import Lightbox from './components/Lightbox'
 import Blind from './components/Blind'
-
-// Lazy so MapLibre + pmtiles (the bulk of the JS) are code-split into their own
-// chunk, fetched only when a user actually opens a "where to stay" overlay —
-// they never weigh on the initial search-and-results load.
-const DestinationDetail = lazy(() => import('./components/DestinationDetail'))
 import { getDestinations, getAvailableMonths } from './lib/getDestinations'
 import { applyAmbient } from './lib/ambient'
 import {
@@ -53,10 +48,6 @@ export default function Home({ onNavigate }) {
   const [searchNonce, setSearchNonce] = useState(0)
   // The photo currently enlarged in the lightbox (null when closed).
   const [lightbox, setLightbox] = useState(null)
-  // The destination whose "where to stay" detail overlay is open (null when
-  // closed). Local UI state only — not URL-encoded; this overlay is a within-page
-  // affordance, not a shareable route.
-  const [detail, setDetail] = useState(null)
   // The "How it works" blind — the sole /how-it-works presentation. Home owns the
   // open state and the pushState; a direct hit / refresh on /how-it-works opens
   // the blind on load (App always renders Home), so the URL and the header link
@@ -248,7 +239,6 @@ export default function Home({ onNavigate }) {
               monthHasData={monthHasData}
               searchNonce={searchNonce}
               onOpenLightbox={setLightbox}
-              onOpenDetail={setDetail}
             />
           </div>
           <Footer />
@@ -267,11 +257,6 @@ export default function Home({ onNavigate }) {
         </button>
 
         {lightbox && <Lightbox image={lightbox} onClose={() => setLightbox(null)} />}
-        {detail && (
-          <Suspense fallback={null}>
-            <DestinationDetail result={detail} onClose={() => setDetail(null)} />
-          </Suspense>
-        )}
       </div>
 
       <Blind open={blindOpen} onClose={closeBlind} onHome={resetToHome} />

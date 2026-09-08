@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { track } from '@vercel/analytics'
 import {
   moneyRange,
@@ -9,6 +9,13 @@ import {
 } from '../lib/format'
 import { buildFlightSearchUrl, resolveSearchMonth } from '../lib/links'
 import { getNeighbourhoods } from '../lib/getNeighbourhoods'
+import { guideKind } from '../lib/neighbourhoodVocab'
+import { NeighbourhoodChip, CompactCityBand } from './neighbourhoodParts'
+
+// Lazy so MapLibre + pmtiles (the bulk of the JS) are code-split into their own
+// chunk, fetched only when a card's map is actually opened — they never weigh on
+// the initial search-and-results load.
+const NeighbourhoodExpansion = lazy(() => import('./NeighbourhoodGuide'))
 
 // Unsplash's API guidelines: credit the photographer with a link back to their
 // profile, and link to Unsplash, both tagged with our utm_source.
@@ -28,18 +35,21 @@ const UTM = '?utm_source=somewhere&utm_medium=referral'
  * `hero_image` is present, with required attribution; when it's null (the whole
  * v1 dataset today, §5) it falls back to the designed placeholder texture.
  */
-export default function ResultCard({ result, nights, originIata, month, index = 0, onOpenLightbox, onOpenDetail }) {
+export default function ResultCard({ result, nights, originIata, month, index = 0, onOpenLightbox }) {
   const [open, setOpen] = useState(false)
+  // The inline neighbourhood map, expanded in place inside the card.
+  const [mapOpen, setMapOpen] = useState(false)
   const { cost } = result
   const reason = result.blurb || result.reason
   const img = result.hero_image
   const hasImg = !!(img && img.url)
 
-  // Show the "where to stay" affordance only for cities that actually carry a
-  // neighbourhood guide (full or minimal). Cards without an entry are untouched,
-  // so a city with no guidance never advertises one. Routed through the seam.
+  // Neighbourhood guidance renders only for cities that actually carry an entry:
+  // 'full' gets the chip + inline map, 'minimal' gets the compact-city band, and
+  // anything else leaves the card exactly as it was. Routed through the seam.
   const guide = getNeighbourhoods(result.id)
-  const hasGuide = !!(guide && guide.tier !== 'none')
+  const kind = guideKind(guide)
+  const mapId = `rc-nb-${result.id}`
 
   // The one outbound action a card offers (flight-handoff-task.md). null
   // means required inputs are missing or the month can't be resolved — in
@@ -138,18 +148,14 @@ export default function ResultCard({ result, nights, originIata, month, index = 
           {/* Visa chip intentionally omitted: visa scoring is disabled (see
               WEIGHTS in ranking.js); restore once passport-aware data lands
               from the Sherpa Requirements API. */}
+          {kind === 'full' && (
+            <NeighbourhoodChip
+              open={mapOpen}
+              id={mapId}
+              onClick={() => setMapOpen((v) => !v)}
+            />
+          )}
         </div>
-
-        {hasGuide && (
-          <button
-            type="button"
-            className="rc-card__where"
-            onClick={() => onOpenDetail?.(result)}
-          >
-            Where to stay
-            <span className="rc-card__where-arrow" aria-hidden="true">↗</span>
-          </button>
-        )}
 
         {/* Breakdown lives in the body column, beneath the chips — aligned to the
             text, never under the image. */}
@@ -210,6 +216,21 @@ export default function ResultCard({ result, nights, originIata, month, index = 
           {open ? 'hide breakdown' : 'see breakdown'}
         </button>
       </div>
+
+      {/* Full-width rows across the card grid. A 'full' city expands the map in
+          place when the chip is on; a 'minimal' city always shows its band —
+          the honest "one core" answer, owned rather than left blank. */}
+      {kind === 'full' && mapOpen && (
+        <Suspense fallback={<div className="rc-nb__loading" />}>
+          <NeighbourhoodExpansion
+            city={guide}
+            result={result}
+            id={mapId}
+            onCollapse={() => setMapOpen(false)}
+          />
+        </Suspense>
+      )}
+      {kind === 'minimal' && <CompactCityBand note={guide.note} />}
     </article>
   )
 }

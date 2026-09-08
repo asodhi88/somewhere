@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import maplibregl from 'maplibre-gl'
 import { Protocol, PMTiles } from 'pmtiles'
+import { currentAmbient } from '../lib/ambient'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 /**
@@ -10,17 +11,21 @@ import 'maplibre-gl/dist/maplibre-gl.css'
  * can later swap (a different PMTiles extract, a hosted vector style, whatever)
  * as a one-file change — the same seam idea as getDestinations for data.
  *
- * Base tiles (mechanism PR): a self-hosted Protomaps PMTiles extract per city,
- * served from the app's own origin (public/tiles/<id>.pmtiles), no API key and no
- * runtime third-party call. When the extract is absent — the dev state until the
- * files are dropped in — the map degrades cleanly to a styled backdrop: the
- * neighbourhood polygons, anchor and legend still render, just without streets
+ * Base tiles: a self-hosted Protomaps PMTiles extract per city, served from the
+ * app's own origin (public/tiles/<id>.pmtiles), no API key and no runtime
+ * third-party call. When the extract is absent — the dev state until the files
+ * are dropped in — the map degrades cleanly to a styled backdrop: the district
+ * and neighbourhood shapes, anchor and labels still render, just without streets
  * underneath. The header probe keeps that path silent (no 404 noise) rather than
  * bolting on a broken vector source.
  *
  * Attribution: OSM + Protomaps is shown by MapLibre's attribution control, but
  * ONLY once the PMTiles base actually loads (its source carries the string), so a
  * backdrop-only map makes no attribution claim it isn't backing with tiles.
+ *
+ * Zoom controls are deliberately NOT added here — the neighbourhood module draws
+ * its own buttons over the canvas (design: Neighborhood Guidance v2) and drives
+ * them through the map handed to `onReady`.
  */
 
 // One protocol registration for the whole app. maplibre keys protocols by scheme
@@ -37,27 +42,19 @@ function ensureProtocol() {
 // deliberately quiet — the base is context, the coloured areas are the subject.
 const PALETTES = {
   night: {
-    background: '#1a1614',
-    earth: '#221c18',
-    water: '#141d24',
-    roads: '#3a322c',
-    buildings: '#2b241f',
+    background: '#101821',
+    earth: '#16202a',
+    water: '#0e1720',
+    roads: '#2b3742',
+    buildings: '#1b2630',
   },
   day: {
-    background: '#e7ded1',
-    earth: '#efe7d9',
-    water: '#c9dbe4',
-    roads: '#d8ccbb',
-    buildings: '#e2d7c6',
+    background: '#f2ece1',
+    earth: '#f6f1e7',
+    water: '#dfe8ea',
+    roads: '#e2d9cb',
+    buildings: '#ebe3d6',
   },
-}
-
-function currentPalette() {
-  const ambient =
-    (typeof document !== 'undefined' &&
-      document.documentElement.getAttribute('data-ambient')) ||
-    'night'
-  return ambient === 'day' ? PALETTES.day : PALETTES.night
 }
 
 const ATTRIBUTION =
@@ -77,9 +74,12 @@ function basemapLayers(pal) {
 export default function MapBase({
   center,
   zoom = 12.5,
+  minZoom = 8,
+  maxZoom = 14,
   fitBounds,
   pmtilesUrl,
   onReady,
+  scrollZoom = false,
   className = 'rc-nb__map',
   ariaLabel = 'Neighbourhood map',
 }) {
@@ -93,7 +93,7 @@ export default function MapBase({
     const el = containerRef.current
     if (!el) return
     ensureProtocol()
-    const pal = currentPalette()
+    const pal = PALETTES[currentAmbient()]
 
     const reduce =
       typeof window.matchMedia === 'function' &&
@@ -103,25 +103,26 @@ export default function MapBase({
       container: el,
       center,
       zoom,
+      minZoom,
+      maxZoom,
       attributionControl: false,
       // Backdrop-only style to start; the PMTiles base is added on load if the
       // extract is present. A missing extract just leaves this backdrop.
       style: {
         version: 8,
-        // A blank glyphs endpoint isn't needed — we render no label layers here.
         sources: {},
         layers: [{ id: 'background', type: 'background', paint: { 'background-color': pal.background } }],
       },
-      // No inertia/rotate flourishes — a small reference map, not a globe toy.
+      // No rotate/pitch flourishes — a reference map, not a globe toy.
       dragRotate: false,
       pitchWithRotate: false,
       touchZoomRotate: true,
     })
     map.touchZoomRotate.disableRotation()
-    // The map lives inside a scrollable overlay, so wheel-zoom would trap the
-    // page scroll over it. Drag-pan stays; zoom is via the +/- control instead.
-    map.scrollZoom.disable()
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
+    // Inline, the map sits in the scrolling page, so wheel-zoom would trap the
+    // scroll over it; the module's own +/- buttons zoom instead. Full screen has
+    // no page scroll to steal, so the wheel is enabled there.
+    if (!scrollZoom) map.scrollZoom.disable()
 
     let cancelled = false
 
@@ -131,7 +132,7 @@ export default function MapBase({
         const pm = new PMTiles(pmtilesUrl)
         protocol.add(pm)
         const header = await pm.getHeader() // rejects if the extract is absent
-        if (cancelled || !map.getSource) return
+        if (cancelled) return
         map.addSource('basemap', {
           type: 'vector',
           url: `pmtiles://${pmtilesUrl}`,
@@ -140,9 +141,8 @@ export default function MapBase({
           maxzoom: header.maxZoom ?? 15,
         })
         for (const layer of basemapLayers(pal)) map.addLayer(layer)
-        // Attribution only exists once real tiles back it (acceptance: shown iff
-        // the PMTiles base is used).
-        map.addControl(new maplibregl.AttributionControl({ compact: false }), 'bottom-right')
+        // Attribution only exists once real tiles back it.
+        map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right')
       } catch {
         // No extract for this city yet — backdrop only, silently.
       }
@@ -161,8 +161,7 @@ export default function MapBase({
       cancelled = true
       map.remove()
     }
-    // Center/zoom/bounds/url are read once at mount; the module remounts (via
-    // React key) when the city changes, so we intentionally don't re-init here.
+    // Read once at mount; callers remount (via React key) when the city changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
