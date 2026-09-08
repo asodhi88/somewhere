@@ -13,13 +13,18 @@ where `<cityId>` is the destination id (same ids as the destinations dataset).
 
 ## Expected files (mechanism PR — the two seed cities)
 
-| File               | City   | Tier    | Needs tiles? |
-| ------------------ | ------ | ------- | ------------ |
-| `hav.pmtiles`      | Havana | full    | **yes** — renders the map |
-| `sjo.pmtiles`      | San José | minimal | no — minimal tier is a text callout, no map |
+| File          | City        | Tier    | Needs tiles? |
+| ------------- | ----------- | ------- | ------------ |
+| `lax.pmtiles` | Los Angeles | full    | **yes** — renders the map |
+| `hav.pmtiles` | Havana      | full    | **yes** — renders the map |
+| `sjo.pmtiles` | San José    | minimal | no — minimal tier is a text band, no map |
 
-Only **full-tier** cities render a map, so only `hav.pmtiles` is required for
-this PR. Drop it here and the base appears automatically.
+Only **full-tier** cities render a map, so `lax.pmtiles` and `hav.pmtiles` are
+the two required here. Drop them in and the base appears automatically.
+
+Note that Los Angeles is a two-level city (districts at low zoom, neighbourhoods
+past zoom 10.6), so its extract wants the wider metro bbox below rather than a
+tight downtown crop.
 
 ## Graceful absence
 
@@ -35,8 +40,13 @@ Each file is a small area extract of the public Protomaps basemap build, e.g.
 with the `go-pmtiles` CLI:
 
 ```bash
+# Havana — one compact core
 pmtiles extract https://build.protomaps.com/<date>.pmtiles hav.pmtiles \
   --bbox=-82.46,23.08,-82.33,23.16
+
+# Los Angeles — wide enough for the district view and the Valley/Pasadena areas
+pmtiles extract https://build.protomaps.com/<date>.pmtiles lax.pmtiles \
+  --bbox=-118.56,33.92,-118.09,34.19
 ```
 
 Keep each extract tight to the city (a small bounding box around the anchor and
