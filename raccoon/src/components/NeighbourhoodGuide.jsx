@@ -1,14 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
 import maplibregl from 'maplibre-gl'
-import MapBase from './MapBase'
-import { moneyRange } from '../lib/format'
+import MapBase, { BASE_MAX_ZOOM } from './MapBase'
 import { currentAmbient } from '../lib/ambient'
 import { LEAN, LEAN_ORDER, FRICTION_LABEL, formatReviewed } from '../lib/neighbourhoodVocab'
 
 /**
- * Neighbourhood guidance — "you chose the city; now which part of it fits your
- * trip." (design: Neighborhood Guidance v2)
+ * NeighbourhoodModule — "you chose the city; now which part of it fits your trip."
  *
  * The map colours each area by how its nightly stay LEANS against the city's
  * accommodation estimate — below / about / above. This is a disclosed, dated
@@ -17,15 +14,14 @@ import { LEAN, LEAN_ORDER, FRICTION_LABEL, formatReviewed } from '../lib/neighbo
  * shape of its spread, and never feeds the ranking or the estimate. Colour
  * encodes price lean and nothing else — no safety, vibe or nightlife signal.
  *
- * v2 shape: the map expands INLINE inside the result card (and can go full
- * screen), with a two-level read — districts at low zoom, neighbourhoods once
- * you pass DRILL_ZOOM — so a twelve-area city stays legible.
+ * The module reads only from getNeighbourhoods(), so it moves into the routed
+ * /destination/:id view later unchanged; today it is mounted in the thin
+ * DestinationDetail overlay.
  *
- * Tier decides what renders (honest coverage, not uniform coverage):
- *   full    → the chip + inline expansion (map, legend filters, panel).
- *   minimal → a designed editorial band owning the absence ("one core"), always
- *             visible, at full module weight — never a greyed-out empty state.
- *   none / no entry → nothing; the rest of the card is untouched.
+ * Where a city carries a `districts` layer the map reads at two levels —
+ * districts at low zoom, neighbourhoods past DRILL_ZOOM — so a twelve-area city
+ * stays legible. The layer is optional: a city without it (Havana) renders a
+ * single-level map and an area list instead.
  */
 
 // Above this zoom the map reads as neighbourhoods; below it, as districts.
@@ -68,11 +64,6 @@ function prefersReducedMotion() {
 
 /* ------------------------------------------------------------------ map --- */
 
-/**
- * The MapLibre layer work for one map instance. Two of these can be alive at
- * once (inline + full screen); they share selection and filter state through
- * props, and each drives its own camera from the `camera` token.
- */
 function NeighbourhoodMap({
   city,
   activeLeans,
@@ -81,18 +72,14 @@ function NeighbourhoodMap({
   onSelectArea,
   onDrillDistrict,
   initialZoom,
-  scrollZoom,
-  overlay,
 }) {
   const mapRef = useRef(null)
   const labelsRef = useRef([])
   const hoverRef = useRef(null)
-  const tipRef = useRef(null)
   const readyRef = useRef(false)
 
   const { areas, districts = [], anchor } = city
-  const ambient = currentAmbient()
-  const night = ambient === 'night'
+  const night = currentAmbient() === 'night'
 
   const cityCenter = useMemo(
     () => (anchor ? [anchor.lng, anchor.lat] : centroid(areas[0].polygon)),
@@ -112,13 +99,14 @@ function NeighbourhoodMap({
     return { districts: feat('district', districts), zones: feat('zone', areas) }
   }, [areas, districts])
 
-  // Repaint hover/selection emphasis. Ported from the design: the hovered shape
-  // lifts and everything else drops back, so one area reads at a time.
+  // Repaint hover/selection emphasis: the hovered shape lifts and everything
+  // else drops back, so one area reads at a time.
   const paint = useCallback(() => {
     const map = mapRef.current
     if (!map || !map.getLayer('z-fill')) return
     const h = hoverRef.current
     for (const p of ['d', 'z']) {
+      if (!map.getLayer(`${p}-fill`)) continue
       const base = night ? 0.3 : 0.22
       let fill = base
       if (h && h.layer === p) {
@@ -138,41 +126,46 @@ function NeighbourhoodMap({
     }
   }, [night, selectedId])
 
-  // Labels live as markers, not a symbol layer, so they need no glyph endpoint
-  // (the PMTiles extract carries no fonts). Districts show below the drill zoom,
+  // Labels are markers, not a symbol layer, so they need no glyph endpoint (the
+  // extract carries no fonts). Districts show below the drill zoom,
   // neighbourhoods above it, and both follow the active lean filter.
   const placeLabels = useCallback(() => {
     const map = mapRef.current
     if (!map) return
-    const level = map.getZoom() >= DRILL_ZOOM ? 'zones' : 'districts'
+    const hasDistricts = districts.length > 0
+    const level = !hasDistricts || map.getZoom() >= DRILL_ZOOM ? 'zones' : 'districts'
     for (const l of labelsRef.current) {
       const on = l.level === level && activeLeans.includes(l.lean)
       l.el.style.display = on ? 'block' : 'none'
       l.el.dataset.dark = night ? '1' : '0'
       l.el.style.color = night ? '#f2ece1' : LEAN[l.lean].ink
     }
-  }, [activeLeans, night])
+  }, [activeLeans, night, districts.length])
 
   const handleReady = useCallback(
     (map) => {
       mapRef.current = map
       readyRef.current = true
+      const hasDistricts = districts.length > 0
 
-      map.addSource('districts', { type: 'geojson', data: featureCollections.districts, promoteId: 'id' })
       map.addSource('zones', { type: 'geojson', data: featureCollections.zones, promoteId: 'id' })
+      // Without a district layer the neighbourhoods are the only level, so they
+      // must not be hidden below the drill zoom.
+      map.addLayer({ id: 'z-fill', type: 'fill', source: 'zones', minzoom: hasDistricts ? DRILL_ZOOM : 0, paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.22 } })
+      map.addLayer({ id: 'z-line', type: 'line', source: 'zones', minzoom: hasDistricts ? DRILL_ZOOM : 0, paint: { 'line-color': ['get', 'color'], 'line-width': 1.4, 'line-opacity': 0.75 } })
 
-      map.addLayer({ id: 'd-fill', type: 'fill', source: 'districts', maxzoom: DRILL_ZOOM, paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.2 } })
-      map.addLayer({ id: 'd-line', type: 'line', source: 'districts', maxzoom: DRILL_ZOOM, paint: { 'line-color': ['get', 'color'], 'line-width': 1.4, 'line-opacity': 0.7 } })
-      map.addLayer({ id: 'z-fill', type: 'fill', source: 'zones', minzoom: DRILL_ZOOM, paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.22 } })
-      map.addLayer({ id: 'z-line', type: 'line', source: 'zones', minzoom: DRILL_ZOOM, paint: { 'line-color': ['get', 'color'], 'line-width': 1.4, 'line-opacity': 0.75 } })
+      if (hasDistricts) {
+        map.addSource('districts', { type: 'geojson', data: featureCollections.districts, promoteId: 'id' })
+        map.addLayer({ id: 'd-fill', type: 'fill', source: 'districts', maxzoom: DRILL_ZOOM, paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.2 } }, 'z-fill')
+        map.addLayer({ id: 'd-line', type: 'line', source: 'districts', maxzoom: DRILL_ZOOM, paint: { 'line-color': ['get', 'color'], 'line-width': 1.4, 'line-opacity': 0.7 } }, 'z-fill')
+      }
 
-      // Hover tooltip: name + lean band, the same two facts the legend encodes.
+      // Hover readout: name + lean band, the same two facts the legend encodes.
       const tip = document.createElement('div')
       tip.className = 'rc-nb__tip'
       map.getContainer().appendChild(tip)
-      tipRef.current = tip
 
-      for (const p of ['d', 'z']) {
+      for (const p of hasDistricts ? ['d', 'z'] : ['z']) {
         map.on('mousemove', `${p}-fill`, (e) => {
           const f = e.features?.[0]
           if (!f) return
@@ -223,7 +216,6 @@ function NeighbourhoodMap({
         new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat([anchor.lng, anchor.lat]).addTo(map)
       }
 
-      // Name labels for both levels.
       const mk = (list, level) => {
         for (const it of list) {
           const el = document.createElement('div')
@@ -246,8 +238,8 @@ function NeighbourhoodMap({
     [featureCollections, districts, areas, anchor, onDrillDistrict, onSelectArea, paint, placeLabels],
   )
 
-  // Lean filter → hide non-matching neighbourhoods (districts always read as the
-  // overview, so they stay).
+  // Lean filter → hide non-matching neighbourhoods (districts stay: they are the
+  // overview, and a district can hold areas from more than one band).
   useEffect(() => {
     const map = mapRef.current
     if (!map || !readyRef.current || !map.getLayer('z-fill')) return
@@ -261,8 +253,8 @@ function NeighbourhoodMap({
     paint()
   }, [paint])
 
-  // Camera moves are token-driven so a click on the map (which shouldn't move the
-  // view) is distinguishable from a click in a list (which should).
+  // Camera moves are token-driven, so a click on the map (which shouldn't move
+  // the view) is distinguishable from a click in a list (which should).
   useEffect(() => {
     const map = mapRef.current
     if (!map || !readyRef.current || !camera) return
@@ -270,7 +262,7 @@ function NeighbourhoodMap({
     if (camera.kind === 'area') {
       const area = areas.find((a) => a.id === camera.id)
       if (area) {
-        map.flyTo({ center: centroid(area.polygon), zoom: 12.2, duration: reduce ? 0 : 800 })
+        map.flyTo({ center: centroid(area.polygon), zoom: Math.min(12.2, BASE_MAX_ZOOM), duration: reduce ? 0 : 800 })
       }
     } else if (camera.kind === 'district') {
       const members = areas.filter((a) => a.district === camera.id)
@@ -288,23 +280,24 @@ function NeighbourhoodMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [camera])
 
+  const zoomBy = (d) => {
+    const map = mapRef.current
+    if (map) map.easeTo({ zoom: map.getZoom() + d, duration: 260 })
+  }
+
   return (
     <div className="rc-nb__canvas">
       <MapBase
         center={cityCenter}
         zoom={initialZoom}
-        minZoom={8}
-        maxZoom={14}
-        pmtilesUrl={`/tiles/${city.cityId}.pmtiles`}
         onReady={handleReady}
-        scrollZoom={scrollZoom}
+        scrollZoom
       />
       <div className="rc-nb__mapctl">
-        {overlay}
-        <button type="button" className="rc-nb__mapbtn" aria-label="Zoom in" onClick={() => mapRef.current?.easeTo({ zoom: mapRef.current.getZoom() + 1, duration: 260 })}>
+        <button type="button" className="rc-nb__mapbtn" aria-label="Zoom in" onClick={() => zoomBy(1)}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
         </button>
-        <button type="button" className="rc-nb__mapbtn" aria-label="Zoom out" onClick={() => mapRef.current?.easeTo({ zoom: mapRef.current.getZoom() - 1, duration: 260 })}>
+        <button type="button" className="rc-nb__mapbtn" aria-label="Zoom out" onClick={() => zoomBy(-1)}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M5 12h14" /></svg>
         </button>
       </div>
@@ -314,9 +307,9 @@ function NeighbourhoodMap({
 
 /* ---------------------------------------------------------------- panel --- */
 
-function LegendChips({ off, onToggle, variant }) {
+function LegendChips({ off, onToggle }) {
   return (
-    <div className={`rc-nb__legend rc-nb__legend--${variant}`}>
+    <div className="rc-nb__legend">
       {LEAN_ORDER.map((k) => {
         const on = !off[k]
         return (
@@ -337,13 +330,15 @@ function LegendChips({ off, onToggle, variant }) {
   )
 }
 
-function AreaDetail({ area, onClear }) {
+function AreaDetail({ area, onClear, canClear }) {
   const lean = LEAN[area.lean]
   return (
     <div className="rc-nb__detail" key={area.id}>
-      <button type="button" className="rc-nb__back" onClick={onClear}>
-        ← all districts
-      </button>
+      {canClear && (
+        <button type="button" className="rc-nb__back" onClick={onClear}>
+          ← all districts
+        </button>
+      )}
       <div className="rc-nb__detail-head">
         <span className="rc-nb__area-name">{area.name}</span>
         <span className="rc-nb__lean-tag" style={{ color: lean.ink }}>{lean.label}</span>
@@ -378,24 +373,30 @@ function AreaDetail({ area, onClear }) {
   )
 }
 
-function DistrictOverview({ city, cityName, onDrill }) {
+function Overview({ city, cityName, onDrill, onSelect }) {
   const districts = city.districts ?? []
+  const hasDistricts = districts.length > 0
   return (
     <div className="rc-nb__overview">
       <span className="rc-nb__overview-eyebrow">
-        {cityName} · {districts.length ? `${districts.length} districts` : `${city.areas.length} areas`}
+        {cityName} · {hasDistricts ? `${districts.length} districts` : `${city.areas.length} areas`}
       </span>
       <p className="rc-nb__overview-text">
-        {districts.length
+        {hasDistricts
           ? 'Pick a district to zoom into its neighbourhoods, or click any area to see how its stays lean against your estimate and who it suits.'
           : 'Click any area to see how its stays lean against your estimate and who it suits.'}
       </p>
       <div className="rc-nb__districts">
-        {(districts.length ? districts : city.areas).map((d) => (
-          <button key={d.id} type="button" className="rc-nb__district" onClick={() => onDrill(d.id)}>
+        {(hasDistricts ? districts : city.areas).map((d) => (
+          <button
+            key={d.id}
+            type="button"
+            className="rc-nb__district"
+            onClick={() => (hasDistricts ? onDrill(d.id) : onSelect(d.id))}
+          >
             <span className="rc-nb__district-dot" style={{ background: LEAN[d.lean].color }} aria-hidden="true" />
             <span className="rc-nb__district-name">{d.name}</span>
-            {districts.length > 0 && (
+            {hasDistricts && (
               <span className="rc-nb__district-count tnum">
                 {city.areas.filter((a) => a.district === d.id).length}
               </span>
@@ -407,23 +408,18 @@ function DistrictOverview({ city, cityName, onDrill }) {
   )
 }
 
-/* ------------------------------------------------------------ expansion --- */
+/* --------------------------------------------------------------- module --- */
 
-/**
- * The inline expansion inside the result card, plus the full-screen view it can
- * promote to. Owns selection, lean filters and camera intent; both map instances
- * read the same state so the two views never disagree.
- */
-export default function NeighbourhoodExpansion({ city, result, id, onCollapse }) {
+export default function NeighbourhoodModule({ city, cityName }) {
   const [selectedId, setSelectedId] = useState(null)
   const [off, setOff] = useState({})
-  const [fsOpen, setFsOpen] = useState(false)
   const [camera, setCamera] = useState(null)
   const nonce = useRef(0)
 
   const activeLeans = useMemo(() => LEAN_ORDER.filter((k) => !off[k]), [off])
   const selected = city.areas.find((a) => a.id === selectedId) || null
   const reviewed = formatReviewed(city.reviewedOn)
+  const hasDistricts = (city.districts?.length ?? 0) > 0
 
   const move = useCallback((kind, id) => {
     nonce.current += 1
@@ -431,10 +427,13 @@ export default function NeighbourhoodExpansion({ city, result, id, onCollapse })
   }, [])
 
   const selectArea = useCallback((areaId) => setSelectedId(areaId), [])
-  const focusArea = useCallback((areaId) => {
-    setSelectedId(areaId)
-    move('area', areaId)
-  }, [move])
+  const focusArea = useCallback(
+    (areaId) => {
+      setSelectedId(areaId)
+      move('area', areaId)
+    },
+    [move],
+  )
   const drillDistrict = useCallback(
     (districtId) => {
       const first = city.areas.find((a) => a.district === districtId)
@@ -450,46 +449,35 @@ export default function NeighbourhoodExpansion({ city, result, id, onCollapse })
 
   const toggleLean = useCallback((k) => setOff((p) => ({ ...p, [k]: !p[k] })), [])
 
-  // Escape leaves full screen (the inline expansion stays put).
-  useEffect(() => {
-    if (!fsOpen) return
-    const onKey = (e) => {
-      if (e.key === 'Escape') setFsOpen(false)
-    }
-    document.addEventListener('keydown', onKey)
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prev
-    }
-  }, [fsOpen])
-
-  const panel = selected ? (
-    <AreaDetail area={selected} onClear={clearSelection} />
-  ) : (
-    <DistrictOverview city={city} cityName={result.city} onDrill={drillDistrict} />
-  )
-
-  const disclosure = (
-    <p className="rc-nb__disclosure">
-      Our read of how stays in each area compare to this city&rsquo;s estimate — a
-      judgment, not a calculation.{reviewed ? ` Reviewed ${reviewed}.` : ''}
-    </p>
-  )
-
   return (
-    <div className="rc-nb" id={id}>
-      <div className="rc-nb__bar">
-        <span className="rc-nb__bar-title">Where to stay</span>
-        <LegendChips off={off} onToggle={toggleLean} variant="bar" />
-        <button type="button" className="rc-nb__collapse" onClick={onCollapse}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6" /></svg>
-          Collapse
-        </button>
-      </div>
-
+    <section className="rc-nb" aria-label="Where to stay">
       <div className="rc-nb__body">
+        <aside className="rc-nb__rail">
+          <div className="rc-nb__rail-group">
+            <span className="rc-nb__rail-label">Filter by price lean</span>
+            <LegendChips off={off} onToggle={toggleLean} />
+          </div>
+          <div className="rc-nb__rail-group">
+            <span className="rc-nb__rail-label">Neighbourhoods</span>
+            <div className="rc-nb__zones">
+              {city.areas
+                .filter((a) => activeLeans.includes(a.lean))
+                .map((a) => (
+                  <button
+                    key={a.id}
+                    type="button"
+                    className={`rc-nb__zone${a.id === selectedId ? ' is-active' : ''}`}
+                    style={{ '--nb-lean': LEAN[a.lean].color }}
+                    onClick={() => focusArea(a.id)}
+                  >
+                    <span className="rc-nb__zone-dot" aria-hidden="true" />
+                    <span className="rc-nb__zone-name">{a.name}</span>
+                  </button>
+                ))}
+            </div>
+          </div>
+        </aside>
+
         <NeighbourhoodMap
           city={city}
           activeLeans={activeLeans}
@@ -497,101 +485,22 @@ export default function NeighbourhoodExpansion({ city, result, id, onCollapse })
           camera={camera}
           onSelectArea={selectArea}
           onDrillDistrict={drillDistrict}
-          initialZoom={9.5}
-          scrollZoom={false}
-          overlay={
-            <button type="button" className="rc-nb__mapbtn" aria-label="Full screen" onClick={() => setFsOpen(true)}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>
-            </button>
-          }
+          initialZoom={hasDistricts ? 9.5 : 11.6}
         />
-        <div className="rc-nb__side">{panel}</div>
+
+        <div className="rc-nb__panel">
+          {selected ? (
+            <AreaDetail area={selected} onClear={clearSelection} canClear={hasDistricts} />
+          ) : (
+            <Overview city={city} cityName={cityName} onDrill={drillDistrict} onSelect={focusArea} />
+          )}
+        </div>
       </div>
 
-      {disclosure}
-
-      {/* Portalled to <body> on purpose: .rc-card carries a backdrop-filter, which
-          makes it the containing block for position:fixed descendants — the
-          overlay would otherwise be trapped inside the card and scroll with it.
-          Same trap the How-it-works blind avoids by being a sibling of .rc-app. */}
-      {fsOpen && createPortal(
-        <div className="rc-nb__fs" role="dialog" aria-modal="true" aria-label={`${result.city} neighbourhoods`}>
-          <div className="rc-nb__fs-inner">
-            <aside className="rc-nb__rail">
-              <div className="rc-nb__rail-head">
-                <span className="rc-nb__rail-city">{result.city}</span>
-                <span className="rc-nb__rail-sub">{result.country}</span>
-                {result.cost && (
-                  <>
-                    <span className="rc-nb__rail-cost tnum">
-                      {moneyRange(result.cost.low, result.cost.high)}
-                    </span>
-                    <span className="rc-nb__rail-note">whole-trip range</span>
-                  </>
-                )}
-              </div>
-
-              <div className="rc-nb__rail-group">
-                <span className="rc-nb__rail-label">Filter by price lean</span>
-                <LegendChips off={off} onToggle={toggleLean} variant="rail" />
-              </div>
-
-              <div className="rc-nb__rail-group">
-                <span className="rc-nb__rail-label">Neighbourhoods</span>
-                <div className="rc-nb__zones">
-                  {city.areas
-                    .filter((a) => activeLeans.includes(a.lean))
-                    .map((a) => (
-                      <button
-                        key={a.id}
-                        type="button"
-                        className={`rc-nb__zone${a.id === selectedId ? ' is-active' : ''}`}
-                        style={{ '--nb-lean': LEAN[a.lean].color }}
-                        onClick={() => focusArea(a.id)}
-                      >
-                        <span className="rc-nb__zone-dot" aria-hidden="true" />
-                        <span className="rc-nb__zone-name">{a.name}</span>
-                      </button>
-                    ))}
-                </div>
-              </div>
-            </aside>
-
-            <NeighbourhoodMap
-              city={city}
-              activeLeans={activeLeans}
-              selectedId={selectedId}
-              camera={camera}
-              onSelectArea={selectArea}
-              onDrillDistrict={drillDistrict}
-              initialZoom={10.1}
-              scrollZoom
-              overlay={
-                <button type="button" className="rc-nb__mapbtn" aria-label="Close full screen" onClick={() => setFsOpen(false)}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg>
-                </button>
-              }
-            />
-
-            <div className="rc-nb__fs-panel">
-              {selected ? (
-                <AreaDetail area={selected} onClear={clearSelection} />
-              ) : (
-                <div className="rc-nb__overview">
-                  <span className="rc-nb__overview-eyebrow">Nothing selected</span>
-                  <p className="rc-nb__overview-text">
-                    Hover an area to see its name and how its stays lean against your
-                    estimate. Click to pin the details here — how you&rsquo;ll reach the
-                    centre, and who it suits.
-                  </p>
-                </div>
-              )}
-              {disclosure}
-            </div>
-          </div>
-        </div>,
-        document.body,
-      )}
-    </div>
+      <p className="rc-nb__disclosure">
+        Our read of how stays in each area compare to this city&rsquo;s estimate — a
+        judgment, not a calculation.{reviewed ? ` Reviewed ${reviewed}.` : ''}
+      </p>
+    </section>
   )
 }

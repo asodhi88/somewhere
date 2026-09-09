@@ -12,7 +12,7 @@
       {
         "id": "central",
         "name": "Downtown & Eastside",
-        "lean": "about",
+        "lean": "near",
         "polygon": {
           "type": "Polygon",
           "coordinates": [
@@ -86,7 +86,7 @@
       {
         "id": "westside",
         "name": "Westside & Beaches",
-        "lean": "about",
+        "lean": "near",
         "polygon": {
           "type": "Polygon",
           "coordinates": [
@@ -199,9 +199,8 @@
       {
         "id": "dtla",
         "name": "Downtown & Arts District",
-        "short": "Downtown",
         "district": "central",
-        "lean": "about",
+        "lean": "near",
         "friction": "walkable",
         "character": "The walkable centre — galleries, markets and the concert hall in one grid.",
         "summary": "Warehouse galleries, a produce market and the concert hall sit within a short walk of each other.",
@@ -245,7 +244,6 @@
       {
         "id": "ktown",
         "name": "Koreatown",
-        "short": "Koreatown",
         "district": "midcity",
         "lean": "below",
         "friction": "short-ride",
@@ -291,9 +289,8 @@
       {
         "id": "silverlake",
         "name": "Silver Lake & Echo Park",
-        "short": "Silver Lake",
         "district": "central",
-        "lean": "about",
+        "lean": "near",
         "friction": "short-ride",
         "character": "Low-rise, hilly and independent — neighbourhood over landmark.",
         "summary": "Hilly, walkable and low-rise — independent shops along Sunset Junction, a lake and stair-streets above it.",
@@ -337,9 +334,8 @@
       {
         "id": "hollywood",
         "name": "Hollywood",
-        "short": "Hollywood",
         "district": "midcity",
-        "lean": "about",
+        "lean": "near",
         "friction": "short-ride",
         "character": "The tourist spine, with rooms priced below the Westside.",
         "summary": "The tourist spine — theatres, clubs and the Walk of Fame — with rooms priced below the Westside.",
@@ -383,7 +379,6 @@
       {
         "id": "weho",
         "name": "West Hollywood",
-        "short": "West Hollywood",
         "district": "midcity",
         "lean": "above",
         "friction": "short-ride",
@@ -429,7 +424,6 @@
       {
         "id": "santamonica",
         "name": "Santa Monica",
-        "short": "Santa Monica",
         "district": "westside",
         "lean": "above",
         "friction": "taxi-reliant",
@@ -475,9 +469,8 @@
       {
         "id": "venice",
         "name": "Venice",
-        "short": "Venice",
         "district": "westside",
-        "lean": "about",
+        "lean": "near",
         "friction": "taxi-reliant",
         "character": "Canals, skate park and a restaurant street — more lived-in than its neighbour.",
         "summary": "Canals, a skate park and Abbot Kinney’s restaurants — more lived-in and cheaper than Santa Monica next door.",
@@ -521,9 +514,8 @@
       {
         "id": "culver",
         "name": "Culver City",
-        "short": "Culver City",
         "district": "westside",
-        "lean": "about",
+        "lean": "near",
         "friction": "short-ride",
         "character": "A small studio town with its own walkable downtown.",
         "summary": "A small studio town with its own downtown: a few blocks of restaurants, a plaza, and quiet streets around it.",
@@ -567,7 +559,6 @@
       {
         "id": "beverly",
         "name": "Beverly Hills & Mid-Wilshire",
-        "short": "Beverly Hills",
         "district": "midcity",
         "lean": "above",
         "friction": "short-ride",
@@ -613,7 +604,6 @@
       {
         "id": "studiocity",
         "name": "Studio City & NoHo",
-        "short": "Studio City",
         "district": "valley",
         "lean": "below",
         "friction": "short-ride",
@@ -659,7 +649,6 @@
       {
         "id": "pasadena",
         "name": "Pasadena",
-        "short": "Pasadena",
         "district": "valley",
         "lean": "below",
         "friction": "short-ride",
@@ -705,7 +694,6 @@
       {
         "id": "vernon",
         "name": "Central-Alameda & Vernon",
-        "short": "Central-Alameda",
         "district": "south",
         "lean": "below",
         "friction": "short-ride",
@@ -819,7 +807,7 @@
       {
         "id": "vedado",
         "name": "Vedado",
-        "lean": "about",
+        "lean": "near",
         "friction": "short-ride",
         "character": "Leafy mid-century avenues — grand hotels, jazz venues and a calmer pace set back from the crowds.",
         "stayIf": [

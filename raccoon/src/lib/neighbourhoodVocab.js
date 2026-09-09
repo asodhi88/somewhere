@@ -9,13 +9,16 @@
 // Colour = price lean only. A money scale, not a good/bad scale: below is cool
 // (affordable), about is neutral, above is warm — and deliberately NOT alarm-red,
 // so nothing reads as danger. These are the only three colours on the map.
+// Keys are the spec's enum (below | near | above); the labels are the legend
+// wording the spec and the design agree on — note the middle band reads "about
+// your estimate" while its key stays `near`.
 export const LEAN = {
   below: { label: 'Below your estimate', color: '#2E9E8F', ink: '#1A6E62' },
-  about: { label: 'About your estimate', color: '#7C8A94', ink: '#4C5A63' },
+  near: { label: 'About your estimate', color: '#7C8A94', ink: '#4C5A63' },
   above: { label: 'Above your estimate', color: '#C67A44', ink: '#96491C' },
 }
 
-export const LEAN_ORDER = ['below', 'about', 'above']
+export const LEAN_ORDER = ['below', 'near', 'above']
 
 // friction → one of three coarse bands. Never a precise duration: the traveller
 // is deciding *whether they'll be commuting*, not budgeting to the minute, and a

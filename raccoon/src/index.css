@@ -3242,23 +3242,18 @@ html[data-ambient='day'] .rc-eyebrow {
 }
 
 /* ============================================================================
-   Neighbourhood guidance v2 — the "neighbourhoods" chip, the inline map that
-   expands inside a result card, and its full-screen view.
-   (design: Neighborhood Guidance v2.dc.html)
+   Neighbourhood guidance — the "neighbourhoods" chip, the thin per-city detail
+   overlay, and the map module inside it.
+   Behaviour follows neighbourhood-guidance-mechanism-task.md; the visual
+   language follows the Claude Design v2 handoff.
 
    Colour on the map encodes price lean ONLY (below / about / above). It is a
    disclosed editorial judgment, not a computed figure, and never a good/bad or
-   safety scale. Values below use the app's ambient tokens rather than the
-   design's hardcoded light palette, so the module reads correctly in both the
-   day and night ambients.
+   safety scale. Values use the app's ambient tokens rather than the design's
+   hardcoded light palette, so the module reads in both day and night.
    ========================================================================== */
 
-@keyframes rc-nb-expand {
-  from { max-height: 0; opacity: 0; }
-  to { max-height: 720px; opacity: 1; }
-}
-
-/* The chip that opens the map — a quiet sibling of the fact chips, never
+/* The chip that opens the overlay — a quiet sibling of the fact chips, never
    competing with the accent CTA rule. */
 .rc-chip--nb {
   font: inherit;
@@ -3271,8 +3266,9 @@ html[data-ambient='day'] .rc-eyebrow {
   white-space: nowrap;
   color: var(--accent-text);
   border-color: var(--accent-ring);
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
-.rc-chip--nb.is-open {
+.rc-chip--nb:hover {
   background: var(--accent-soft);
 }
 .rc-chip__swatch {
@@ -3283,63 +3279,157 @@ html[data-ambient='day'] .rc-eyebrow {
   display: inline-block;
 }
 
-/* Suspense placeholder while the map chunk loads — holds the row's height so
-   the card doesn't jump. */
-.rc-nb__loading {
-  grid-column: 1 / -1;
-  height: 120px;
-  border-top: 1px solid var(--glass-border, var(--border));
+/* ------------------------------------------------------------- overlay --- */
+
+.rc-detail {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  padding: 28px;
+  overflow: auto;
+  background: rgba(15, 37, 48, 0.5);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: rc-fade 0.15s ease;
 }
-
-/* ---------------------------------------------------------- the expansion --- */
-
-.rc-nb {
-  grid-column: 1 / -1;
-  border-top: 1px solid var(--glass-border, var(--border));
-  background: var(--glass-sunken, var(--surface-sunken));
+.rc-detail__inner {
+  /* width + auto margins, NOT flex:1 + margin:auto — auto margins absorb free
+     space before flex-grow runs, which collapses the panel to its content. */
+  width: 100%;
+  margin: auto;
+  max-width: 1240px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
   overflow: hidden;
-  animation: rc-nb-expand 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+  background: var(--glass-tile, var(--surface));
+  border: 1px solid var(--glass-border, var(--border));
+  box-shadow: 0 40px 90px -30px rgba(20, 60, 90, 0.6);
 }
 
-.rc-nb__bar {
+.rc-detail__head {
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  padding: 12px 14px;
+  gap: 18px;
+  padding: 16px 18px;
   border-bottom: 1px solid var(--glass-border, var(--border));
+  background: var(--glass-sunken, var(--surface-sunken));
 }
-.rc-nb__bar-title {
-  font-size: 11px;
+.rc-detail__hero {
+  flex: none;
+  width: 108px;
+  height: 72px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface-inset);
+  display: grid;
+  place-items: center;
+}
+.rc-detail__hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.rc-detail__hero-fallback {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint, var(--muted));
+  padding: 0 6px;
+  text-align: center;
+}
+.rc-detail__titles {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.rc-detail__city {
+  margin: 0;
+  font-family: 'Cabinet Grotesk', Inter, sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink, var(--text));
+}
+.rc-detail__country {
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--ink-faint, var(--muted));
 }
-.rc-nb__collapse {
-  border: 0;
-  cursor: pointer;
+.rc-detail__cost {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.rc-detail__cost-range {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink, var(--text));
+  white-space: nowrap;
+}
+.rc-detail__cost-note {
+  font-size: 12px;
+  color: var(--ink-faint, var(--muted));
+}
+.rc-detail__close {
+  flex: none;
+  width: 38px;
+  height: 38px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: var(--glass-sunken, var(--surface-inset));
-  color: var(--ink-muted, var(--muted));
-  font: 600 11.5px/1 Inter, system-ui, sans-serif;
-}
-.rc-nb__collapse:hover {
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 10px;
+  background: var(--surface-solid, rgba(255, 255, 255, 0.94));
+  border: 1px solid var(--surface-solid-border, rgba(15, 37, 48, 0.14));
   color: var(--ink, var(--text));
+}
+.rc-detail__close:hover {
+  border-color: var(--accent-ring);
+  color: var(--accent-text);
+}
+
+/* -------------------------------------------------------------- module --- */
+
+.rc-nb__body {
+  display: grid;
+  grid-template-columns: minmax(220px, 268px) minmax(0, 1fr) minmax(260px, 316px);
+  min-height: 460px;
+}
+
+.rc-nb__rail {
+  border-right: 1px solid var(--glass-border, var(--border));
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: auto;
+  background: var(--glass-sunken, var(--surface-sunken));
+}
+.rc-nb__rail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rc-nb__rail-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint, var(--muted));
 }
 
 /* Legend doubles as the lean filter — the three bands are the only encoding. */
-.rc-nb__legend--bar {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-right: auto;
-}
-.rc-nb__legend--rail {
+.rc-nb__legend {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -3348,13 +3438,13 @@ html[data-ambient='day'] .rc-eyebrow {
   --nb-lean: var(--border);
   --nb-ink: var(--muted);
   cursor: pointer;
-  font: 600 11.5px/1 Inter, system-ui, sans-serif;
-  padding: 7px 11px;
-  border-radius: 999px;
-  display: inline-flex;
+  text-align: left;
+  font: 600 12.5px/1.2 Inter, system-ui, sans-serif;
+  padding: 9px 11px;
+  border-radius: 10px;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  white-space: nowrap;
+  gap: 9px;
   background: var(--glass-tile, var(--surface));
   border: 1px solid var(--glass-border, var(--border));
   color: var(--ink-faint, var(--muted));
@@ -3365,44 +3455,67 @@ html[data-ambient='day'] .rc-eyebrow {
   border-color: color-mix(in srgb, var(--nb-lean) 55%, transparent);
   color: var(--nb-ink);
 }
-/* In the night ambient the ink colours are too dark to read on the dark
-   surface — the dot carries the hue, the label stays legible. */
+/* In the night ambient the ink colours are too dark against the dark surface —
+   the dot carries the hue, the label stays legible. */
 [data-ambient='night'] .rc-nb__legend-chip.is-on {
   color: var(--text);
 }
-.rc-nb__legend--rail .rc-nb__legend-chip {
-  text-align: left;
-  padding: 9px 11px;
-  border-radius: 10px;
-  font-size: 12.5px;
-  line-height: 1.2;
-}
 .rc-nb__legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+  display: inline-block;
+}
+
+.rc-nb__zones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rc-nb__zone {
+  --nb-lean: var(--border);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  padding: 8px 10px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--glass-tile, var(--surface));
+  border: 1px solid var(--glass-border, var(--border));
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.rc-nb__zone:hover {
+  border-color: var(--accent-ring);
+}
+.rc-nb__zone.is-active {
+  background: color-mix(in srgb, var(--nb-lean) 12%, transparent);
+  border-color: color-mix(in srgb, var(--nb-lean) 55%, transparent);
+}
+.rc-nb__zone-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   flex: none;
   display: inline-block;
+  background: var(--nb-lean);
 }
-.rc-nb__legend--rail .rc-nb__legend-dot {
-  width: 9px;
-  height: 9px;
-}
-
-.rc-nb__body {
-  display: grid;
-  grid-template-columns: minmax(320px, 1fr) 288px;
+.rc-nb__zone-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink, var(--text));
 }
 
 /* ----------------------------------------------------------------- map --- */
 
 .rc-nb__canvas {
   position: relative;
-  height: 360px;
   /* Only visible until the GL canvas paints, so it must match MapBase's
-     background palette for the same ambient — keep the two in step. Note these
-     are literal values, not --surface-* tokens: those carry the night palette
-     on :root as the no-JS fallback and are not re-declared per ambient. */
+     background palette for the same ambient — keep the two in step. Literal
+     values, not --surface-* tokens: those carry the night palette on :root as
+     the no-JS fallback and are not re-declared per ambient. */
   background: #f2ece1;
 }
 [data-ambient='night'] .rc-nb__canvas {
@@ -3444,8 +3557,7 @@ html[data-ambient='day'] .rc-eyebrow {
   color: var(--accent-text);
 }
 
-/* Hover readout on the map: name + lean band, the same two facts the legend
-   encodes. Built in JS, styled here. */
+/* Hover readout: name + lean band, the same two facts the legend encodes. */
 .rc-nb__tip {
   position: absolute;
   z-index: 5;
@@ -3461,9 +3573,7 @@ html[data-ambient='day'] .rc-eyebrow {
   color: var(--ink, var(--text));
   white-space: nowrap;
 }
-.rc-nb__tip-name {
-  font-weight: 600;
-}
+.rc-nb__tip-name,
 .rc-nb__tip-band {
   font-weight: 600;
 }
@@ -3471,7 +3581,6 @@ html[data-ambient='day'] .rc-eyebrow {
   color: var(--text) !important;
 }
 
-/* Area / district name labels, as markers (no glyph endpoint needed). */
 .rc-nb__label {
   font: 600 11px/1.2 Inter, system-ui, sans-serif;
   letter-spacing: 0.02em;
@@ -3511,17 +3620,17 @@ html[data-ambient='day'] .rc-eyebrow {
 
 /* --------------------------------------------------------------- panel --- */
 
-.rc-nb__side {
+.rc-nb__panel {
   border-left: 1px solid var(--glass-border, var(--border));
-  padding: 16px 16px 18px;
+  padding: 18px 16px;
+  overflow: auto;
+  background: var(--glass-sunken, var(--surface-sunken));
+}
+.rc-nb__detail {
   display: flex;
   flex-direction: column;
   gap: 11px;
-  background: var(--glass-tile, var(--surface));
-  overflow-y: auto;
-  max-height: 360px;
 }
-
 .rc-nb__back {
   align-self: flex-start;
   cursor: pointer;
@@ -3533,11 +3642,6 @@ html[data-ambient='day'] .rc-eyebrow {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-.rc-nb__detail {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-}
 .rc-nb__detail-head {
   display: flex;
   flex-direction: column;
@@ -3546,7 +3650,7 @@ html[data-ambient='day'] .rc-eyebrow {
 .rc-nb__area-name {
   font-family: 'Cabinet Grotesk', Inter, sans-serif;
   font-weight: 800;
-  font-size: 19px;
+  font-size: 21px;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--ink, var(--text));
@@ -3561,7 +3665,7 @@ html[data-ambient='day'] .rc-eyebrow {
 }
 .rc-nb__character {
   margin: 0;
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.45;
   font-weight: 600;
   color: var(--ink, var(--text));
@@ -3570,14 +3674,14 @@ html[data-ambient='day'] .rc-eyebrow {
 .rc-nb__summary {
   margin: 0;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--ink-muted, var(--muted));
   text-wrap: pretty;
 }
 .rc-nb__field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 .rc-nb__field-label {
   font-size: 10.5px;
@@ -3593,16 +3697,16 @@ html[data-ambient='day'] .rc-eyebrow {
   color: #c67a44;
 }
 .rc-nb__field-value {
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.45;
   color: var(--ink-muted, var(--muted));
 }
 .rc-nb__fit {
-  font-size: 12.5px;
+  font-size: 13px;
   line-height: 1.4;
   color: var(--ink-muted, var(--muted));
   display: flex;
-  gap: 7px;
+  gap: 8px;
 }
 .rc-nb__fit-mark {
   font-weight: 700;
@@ -3615,7 +3719,7 @@ html[data-ambient='day'] .rc-eyebrow {
   color: #c67a44;
 }
 
-/* No selection: the district overview that invites the drill-down. */
+/* No selection: the overview that invites the first click. */
 .rc-nb__overview {
   display: flex;
   flex-direction: column;
@@ -3647,7 +3751,7 @@ html[data-ambient='day'] .rc-eyebrow {
   font: inherit;
   padding: 9px 11px;
   border-radius: 10px;
-  background: var(--glass-sunken, var(--surface-inset));
+  background: var(--glass-tile, var(--surface));
   border: 1px solid var(--glass-border, var(--border));
   display: flex;
   align-items: center;
@@ -3678,7 +3782,7 @@ html[data-ambient='day'] .rc-eyebrow {
 /* Disclosure line — the honesty statement, always visible for full-tier. */
 .rc-nb__disclosure {
   margin: 0;
-  padding: 10px 14px 12px;
+  padding: 10px 18px 12px;
   font-size: 11px;
   line-height: 1.45;
   color: var(--ink-faint, var(--muted));
@@ -3686,151 +3790,16 @@ html[data-ambient='day'] .rc-eyebrow {
   text-wrap: pretty;
 }
 
-/* --------------------------------------------------------- full screen --- */
-
-.rc-nb__fs {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  background: rgba(15, 37, 48, 0.5);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  display: flex;
-  padding: 28px;
-  overflow: auto;
-}
-.rc-nb__fs-inner {
-  flex: 1;
-  display: grid;
-  grid-template-columns: minmax(240px, 292px) minmax(0, 1fr) minmax(280px, 320px);
-  border-radius: 20px;
-  overflow: hidden;
-  background: var(--glass-tile, var(--surface));
-  border: 1px solid var(--glass-border, var(--border));
-  box-shadow: 0 40px 90px -30px rgba(20, 60, 90, 0.6);
-}
-.rc-nb__fs-inner .rc-nb__canvas {
-  height: auto;
-}
-.rc-nb__rail {
-  border-right: 1px solid var(--glass-border, var(--border));
-  padding: 22px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  overflow: auto;
-  background: var(--glass-sunken, var(--surface-sunken));
-}
-.rc-nb__rail-head {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.rc-nb__rail-city {
-  font-family: 'Cabinet Grotesk', Inter, sans-serif;
-  font-weight: 800;
-  font-size: 26px;
-  line-height: 1.05;
-  letter-spacing: -0.025em;
-  color: var(--ink, var(--text));
-}
-.rc-nb__rail-sub {
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--ink-faint, var(--muted));
-}
-.rc-nb__rail-cost {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--ink, var(--text));
-  margin-top: 2px;
-}
-.rc-nb__rail-note {
-  font-size: 12px;
-  color: var(--ink-faint, var(--muted));
-}
-.rc-nb__rail-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.rc-nb__rail-label {
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-faint, var(--muted));
-}
-.rc-nb__zones {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.rc-nb__zone {
-  --nb-lean: var(--border);
-  cursor: pointer;
-  text-align: left;
-  font: inherit;
-  padding: 8px 10px;
-  border-radius: 9px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  background: var(--glass-tile, var(--surface));
-  border: 1px solid var(--glass-border, var(--border));
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-.rc-nb__zone:hover {
-  border-color: var(--accent-ring);
-}
-.rc-nb__zone.is-active {
-  background: color-mix(in srgb, var(--nb-lean) 12%, transparent);
-  border-color: color-mix(in srgb, var(--nb-lean) 55%, transparent);
-}
-.rc-nb__zone-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex: none;
-  display: inline-block;
-  background: var(--nb-lean);
-}
-.rc-nb__zone-name {
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--ink, var(--text));
-}
-.rc-nb__fs-panel {
-  border-left: 1px solid var(--glass-border, var(--border));
-  padding: 22px 20px;
-  overflow: auto;
-  background: var(--glass-sunken, var(--surface-sunken));
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.rc-nb__fs-panel .rc-nb__area-name {
-  font-size: 22px;
-}
-.rc-nb__fs-panel .rc-nb__disclosure {
-  padding: 12px 0 0;
-  margin-top: auto;
-}
-
-/* ------------------------------------------------------- minimal tier --- */
+/* --------------------------------------------------------- minimal tier --- */
 
 /* A designed editorial band carrying the same visual weight as a real module —
    never a greyed-out or "no data" empty state. */
 .rc-nb__compact {
-  grid-column: 1 / -1;
-  border-top: 1px solid var(--glass-border, var(--border));
   background: linear-gradient(115deg, rgba(46, 158, 143, 0.1), rgba(var(--ac-rgb), 0.08));
   display: flex;
   align-items: center;
   gap: 22px;
-  padding: 26px 30px;
+  padding: 30px 30px 34px;
 }
 .rc-nb__compact-mark {
   flex: none;
@@ -3862,53 +3831,86 @@ html[data-ambient='day'] .rc-eyebrow {
 
 /* ------------------------------------------------------------ responsive --- */
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   .rc-nb__body {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+    grid-template-rows: 380px auto;
+    min-height: 0;
   }
-  /* Stacked, the bar would run to four rows (title / chips / chips / collapse).
-     Pull Collapse up beside the title and let the filters take the row below,
-     so the map isn't pushed down the screen. */
-  .rc-nb__legend--bar {
-    order: 3;
-    flex-basis: 100%;
-    margin-right: 0;
-  }
-  .rc-nb__collapse {
-    margin-left: auto;
-  }
-  .rc-nb__side {
-    border-left: 0;
-    border-top: 1px solid var(--glass-border, var(--border));
-    max-height: none;
-  }
+  /* Map first, panel beside it, filters + area list below the pair. */
   .rc-nb__canvas {
-    height: 300px;
+    grid-column: 1;
+    grid-row: 1;
   }
-  .rc-nb__fs {
-    padding: 0;
-  }
-  .rc-nb__fs-inner {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 320px auto;
-    border-radius: 0;
+  .rc-nb__panel {
+    grid-column: 2;
+    grid-row: 1;
   }
   .rc-nb__rail {
+    grid-column: 1 / -1;
+    grid-row: 2;
     border-right: 0;
-    border-bottom: 1px solid var(--glass-border, var(--border));
+    border-top: 1px solid var(--glass-border, var(--border));
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
   }
-  .rc-nb__fs-panel {
+  .rc-nb__rail-group {
+    flex: 1 1 240px;
+  }
+  .rc-nb__legend,
+  .rc-nb__zones {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 760px) {
+  .rc-detail {
+    padding: 0;
+  }
+  .rc-detail__inner {
+    border-radius: 0;
+    min-height: 100%;
+  }
+  .rc-detail__head {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px;
+  }
+  .rc-detail__city {
+    font-size: 23px;
+  }
+  .rc-detail__cost {
+    align-items: flex-start;
+    margin-left: 0;
+    flex-basis: 100%;
+    order: 4;
+  }
+  .rc-detail__cost-range {
+    font-size: 19px;
+  }
+  .rc-nb__body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px auto auto;
+  }
+  .rc-nb__panel {
+    grid-column: 1;
+    grid-row: 2;
     border-left: 0;
     border-top: 1px solid var(--glass-border, var(--border));
   }
+  .rc-nb__rail {
+    grid-row: 3;
+  }
   .rc-nb__compact {
-    padding: 20px 18px;
+    padding: 22px 18px;
     gap: 16px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rc-nb {
+  .rc-detail {
     animation: none;
   }
 }

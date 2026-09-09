@@ -2,6 +2,16 @@ import { describe, it, expect } from 'vitest'
 import { getNeighbourhoods } from './getNeighbourhoods'
 import { LEAN, FRICTION_LABEL, guideKind } from './neighbourhoodVocab'
 
+/** Every author-written string the module can put on screen, as one blob. */
+function allCopy() {
+  return JSON.stringify(
+    ['hav', 'lax', 'sjo'].map((id) => {
+      const c = getNeighbourhoods(id)
+      return [c.note, ...(c.areas || []).map((a) => [a.character, a.summary, a.stayIf, a.skipIf])]
+    }),
+  )
+}
+
 // The seam contract (acceptance #1): every neighbourhood read goes through this
 // one accessor, which returns the city object or null. It does not editorialise
 // — tier logic lives in the module, not here.
@@ -14,6 +24,15 @@ describe('getNeighbourhoods', () => {
     expect(hav.anchor.name).toBe('Parque Central')
     expect(hav.areas.length).toBeGreaterThanOrEqual(3)
     expect(hav.areas.length).toBeLessThanOrEqual(5)
+  })
+
+  it('uses the spec enums exactly — lean below|near|above, three friction bands', () => {
+    // The schema is about to be frozen for a 130+ entry content pass, so these
+    // are the spec's keys verbatim. Note the middle band's key is `near` while
+    // the label users see reads "About your estimate".
+    expect(Object.keys(LEAN)).toEqual(['below', 'near', 'above'])
+    expect(LEAN.near.label).toBe('About your estimate')
+    expect(Object.keys(FRICTION_LABEL)).toEqual(['walkable', 'short-ride', 'taxi-reliant'])
   })
 
   it('every full-tier area carries a lean in the three allowed buckets and a friction band', () => {
@@ -29,18 +48,28 @@ describe('getNeighbourhoods', () => {
   })
 
   it('renders no precise times or percentages anywhere in the copy', () => {
-    const copy = JSON.stringify(
-      ['hav', 'lax', 'sjo'].map((id) => {
-        const c = getNeighbourhoods(id)
-        return [c.note, ...(c.areas || []).map((a) => [a.character, a.summary, a.stayIf, a.skipIf])]
-      }),
-    )
+    const copy = allCopy()
     expect(copy).not.toMatch(/%/)
     // Precise travel times are always minutes ("15 min walk", "25–35 minutes to
     // Downtown") or distances — those are the falsifiable claims the friction
     // bands exist to avoid. "24-hour cafés" is an opening time, not a duration.
     expect(copy).not.toMatch(/\d[\d\s–-]*(?:min\b|minutes?\b)/i)
     expect(copy).not.toMatch(/\d[\d\s–-]*(?:km\b|miles?\b)/i)
+  })
+
+  it('carries no risk or safety language anywhere in the copy', () => {
+    // The feature describes transport need, never area risk: "you'll want a taxi
+    // back at night" is logistics; "caution after dark" and its equivalents are
+    // prohibited. Note "avoid" is deliberately not banned outright — "you'd
+    // rather avoid the crowds" is traveller fit; "avoid this area" is not.
+    const copy = allCopy()
+    for (const term of [
+      /caution/i, /after dark/i, /sketch/i, /unsafe/i, /dangerous/i,
+      /\bsafety\b/i, /\bcrime\b/i, /dodgy/i, /seedy/i, /no-go/i,
+      /avoid (?:this|the) (?:area|neighbourhood|district|part)/i,
+    ]) {
+      expect(copy).not.toMatch(term)
+    }
   })
 
   it('LA carries the district layer that drives the drill-down; Havana does not', () => {

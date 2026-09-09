@@ -10,12 +10,12 @@ import {
 import { buildFlightSearchUrl, resolveSearchMonth } from '../lib/links'
 import { getNeighbourhoods } from '../lib/getNeighbourhoods'
 import { guideKind } from '../lib/neighbourhoodVocab'
-import { NeighbourhoodChip, CompactCityBand } from './neighbourhoodParts'
+import { NeighbourhoodChip } from './neighbourhoodParts'
 
 // Lazy so MapLibre + pmtiles (the bulk of the JS) are code-split into their own
-// chunk, fetched only when a card's map is actually opened — they never weigh on
-// the initial search-and-results load.
-const NeighbourhoodExpansion = lazy(() => import('./NeighbourhoodGuide'))
+// chunk, fetched only when a card's detail overlay is actually opened — they
+// never weigh on the initial search-and-results load.
+const DestinationDetail = lazy(() => import('./DestinationDetail'))
 
 // Unsplash's API guidelines: credit the photographer with a link back to their
 // profile, and link to Unsplash, both tagged with our utm_source.
@@ -37,19 +37,18 @@ const UTM = '?utm_source=somewhere&utm_medium=referral'
  */
 export default function ResultCard({ result, nights, originIata, month, index = 0, onOpenLightbox }) {
   const [open, setOpen] = useState(false)
-  // The inline neighbourhood map, expanded in place inside the card.
-  const [mapOpen, setMapOpen] = useState(false)
+  // The per-city detail overlay that hosts the neighbourhood module.
+  const [detailOpen, setDetailOpen] = useState(false)
   const { cost } = result
   const reason = result.blurb || result.reason
   const img = result.hero_image
   const hasImg = !!(img && img.url)
 
-  // Neighbourhood guidance renders only for cities that actually carry an entry:
-  // 'full' gets the chip + inline map, 'minimal' gets the compact-city band, and
-  // anything else leaves the card exactly as it was. Routed through the seam.
+  // The chip is offered only for cities that actually carry an entry ('full' or
+  // 'minimal'); anything else leaves the card exactly as it was, so a city with
+  // no guidance never advertises one. Routed through the seam.
   const guide = getNeighbourhoods(result.id)
-  const kind = guideKind(guide)
-  const mapId = `rc-nb-${result.id}`
+  const hasGuide = guideKind(guide) !== null
 
   // The one outbound action a card offers (flight-handoff-task.md). null
   // means required inputs are missing or the month can't be resolved — in
@@ -148,12 +147,8 @@ export default function ResultCard({ result, nights, originIata, month, index = 
           {/* Visa chip intentionally omitted: visa scoring is disabled (see
               WEIGHTS in ranking.js); restore once passport-aware data lands
               from the Sherpa Requirements API. */}
-          {kind === 'full' && (
-            <NeighbourhoodChip
-              open={mapOpen}
-              id={mapId}
-              onClick={() => setMapOpen((v) => !v)}
-            />
+          {hasGuide && (
+            <NeighbourhoodChip open={detailOpen} onClick={() => setDetailOpen(true)} />
           )}
         </div>
 
@@ -217,20 +212,12 @@ export default function ResultCard({ result, nights, originIata, month, index = 
         </button>
       </div>
 
-      {/* Full-width rows across the card grid. A 'full' city expands the map in
-          place when the chip is on; a 'minimal' city always shows its band —
-          the honest "one core" answer, owned rather than left blank. */}
-      {kind === 'full' && mapOpen && (
-        <Suspense fallback={<div className="rc-nb__loading" />}>
-          <NeighbourhoodExpansion
-            city={guide}
-            result={result}
-            id={mapId}
-            onCollapse={() => setMapOpen(false)}
-          />
+      {/* The overlay portals to <body>, so it renders nothing inside the card. */}
+      {detailOpen && (
+        <Suspense fallback={null}>
+          <DestinationDetail result={result} onClose={() => setDetailOpen(false)} />
         </Suspense>
       )}
-      {kind === 'minimal' && <CompactCityBand note={guide.note} />}
     </article>
   )
 }
