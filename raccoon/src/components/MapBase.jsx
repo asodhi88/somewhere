@@ -62,6 +62,9 @@ const PALETTES = {
     roads: '#2b3742',
     roadsMajor: '#36444f',
     buildings: '#1e2a35',
+    label: '#6f7d8a',
+    labelPlace: '#8492a0',
+    labelHalo: '#101821',
   },
   day: {
     background: '#f2ece1',
@@ -72,6 +75,9 @@ const PALETTES = {
     roads: '#e0d6c6',
     roadsMajor: '#d6c9b4',
     buildings: '#e6ddcd',
+    label: '#a1968a',
+    labelPlace: '#8c8175',
+    labelHalo: '#f2ece1',
   },
 }
 
@@ -113,6 +119,67 @@ function basemapLayers(pal) {
         'line-width': ['interpolate', ['linear'], ['zoom'], 9, 0.5, 14, 2.6],
       },
     },
+
+    // Labels are deliberately subordinate: low-contrast ink, small sizes, and a
+    // halo only strong enough to survive the road lines. The price-lean polygons
+    // are the subject; these are here so the reader can orient, not read a
+    // street atlas. They sit below the module's layers, which are added after.
+    {
+      id: 'base-label-place',
+      type: 'symbol',
+      source: 'basemap',
+      'source-layer': 'places',
+      minzoom: 11,
+      // Local granularity only. Country/region/city labels would duplicate — and
+      // fight with — the module's own district and area markers.
+      filter: [
+        'all',
+        ['has', 'name'],
+        ['in', ['get', 'kind'], ['literal', ['neighbourhood', 'suburb', 'quarter', 'locality', 'village', 'town']]],
+      ],
+      layout: {
+        'text-field': ['get', 'name'],
+        'text-font': ['Noto Sans Regular'],
+        'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 14, 12],
+        'text-max-width': 7,
+        'text-padding': 6,
+      },
+      paint: {
+        'text-color': pal.labelPlace,
+        'text-halo-color': pal.labelHalo,
+        'text-halo-width': 1.1,
+        'text-opacity': 0.85,
+      },
+    },
+    {
+      id: 'base-label-road',
+      type: 'symbol',
+      source: 'basemap',
+      'source-layer': 'roads',
+      // Only at the deepest zoom, and only the roads worth naming — labelling
+      // every residential street turns the grid into noise.
+      minzoom: 13.5,
+      filter: [
+        'all',
+        ['has', 'name'],
+        ['in', ['get', 'kind'], ['literal', ['highway', 'major_road', 'medium_road']]],
+      ],
+      layout: {
+        'text-field': ['get', 'name'],
+        'text-font': ['Noto Sans Regular'],
+        'text-size': 10,
+        'symbol-placement': 'line',
+        'symbol-spacing': 300,
+        'text-max-angle': 30,
+        'text-padding': 4,
+      },
+      paint: {
+        'text-color': pal.label,
+        'text-halo-color': pal.labelHalo,
+        'text-halo-width': 1.2,
+        'text-opacity': 0.8,
+      },
+    },
   ]
 }
 
@@ -152,6 +219,11 @@ export default function MapBase({
       attributionControl: false,
       style: {
         version: 8,
+        // Self-hosted, same reasoning as the tiles: a hosted glyph CDN would be
+        // exactly the runtime third-party call the PMTiles extract exists to
+        // avoid. Relative URL, served from public/fonts/ off our own origin.
+        // Only the Latin ranges of one stack are vendored (see tiles/README.md).
+        glyphs: '/fonts/{fontstack}/{range}.pbf',
         sources: {
           basemap: {
             type: 'vector',

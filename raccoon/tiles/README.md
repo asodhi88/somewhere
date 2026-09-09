@@ -27,6 +27,27 @@ pmtiles extract https://build.protomaps.com/<date>.pmtiles somewhere-z14.pmtiles
 3. Upload the `.pmtiles` file to Blob storage and, if the URL changed, update
    `PMTILES_URL`.
 
+## Fonts (glyphs)
+
+Vector tiles carry label *text* but never the *fonts* to draw it, so MapLibre needs a
+`glyphs` endpoint before any symbol layer renders. Those are **self-hosted too**, for the
+same reason as the tiles: a hosted glyph CDN would be exactly the runtime third-party
+call this setup exists to avoid.
+
+- Location: `public/fonts/<stack>/<range>.pbf`, referenced by the style as the relative
+  URL `/fonts/{fontstack}/{range}.pbf`.
+- Vendored: **one stack, Latin ranges only** — `Noto Sans Regular`, ranges `0-255` and
+  `256-511` (~200KB). The full stack is 256 ranges / ~6MB, and the rest is for scripts no
+  seed city needs. `OFL.txt` is the font licence and ships alongside.
+- Source: [protomaps/basemaps-assets](https://github.com/protomaps/basemaps-assets)
+  (`fonts/Noto Sans Regular/`). Note the directory names contain spaces, so the fetched
+  path is URL-encoded (`Noto%20Sans%20Regular`).
+
+**Adding a font range or stack:** only if a label needs it. A character outside the
+vendored ranges is simply dropped by MapLibre — so if non-Latin city names ever appear,
+pull that range rather than the whole set, and keep `text-font` in `MapBase.jsx` in step
+with the directories that actually exist.
+
 ## Attribution
 
 The basemap is OpenStreetMap data. **© OpenStreetMap is rendered on the map whenever it
