@@ -36,17 +36,27 @@ call this setup exists to avoid.
 
 - Location: `public/fonts/<stack>/<range>.pbf`, referenced by the style as the relative
   URL `/fonts/{fontstack}/{range}.pbf`.
-- Vendored: **one stack, Latin ranges only** — `Noto Sans Regular`, ranges `0-255` and
-  `256-511` (~200KB). The full stack is 256 ranges / ~6MB, and the rest is for scripts no
-  seed city needs. `OFL.txt` is the font licence and ships alongside.
+- Vendored: **one stack, three ranges** — `Noto Sans Regular`: `0-255` (Basic Latin +
+  Latin-1), `256-511` (Latin Extended-A) and `8192-8447` (General Punctuation — OSM names
+  really do contain en dashes and curly quotes). ~276KB in total against 256 ranges /
+  ~6MB for the full stack, the rest being scripts no seed city needs. `OFL.txt` is the
+  font licence and ships alongside.
 - Source: [protomaps/basemaps-assets](https://github.com/protomaps/basemaps-assets)
   (`fonts/Noto Sans Regular/`). Note the directory names contain spaces, so the fetched
   path is URL-encoded (`Noto%20Sans%20Regular`).
 
-**Adding a font range or stack:** only if a label needs it. A character outside the
-vendored ranges is simply dropped by MapLibre — so if non-Latin city names ever appear,
-pull that range rather than the whole set, and keep `text-font` in `MapBase.jsx` in step
-with the directories that actually exist.
+**Adding a font range or stack:** only if a label needs it. Pull the single range rather
+than the whole set, and keep `text-font` in `MapBase.jsx` in step with the directories
+that actually exist.
+
+**How a missing range shows up — worth knowing, because it is silent.** MapLibre requests
+a range only when a label contains a character in it, and a missing file does *not*
+surface as a 404: the SPA fallback answers with `200` and `index.html`, so MapLibre gets
+HTML where it expects a protobuf, fails to parse it, and quietly drops those glyphs. No
+console error. `8192-8447` was found exactly this way — labels looked fine until the
+request log showed a `/fonts/` response typed `text/html`. If labels ever look truncated
+or a word silently vanishes, check the network panel for a `/fonts/` request whose
+content-type is HTML, and vendor that range.
 
 ## Attribution
 
