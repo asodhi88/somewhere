@@ -58,6 +58,17 @@ request log showed a `/fonts/` response typed `text/html`. If labels ever look t
 or a word silently vanishes, check the network panel for a `/fonts/` request whose
 content-type is HTML, and vendor that range.
 
+**TODO (content-pass scale): make this fail loudly.** Finding a missing range by eye does
+not scale to 130+ entries whose names we will not have read. Add a check that `/fonts/`
+responses are actually glyph payloads rather than the SPA fallback — a small dev-time
+fetch wrapper, or a CI step that requests each range the style references.
+
+One caveat for whoever builds it: **do not assert `content-type: application/x-protobuf`.**
+The dev server returns these `.pbf` files with *no* content-type at all, so an equality
+check would fail in dev while passing in production — the worst possible direction for a
+guard. The reliable tell is the inverse: a `text/html` content-type (or a body that fails
+to parse as a glyph protobuf) means the fallback answered and the range is missing.
+
 ## Attribution
 
 The basemap is OpenStreetMap data. **© OpenStreetMap is rendered on the map whenever it
