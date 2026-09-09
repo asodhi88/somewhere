@@ -13,9 +13,9 @@ import { guideKind } from '../lib/neighbourhoodVocab'
 import { NeighbourhoodChip } from './neighbourhoodParts'
 
 // Lazy so MapLibre + pmtiles (the bulk of the JS) are code-split into their own
-// chunk, fetched only when a card's detail overlay is actually opened — they
-// never weigh on the initial search-and-results load.
-const DestinationDetail = lazy(() => import('./DestinationDetail'))
+// chunk, fetched only when a card's neighbourhood section is actually expanded —
+// they never weigh on the initial search-and-results load.
+const NeighbourhoodSection = lazy(() => import('./NeighbourhoodSection'))
 
 // Unsplash's API guidelines: credit the photographer with a link back to their
 // profile, and link to Unsplash, both tagged with our utm_source.
@@ -37,8 +37,9 @@ const UTM = '?utm_source=somewhere&utm_medium=referral'
  */
 export default function ResultCard({ result, nights, originIata, month, index = 0, onOpenLightbox }) {
   const [open, setOpen] = useState(false)
-  // The per-city detail overlay that hosts the neighbourhood module.
-  const [detailOpen, setDetailOpen] = useState(false)
+  // Step one of the neighbourhood interaction: the section expanded in place
+  // inside this tile. Full screen is a further, explicit step inside it.
+  const [nbOpen, setNbOpen] = useState(false)
   const { cost } = result
   const reason = result.blurb || result.reason
   const img = result.hero_image
@@ -148,7 +149,11 @@ export default function ResultCard({ result, nights, originIata, month, index = 
               WEIGHTS in ranking.js); restore once passport-aware data lands
               from the Sherpa Requirements API. */}
           {hasGuide && (
-            <NeighbourhoodChip open={detailOpen} onClick={() => setDetailOpen(true)} />
+            <NeighbourhoodChip
+              open={nbOpen}
+              id={`rc-nb-${result.id}`}
+              onClick={() => setNbOpen((v) => !v)}
+            />
           )}
         </div>
 
@@ -212,10 +217,16 @@ export default function ResultCard({ result, nights, originIata, month, index = 
         </button>
       </div>
 
-      {/* The overlay portals to <body>, so it renders nothing inside the card. */}
-      {detailOpen && (
-        <Suspense fallback={null}>
-          <DestinationDetail result={result} onClose={() => setDetailOpen(false)} />
+      {/* Step one: the section expands in place, spanning the card grid. The
+          full-screen overlay it can open portals to <body>, so it adds nothing
+          here. */}
+      {nbOpen && (
+        <Suspense fallback={<div className="rc-nb__loading" id={`rc-nb-${result.id}`} />}>
+          <NeighbourhoodSection
+            city={guide}
+            result={result}
+            onCollapse={() => setNbOpen(false)}
+          />
         </Suspense>
       )}
     </article>

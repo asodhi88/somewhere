@@ -5,6 +5,7 @@ import { getNeighbourhoods } from '../lib/getNeighbourhoods'
 import { guideKind } from '../lib/neighbourhoodVocab'
 import { CompactCityBand } from './neighbourhoodParts'
 import NeighbourhoodModule from './NeighbourhoodGuide'
+import { useNeighbourhoodState } from '../lib/useNeighbourhoodState'
 
 /**
  * DestinationDetail — a deliberately thin per-city overlay: hero, cost header,
@@ -19,12 +20,16 @@ import NeighbourhoodModule from './NeighbourhoodGuide'
  * overlay would be trapped inside the card and scroll with it. Same trap the
  * how-it-works blind avoids by being a sibling of .rc-app.
  */
-export default function DestinationDetail({ result, onClose }) {
+export default function DestinationDetail({ result, state, onClose }) {
   const closeRef = useRef(null)
   const city = getNeighbourhoods(result.id)
   const kind = guideKind(city)
   const img = result.hero_image
   const { cost } = result
+  // Normally handed the inline section's state so the two views agree; falls
+  // back to its own when opened standalone (e.g. from a future routed view).
+  const ownState = useNeighbourhoodState(city ?? { areas: [] })
+  const mapState = state ?? ownState
 
   useEffect(() => {
     const onKey = (e) => {
@@ -80,7 +85,14 @@ export default function DestinationDetail({ result, onClose }) {
 
         {/* A city with no entry, or tier "none", renders no module at all and
             leaves the rest of the overlay untouched. */}
-        {kind === 'full' && <NeighbourhoodModule city={city} cityName={result.city} />}
+        {kind === 'full' && (
+          <NeighbourhoodModule
+            city={city}
+            cityName={result.city}
+            state={mapState}
+            variant="overlay"
+          />
+        )}
         {kind === 'minimal' && <CompactCityBand note={city.note} />}
       </div>
     </div>,

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import maplibregl from 'maplibre-gl'
 import MapBase, { BASE_MAX_ZOOM } from './MapBase'
 import { currentAmbient } from '../lib/ambient'
@@ -307,9 +307,9 @@ function NeighbourhoodMap({
 
 /* ---------------------------------------------------------------- panel --- */
 
-function LegendChips({ off, onToggle }) {
+function LegendChips({ off, onToggle, variant = 'rail' }) {
   return (
-    <div className="rc-nb__legend">
+    <div className={`rc-nb__legend rc-nb__legend--${variant}`}>
       {LEAN_ORDER.map((k) => {
         const on = !off[k]
         return (
@@ -410,73 +410,80 @@ function Overview({ city, cityName, onDrill, onSelect }) {
 
 /* --------------------------------------------------------------- module --- */
 
-export default function NeighbourhoodModule({ city, cityName }) {
-  const [selectedId, setSelectedId] = useState(null)
-  const [off, setOff] = useState({})
-  const [camera, setCamera] = useState(null)
-  const nonce = useRef(0)
-
-  const activeLeans = useMemo(() => LEAN_ORDER.filter((k) => !off[k]), [off])
-  const selected = city.areas.find((a) => a.id === selectedId) || null
+/**
+ * The map module in one of two layouts:
+ *   inline  — inside a result tile: a bar (filters, full-screen, collapse) over
+ *             map + panel. The reader's first step.
+ *   overlay — inside the detail overlay: rail (filters + area list) / map /
+ *             panel. Only reached by an explicit full-screen click.
+ * Both are driven by a `state` from useNeighbourhoodState, so the two agree.
+ */
+export default function NeighbourhoodModule({
+  city,
+  cityName,
+  state,
+  variant = 'overlay',
+  onFullscreen,
+  onCollapse,
+}) {
+  const {
+    selectedId, off, camera, activeLeans, selected, hasDistricts,
+    selectArea, focusArea, drillDistrict, clearSelection, toggleLean,
+  } = state
   const reviewed = formatReviewed(city.reviewedOn)
-  const hasDistricts = (city.districts?.length ?? 0) > 0
+  const inline = variant === 'inline'
 
-  const move = useCallback((kind, id) => {
-    nonce.current += 1
-    setCamera({ kind, id, n: nonce.current })
-  }, [])
-
-  const selectArea = useCallback((areaId) => setSelectedId(areaId), [])
-  const focusArea = useCallback(
-    (areaId) => {
-      setSelectedId(areaId)
-      move('area', areaId)
-    },
-    [move],
+  const areaList = (
+    <div className="rc-nb__zones">
+      {city.areas
+        .filter((a) => activeLeans.includes(a.lean))
+        .map((a) => (
+          <button
+            key={a.id}
+            type="button"
+            className={`rc-nb__zone${a.id === selectedId ? ' is-active' : ''}`}
+            style={{ '--nb-lean': LEAN[a.lean].color }}
+            onClick={() => focusArea(a.id)}
+          >
+            <span className="rc-nb__zone-dot" aria-hidden="true" />
+            <span className="rc-nb__zone-name">{a.name}</span>
+          </button>
+        ))}
+    </div>
   )
-  const drillDistrict = useCallback(
-    (districtId) => {
-      const first = city.areas.find((a) => a.district === districtId)
-      setSelectedId(first ? first.id : null)
-      move('district', districtId)
-    },
-    [city.areas, move],
-  )
-  const clearSelection = useCallback(() => {
-    setSelectedId(null)
-    move('reset')
-  }, [move])
-
-  const toggleLean = useCallback((k) => setOff((p) => ({ ...p, [k]: !p[k] })), [])
 
   return (
-    <section className="rc-nb" aria-label="Where to stay">
+    <section className={`rc-nb rc-nb--${variant}`} aria-label="Where to stay">
+      {inline && (
+        <div className="rc-nb__bar">
+          <span className="rc-nb__bar-title">Where to stay</span>
+          <LegendChips off={off} onToggle={toggleLean} variant="bar" />
+          <button type="button" className="rc-nb__barbtn" onClick={onFullscreen}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>
+            Full screen
+          </button>
+          <button type="button" className="rc-nb__barbtn" onClick={onCollapse}>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6" /></svg>
+            Collapse
+          </button>
+        </div>
+      )}
+
       <div className="rc-nb__body">
-        <aside className="rc-nb__rail">
-          <div className="rc-nb__rail-group">
-            <span className="rc-nb__rail-label">Filter by price lean</span>
-            <LegendChips off={off} onToggle={toggleLean} />
-          </div>
-          <div className="rc-nb__rail-group">
-            <span className="rc-nb__rail-label">Neighbourhoods</span>
-            <div className="rc-nb__zones">
-              {city.areas
-                .filter((a) => activeLeans.includes(a.lean))
-                .map((a) => (
-                  <button
-                    key={a.id}
-                    type="button"
-                    className={`rc-nb__zone${a.id === selectedId ? ' is-active' : ''}`}
-                    style={{ '--nb-lean': LEAN[a.lean].color }}
-                    onClick={() => focusArea(a.id)}
-                  >
-                    <span className="rc-nb__zone-dot" aria-hidden="true" />
-                    <span className="rc-nb__zone-name">{a.name}</span>
-                  </button>
-                ))}
+        {/* Inline keeps the filters in the bar and drops the area list — the
+            tile is a preview, and the list is what full screen adds. */}
+        {!inline && (
+          <aside className="rc-nb__rail">
+            <div className="rc-nb__rail-group">
+              <span className="rc-nb__rail-label">Filter by price lean</span>
+              <LegendChips off={off} onToggle={toggleLean} variant="rail" />
             </div>
-          </div>
-        </aside>
+            <div className="rc-nb__rail-group">
+              <span className="rc-nb__rail-label">Neighbourhoods</span>
+              {areaList}
+            </div>
+          </aside>
+        )}
 
         <NeighbourhoodMap
           city={city}
