@@ -6,7 +6,7 @@ seed city, *not* a file per city. `<MapBase>` points at one Blob URL and does no
 filename resolution by city id.
 
 - **Extract URL** — set as `PMTILES_URL` in `MapBase.jsx`.
-- **maxzoom = 13.** The map's `maxZoom` matches, so interactions never invite detail
+- **maxzoom = 14.** The map's `maxZoom` matches, so interactions never invite detail
   the extract cannot serve.
 - **`cities.geojson` is the committed region source** — one polygon per city. It is the
   input to the cut, so it is the thing to edit and review; the `.pmtiles` output is
@@ -21,10 +21,10 @@ filename resolution by city id.
 2. Re-cut and re-upload:
 
 ```bash
-pmtiles extract https://build.protomaps.com/<date>.pmtiles somewhere.pmtiles --region=tiles/cities.geojson --maxzoom=13
+pmtiles extract https://build.protomaps.com/<date>.pmtiles somewhere-z14.pmtiles --region=tiles/cities.geojson --maxzoom=14
 ```
 
-3. Upload `somewhere.pmtiles` to Blob storage and, if the URL changed, update
+3. Upload the `.pmtiles` file to Blob storage and, if the URL changed, update
    `PMTILES_URL`.
 
 ## Attribution

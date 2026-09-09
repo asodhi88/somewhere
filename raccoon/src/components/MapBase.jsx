@@ -24,10 +24,10 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 // The single multi-region extract. Chosen to scale to 150-200 cities, where
 // per-city files would not.
 export const PMTILES_URL =
-  'https://yftlayj7jhygl1oe.public.blob.vercel-storage.com/somewhere.pmtiles'
+  'https://yftlayj7jhygl1oe.public.blob.vercel-storage.com/somewhere-z14.pmtiles'
 
-// The extract is cut at z13; the map must not invite detail past it.
-export const BASE_MAX_ZOOM = 13
+// The extract is cut at z14; the map must not invite detail past it.
+export const BASE_MAX_ZOOM = 14
 
 // One protocol registration for the whole app. maplibre keys protocols by scheme
 // globally, so registering per-mount would throw on the second map.
@@ -57,39 +57,60 @@ const PALETTES = {
     background: '#101821',
     earth: '#16202a',
     landcover: '#182430',
+    landuse: '#1a2530',
     water: '#0e1720',
     roads: '#2b3742',
-    buildings: '#1b2630',
+    roadsMajor: '#36444f',
+    buildings: '#1e2a35',
   },
   day: {
     background: '#f2ece1',
     earth: '#f6f1e7',
     landcover: '#eceadb',
+    landuse: '#ece7d6',
     water: '#dfe8ea',
-    roads: '#e2d9cb',
-    buildings: '#ebe3d6',
+    roads: '#e0d6c6',
+    roadsMajor: '#d6c9b4',
+    buildings: '#e6ddcd',
   },
 }
 
 const ATTRIBUTION =
   '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> · <a href="https://protomaps.com" target="_blank" rel="noreferrer">Protomaps</a>'
 
-// The Protomaps basemap schema exposes these source-layers (verified against the
-// extract's metadata). A quiet subset is enough for street context.
+// The Protomaps basemap schema exposes these source-layers, with these zoom
+// ranges (verified against the extract's metadata — landcover really does stop
+// at z7, which is why landuse carries the close-in texture). A quiet subset is
+// enough for street context.
 function basemapLayers(pal) {
   return [
     { id: 'base-earth', type: 'fill', source: 'basemap', 'source-layer': 'earth', paint: { 'fill-color': pal.earth } },
-    { id: 'base-landcover', type: 'fill', source: 'basemap', 'source-layer': 'landcover', paint: { 'fill-color': pal.landcover, 'fill-opacity': 0.6 } },
+    { id: 'base-landcover', type: 'fill', source: 'basemap', 'source-layer': 'landcover', maxzoom: 8, paint: { 'fill-color': pal.landcover, 'fill-opacity': 0.6 } },
+    { id: 'base-landuse', type: 'fill', source: 'basemap', 'source-layer': 'landuse', minzoom: 8, paint: { 'fill-color': pal.landuse, 'fill-opacity': 0.7 } },
     { id: 'base-water', type: 'fill', source: 'basemap', 'source-layer': 'water', paint: { 'fill-color': pal.water } },
-    { id: 'base-buildings', type: 'fill', source: 'basemap', 'source-layer': 'buildings', minzoom: 12, paint: { 'fill-color': pal.buildings } },
+    { id: 'base-buildings', type: 'fill', source: 'basemap', 'source-layer': 'buildings', minzoom: 13, paint: { 'fill-color': pal.buildings, 'fill-opacity': 0.55 } },
+    // Two road passes so the close-in view has a hierarchy rather than a mesh
+    // of identical hairlines: minor streets stay thin, through-routes carry.
     {
-      id: 'base-roads',
+      id: 'base-roads-minor',
       type: 'line',
       source: 'basemap',
       'source-layer': 'roads',
+      filter: ['!', ['in', ['get', 'kind'], ['literal', ['highway', 'major_road']]]],
       paint: {
         'line-color': pal.roads,
-        'line-width': ['interpolate', ['linear'], ['zoom'], 9, 0.3, 13, 1.6],
+        'line-width': ['interpolate', ['linear'], ['zoom'], 11, 0.25, 14, 1.2],
+      },
+    },
+    {
+      id: 'base-roads-major',
+      type: 'line',
+      source: 'basemap',
+      'source-layer': 'roads',
+      filter: ['in', ['get', 'kind'], ['literal', ['highway', 'major_road']]],
+      paint: {
+        'line-color': pal.roadsMajor,
+        'line-width': ['interpolate', ['linear'], ['zoom'], 9, 0.5, 14, 2.6],
       },
     },
   ]

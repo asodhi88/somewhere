@@ -101,28 +101,52 @@ function NeighbourhoodMap({
 
   // Repaint hover/selection emphasis: the hovered shape lifts and everything
   // else drops back, so one area reads at a time.
+  //
+  // Every fill fades as you zoom in. Far out the fill IS the information — the
+  // shape of the lean across the city. Close in the basemap has real detail
+  // (streets, blocks, parks) and a wash over it hides exactly what the reader
+  // zoomed in to see, so the boundary hands over to its stroke.
   const paint = useCallback(() => {
     const map = mapRef.current
     if (!map || !map.getLayer('z-fill')) return
     const h = hoverRef.current
+    const isId = (id) => ['==', ['get', 'id'], id]
+
+    // The zoom curve must be the OUTERMOST expression and there may be only one
+    // of them, so the per-feature `case` goes inside each stop — not a `case`
+    // choosing between two curves, which the style spec rejects outright.
+    const fade = (far, close) => ['interpolate', ['linear'], ['zoom'], 11, far, 14, close]
+    const pick = (id, hit, miss) => [
+      ['case', isId(id), hit[0], miss[0]],
+      ['case', isId(id), hit[1], miss[1]],
+    ]
+
+    // [far, close] opacity pairs.
+    const F = night
+      ? { base: [0.3, 0.1], selected: [0.36, 0.15], hover: [0.52, 0.22], dim: [0.12, 0.05] }
+      : { base: [0.22, 0.06], selected: [0.28, 0.1], hover: [0.44, 0.16], dim: [0.09, 0.03] }
+
     for (const p of ['d', 'z']) {
       if (!map.getLayer(`${p}-fill`)) continue
-      const base = night ? 0.3 : 0.22
-      let fill = base
-      if (h && h.layer === p) {
-        fill = ['case', ['==', ['id'], h.id], night ? 0.52 : 0.44, night ? 0.12 : 0.09]
-      } else if (h) {
-        fill = night ? 0.1 : 0.08
-      }
+
+      let fill
+      if (h && h.layer === p) fill = fade(...pick(h.id, F.hover, F.dim))
+      else if (h) fill = fade(F.dim[0], F.dim[1])
+      else if (p === 'z' && selectedId) fill = fade(...pick(selectedId, F.selected, F.base))
+      else fill = fade(F.base[0], F.base[1])
       map.setPaintProperty(`${p}-fill`, 'fill-opacity', fill)
+
+      // The stroke thickens with zoom to carry the state the fill gives up.
+      let width
+      if (h && h.layer === p) width = fade(...pick(h.id, [2.6, 3.2], [1, 1]))
+      else if (p === 'z' && selectedId) width = fade(...pick(selectedId, [2.8, 4], [1.2, 1.2]))
+      else width = 1.4
+      map.setPaintProperty(`${p}-line`, 'line-width', width)
       map.setPaintProperty(
         `${p}-line`,
-        'line-width',
-        h && h.layer === p ? ['case', ['==', ['id'], h.id], 2.6, 1] : 1.4,
+        'line-opacity',
+        p === 'z' && selectedId ? ['case', isId(selectedId), 1, 0.55] : 0.75,
       )
-    }
-    if (selectedId) {
-      map.setPaintProperty('z-line', 'line-width', ['case', ['==', ['get', 'id'], selectedId], 2.8, 1.2])
     }
   }, [night, selectedId])
 

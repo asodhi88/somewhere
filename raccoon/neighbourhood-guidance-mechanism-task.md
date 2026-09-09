@@ -124,7 +124,8 @@ Add `getNeighbourhoods(cityId)` in `src/lib/` (parallel to `getDestinations`). A
 - **Renderer:** MapLibre GL (project-settled). Wrap the base in a `<MapBase>` component so the tile source is swappable and nothing else depends on it.
 - **Base:** a **single self-hosted Protomaps PMTiles multi-region extract** covering all seed cities in one file — *not* per-city files. `<MapBase>` points at one Blob URL; no filename resolution by city id. No API key, no runtime third-party call.
   - Extract URL: hosted on Vercel Blob (public). Paste the current URL when wiring.
-  - **maxzoom = 13.** Map interactions should not expect detail beyond this.
+  - **maxzoom = 14.** Map interactions should not expect detail beyond this. (Was 13; re-cut at 14 so the close-in view carries real street and block detail.)
+  - Because that detail is now worth seeing, **area fills fade as zoom increases** and the boundary hands over to its stroke. Far out the fill is the information — the shape of the lean across the city; close in a wash over the streets hides what the reader zoomed in for.
   - Register the `pmtiles://` protocol for MapLibre GL.
   - `tiles/cities.geojson` is the **committed region source** (one polygon per city, cut with `pmtiles extract --region`). Adding a city = add a polygon, re-cut, re-upload. Add `*.pmtiles` to `.gitignore` — tiles are build output, not source.
   - Show visible **© OpenStreetMap** attribution on the map. This is an ODbL obligation, not optional. Protomaps credit is appreciated but not required.
