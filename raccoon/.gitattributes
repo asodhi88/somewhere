@@ -1,0 +1,4 @@
+# Font glyph ranges are binary protobufs — never let autocrlf touch them.
+*.pbf binary
+# Tile archives are binary too (gitignored, but belt-and-braces).
+*.pmtiles binary

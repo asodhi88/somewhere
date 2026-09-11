@@ -2,7 +2,13 @@
   "type": "Feature",
   "properties": {
     "name": "somewhere tile extract regions",
-    "note": "One polygon per city. Add a polygon to extend coverage, then re-cut the extract."
+    "note": "One polygon per city. Add a polygon to extend coverage, then re-cut the extract.",
+    "regions": [
+      "Los Angeles — seeded, full tier (district-layered)",
+      "Havana — seeded, full tier (single-level)",
+      "Halifax — NOT seeded: no entry in neighbourhoods.json, so nothing renders over these tiles"
+    ],
+    "todo": "Halifax has no seeded neighbourhoods entry. At the next re-cut either seed it or drop its polygon. Not re-cutting for this alone — the whole extract is ~16MB, so the waste is trivial."
   },
   "geometry": {
     "type": "MultiPolygon",

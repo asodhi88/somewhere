@@ -51,3 +51,13 @@ export function applyAmbient(mode = resolveAmbient()) {
   if (tc) tc.setAttribute('content', TOP_OF_SKY[mode] || TOP_OF_SKY.night)
   return mode
 }
+
+/**
+ * The ambient currently painted on <html> — which is not the same question as
+ * resolveAmbient() (the clock). Non-React canvases (the neighbourhood map) read
+ * this to pick a palette that matches the page around them.
+ */
+export function currentAmbient() {
+  if (typeof document === 'undefined') return 'night'
+  return document.documentElement.getAttribute('data-ambient') === 'day' ? 'day' : 'night'
+}

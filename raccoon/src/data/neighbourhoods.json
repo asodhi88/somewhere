@@ -1,0 +1,939 @@
+{
+  "lax": {
+    "cityId": "lax",
+    "tier": "full",
+    "reviewedOn": "2026-09",
+    "anchor": {
+      "name": "Downtown LA",
+      "lat": 34.043,
+      "lng": -118.238
+    },
+    "districts": [
+      {
+        "id": "central",
+        "name": "Downtown & Eastside",
+        "lean": "near",
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.22392, 34.065],
+              [-118.22444, 34.07079],
+              [-118.22866, 34.07545],
+              [-118.23497, 34.07787],
+              [-118.24108, 34.07851],
+              [-118.24596, 34.07905],
+              [-118.2505, 34.08072],
+              [-118.25633, 34.08301],
+              [-118.26373, 34.08399],
+              [-118.27094, 34.08193],
+              [-118.27532, 34.07687],
+              [-118.27561, 34.07057],
+              [-118.27288, 34.065],
+              [-118.2695, 34.06078],
+              [-118.26702, 34.0571],
+              [-118.26506, 34.05294],
+              [-118.26202, 34.04847],
+              [-118.25694, 34.0451],
+              [-118.2505, 34.04419],
+              [-118.24432, 34.04589],
+              [-118.23937, 34.04903],
+              [-118.23524, 34.05236],
+              [-118.231, 34.05567],
+              [-118.22672, 34.05972],
+              [-118.22392, 34.065]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "midcity",
+        "name": "Hollywood & Mid-City",
+        "lean": "above",
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.31545, 34.0785],
+              [-118.31938, 34.08613],
+              [-118.32433, 34.09257],
+              [-118.3292, 34.09883],
+              [-118.33504, 34.10534],
+              [-118.34334, 34.11068],
+              [-118.35375, 34.11244],
+              [-118.36375, 34.10942],
+              [-118.37079, 34.10294],
+              [-118.37469, 34.09585],
+              [-118.37788, 34.09004],
+              [-118.38283, 34.08495],
+              [-118.38929, 34.0785],
+              [-118.3939, 34.06959],
+              [-118.39289, 34.05978],
+              [-118.3853, 34.05237],
+              [-118.37384, 34.04967],
+              [-118.36261, 34.05111],
+              [-118.35375, 34.05386],
+              [-118.34631, 34.0555],
+              [-118.3381, 34.05604],
+              [-118.32858, 34.05765],
+              [-118.3199, 34.06231],
+              [-118.31512, 34.06993],
+              [-118.31545, 34.0785]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "westside",
+        "name": "Westside & Beaches",
+        "lean": "near",
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.39578, 34.01],
+              [-118.39229, 34.02304],
+              [-118.39021, 34.03909],
+              [-118.39571, 34.05583],
+              [-118.41057, 34.06805],
+              [-118.43088, 34.07226],
+              [-118.451, 34.06954],
+              [-118.46846, 34.064],
+              [-118.48477, 34.05849],
+              [-118.50179, 34.0521],
+              [-118.51769, 34.04192],
+              [-118.52726, 34.02694],
+              [-118.52636, 34.01],
+              [-118.51617, 33.99553],
+              [-118.50254, 33.98533],
+              [-118.49088, 33.97694],
+              [-118.48136, 33.9664],
+              [-118.46939, 33.9531],
+              [-118.451, 33.9416],
+              [-118.4279, 33.93855],
+              [-118.40716, 33.94706],
+              [-118.39549, 33.96398],
+              [-118.39356, 33.98251],
+              [-118.39579, 33.99774],
+              [-118.39578, 34.01]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "valley",
+        "name": "Valley & Northeast",
+        "lean": "below",
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.18358, 34.146],
+              [-118.18837, 34.16421],
+              [-118.20485, 34.17737],
+              [-118.22546, 34.18327],
+              [-118.24318, 34.18517],
+              [-118.2568, 34.18832],
+              [-118.2705, 34.19476],
+              [-118.28836, 34.20115],
+              [-118.30937, 34.20172],
+              [-118.32778, 34.19341],
+              [-118.33806, 34.17828],
+              [-118.33959, 34.16132],
+              [-118.33652, 34.146],
+              [-118.33309, 34.13212],
+              [-118.32946, 34.11783],
+              [-118.32212, 34.10328],
+              [-118.30827, 34.09185],
+              [-118.28944, 34.0875],
+              [-118.2705, 34.09085],
+              [-118.25506, 34.0983],
+              [-118.24207, 34.10525],
+              [-118.22753, 34.11043],
+              [-118.20963, 34.11692],
+              [-118.19241, 34.12868],
+              [-118.18358, 34.146]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "south",
+        "name": "South LA & Harbor",
+        "lean": "below",
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.21617, 33.995],
+              [-118.21848, 34.00111],
+              [-118.21989, 34.0075],
+              [-118.2217, 34.01515],
+              [-118.22644, 34.02308],
+              [-118.23518, 34.02847],
+              [-118.246, 34.02879],
+              [-118.25538, 34.02403],
+              [-118.26119, 34.01682],
+              [-118.26443, 34.01028],
+              [-118.26798, 34.00552],
+              [-118.27357, 34.00113],
+              [-118.27979, 33.995],
+              [-118.2831, 33.98676],
+              [-118.28082, 33.97833],
+              [-118.27335, 33.97232],
+              [-118.26358, 33.96976],
+              [-118.25425, 33.96946],
+              [-118.246, 33.96954],
+              [-118.23773, 33.96942],
+              [-118.22883, 33.97034],
+              [-118.22056, 33.97391],
+              [-118.21531, 33.98031],
+              [-118.21426, 33.98795],
+              [-118.21617, 33.995]
+            ]
+          ]
+        }
+      }
+    ],
+    "areas": [
+      {
+        "id": "dtla",
+        "name": "Downtown & Arts District",
+        "district": "central",
+        "lean": "near",
+        "friction": "walkable",
+        "character": "The walkable centre — galleries, markets and the concert hall in one grid.",
+        "summary": "Warehouse galleries, a produce market and the concert hall sit within a short walk of each other.",
+        "stayIf": [
+          "You want museums, food halls and rail on your doorstep",
+          "You’d rather not rent a car"
+        ],
+        "skipIf": [
+          "You picture quiet, leafy evenings",
+          "You’re here mainly for the beach"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.21269, 34.043],
+              [-118.2152, 34.04914],
+              [-118.22111, 34.05317],
+              [-118.22715, 34.05538],
+              [-118.23212, 34.05799],
+              [-118.238, 34.06176],
+              [-118.24633, 34.06424],
+              [-118.25496, 34.06235],
+              [-118.25974, 34.05609],
+              [-118.25926, 34.04873],
+              [-118.25647, 34.043],
+              [-118.25493, 34.03844],
+              [-118.25455, 34.03304],
+              [-118.25219, 34.02681],
+              [-118.24607, 34.02242],
+              [-118.238, 34.02204],
+              [-118.2309, 34.02489],
+              [-118.22534, 34.02857],
+              [-118.22001, 34.03217],
+              [-118.21496, 34.0368],
+              [-118.21269, 34.043]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "ktown",
+        "name": "Koreatown",
+        "district": "midcity",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "Dense, late-running and noticeably cheaper than the Westside.",
+        "summary": "The densest late-night grid in the city: barbecue, karaoke rooms and 24-hour cafés stacked several floors up.",
+        "stayIf": [
+          "You want to eat late and pay less",
+          "You like being on a busy, central grid"
+        ],
+        "skipIf": [
+          "You need silence after midnight",
+          "You want to be near the coast"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.27948, 34.058],
+              [-118.28212, 34.06308],
+              [-118.28585, 34.06712],
+              [-118.28947, 34.07114],
+              [-118.29417, 34.07542],
+              [-118.301, 34.07801],
+              [-118.30834, 34.07671],
+              [-118.31316, 34.07186],
+              [-118.31472, 34.06626],
+              [-118.31555, 34.06192],
+              [-118.31809, 34.058],
+              [-118.32113, 34.05258],
+              [-118.32099, 34.04597],
+              [-118.31589, 34.04103],
+              [-118.30806, 34.04],
+              [-118.301, 34.042],
+              [-118.29565, 34.04436],
+              [-118.29044, 34.04596],
+              [-118.28467, 34.04817],
+              [-118.28024, 34.05241],
+              [-118.27948, 34.058]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "silverlake",
+        "name": "Silver Lake & Echo Park",
+        "district": "central",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "Low-rise, hilly and independent — neighbourhood over landmark.",
+        "summary": "Hilly, walkable and low-rise — independent shops along Sunset Junction, a lake and stair-streets above it.",
+        "stayIf": [
+          "You want cafés, shops and a genuine local feel",
+          "You’ve already ticked off the tourist sights"
+        ],
+        "skipIf": [
+          "You need flat, easy walking",
+          "You want big nightlife on the doorstep"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.23741, 34.087],
+              [-118.24078, 34.09298],
+              [-118.24458, 34.09809],
+              [-118.24868, 34.10332],
+              [-118.25482, 34.10784],
+              [-118.263, 34.10914],
+              [-118.27051, 34.10615],
+              [-118.27521, 34.10091],
+              [-118.27835, 34.09624],
+              [-118.28274, 34.09231],
+              [-118.28827, 34.087],
+              [-118.29098, 34.07947],
+              [-118.28744, 34.07229],
+              [-118.2789, 34.06888],
+              [-118.26985, 34.06953],
+              [-118.263, 34.07126],
+              [-118.25697, 34.07163],
+              [-118.24957, 34.07169],
+              [-118.24179, 34.07424],
+              [-118.23713, 34.08004],
+              [-118.23741, 34.087]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "hollywood",
+        "name": "Hollywood",
+        "district": "midcity",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "The tourist spine, with rooms priced below the Westside.",
+        "summary": "The tourist spine — theatres, clubs and the Walk of Fame — with rooms priced below the Westside.",
+        "stayIf": [
+          "You want landmarks within walking distance",
+          "It’s a short, first-time visit"
+        ],
+        "skipIf": [
+          "You want calm residential streets",
+          "You’d rather avoid the crowds"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.31004, 34.098],
+              [-118.31078, 34.1029],
+              [-118.31138, 34.1086],
+              [-118.31468, 34.11432],
+              [-118.32132, 34.11758],
+              [-118.329, 34.1173],
+              [-118.33567, 34.115],
+              [-118.34175, 34.11254],
+              [-118.34828, 34.1096],
+              [-118.35387, 34.10469],
+              [-118.3553, 34.098],
+              [-118.3514, 34.09197],
+              [-118.34485, 34.08846],
+              [-118.33923, 34.08634],
+              [-118.33483, 34.08314],
+              [-118.329, 34.07878],
+              [-118.32051, 34.07636],
+              [-118.31213, 34.07877],
+              [-118.30781, 34.08525],
+              [-118.30816, 34.09239],
+              [-118.31004, 34.098]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "weho",
+        "name": "West Hollywood",
+        "district": "midcity",
+        "lean": "above",
+        "friction": "short-ride",
+        "character": "Compact, design-led, and the city’s densest bar strip.",
+        "summary": "Design showrooms by day, the city’s densest bar strip by night, all inside a compact walkable grid.",
+        "stayIf": [
+          "You want an evening out without driving between venues",
+          "You’ll make use of the walkable grid"
+        ],
+        "skipIf": [
+          "You’re holding a tight nightly budget",
+          "You need rail straight to downtown"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.36908, 34.09],
+              [-118.36751, 34.09471],
+              [-118.36741, 34.10058],
+              [-118.3712, 34.10573],
+              [-118.37798, 34.10788],
+              [-118.385, 34.10705],
+              [-118.39095, 34.10516],
+              [-118.39667, 34.1033],
+              [-118.40249, 34.10052],
+              [-118.40647, 34.09578],
+              [-118.40638, 34.09],
+              [-118.40274, 34.08523],
+              [-118.39842, 34.08193],
+              [-118.39509, 34.0785],
+              [-118.39131, 34.07392],
+              [-118.385, 34.06994],
+              [-118.37702, 34.06967],
+              [-118.37093, 34.07397],
+              [-118.36894, 34.08034],
+              [-118.36939, 34.0858],
+              [-118.36908, 34.09]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "santamonica",
+        "name": "Santa Monica",
+        "district": "westside",
+        "lean": "above",
+        "friction": "taxi-reliant",
+        "character": "Beach, pier and a car-free week right on the coast.",
+        "summary": "Beach, pier and a pedestrian shopping street — the easiest part of the city to manage without a car.",
+        "stayIf": [
+          "You’re travelling without a car",
+          "You want the beach at your door"
+        ],
+        "skipIf": [
+          "You’ll need to reach downtown often",
+          "The nightly rate is a stretch"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.46162, 34.019],
+              [-118.46069, 34.02716],
+              [-118.46667, 34.03365],
+              [-118.47608, 34.03603],
+              [-118.48444, 34.03573],
+              [-118.491, 34.03585],
+              [-118.49805, 34.03698],
+              [-118.50644, 34.03662],
+              [-118.51361, 34.03261],
+              [-118.51658, 34.02589],
+              [-118.51569, 34.019],
+              [-118.5136, 34.01291],
+              [-118.51141, 34.00671],
+              [-118.50735, 34.00035],
+              [-118.49993, 33.99621],
+              [-118.491, 33.99667],
+              [-118.48392, 34.00095],
+              [-118.47938, 34.00574],
+              [-118.47466, 34.00916],
+              [-118.46788, 34.01277],
+              [-118.46162, 34.019]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "venice",
+        "name": "Venice",
+        "district": "westside",
+        "lean": "near",
+        "friction": "taxi-reliant",
+        "character": "Canals, skate park and a restaurant street — more lived-in than its neighbour.",
+        "summary": "Canals, a skate park and Abbot Kinney’s restaurants — more lived-in and cheaper than Santa Monica next door.",
+        "stayIf": [
+          "You want beach mornings and a walkable food street",
+          "You prefer character over polish"
+        ],
+        "skipIf": [
+          "You want somewhere polished and tidy",
+          "You lean on late-night transit"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.4389, 33.99],
+              [-118.44118, 33.99669],
+              [-118.4481, 34.00079],
+              [-118.45545, 34.00204],
+              [-118.46093, 34.00294],
+              [-118.466, 34.00523],
+              [-118.47284, 34.00746],
+              [-118.48063, 34.0067],
+              [-118.48614, 34.00213],
+              [-118.48762, 33.99582],
+              [-118.48659, 33.99],
+              [-118.48532, 33.9848],
+              [-118.48368, 33.97935],
+              [-118.47975, 33.9743],
+              [-118.47314, 33.97179],
+              [-118.466, 33.97277],
+              [-118.46035, 33.97558],
+              [-118.45545, 33.97796],
+              [-118.44934, 33.97996],
+              [-118.44259, 33.98369],
+              [-118.4389, 33.99]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "culver",
+        "name": "Culver City",
+        "district": "westside",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "A small studio town with its own walkable downtown.",
+        "summary": "A small studio town with its own downtown: a few blocks of restaurants, a plaza, and quiet streets around it.",
+        "stayIf": [
+          "You want rail access and a real neighbourhood",
+          "You want Westside proximity for less"
+        ],
+        "skipIf": [
+          "You want beach or an evening scene at the door",
+          "You’re after big-city buzz"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.37059, 34.021],
+              [-118.37529, 34.02658],
+              [-118.38169, 34.02962],
+              [-118.38654, 34.03179],
+              [-118.39039, 34.03532],
+              [-118.396, 34.03962],
+              [-118.40402, 34.04147],
+              [-118.41149, 34.03867],
+              [-118.41523, 34.03258],
+              [-118.41544, 34.02623],
+              [-118.41487, 34.021],
+              [-118.41487, 34.01592],
+              [-118.41376, 34.0103],
+              [-118.40954, 34.00556],
+              [-118.40282, 34.0036],
+              [-118.396, 34.00433],
+              [-118.39004, 34.0058],
+              [-118.38373, 34.00701],
+              [-118.3766, 34.00932],
+              [-118.37109, 34.01429],
+              [-118.37059, 34.021]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "beverly",
+        "name": "Beverly Hills & Mid-Wilshire",
+        "district": "midcity",
+        "lean": "above",
+        "friction": "short-ride",
+        "character": "Wide boulevards, museum row, and quiet by nine.",
+        "summary": "Wide boulevards, museum row and high-end retail; residential blocks are silent by nine.",
+        "stayIf": [
+          "You want a calm base near the museums",
+          "The nightly rate fits comfortably"
+        ],
+        "skipIf": [
+          "You want somewhere still busy late in the evening",
+          "You’re watching the budget closely"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.37809, 34.068],
+              [-118.38138, 34.07301],
+              [-118.38354, 34.0779],
+              [-118.38578, 34.08421],
+              [-118.39116, 34.09053],
+              [-118.4, 34.09313],
+              [-118.40865, 34.09005],
+              [-118.4136, 34.08351],
+              [-118.4155, 34.07733],
+              [-118.41779, 34.07279],
+              [-118.42172, 34.068],
+              [-118.42445, 34.06142],
+              [-118.42245, 34.05449],
+              [-118.41573, 34.05006],
+              [-118.40748, 34.04892],
+              [-118.4, 34.04927],
+              [-118.3928, 34.04965],
+              [-118.3851, 34.05101],
+              [-118.3786, 34.05512],
+              [-118.37617, 34.06158],
+              [-118.37809, 34.068]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "studiocity",
+        "name": "Studio City & NoHo",
+        "district": "valley",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "Valley-side calm with a long restaurant boulevard and rail.",
+        "summary": "Valley-side residential streets with a long restaurant stretch on Ventura Blvd and the arts district by the station.",
+        "stayIf": [
+          "You want budget with a train downtown",
+          "You don’t mind being over the hill"
+        ],
+        "skipIf": [
+          "You want to walk to the sights",
+          "You want beach access"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.37451, 34.145],
+              [-118.37555, 34.1505],
+              [-118.37638, 34.15679],
+              [-118.3796, 34.16368],
+              [-118.38688, 34.16823],
+              [-118.396, 34.16771],
+              [-118.40304, 34.16293],
+              [-118.40701, 34.15754],
+              [-118.41071, 34.15385],
+              [-118.41647, 34.1505],
+              [-118.42232, 34.145],
+              [-118.4238, 34.13753],
+              [-118.41905, 34.13114],
+              [-118.41079, 34.12815],
+              [-118.40282, 34.12764],
+              [-118.396, 34.12728],
+              [-118.38885, 34.12678],
+              [-118.38119, 34.12813],
+              [-118.37544, 34.13264],
+              [-118.37359, 34.13897],
+              [-118.37451, 34.145]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "pasadena",
+        "name": "Pasadena",
+        "district": "valley",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "A separate small city — Craftsman streets, gardens and a train in.",
+        "summary": "A separate small city — Craftsman architecture, gardens, and a walkable old town with a rail line into LA.",
+        "stayIf": [
+          "You want walkable calm and a rail line",
+          "You like architecture and gardens"
+        ],
+        "skipIf": [
+          "You want to be central to LA",
+          "You’re here for the beach"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.12133, 34.147],
+              [-118.12079, 34.15351],
+              [-118.12295, 34.16026],
+              [-118.12918, 34.16502],
+              [-118.1375, 34.16609],
+              [-118.145, 34.16474],
+              [-118.15153, 34.16363],
+              [-118.15925, 34.16324],
+              [-118.16837, 34.16105],
+              [-118.17512, 34.1551],
+              [-118.17535, 34.147],
+              [-118.1694, 34.14044],
+              [-118.16183, 34.13688],
+              [-118.15625, 34.13419],
+              [-118.15166, 34.13003],
+              [-118.145, 34.12544],
+              [-118.13596, 34.12398],
+              [-118.12785, 34.12746],
+              [-118.12351, 34.13408],
+              [-118.12217, 34.14086],
+              [-118.12133, 34.147]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "vernon",
+        "name": "Central-Alameda & Vernon",
+        "district": "south",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "A working industrial district — warehouses and rail yards rather than storefronts.",
+        "summary": "Industrial blocks built around freight and manufacturing. Shops and restaurants are sparse, with long gaps between them.",
+        "stayIf": [
+          "You have a specific reason to be right here",
+          "The lowest nightly rates outweigh being far from the sights"
+        ],
+        "skipIf": [
+          "You want shops, food or sights within walking distance",
+          "You want an easy trip without a car"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-118.22183, 33.995],
+              [-118.22051, 34.00187],
+              [-118.22322, 34.00872],
+              [-118.23012, 34.01313],
+              [-118.23838, 34.01445],
+              [-118.246, 34.01464],
+              [-118.25391, 34.01519],
+              [-118.26325, 34.01469],
+              [-118.27183, 34.01056],
+              [-118.27536, 34.00291],
+              [-118.2724, 33.995],
+              [-118.26644, 33.98949],
+              [-118.26192, 33.98541],
+              [-118.25915, 33.98],
+              [-118.25455, 33.97318],
+              [-118.246, 33.96857],
+              [-118.23604, 33.96958],
+              [-118.22899, 33.97559],
+              [-118.22591, 33.9829],
+              [-118.22419, 33.98912],
+              [-118.22183, 33.995]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "hav": {
+    "cityId": "hav",
+    "tier": "full",
+    "reviewedOn": "2026-09",
+    "anchor": {
+      "name": "Parque Central",
+      "lat": 23.1367,
+      "lng": -82.3589
+    },
+    "areas": [
+      {
+        "id": "habana-vieja",
+        "name": "Habana Vieja",
+        "lean": "above",
+        "friction": "walkable",
+        "character": "The restored colonial core — plazas, cathedrals and museums packed into a few walkable blocks by the harbour.",
+        "stayIf": [
+          "You want the headline sights outside your door",
+          "You'd rather walk everywhere than arrange rides",
+          "Restaurants, bars and live music within a few blocks matter"
+        ],
+        "skipIf": [
+          "Stretching your nightly budget further matters more to you than being in the middle of it",
+          "You need quiet to sleep — the streets stay lively late"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-82.3577, 23.1443],
+              [-82.3582, 23.1422],
+              [-82.3586, 23.14],
+              [-82.3589, 23.1378],
+              [-82.3585, 23.1355],
+              [-82.3578, 23.1338],
+              [-82.356, 23.1318],
+              [-82.3538, 23.13],
+              [-82.3512, 23.129],
+              [-82.3486, 23.1292],
+              [-82.3462, 23.1305],
+              [-82.3468, 23.1322],
+              [-82.3473, 23.1344],
+              [-82.3484, 23.1364],
+              [-82.3495, 23.1384],
+              [-82.3507, 23.1401],
+              [-82.3521, 23.1417],
+              [-82.3537, 23.143],
+              [-82.3551, 23.1441],
+              [-82.3563, 23.145],
+              [-82.3577, 23.1443]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "centro-habana",
+        "name": "Centro Habana",
+        "lean": "below",
+        "friction": "walkable",
+        "character": "Dense, lived-in blocks between the old town and Vedado — everyday Havana rather than the postcard.",
+        "stayIf": [
+          "You want the lowest nightly rates still within walking distance of the core",
+          "Staying among residents appeals more than staying among visitors",
+          "Being a short walk from both Habana Vieja and the Malecón suits you"
+        ],
+        "skipIf": [
+          "You want polished, restored surroundings rather than a working neighbourhood",
+          "You're set on stepping straight out into the main sights each morning"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-82.3577, 23.1443],
+              [-82.3625, 23.1428],
+              [-82.367, 23.142],
+              [-82.3715, 23.142],
+              [-82.3755, 23.1422],
+              [-82.3793, 23.144],
+              [-82.38, 23.1405],
+              [-82.3805, 23.1378],
+              [-82.3803, 23.135],
+              [-82.3795, 23.1322],
+              [-82.3782, 23.1298],
+              [-82.375, 23.1288],
+              [-82.3718, 23.1282],
+              [-82.3685, 23.1285],
+              [-82.3655, 23.1296],
+              [-82.3628, 23.131],
+              [-82.3605, 23.1325],
+              [-82.3585, 23.1355],
+              [-82.3589, 23.1378],
+              [-82.3586, 23.14],
+              [-82.3582, 23.1422],
+              [-82.3577, 23.1443]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "vedado",
+        "name": "Vedado",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "Leafy mid-century avenues — grand hotels, jazz venues and a calmer pace set back from the crowds.",
+        "stayIf": [
+          "You want a quieter base on tree-lined streets",
+          "A short ride into the old town each day works for you",
+          "You like cinemas, cafés and music venues spread around you"
+        ],
+        "skipIf": [
+          "You'd rather walk to the historic core than take a ride to it each time",
+          "You want to be in the thick of the old town, not a residential district"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-82.3793, 23.144],
+              [-82.383, 23.1452],
+              [-82.3872, 23.1462],
+              [-82.3912, 23.1461],
+              [-82.3952, 23.1454],
+              [-82.3992, 23.143],
+              [-82.4032, 23.1402],
+              [-82.4066, 23.1368],
+              [-82.4094, 23.1338],
+              [-82.4098, 23.1308],
+              [-82.41, 23.1278],
+              [-82.4092, 23.1258],
+              [-82.404, 23.1262],
+              [-82.3985, 23.1262],
+              [-82.393, 23.1266],
+              [-82.3875, 23.1275],
+              [-82.3822, 23.1286],
+              [-82.3782, 23.1298],
+              [-82.3795, 23.1322],
+              [-82.3803, 23.135],
+              [-82.3805, 23.1378],
+              [-82.38, 23.1405],
+              [-82.3793, 23.144]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "miramar",
+        "name": "Miramar",
+        "lean": "above",
+        "friction": "taxi-reliant",
+        "character": "Spacious embassy district across the river — large villas, private restaurants and room to breathe.",
+        "stayIf": [
+          "You want space, calm and larger rooms over being central",
+          "You're happy to rely on taxis to reach the sights",
+          "Private restaurants and a residential feel appeal more than street bustle"
+        ],
+        "skipIf": [
+          "You want to reach the old town without depending on taxis",
+          "Being within walking distance of the main sights is important to you"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-82.413, 23.1338],
+              [-82.416, 23.132],
+              [-82.4195, 23.1302],
+              [-82.423, 23.1272],
+              [-82.4265, 23.1242],
+              [-82.43, 23.1218],
+              [-82.4335, 23.1188],
+              [-82.437, 23.1164],
+              [-82.4405, 23.1128],
+              [-82.444, 23.1098],
+              [-82.4455, 23.1082],
+              [-82.44, 23.103],
+              [-82.434, 23.1062],
+              [-82.428, 23.1098],
+              [-82.422, 23.114],
+              [-82.417, 23.118],
+              [-82.413, 23.1218],
+              [-82.4128, 23.125],
+              [-82.4128, 23.1285],
+              [-82.4128, 23.1315],
+              [-82.413, 23.1338]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "sjo": {
+    "cityId": "sjo",
+    "tier": "minimal",
+    "reviewedOn": "2026-09",
+    "note": "Most trips treat San José as a short central stay before the coast or the volcanoes. Base yourself downtown, near Barrio Escalante, and it's walkable — there's no neighbourhood puzzle to solve here.",
+    "areas": []
+  }
+}

@@ -107,6 +107,17 @@ One JSON file in v1 (Supabase only if it outgrows that). ~120 records.
 }
 ```
 
+> In the shipped dataset the flight block is keyed by origin — `flights.<origin>.bands`
+> (e.g. `flights.yyz.bands`) — not the flat `flight.bands` shown in this simplified example.
+
+**Flight band definition.** Each `bands.<month>` value is a `[low, high]` pair meaning the
+**return (round-trip) economy fare per adult, in CAD**, as a range across that month. It is the
+*whole* air-travel cost of the trip, not one leg — which is why the cost model adds it exactly
+once (`total = flight_band + stay + ground`, see [ranking.js](src/lib/ranking.js) `estimateCost`)
+and the outbound handoff opens a **round-trip** Skyscanner search (`rtn=1`). If this were ever
+redefined as a one-way fare, both the total-cost estimate and the round-trip handoff would be
+wrong, so treat "return, per adult, CAD" as canonical.
+
 **Sourcing:** cost-of-living indices, median hostel/hotel rates, published daily-budget aggregates, IATA/airline route data, climate normals, Government of Canada travel advisories for visa status.
 
 **Imagery:** Unsplash API. Free, strong travel photography, attribution required and easy to satisfy. **Hand-pick one hero per destination** rather than keyword-pulling — otherwise you ship the same generic Eiffel Tower as everyone else. (User's own photography is *not* carrying imagery — insufficient coverage.)
