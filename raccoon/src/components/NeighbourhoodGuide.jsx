@@ -3,6 +3,13 @@ import maplibregl from 'maplibre-gl'
 import MapBase, { BASE_MAX_ZOOM } from './MapBase'
 import { currentAmbient } from '../lib/ambient'
 import { LEAN, LEAN_ORDER, FRICTION_LABEL, formatReviewed } from '../lib/neighbourhoodVocab'
+import {
+  DRILL_ZOOM,
+  FIT_PADDING,
+  boundsOf,
+  centroid,
+  fitFor,
+} from '../lib/neighbourhoodGeometry'
 
 /**
  * NeighbourhoodModule — "you chose the city; now which part of it fits your trip."
@@ -24,36 +31,6 @@ import { LEAN, LEAN_ORDER, FRICTION_LABEL, formatReviewed } from '../lib/neighbo
  * single-level map and an area list instead.
  */
 
-// Above this zoom the map reads as neighbourhoods; below it, as districts.
-const DRILL_ZOOM = 10.6
-
-function centroid(polygon) {
-  const ring = polygon.coordinates[0]
-  const n = ring.length - 1
-  let x = 0
-  let y = 0
-  for (let i = 0; i < n; i++) {
-    x += ring[i][0]
-    y += ring[i][1]
-  }
-  return [x / n, y / n]
-}
-
-function boundsOf(items) {
-  let w = Infinity, s = Infinity, e = -Infinity, n = -Infinity
-  for (const it of items) {
-    for (const ring of it.polygon.coordinates) {
-      for (const [lng, lat] of ring) {
-        if (lng < w) w = lng
-        if (lng > e) e = lng
-        if (lat < s) s = lat
-        if (lat > n) n = lat
-      }
-    }
-  }
-  return [[w, s], [e, n]]
-}
-
 function prefersReducedMotion() {
   return (
     typeof window !== 'undefined' &&
@@ -71,7 +48,6 @@ function NeighbourhoodMap({
   camera,
   onSelectArea,
   onDrillDistrict,
-  initialZoom,
 }) {
   const mapRef = useRef(null)
   const labelsRef = useRef([])
@@ -85,6 +61,9 @@ function NeighbourhoodMap({
     () => (anchor ? [anchor.lng, anchor.lat] : centroid(areas[0].polygon)),
     [anchor, areas],
   )
+
+  // Frame the city by what it actually draws — see fitFor().
+  const fit = useMemo(() => fitFor(city), [city])
 
   const featureCollections = useMemo(() => {
     const feat = (kind, list) => ({
@@ -298,7 +277,11 @@ function NeighbourhoodMap({
         map.easeTo({ center: cam?.center ?? map.getCenter(), zoom: z, duration: reduce ? 0 : 900 })
       }
     } else if (camera.kind === 'reset') {
-      map.easeTo({ center: cityCenter, zoom: initialZoom, duration: reduce ? 0 : 700 })
+      map.fitBounds(fit.bounds, {
+        padding: FIT_PADDING,
+        maxZoom: fit.maxZoom,
+        duration: reduce ? 0 : 700,
+      })
     }
     // Only the token drives a move; the data deps are read, not watched.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -313,7 +296,9 @@ function NeighbourhoodMap({
     <div className="rc-nb__canvas">
       <MapBase
         center={cityCenter}
-        zoom={initialZoom}
+        fitBounds={fit.bounds}
+        fitMaxZoom={fit.maxZoom}
+        fitPadding={FIT_PADDING}
         onReady={handleReady}
         scrollZoom
       />
@@ -516,7 +501,6 @@ export default function NeighbourhoodModule({
           camera={camera}
           onSelectArea={selectArea}
           onDrillDistrict={drillDistrict}
-          initialZoom={hasDistricts ? 9.5 : 11.6}
         />
 
         <div className="rc-nb__panel">

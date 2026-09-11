@@ -189,6 +189,8 @@ export default function MapBase({
   minZoom = 8,
   maxZoom = BASE_MAX_ZOOM,
   fitBounds,
+  fitMaxZoom,
+  fitPadding = 36,
   onReady,
   scrollZoom = false,
   className = 'rc-nb__map',
@@ -206,14 +208,15 @@ export default function MapBase({
     ensureArchive()
     const pal = PALETTES[currentAmbient()]
 
-    const reduce =
-      typeof window.matchMedia === 'function' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    // Framing from bounds is set at construction rather than fitted after load,
+    // so the map never paints one view and then jumps to another.
+    const camera = fitBounds
+      ? { bounds: fitBounds, fitBoundsOptions: { padding: fitPadding, maxZoom: fitMaxZoom } }
+      : { center, zoom }
 
     const map = new maplibregl.Map({
       container: el,
-      center,
-      zoom,
+      ...camera,
       minZoom,
       maxZoom,
       attributionControl: false,
@@ -259,9 +262,6 @@ export default function MapBase({
     let cancelled = false
     map.on('load', () => {
       if (cancelled) return
-      if (fitBounds) {
-        map.fitBounds(fitBounds, { padding: 36, animate: !reduce, duration: reduce ? 0 : 600 })
-      }
       onReadyRef.current?.(map)
     })
 

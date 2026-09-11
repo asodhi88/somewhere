@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { getNeighbourhoods } from './getNeighbourhoods'
 import { LEAN, FRICTION_LABEL, guideKind } from './neighbourhoodVocab'
+import { DRILL_ZOOM, FIT_MAX_ZOOM, boundsOf, fitFor } from './neighbourhoodGeometry'
 
 /** Every author-written string the module can put on screen, as one blob. */
 function allCopy() {
@@ -96,5 +97,47 @@ describe('getNeighbourhoods', () => {
     expect(getNeighbourhoods(undefined)).toBeNull()
     expect(guideKind(getNeighbourhoods('nope'))).toBeNull()
     expect(guideKind({ tier: 'none' })).toBeNull()
+  })
+})
+
+// The opening view is computed from each city's own shapes. The content pass
+// adds cities that nobody will hand-tune a zoom for, so the rule has to hold
+// generically — including for shapes far tighter than the current seeds.
+describe('fitFor — how a city frames itself on open', () => {
+  it('frames every shape the city draws, so nothing opens off-screen', () => {
+    for (const id of ['hav', 'lax']) {
+      const city = getNeighbourhoods(id)
+      const [[w, s], [e, n]] = fitFor(city).bounds
+      for (const shape of [...(city.districts ?? []), ...city.areas]) {
+        for (const [lng, lat] of shape.polygon.coordinates[0]) {
+          expect(lng).toBeGreaterThanOrEqual(w)
+          expect(lng).toBeLessThanOrEqual(e)
+          expect(lat).toBeGreaterThanOrEqual(s)
+          expect(lat).toBeLessThanOrEqual(n)
+        }
+      }
+    }
+  })
+
+  it('includes districts, which can reach past their member areas', () => {
+    const lax = getNeighbourhoods('lax')
+    const withDistricts = fitFor(lax).bounds
+    const areasOnly = boundsOf(lax.areas)
+    // West edge: the district ring extends beyond the areas it covers.
+    expect(withDistricts[0][0]).toBeLessThan(areasOnly[0][0])
+  })
+
+  it('keeps a district-layered city below the drill zoom, so it opens on districts', () => {
+    expect(fitFor(getNeighbourhoods('lax')).maxZoom).toBeLessThan(DRILL_ZOOM)
+  })
+
+  it('caps a single-level city so a tight cluster does not open at street level', () => {
+    expect(fitFor(getNeighbourhoods('hav')).maxZoom).toBe(FIT_MAX_ZOOM)
+    // A hypothetical one-area city: the cap is what stops it opening zoomed in.
+    const tiny = {
+      areas: [{ polygon: { type: 'Polygon', coordinates: [[[-82.36, 23.14], [-82.359, 23.14], [-82.359, 23.141], [-82.36, 23.141], [-82.36, 23.14]]] } }],
+    }
+    expect(fitFor(tiny).maxZoom).toBe(FIT_MAX_ZOOM)
+    expect(fitFor(tiny).bounds).toEqual([[-82.36, 23.14], [-82.359, 23.141]])
   })
 })
