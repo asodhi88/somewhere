@@ -935,5 +935,1048 @@
     "reviewedOn": "2026-09",
     "note": "Most trips treat San José as a short central stay before the coast or the volcanoes. Base yourself downtown, near Barrio Escalante, and it's walkable — there's no neighbourhood puzzle to solve here.",
     "areas": []
+  },
+  "del": {
+    "cityId": "del",
+    "tier": "full",
+    "reviewedOn": "2026-09",
+    "anchor": {
+      "name": "Connaught Place",
+      "lat": 28.6315,
+      "lng": 77.2167
+    },
+    "areas": [
+      {
+        "id": "connaught",
+        "name": "Connaught Place & Central Delhi",
+        "lean": "near",
+        "friction": "walkable",
+        "character": "The white colonnades at the centre of New Delhi — three metro lines meet beneath it and the wide imperial avenues start at its edge.",
+        "stayIf": [
+          "You want the metro network’s main interchange on your doorstep",
+          "You’re moving on to Agra or Jaipur and want the stations close",
+          "The museums and the government quarter are on your list"
+        ],
+        "skipIf": [
+          "You want restaurants and bars to walk to in the evening — the good ones are further south",
+          "You picture a leafy residential street rather than a commercial core"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [77.205, 28.643],
+              [77.213, 28.643],
+              [77.219, 28.643],
+              [77.225, 28.643],
+              [77.232, 28.6415],
+              [77.2385, 28.638],
+              [77.2425, 28.632],
+              [77.244, 28.6255],
+              [77.2425, 28.6185],
+              [77.238, 28.613],
+              [77.231, 28.6095],
+              [77.2225, 28.608],
+              [77.2145, 28.609],
+              [77.2075, 28.6125],
+              [77.203, 28.618],
+              [77.201, 28.6245],
+              [77.2015, 28.631],
+              [77.203, 28.6375],
+              [77.205, 28.643]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "paharganj",
+        "name": "Paharganj",
+        "lean": "below",
+        "friction": "walkable",
+        "character": "The budget bazaar facing New Delhi railway station — guesthouse stairwells, luggage shops and lanes too narrow for cars.",
+        "stayIf": [
+          "You want the cheapest beds still within walking distance of the centre",
+          "You have an early train and want the platform close",
+          "Being in the middle of the noise is part of the appeal"
+        ],
+        "skipIf": [
+          "You want a quiet room and a lift",
+          "You’re arriving off a long flight and want somewhere calm to land",
+          "You’re carrying luggage you can’t wheel through crowded lanes"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [77.205, 28.643],
+              [77.2032, 28.6472],
+              [77.2028, 28.6515],
+              [77.2042, 28.6552],
+              [77.2075, 28.6578],
+              [77.2103, 28.6586],
+              [77.212, 28.659],
+              [77.2165, 28.6588],
+              [77.2185, 28.6582],
+              [77.2208, 28.6572],
+              [77.224, 28.6545],
+              [77.2258, 28.651],
+              [77.2262, 28.6472],
+              [77.2252, 28.645],
+              [77.225, 28.643],
+              [77.219, 28.643],
+              [77.213, 28.643],
+              [77.205, 28.643]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "south-delhi",
+        "name": "Hauz Khas & South Delhi",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "Where the city actually goes out — a ruined madrasa above a lake, design shops, and the densest run of restaurants and bars in Delhi.",
+        "stayIf": [
+          "You want restaurants, bars and cafés rather than monuments at the door",
+          "You’d rather sleep somewhere residential and ride in to the sights",
+          "You’re here long enough that a metro ride each morning is no burden"
+        ],
+        "skipIf": [
+          "Your trip is three days of monuments and you want them close",
+          "You want to walk to the Red Fort and India Gate"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [77.19, 28.57],
+              [77.198, 28.571],
+              [77.206, 28.57],
+              [77.213, 28.567],
+              [77.2185, 28.562],
+              [77.222, 28.555],
+              [77.2245, 28.547],
+              [77.225, 28.539],
+              [77.2235, 28.531],
+              [77.22, 28.524],
+              [77.2145, 28.5185],
+              [77.2075, 28.5155],
+              [77.2, 28.515],
+              [77.1935, 28.518],
+              [77.189, 28.524],
+              [77.187, 28.532],
+              [77.1868, 28.541],
+              [77.1875, 28.55],
+              [77.1885, 28.56],
+              [77.19, 28.57]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "aerocity",
+        "name": "Aerocity",
+        "lean": "above",
+        "friction": "taxi-reliant",
+        "character": "A purpose-built block of international hotels beside the airport — a few restaurants inside it and nothing at all outside.",
+        "stayIf": [
+          "You have a pre-dawn flight or a long layover",
+          "You want a predictable international hotel and a short transfer"
+        ],
+        "skipIf": [
+          "You came to see Delhi — everything worth seeing is a long ride away",
+          "You want to step outside and find a street to wander"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [77.112, 28.556],
+              [77.1145, 28.56],
+              [77.116, 28.5612],
+              [77.1185, 28.562],
+              [77.123, 28.5622],
+              [77.127, 28.5605],
+              [77.129, 28.5592],
+              [77.1298, 28.5575],
+              [77.131, 28.5538],
+              [77.1305, 28.55],
+              [77.1282, 28.5476],
+              [77.1245, 28.5468],
+              [77.1205, 28.547],
+              [77.1168, 28.5482],
+              [77.1152, 28.5492],
+              [77.114, 28.5505],
+              [77.1125, 28.5532],
+              [77.112, 28.556]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "nizamuddin",
+        "name": "Nizamuddin & Lodhi",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "Mughal tombs and gardens on one side, a working shrine quarter on the other — the calmest central base in the city.",
+        "stayIf": [
+          "You want gardens and tombs on your morning walk",
+          "You want to be central without being in the commercial crush",
+          "Qawwali at the shrine on a Thursday evening appeals"
+        ],
+        "skipIf": [
+          "You want somewhere that stays busy into the evening",
+          "You’re counting every rupee on the room"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [77.215, 28.605],
+              [77.223, 28.6058],
+              [77.231, 28.6045],
+              [77.2385, 28.6015],
+              [77.244, 28.5975],
+              [77.2478, 28.5925],
+              [77.2492, 28.587],
+              [77.2486, 28.5815],
+              [77.2458, 28.5775],
+              [77.2405, 28.5752],
+              [77.234, 28.5748],
+              [77.2285, 28.576],
+              [77.2225, 28.5785],
+              [77.2178, 28.5825],
+              [77.2152, 28.5878],
+              [77.2142, 28.5935],
+              [77.2143, 28.5995],
+              [77.215, 28.605]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "dxb": {
+    "cityId": "dxb",
+    "tier": "full",
+    "reviewedOn": "2026-09",
+    "anchor": {
+      "name": "Downtown Dubai",
+      "lat": 25.1972,
+      "lng": 55.2744
+    },
+    "areas": [
+      {
+        "id": "downtown",
+        "name": "Downtown & Business Bay",
+        "lean": "above",
+        "friction": "short-ride",
+        "character": "The Burj Khalifa, the fountain and the mall — the city’s postcard, with a canal and a wall of towers behind it.",
+        "stayIf": [
+          "You want the headline sights and the largest mall on your doorstep",
+          "A metro station and the fountain show within walking distance matter"
+        ],
+        "skipIf": [
+          "You came for the beach — it’s a long ride from here",
+          "You want streets to wander rather than podiums and skybridges"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [55.256, 25.21],
+              [55.265, 25.2115],
+              [55.2735, 25.21],
+              [55.281, 25.2065],
+              [55.287, 25.201],
+              [55.29, 25.1945],
+              [55.2895, 25.1875],
+              [55.286, 25.1815],
+              [55.28, 25.1772],
+              [55.2725, 25.1752],
+              [55.265, 25.1755],
+              [55.258, 25.178],
+              [55.2528, 25.1825],
+              [55.25, 25.1885],
+              [55.2498, 25.195],
+              [55.2518, 25.2015],
+              [55.254, 25.2065],
+              [55.256, 25.21]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "marina",
+        "name": "Dubai Marina & JBR",
+        "lean": "above",
+        "friction": "short-ride",
+        "character": "Towers packed around a man-made marina with a beach promenade behind them — the one part of the city built to be walked.",
+        "stayIf": [
+          "You want the beach and a walkable evening strip in the same place",
+          "You’d rather not take a taxi to dinner",
+          "You’ll use the metro and the tram rather than taxis"
+        ],
+        "skipIf": [
+          "You’re here mainly for the creek and the souks",
+          "High-rise density isn’t what you pictured"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [55.14, 25.0928],
+              [55.144, 25.0932],
+              [55.1478, 25.0925],
+              [55.1508, 25.0902],
+              [55.153, 25.0868],
+              [55.1542, 25.083],
+              [55.1532, 25.0792],
+              [55.1505, 25.0755],
+              [55.1465, 25.0728],
+              [55.142, 25.0716],
+              [55.1378, 25.0722],
+              [55.1345, 25.0742],
+              [55.1322, 25.0768],
+              [55.1316, 25.0792],
+              [55.1332, 25.0812],
+              [55.135, 25.0835],
+              [55.1364, 25.0858],
+              [55.1372, 25.0882],
+              [55.137, 25.0906],
+              [55.1382, 25.092],
+              [55.14, 25.0928]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "deira",
+        "name": "Deira & Bur Dubai",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "The creek, the gold and spice souks and the abra crossings — the oldest part of the city and the cheapest to sleep in.",
+        "stayIf": [
+          "You want the lowest nightly rates and the oldest streets",
+          "You’d rather walk souks than malls",
+          "Crossing the water by abra each day appeals"
+        ],
+        "skipIf": [
+          "You want a beach within walking distance",
+          "You pictured glass towers and new-build hotels"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [55.285, 25.27],
+              [55.29, 25.279],
+              [55.296, 25.286],
+              [55.304, 25.29],
+              [55.313, 25.2905],
+              [55.3215, 25.2875],
+              [55.3285, 25.2815],
+              [55.333, 25.2735],
+              [55.334, 25.265],
+              [55.331, 25.257],
+              [55.3245, 25.251],
+              [55.316, 25.2472],
+              [55.3065, 25.2462],
+              [55.2975, 25.2485],
+              [55.29, 25.2535],
+              [55.2855, 25.2605],
+              [55.285, 25.27]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "albarsha",
+        "name": "Al Barsha & Barsha Heights",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "Mid-rise apartment blocks around a big mall — where the value rooms are, on the metro line but off the postcard.",
+        "stayIf": [
+          "You want space and a low rate with the metro still at hand",
+          "You’re happy to commute to both the beach and the old city"
+        ],
+        "skipIf": [
+          "You’d rather not start and end each day with a commute",
+          "It’s a short trip and you’d rather be central"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [55.165, 25.115],
+              [55.172, 25.1215],
+              [55.18, 25.1255],
+              [55.189, 25.127],
+              [55.1975, 25.125],
+              [55.2045, 25.1205],
+              [55.2095, 25.114],
+              [55.2115, 25.1065],
+              [55.21, 25.099],
+              [55.205, 25.0925],
+              [55.1975, 25.0882],
+              [55.189, 25.0865],
+              [55.1805, 25.0878],
+              [55.173, 25.0918],
+              [55.1675, 25.0982],
+              [55.1648, 25.1065],
+              [55.165, 25.115]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "jumeirah",
+        "name": "Jumeirah & Umm Suqeim",
+        "lean": "above",
+        "friction": "taxi-reliant",
+        "character": "Low villa streets along the best public beaches, under the sail of the Burj Al Arab.",
+        "stayIf": [
+          "You want beach mornings and low-rise streets",
+          "You’d rather have a resort than a tower"
+        ],
+        "skipIf": [
+          "You’d rather not rely on taxis for every trip — the metro doesn’t reach here",
+          "You want city sights and an evening scene close by"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [55.189, 25.139],
+              [55.1975, 25.1465],
+              [55.206, 25.154],
+              [55.2145, 25.1615],
+              [55.223, 25.169],
+              [55.2315, 25.1765],
+              [55.2395, 25.184],
+              [55.2435, 25.1808],
+              [55.247, 25.177],
+              [55.239, 25.1698],
+              [55.2308, 25.1625],
+              [55.2225, 25.155],
+              [55.214, 25.1475],
+              [55.2058, 25.14],
+              [55.2015, 25.1362],
+              [55.197, 25.1325],
+              [55.192, 25.1345],
+              [55.189, 25.139]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "rom": {
+    "cityId": "rom",
+    "tier": "full",
+    "reviewedOn": "2026-09",
+    "anchor": {
+      "name": "Piazza Venezia",
+      "lat": 41.896,
+      "lng": 12.4828
+    },
+    "areas": [
+      {
+        "id": "centro-storico",
+        "name": "Centro Storico",
+        "lean": "above",
+        "friction": "walkable",
+        "character": "The Pantheon, Navona and the Trevi inside one knot of lanes — you open the door and you are already there.",
+        "stayIf": [
+          "You want the sights themselves, not a neighbourhood to discover",
+          "It’s a short trip and walking everywhere matters more than the rate"
+        ],
+        "skipIf": [
+          "You’re holding a tight nightly budget",
+          "You want a room away from crowds and late-night noise"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [12.477, 41.9108],
+              [12.4805, 41.9095],
+              [12.4835, 41.906],
+              [12.485, 41.9015],
+              [12.4852, 41.8975],
+              [12.4838, 41.894],
+              [12.48, 41.8918],
+              [12.4775, 41.8908],
+              [12.4752, 41.8922],
+              [12.4718, 41.8937],
+              [12.469, 41.8962],
+              [12.467, 41.8992],
+              [12.4676, 41.902],
+              [12.4706, 41.9042],
+              [12.474, 41.907],
+              [12.4758, 41.9092],
+              [12.477, 41.9108]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "trastevere",
+        "name": "Trastevere",
+        "lean": "near",
+        "friction": "walkable",
+        "character": "Cobbled lanes and ivy on the far bank — a restaurant on every corner and a hill of gardens above them.",
+        "stayIf": [
+          "You want dinner and an evening walk without crossing the city",
+          "You’d rather stay in a neighbourhood than inside a monument"
+        ],
+        "skipIf": [
+          "You’re relying on the metro to get around",
+          "You want to be asleep early on a Friday"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [12.47, 41.8928],
+              [12.4735, 41.8912],
+              [12.4768, 41.8895],
+              [12.4782, 41.887],
+              [12.4772, 41.884],
+              [12.4748, 41.8812],
+              [12.4715, 41.879],
+              [12.4678, 41.8772],
+              [12.4638, 41.8768],
+              [12.4602, 41.8784],
+              [12.4578, 41.8816],
+              [12.457, 41.8856],
+              [12.458, 41.8894],
+              [12.4602, 41.8925],
+              [12.4635, 41.8945],
+              [12.4665, 41.8945],
+              [12.47, 41.8928]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "monti",
+        "name": "Monti",
+        "lean": "near",
+        "friction": "walkable",
+        "character": "A village of workshops and wine bars wedged between the Forum and the hill — central, but quiet by Roman standards.",
+        "stayIf": [
+          "You want the Forum and the Colosseum on foot and a real neighbourhood at night",
+          "You prefer small shops and wine bars to big restaurants"
+        ],
+        "skipIf": [
+          "You want the Vatican side close",
+          "Steep cobbled streets are a problem for you"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [12.4855, 41.901],
+              [12.49, 41.9015],
+              [12.4922, 41.9014],
+              [12.4945, 41.9008],
+              [12.4982, 41.8988],
+              [12.4996, 41.8972],
+              [12.5, 41.8955],
+              [12.4998, 41.892],
+              [12.4978, 41.8892],
+              [12.4945, 41.8875],
+              [12.4908, 41.8872],
+              [12.489, 41.8877],
+              [12.4875, 41.8885],
+              [12.4855, 41.8908],
+              [12.4848, 41.894],
+              [12.4846, 41.8958],
+              [12.485, 41.8975],
+              [12.4855, 41.901]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "prati",
+        "name": "Prati & the Vatican",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "Wide nineteenth-century blocks behind St Peter’s — orderly, well fed, and one bridge from the old centre.",
+        "stayIf": [
+          "You want the Vatican first thing and calm streets afterwards",
+          "You’d like more room for your money than the centre gives"
+        ],
+        "skipIf": [
+          "You want the Forum and the Colosseum within walking distance",
+          "You want tangled old lanes rather than a grid"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [12.4755, 41.9145],
+              [12.4742, 41.9185],
+              [12.47, 41.9205],
+              [12.4645, 41.921],
+              [12.4588, 41.92],
+              [12.4535, 41.9175],
+              [12.4492, 41.914],
+              [12.4462, 41.9098],
+              [12.445, 41.9052],
+              [12.4458, 41.9008],
+              [12.449, 41.898],
+              [12.454, 41.8975],
+              [12.459, 41.8988],
+              [12.4638, 41.9012],
+              [12.4682, 41.9045],
+              [12.4718, 41.9085],
+              [12.4742, 41.9118],
+              [12.4755, 41.9145]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "termini",
+        "name": "Termini & Esquilino",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "The transport hub — every train, bus and airport link, with the cheapest central rooms clustered around it.",
+        "stayIf": [
+          "You want the lowest central rates and every onward connection",
+          "You’re using Rome as a base for day trips"
+        ],
+        "skipIf": [
+          "You want the street outside to be part of the holiday",
+          "It’s a short trip and you want to walk to everything"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [12.5, 41.9075],
+              [12.5045, 41.9105],
+              [12.5072, 41.9116],
+              [12.5095, 41.9122],
+              [12.515, 41.912],
+              [12.52, 41.91],
+              [12.5235, 41.9062],
+              [12.5248, 41.9038],
+              [12.525, 41.9015],
+              [12.5242, 41.8968],
+              [12.5212, 41.8932],
+              [12.5165, 41.8912],
+              [12.5112, 41.8908],
+              [12.5088, 41.8912],
+              [12.5062, 41.8922],
+              [12.5022, 41.895],
+              [12.5002, 41.8988],
+              [12.5001, 41.9032],
+              [12.5, 41.9075]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "yvr": {
+    "cityId": "yvr",
+    "tier": "full",
+    "reviewedOn": "2026-09",
+    "anchor": {
+      "name": "Downtown Vancouver",
+      "lat": 49.282,
+      "lng": -123.118
+    },
+    "areas": [
+      {
+        "id": "downtown",
+        "name": "Downtown & Coal Harbour",
+        "lean": "above",
+        "friction": "walkable",
+        "character": "Glass towers between two shorelines — the seawall on one side, the shopping streets on the other.",
+        "stayIf": [
+          "You want the seawall and the ferries at the door",
+          "You’re not renting a car"
+        ],
+        "skipIf": [
+          "You want a neighbourhood rather than a downtown",
+          "The nightly rate is a stretch"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-123.13, 49.288],
+              [-123.125, 49.2895],
+              [-123.12, 49.289],
+              [-123.117, 49.2884],
+              [-123.115, 49.288],
+              [-123.111, 49.2868],
+              [-123.108, 49.2852],
+              [-123.1076, 49.2838],
+              [-123.1075, 49.2825],
+              [-123.109, 49.2795],
+              [-123.112, 49.2765],
+              [-123.116, 49.274],
+              [-123.1182, 49.2728],
+              [-123.1205, 49.2722],
+              [-123.125, 49.273],
+              [-123.1285, 49.2745],
+              [-123.1305, 49.2782],
+              [-123.131, 49.282],
+              [-123.1305, 49.2852],
+              [-123.13, 49.288]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "westend",
+        "name": "West End & Davie",
+        "lean": "near",
+        "friction": "walkable",
+        "character": "Leafy low-rise blocks between the park and the beach — the residential, walkable side of downtown.",
+        "stayIf": [
+          "You want Stanley Park and English Bay on your morning walk",
+          "You want to stay central without paying the tower rate"
+        ],
+        "skipIf": [
+          "You’ll have a car and need somewhere easy to park it",
+          "Your trip is built around the convention centre or a cruise departure"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-123.1305, 49.2852],
+              [-123.131, 49.282],
+              [-123.1305, 49.2782],
+              [-123.1285, 49.2745],
+              [-123.1325, 49.2758],
+              [-123.1362, 49.2778],
+              [-123.139, 49.2805],
+              [-123.1408, 49.2832],
+              [-123.1422, 49.2862],
+              [-123.1442, 49.2888],
+              [-123.144, 49.29],
+              [-123.142, 49.2905],
+              [-123.1392, 49.2903],
+              [-123.1362, 49.2895],
+              [-123.1338, 49.2878],
+              [-123.132, 49.2866],
+              [-123.1305, 49.2852]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "gastown",
+        "name": "Gastown & Chinatown",
+        "lean": "near",
+        "friction": "walkable",
+        "character": "The oldest brick streets in the city — cobbles, restored warehouses and the densest run of restaurants downtown.",
+        "stayIf": [
+          "You want restaurants, bars and the SkyTrain within a few blocks",
+          "You like old brick and cobblestone over glass"
+        ],
+        "skipIf": [
+          "You picture beach mornings rather than brick streets",
+          "Cobbles and a busy street late on aren’t what you pictured"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-123.112, 49.2765],
+              [-123.109, 49.2795],
+              [-123.1075, 49.2825],
+              [-123.1076, 49.2838],
+              [-123.108, 49.2852],
+              [-123.105, 49.2855],
+              [-123.102, 49.285],
+              [-123.1005, 49.2847],
+              [-123.099, 49.2842],
+              [-123.0962, 49.2828],
+              [-123.0945, 49.2805],
+              [-123.0943, 49.2793],
+              [-123.0942, 49.278],
+              [-123.0955, 49.2755],
+              [-123.0985, 49.2738],
+              [-123.1025, 49.273],
+              [-123.1045, 49.2732],
+              [-123.1065, 49.2738],
+              [-123.1098, 49.275],
+              [-123.112, 49.2765]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "kitsilano",
+        "name": "Kitsilano",
+        "lean": "near",
+        "friction": "short-ride",
+        "character": "Wooden houses above a swimming beach, with a long street of cafés and outdoor shops behind them.",
+        "stayIf": [
+          "You want a beach, a pool and a neighbourhood to walk in",
+          "You’d rather look at downtown across the water than stand in it"
+        ],
+        "skipIf": [
+          "You want to walk to downtown rather than ride",
+          "It’s a two-night trip and you want to be central"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-123.142, 49.2745],
+              [-123.1455, 49.276],
+              [-123.15, 49.274],
+              [-123.1545, 49.2735],
+              [-123.1595, 49.2726],
+              [-123.165, 49.2718],
+              [-123.1705, 49.2712],
+              [-123.1755, 49.2706],
+              [-123.1778, 49.2685],
+              [-123.1782, 49.2655],
+              [-123.176, 49.2625],
+              [-123.171, 49.2608],
+              [-123.165, 49.2602],
+              [-123.1585, 49.2602],
+              [-123.152, 49.261],
+              [-123.1462, 49.2625],
+              [-123.142, 49.2652],
+              [-123.14, 49.269],
+              [-123.1402, 49.2722],
+              [-123.142, 49.2745]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "mountpleasant",
+        "name": "Mount Pleasant & Main Street",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "Brew halls, vintage shops and low-rise blocks along Main — the best value anywhere near the centre.",
+        "stayIf": [
+          "You want the lowest rates while still being close in",
+          "You’d rather eat and drink where the city does"
+        ],
+        "skipIf": [
+          "You want water views or the seawall",
+          "You want the sights within walking distance"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-123.11, 49.27],
+              [-123.1055, 49.2712],
+              [-123.1005, 49.2715],
+              [-123.0955, 49.2708],
+              [-123.0912, 49.269],
+              [-123.0882, 49.2662],
+              [-123.0872, 49.263],
+              [-123.088, 49.2595],
+              [-123.0908, 49.2566],
+              [-123.0952, 49.255],
+              [-123.1002, 49.2546],
+              [-123.1052, 49.2556],
+              [-123.1092, 49.258],
+              [-123.1115, 49.2612],
+              [-123.1122, 49.2652],
+              [-123.1112, 49.2682],
+              [-123.11, 49.27]
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  "yqb": {
+    "cityId": "yqb",
+    "tier": "full",
+    "reviewedOn": "2026-09",
+    "anchor": {
+      "name": "Place d’Armes",
+      "lat": 46.812,
+      "lng": -71.205
+    },
+    "areas": [
+      {
+        "id": "haute-ville",
+        "name": "Vieux-Québec, Haute-Ville",
+        "lean": "above",
+        "friction": "walkable",
+        "character": "Inside the walls and under the Château — stone streets, ramparts, and the boardwalk terrace above the river.",
+        "stayIf": [
+          "You want the walled city outside your door",
+          "It’s a short trip and the setting matters more than the rate"
+        ],
+        "skipIf": [
+          "You’re watching the nightly rate closely",
+          "Steep streets and stairs are a problem for you"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-71.214, 46.813],
+              [-71.2132, 46.8148],
+              [-71.2124, 46.8156],
+              [-71.2115, 46.816],
+              [-71.2092, 46.8166],
+              [-71.2068, 46.8164],
+              [-71.205, 46.8152],
+              [-71.2042, 46.8135],
+              [-71.2044, 46.8127],
+              [-71.204, 46.8118],
+              [-71.2046, 46.81],
+              [-71.2058, 46.8088],
+              [-71.2078, 46.8082],
+              [-71.2088, 46.8081],
+              [-71.2098, 46.8082],
+              [-71.2118, 46.809],
+              [-71.2132, 46.8104],
+              [-71.214, 46.8118],
+              [-71.214, 46.813]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "vieux-port",
+        "name": "Petit-Champlain & Vieux-Port",
+        "lean": "above",
+        "friction": "walkable",
+        "character": "The lower town at the foot of the cliff — the narrowest street in the old city, a market hall, and the river ferry.",
+        "stayIf": [
+          "You want the old-town postcard and the waterfront in one place",
+          "The market and the ferry on foot appeal"
+        ],
+        "skipIf": [
+          "You’d rather not climb between upper and lower town several times a day",
+          "You want the lowest rates in the city"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-71.205, 46.8152],
+              [-71.2042, 46.8135],
+              [-71.2044, 46.8127],
+              [-71.204, 46.8118],
+              [-71.2046, 46.81],
+              [-71.2032, 46.8096],
+              [-71.2024, 46.81],
+              [-71.2022, 46.8112],
+              [-71.202, 46.8122],
+              [-71.2014, 46.8134],
+              [-71.2006, 46.8146],
+              [-71.2004, 46.8158],
+              [-71.2014, 46.8168],
+              [-71.2032, 46.8172],
+              [-71.2052, 46.8175],
+              [-71.207, 46.8175],
+              [-71.2084, 46.8172],
+              [-71.209, 46.817],
+              [-71.2074, 46.8167],
+              [-71.206, 46.8161],
+              [-71.205, 46.8152]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "saint-roch",
+        "name": "Saint-Roch",
+        "lean": "below",
+        "friction": "short-ride",
+        "character": "The flat lower-town grid that became the city’s restaurant and design quarter — no ramparts, no tour groups.",
+        "stayIf": [
+          "You want the best eating and the lowest rates in one place",
+          "You’d rather have flat streets than a hill",
+          "You’re staying long enough to want a neighbourhood"
+        ],
+        "skipIf": [
+          "You came for the walled city and want to wake up inside it",
+          "It’s one night and you want the postcard"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-71.235, 46.817],
+              [-71.232, 46.8196],
+              [-71.2278, 46.8208],
+              [-71.225, 46.8211],
+              [-71.223, 46.821],
+              [-71.2188, 46.8202],
+              [-71.216, 46.8182],
+              [-71.2152, 46.8162],
+              [-71.2148, 46.8142],
+              [-71.2145, 46.8128],
+              [-71.2152, 46.81],
+              [-71.217, 46.808],
+              [-71.2208, 46.8072],
+              [-71.2255, 46.8074],
+              [-71.23, 46.8082],
+              [-71.2318, 46.8092],
+              [-71.2332, 46.8102],
+              [-71.235, 46.8135],
+              [-71.235, 46.817]
+            ]
+          ]
+        }
+      },
+      {
+        "id": "montcalm",
+        "name": "Montcalm & Saint-Jean-Baptiste",
+        "lean": "near",
+        "friction": "walkable",
+        "character": "Grande Allée’s terraces, the battlefield park, and quiet residential streets immediately outside the walls.",
+        "stayIf": [
+          "You want the old town on foot but a residential street to sleep on",
+          "You’ll use the Plains of Abraham for running or skiing"
+        ],
+        "skipIf": [
+          "You want to be inside the walls",
+          "You want the waterfront and the ferry close"
+        ],
+        "polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-71.214, 46.8118],
+              [-71.2132, 46.8104],
+              [-71.2118, 46.809],
+              [-71.2098, 46.8082],
+              [-71.2092, 46.8062],
+              [-71.2098, 46.8038],
+              [-71.2115, 46.8018],
+              [-71.2142, 46.8002],
+              [-71.2175, 46.7992],
+              [-71.2215, 46.7988],
+              [-71.2258, 46.7992],
+              [-71.2298, 46.8002],
+              [-71.2328, 46.8022],
+              [-71.2342, 46.8048],
+              [-71.2332, 46.807],
+              [-71.23, 46.8082],
+              [-71.2255, 46.8074],
+              [-71.2208, 46.8072],
+              [-71.217, 46.808],
+              [-71.2152, 46.81],
+              [-71.214, 46.8118]
+            ]
+          ]
+        }
+      }
+    ]
   }
 }

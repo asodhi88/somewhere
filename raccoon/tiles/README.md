@@ -11,21 +11,91 @@ filename resolution by city id.
 - **`cities.geojson` is the committed region source** — one polygon per city. It is the
   input to the cut, so it is the thing to edit and review; the `.pmtiles` output is
   build artefact and is gitignored.
+- **Only full-tier cities get a region.** Minimal-tier cities render the editorial band
+  and never mount `<MapBase>` (see `NeighbourhoodSection`), so a region cut for one buys
+  nothing and costs extract size. Halifax had a region and no entry for exactly this
+  reason; it was dropped once Halifax triaged minimal.
 - No API key and no runtime third-party call: the extract is served from our own Blob
   storage.
 
 ## Adding a city
 
-1. Add a polygon to the `MultiPolygon` in `cities.geojson` covering the city's areas
-   (a generous bbox is fine — vector tiles are cheap at these zooms).
-2. Re-cut and re-upload:
+1. Add a polygon to the `MultiPolygon` in `cities.geojson` covering the city's areas.
+   **Keep it tight** — just the metro area. Loose boxes are the main driver of extract
+   size, and size discipline is what keeps this architecture viable at 150–200 cities.
+2. Verify the city's polygons before cutting — see **Checking polygons** below.
+3. Re-cut, once per batch rather than per city:
 
 ```bash
-pmtiles extract https://build.protomaps.com/<date>.pmtiles somewhere-z14.pmtiles --region=tiles/cities.geojson --maxzoom=14
+pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles somewhere-z14-<YYYYMMDD>.pmtiles --region=tiles/cities.geojson --maxzoom=14
 ```
 
-3. Upload the `.pmtiles` file to Blob storage and, if the URL changed, update
-   `PMTILES_URL`.
+Use the same `<YYYYMMDD>` in both halves — the output is named for the build it came
+from, so the file on disk, the object in Blob and `PMTILES_URL` all agree.
+
+4. Upload the `.pmtiles` file to Blob storage **under a new dated filename**, then update
+   `PMTILES_URL` in `MapBase.jsx` to match. See the convention below.
+
+**Current extract:** `somewhere-z14-20260910.pmtiles` — 7 regions, cut from
+`build.protomaps.com/20260910.pmtiles`, 62 MB. Los Angeles alone is ~4,100 km² of the
+~5,500 km² total — its district-layered entry genuinely spans Pasadena to Santa Monica
+to the Harbor, but it is the one to look at first if size ever needs trimming.
+
+## Versioning: date the filename, never overwrite
+
+The extract filename carries the **Protomaps build date it was cut from**
+(`somewhere-z14-<YYYYMMDD>.pmtiles`), and each re-cut is uploaded under a new name.
+The old object is left in place until the new URL is live.
+
+This is not tidiness. Blob serves these with `Cache-Control: public, max-age=2592000` —
+a month. Overwriting the same pathname keeps the URL stable and therefore *looks* like
+the cheaper option, but it leaves CDN edges serving the previous extract for up to a
+month, with no error anywhere: tiles load, the map renders, and only the cities added in
+the newest cut are missing. A city seeded in this repo would draw its polygons over
+blank tiles, and nothing in the app or the build would say why.
+
+Dating the filename makes a re-cut a code change — one line in `MapBase.jsx` — which is
+exactly the property worth having. The extract the app points at is then visible in the
+diff and reviewable in the PR, and a stale extract is impossible rather than merely
+unlikely.
+
+**Because of this, a batch that re-cuts tiles cannot merge before the upload.** The
+dataset and the URL have to land together: data without the extract renders blank tiles,
+and the URL without the data points at regions nothing uses.
+
+Old extracts can be deleted from Blob once the new URL has been live long enough that no
+cached HTML still references the previous one.
+
+## Checking polygons
+
+```bash
+node scripts/check-polygons.mjs                          # every full-tier city
+node scripts/check-polygons.mjs del dxb                  # just these
+node scripts/check-polygons.mjs --source=somewhere-z14-20260910.pmtiles  # against a local cut
+```
+
+Samples each polygon's interior against the basemap `water` layer and validates ring
+closure, self-intersection, sibling overlap, tile-region containment and bbox spans.
+Defaults to the remote planet build over range requests, because a newly-seeded city is
+by definition not in our own extract yet; point `--source` at the local file afterwards
+to confirm the cut actually serves it.
+
+**Why it is not optional.** Since framing follows the data, a city with misplaced
+polygons frames the wrong place *convincingly* — the failure moved from obvious to
+invisible. It caught Miramar sitting in the sea, and on the batch-1 run it caught Rome's
+centro storico drawn across the Tiber and Quebec's lower town drawn into the St Lawrence.
+
+Two things it deliberately does **not** assume:
+
+- **Districts are not geometric parents of their areas.** They are a generalized shape
+  drawn below `DRILL_ZOOM`; in the LA seed, `pasadena` sits entirely outside the `valley`
+  district it belongs to. Only the label is checked, not containment.
+- **A waterfront area legitimately contains water.** Those are listed in the script's
+  `WATERFRONT` set, which is an attestation that someone read the number and accepted it
+  — not a way to silence the check.
+
+It also fails loudly when too many samples land on tiles the source cannot serve, rather
+than reporting a confident `0.0%` — the same silent-fallback trap as the fonts note below.
 
 ## Fonts (glyphs)
 

@@ -23,8 +23,15 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 
 // The single multi-region extract. Chosen to scale to 150-200 cities, where
 // per-city files would not.
+//
+// The filename carries the Protomaps build date it was cut from, and each
+// re-cut is uploaded under a NEW name rather than overwriting the old one:
+// Blob serves these with a month-long max-age, so overwriting in place would
+// leave CDN edges handing out a stale extract, and a city seeded in this repo
+// would render over blank tiles for no visible reason. Changing this constant
+// is therefore how a re-cut ships. See tiles/README.md.
 export const PMTILES_URL =
-  'https://yftlayj7jhygl1oe.public.blob.vercel-storage.com/somewhere-z14.pmtiles'
+  'https://yftlayj7jhygl1oe.public.blob.vercel-storage.com/somewhere-z14-20260910.pmtiles'
 
 // The extract is cut at z14; the map must not invite detail past it.
 export const BASE_MAX_ZOOM = 14
