@@ -63,10 +63,18 @@ Add each new **full-tier** city's bounding box to `tiles/cities.geojson`. **Keep
 Re-cut **once at the end of each batch**, not per city:
 
 ```
-pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles somewhere-z14.pmtiles --region=tiles/cities.geojson --maxzoom=14
+pmtiles extract https://build.protomaps.com/<YYYYMMDD>.pmtiles somewhere-z14-<YYYYMMDD>.pmtiles --region=tiles/cities.geojson --maxzoom=14
 ```
 
 Upload to Vercel Blob, update the URL in `<MapBase>` and the spec.
+
+**Date the filename; never overwrite (batch 1).** Blob serves the extract with a
+month-long `max-age`, so re-uploading to the same pathname leaves CDN edges handing out
+the previous cut with no error anywhere — tiles load, the map renders, and only the
+newly-seeded cities are missing. Each re-cut goes up under `somewhere-z14-<YYYYMMDD>`
+and `PMTILES_URL` changes to match, which makes a re-cut a reviewable one-line diff.
+Consequence for batching: **a batch that re-cuts cannot merge before the upload** — the
+data and the URL have to land together. See `tiles/README.md`.
 
 ~~Resolve **Halifax** in this pass: it has a region cut but no entry. Seed it or drop the region.~~
 **Resolved (batch 1): region dropped.** Halifax triaged minimal — a compact peninsula where the honest answer is downtown or the North End — and minimal tier renders no map, so the box had nothing to serve.
