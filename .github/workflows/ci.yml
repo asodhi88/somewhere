@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: Lint and test
+    runs-on: ubuntu-latest
+
+    # The app lives in raccoon/; the repo root only contains this wrapper.
+    defaults:
+      run:
+        working-directory: raccoon
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ASK_LIVE is deliberately unset: the live parse tests in
+      # api/_lib/askParse.test.js self-skip without it, so CI never calls the
+      # Anthropic API and needs no key.
+      - name: Test
+        run: npm test
+
+      - name: Lint
+        run: npm run lint
