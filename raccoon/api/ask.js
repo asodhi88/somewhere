@@ -3,7 +3,7 @@
  * existing search form (Vercel serverless function).
  *
  * Body:    { "query": "warm beach week in February under $2,000" }
- * Returns: { origin, month, nights, budget, assumed[], unused[], originFallback }
+ * Returns: { origin, month, nights, budget, stay, assumed[], unused[], originFallback }
  *
  * Every value in that response is a form input the user can see and change. The
  * endpoint does not rank, price, or name a destination — the ranking engine is

@@ -18,7 +18,14 @@
  */
 import { describe, expect, it } from 'vitest'
 import { FIXTURES, FIXTURE_NOW } from './askFixtures.js'
-import { askContext, normalizeParse, MAX_QUERY_CHARS, FIELDS } from './askSchema.js'
+import {
+  askContext,
+  buildTool,
+  normalizeParse,
+  MAX_QUERY_CHARS,
+  FIELDS,
+  STAY_VALUES,
+} from './askSchema.js'
 import { AskError, parseQuery, validateQuery } from './parseQuery.js'
 
 const ctx = askContext(FIXTURE_NOW)
@@ -29,6 +36,7 @@ const good = {
   month: 'jan-2027',
   nights: 5,
   budget: 1800,
+  stay: 'nice',
   assumed: [],
   unused: [],
   originFallback: '',
@@ -41,9 +49,11 @@ describe('the fixture set', () => {
       new Set([
         'Fully specified',
         'Missing fields',
+        'Stay tier',
         'Unsupported origin',
         'Unrankable ask',
         'Named destination',
+        'Long query',
         'Nonsense / empty',
         'Character cap',
       ]),
@@ -68,6 +78,47 @@ describe('the fixture set', () => {
     for (const f of FIXTURES) {
       if (f.expect) expect(ctx.monthValues).toContain(f.expect.month)
     }
+  })
+})
+
+describe('the tool schema', () => {
+  const tool = buildTool(ctx)
+
+  it('is strict, closed, and requires every field', () => {
+    expect(tool.strict).toBe(true)
+    expect(tool.input_schema.additionalProperties).toBe(false)
+    expect(tool.input_schema.required).toEqual([...FIELDS, 'unused', 'originFallback'])
+  })
+
+  it("binds the enums to the form's own values", () => {
+    const props = tool.input_schema.properties
+    expect(props.month.anyOf[0].enum).toEqual(ctx.monthValues)
+    expect(props.stay.anyOf[0].enum).toEqual(STAY_VALUES)
+    expect(props.origin.anyOf[0].enum).toEqual(['YYZ', 'YUL'])
+  })
+
+  it('lets the model decline every field, and never asks it for `assumed`', () => {
+    const props = tool.input_schema.properties
+    // The model's only judgement is value-or-null. `assumed` is derived from
+    // the nulls by normalizeParse, so the model has no array it could forget
+    // to append to — the silent-default failure is structurally impossible.
+    expect(props.assumed).toBeUndefined()
+    expect(tool.input_schema.required).not.toContain('assumed')
+    for (const f of ['origin', 'month', 'stay']) {
+      expect(props[f].anyOf[1]).toEqual({ type: 'null' })
+    }
+    for (const f of ['nights', 'budget']) {
+      expect(props[f].type).toEqual([f === 'nights' ? 'integer' : 'integer', 'null'])
+    }
+    expect(props.originFallback.type).toEqual(['string', 'null'])
+  })
+
+  it('carries no numeric bounds — a strict schema rejects them on integers', () => {
+    // The API returns 400 "For 'integer' type, properties maximum, minimum are
+    // not supported". clampInt enforces the ranges instead; this guards the
+    // schema against quietly growing them back.
+    const json = JSON.stringify(tool.input_schema)
+    expect(json).not.toMatch(/"minimum"|"maximum"/)
   })
 })
 
@@ -105,6 +156,7 @@ describe('normalizeParse — the form is the authority, not the model', () => {
       month: 'jan-2027',
       nights: 5,
       budget: 1800,
+      stay: 'nice',
       assumed: [],
       unused: [],
       originFallback: null,
@@ -124,8 +176,19 @@ describe('normalizeParse — the form is the authority, not the model', () => {
     expect(out.assumed).not.toContain('origin')
   })
 
-  it('treats an empty originFallback as none', () => {
+  it('treats a null or blank originFallback as none', () => {
+    expect(normalizeParse({ ...good, originFallback: null }, ctx).originFallback).toBeNull()
     expect(normalizeParse({ ...good, originFallback: '  ' }, ctx).originFallback).toBeNull()
+  })
+
+  it('never lists the fallback city under unused as well', () => {
+    // originFallback is the disclosure; PR 2 gives it its own prominent note.
+    const out = normalizeParse(
+      { ...good, originFallback: 'Vancouver', unused: ['From Vancouver', 'beach'] },
+      ctx,
+    )
+    expect(out.originFallback).toBe('Vancouver')
+    expect(out.unused).toEqual(['beach'])
   })
 
   it('replaces a month outside the form window', () => {
@@ -149,13 +212,34 @@ describe('normalizeParse — the form is the authority, not the model', () => {
     expect(out.assumed).toEqual(['nights', 'budget'])
   })
 
-  it('reports assumed in form order, deduped, with nothing invented', () => {
+  it('falls back to the form default for an unknown stay tier, and says so', () => {
+    const out = normalizeParse({ ...good, stay: 'penthouse' }, ctx)
+    expect(out.stay).toBe(ctx.defaults.stay)
+    expect(out.assumed).toContain('stay')
+  })
+
+  it('takes the stay value, never the UI label', () => {
+    // The form stores `mid` and displays "Mid-range" — a label is not a value.
+    expect(normalizeParse({ ...good, stay: 'Mid-range' }, ctx).stay).toBe(ctx.defaults.stay)
+    expect(normalizeParse({ ...good, stay: 'MID' }, ctx).stay).toBe('mid')
+    expect(normalizeParse({ ...good, stay: 'MID' }, ctx).assumed).not.toContain('stay')
+  })
+
+  it('derives assumed in form order from the nulls, ignoring what the model sends', () => {
     const out = normalizeParse(
-      { ...good, assumed: ['budget', 'stay', 'origin', 'budget'] },
+      // A model-supplied `assumed` is not read at all — it is derived from the
+      // fields that came back null, which is the whole point of the design.
+      { ...good, origin: null, budget: null, assumed: ['month', 'vibe'] },
       ctx,
     )
     expect(out.assumed).toEqual(['origin', 'budget'])
     for (const f of out.assumed) expect(FIELDS).toContain(f)
+  })
+
+  it('does not call a clamped number an assumption', () => {
+    // The traveller did answer; the answer was just out of range.
+    expect(normalizeParse({ ...good, nights: 400 }, ctx).assumed).toEqual([])
+    expect(normalizeParse({ ...good, budget: -50 }, ctx).assumed).toEqual([])
   })
 
   it('tidies unused fragments — trimmed, deduped, capped', () => {
@@ -179,6 +263,7 @@ describe('normalizeParse — the form is the authority, not the model', () => {
       month: ctx.defaults.month,
       nights: ctx.defaults.nights,
       budget: ctx.defaults.budget,
+      stay: ctx.defaults.stay,
       assumed: FIELDS,
       unused: [],
       originFallback: null,
@@ -204,6 +289,7 @@ describe.skipIf(!live)('live parses (claude-haiku-4-5)', () => {
       expect(parse.month).toBe(f.expect.month)
       expect(parse.nights).toBe(f.expect.nights)
       expect(parse.budget).toBe(f.expect.budget)
+      expect(parse.stay).toBe(f.expect.stay)
       expect(parse.assumed).toEqual(f.expect.assumed)
 
       if (f.expect.originFallback instanceof RegExp) {

@@ -1,10 +1,14 @@
 /**
  * askFixtures.js — the "Ask somewhere" parse test set.
  *
- * 25 queries with the parse each one should produce, covering every category the
- * task spec names: fully specified, missing fields, unsupported departure cities,
- * unrankable asks, destinations in and outside the 37-city dataset, nonsense, and
- * input at and beyond the 200-character cap.
+ * 31 queries with the parse each one should produce, covering every category the
+ * task spec names: fully specified, missing fields, stay tier, unsupported
+ * departure cities, unrankable asks, destinations in and outside the 37-city
+ * dataset, nonsense, long dense queries, and input at and beyond the
+ * 200-character cap.
+ *
+ * `assumed` is derived by the normaliser from the fields the model returned as
+ * null, so these expectations test the derivation as much as the parse.
  *
  * Used two ways:
  *   - api/_lib/askParse.test.js  — offline assertions always; live parses when
@@ -35,7 +39,8 @@ export const FIXTURES = [
       month: 'mar-2027',
       nights: 7,
       budget: 2500,
-      assumed: [],
+      stay: 'mid',
+      assumed: ['stay'],
       unused: NONE,
       originFallback: null,
     },
@@ -49,7 +54,8 @@ export const FIXTURES = [
       month: 'jan-2027',
       nights: 10,
       budget: 3000,
-      assumed: [],
+      stay: 'mid',
+      assumed: ['stay'],
       unused: NONE,
       originFallback: null,
     },
@@ -63,7 +69,8 @@ export const FIXTURES = [
       month: 'dec-2026',
       nights: 7,
       budget: 1800,
-      assumed: [],
+      stay: 'mid',
+      assumed: ['stay'],
       unused: NONE,
       originFallback: null,
     },
@@ -77,7 +84,8 @@ export const FIXTURES = [
       month: 'nov-2026',
       nights: 4,
       budget: 1200,
-      assumed: [],
+      stay: 'mid',
+      assumed: ['stay'],
       unused: NONE,
       originFallback: null,
     },
@@ -93,7 +101,8 @@ export const FIXTURES = [
       month: 'feb-2027',
       nights: 7,
       budget: 2000,
-      assumed: ['origin', 'nights'],
+      stay: 'mid',
+      assumed: ['origin', 'nights', 'stay'],
       unused: NONE,
       originFallback: null,
     },
@@ -107,7 +116,8 @@ export const FIXTURES = [
       month: 'oct-2026',
       nights: 7,
       budget: 1500,
-      assumed: ['origin', 'month', 'nights'],
+      stay: 'mid',
+      assumed: ['origin', 'month', 'nights', 'stay'],
       unused: NONE,
       originFallback: null,
     },
@@ -121,7 +131,8 @@ export const FIXTURES = [
       month: 'jun-2027',
       nights: 14,
       budget: 2000,
-      assumed: ['origin', 'budget'],
+      stay: 'mid',
+      assumed: ['origin', 'budget', 'stay'],
       unused: NONE,
       originFallback: null,
     },
@@ -129,30 +140,83 @@ export const FIXTURES = [
   {
     id: 'missing-everything-vague',
     category: 'Missing fields',
+    // "the spring" does name a time of year, so month is a value, not an
+    // assumption — only the three fields the query is silent on are disclosed.
     query: 'Somewhere cheap in the spring',
     expect: {
       origin: 'YYZ',
       month: 'mar-2027',
       nights: 7,
       budget: 2000,
-      assumed: ['origin', 'month', 'nights', 'budget'],
+      stay: 'mid',
+      assumed: ['origin', 'nights', 'budget', 'stay'],
       unused: NONE,
       originFallback: null,
     },
   },
+
+  // ── Stay tier ────────────────────────────────────────────────────────────
   {
-    id: 'missing-stay-tier-unmappable',
-    category: 'Missing fields',
+    id: 'stay-nothing-fancy',
+    category: 'Stay tier',
+    // "nothing fancy" is about where they sleep, so it lands on the form's
+    // budget tier rather than in `unused`.
     query: '10 nights in April, nothing fancy, around $2,000',
     expect: {
       origin: 'YYZ',
       month: 'apr-2027',
       nights: 10,
       budget: 2000,
+      stay: 'budget',
       assumed: ['origin'],
-      // The form has a stay tier; this schema deliberately does not, so the
-      // preference has to be named rather than quietly dropped.
-      unused: [/fancy|budget|cheap|basic|simple/i],
+      unused: NONE,
+      originFallback: null,
+    },
+  },
+  {
+    id: 'stay-splurge',
+    category: 'Stay tier',
+    query: 'A week in May from Toronto, $4,000, splurge on a nice hotel',
+    expect: {
+      origin: 'YYZ',
+      month: 'may-2027',
+      nights: 7,
+      budget: 4000,
+      stay: 'nice',
+      assumed: [],
+      unused: NONE,
+      originFallback: null,
+    },
+  },
+  {
+    id: 'stay-hostels',
+    category: 'Stay tier',
+    query: 'Hostels are fine — 12 nights in February on $1,800',
+    expect: {
+      origin: 'YYZ',
+      month: 'feb-2027',
+      nights: 12,
+      budget: 1800,
+      stay: 'budget',
+      assumed: ['origin'],
+      unused: NONE,
+      originFallback: null,
+    },
+  },
+  {
+    id: 'stay-assumed-fallback',
+    category: 'Stay tier',
+    // A cheap *trip* says nothing about the standard of accommodation: stay
+    // holds at the form default and is disclosed as an assumption.
+    query: 'Keep it cheap — 6 nights in November from Montreal',
+    expect: {
+      origin: 'YUL',
+      month: 'nov-2026',
+      nights: 6,
+      budget: 2000,
+      stay: 'mid',
+      assumed: ['budget', 'stay'],
+      unused: NONE,
       originFallback: null,
     },
   },
@@ -167,7 +231,8 @@ export const FIXTURES = [
       month: 'jan-2027',
       nights: 7,
       budget: 2000,
-      assumed: [],
+      stay: 'mid',
+      assumed: ['stay'],
       unused: NONE,
       originFallback: /vancouver/i,
     },
@@ -181,7 +246,8 @@ export const FIXTURES = [
       month: 'oct-2026',
       nights: 5,
       budget: 2000,
-      assumed: ['budget'],
+      stay: 'mid',
+      assumed: ['budget', 'stay'],
       unused: NONE,
       originFallback: /halifax/i,
     },
@@ -195,7 +261,8 @@ export const FIXTURES = [
       month: 'mar-2027',
       nights: 6,
       budget: 2500,
-      assumed: [],
+      stay: 'mid',
+      assumed: ['stay'],
       unused: NONE,
       originFallback: /new york/i,
     },
@@ -211,7 +278,8 @@ export const FIXTURES = [
       month: 'nov-2026',
       nights: 5,
       budget: 2000,
-      assumed: ['origin'],
+      stay: 'mid',
+      assumed: ['origin', 'stay'],
       unused: [/nightlife|night life|bars|clubs/i],
       originFallback: null,
     },
@@ -225,7 +293,8 @@ export const FIXTURES = [
       month: 'may-2027',
       nights: 4,
       budget: 3000,
-      assumed: ['origin'],
+      stay: 'mid',
+      assumed: ['origin', 'stay'],
       unused: [/safe/i, /romantic|anniversary/i],
       originFallback: null,
     },
@@ -239,7 +308,8 @@ export const FIXTURES = [
       month: 'jan-2027',
       nights: 7,
       budget: 2500,
-      assumed: ['origin'],
+      stay: 'mid',
+      assumed: ['origin', 'stay'],
       unused: [/beach/i, /food/i],
       originFallback: null,
     },
@@ -253,7 +323,8 @@ export const FIXTURES = [
       month: 'dec-2026',
       nights: 7,
       budget: 2200,
-      assumed: ['origin'],
+      stay: 'mid',
+      assumed: ['origin', 'stay'],
       unused: [/nonstop|non-stop|direct/i],
       originFallback: null,
     },
@@ -269,7 +340,8 @@ export const FIXTURES = [
       // The form carries one figure and the engine prices one traveller; the
       // party size is disclosed rather than divided out.
       budget: 4000,
-      assumed: ['origin'],
+      stay: 'mid',
+      assumed: ['origin', 'stay'],
       unused: [/two of us|2 people|two people|couple|two travellers|two travelers/i],
       originFallback: null,
     },
@@ -285,7 +357,8 @@ export const FIXTURES = [
       month: 'jul-2027',
       nights: 14,
       budget: 3000,
-      assumed: ['origin'],
+      stay: 'mid',
+      assumed: ['origin', 'stay'],
       unused: [/bali/i],
       originFallback: null,
     },
@@ -301,7 +374,8 @@ export const FIXTURES = [
       month: 'apr-2027',
       nights: 8,
       budget: 3500,
-      assumed: ['origin'],
+      stay: 'mid',
+      assumed: ['origin', 'stay'],
       unused: [/tokyo/i],
       originFallback: null,
     },
@@ -317,7 +391,8 @@ export const FIXTURES = [
       month: 'oct-2026',
       nights: 7,
       budget: 2000,
-      assumed: ['origin', 'month', 'nights', 'budget'],
+      stay: 'mid',
+      assumed: ['origin', 'month', 'nights', 'budget', 'stay'],
       unused: [/asdkjh|lorem|qwe/i],
       originFallback: null,
     },
@@ -331,7 +406,8 @@ export const FIXTURES = [
       month: 'oct-2026',
       nights: 7,
       budget: 2000,
-      assumed: ['origin', 'month', 'nights', 'budget'],
+      stay: 'mid',
+      assumed: ['origin', 'month', 'nights', 'budget', 'stay'],
       unused: [/capital|france/i],
       originFallback: null,
     },
@@ -345,8 +421,66 @@ export const FIXTURES = [
       month: 'mar-2027',
       nights: 5,
       budget: 2000,
-      assumed: ['origin', 'budget'],
+      stay: 'mid',
+      assumed: ['origin', 'budget', 'stay'],
       unused: [/poem|ignore|instruction/i],
+      originFallback: null,
+    },
+  },
+
+  // ── Long, dense queries ──────────────────────────────────────────────────
+  // Four fixtures in the 190–200 character band, each combining several
+  // mappable fields with at least one unrankable fragment. A long query is
+  // where rule adherence is most likely to thin out — the first live run lost
+  // an `assumed` entry on exactly this shape — so the set has to be wide enough
+  // to tell a pattern from a one-off.
+  {
+    id: 'long-dense-nightlife',
+    category: 'Long query',
+    query:
+      'Flying out of Montreal in December for eleven nights with about three thousand five hundred dollars to spend, I would like a nice hotel and somewhere with really good nightlife and live music',
+    expect: {
+      origin: 'YUL',
+      month: 'dec-2026',
+      nights: 11,
+      budget: 3500,
+      stay: 'nice',
+      assumed: [],
+      unused: [/nightlife|live music/i],
+      originFallback: null,
+    },
+  },
+  {
+    id: 'long-dense-fallback',
+    category: 'Long query',
+    query:
+      'My partner and I are flying out of Calgary in February, we have four nights and about two thousand dollars each, hostels are completely fine, and we would both really love somewhere with great food',
+    expect: {
+      origin: 'YYZ',
+      month: 'feb-2027',
+      nights: 4,
+      budget: 2000,
+      stay: 'budget',
+      assumed: [],
+      unused: [/partner|two of us|both/i, /food/i],
+      originFallback: /calgary/i,
+    },
+  },
+  {
+    id: 'long-dense-vague',
+    category: 'Long query',
+    // "warm" must not surface in `unused` (the engine ranks weather), but the
+    // flight-time limit must — the form has no such input.
+    query:
+      'Not fussy about where it is but it needs to be warm, I have nine nights free in July and roughly two thousand four hundred dollars, and I would rather not be on a plane for more than eight hours',
+    expect: {
+      origin: 'YYZ',
+      month: 'jul-2027',
+      nights: 9,
+      budget: 2400,
+      stay: 'mid',
+      assumed: ['origin', 'stay'],
+      unused: [/eight hours|plane|flight/i],
       originFallback: null,
     },
   },
@@ -364,7 +498,8 @@ export const FIXTURES = [
       month: 'feb-2027',
       nights: 7,
       budget: 2000,
-      assumed: [],
+      stay: 'mid',
+      assumed: ['stay'],
       unused: [/swim|eat|food/i],
       originFallback: null,
     },

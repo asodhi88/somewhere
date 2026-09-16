@@ -15,7 +15,7 @@
  *
  * Needs ANTHROPIC_API_KEY in the environment or in raccoon/.env. It calls the
  * API directly and does not go through the endpoint, so no rate-limit store is
- * involved. ~25 calls on claude-haiku-4-5 — well under a cent.
+ * involved. ~28 calls on claude-haiku-4-5 — well under a cent.
  */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -74,6 +74,7 @@ const line = (p) =>
     p.month,
     `${p.nights}n`,
     money(p.budget),
+    p.stay,
     `assumed: ${list(p.assumed)}`,
     `unused: ${list(p.unused)}`,
     `fallback: ${p.originFallback || '—'}`,
@@ -86,6 +87,7 @@ const expectedLine = (e) =>
     e.month,
     `${e.nights}n`,
     money(e.budget),
+    e.stay,
     `assumed: ${list(e.assumed)}`,
     `unused: ${e.unused?.length ? e.unused.map(String).join(' / ') : '—'}`,
     `fallback: ${e.originFallback ? String(e.originFallback) : '—'}`,
@@ -94,7 +96,7 @@ const expectedLine = (e) =>
 /** Field-by-field comparison; returns the names that differ. */
 function diff(actual, expected) {
   const bad = []
-  for (const k of ['origin', 'month', 'nights', 'budget']) {
+  for (const k of ['origin', 'month', 'nights', 'budget', 'stay']) {
     if (actual[k] !== expected[k]) bad.push(k)
   }
   if (actual.assumed.join(',') !== expected.assumed.join(',')) bad.push('assumed')

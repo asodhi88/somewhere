@@ -42,6 +42,7 @@ Fields correspond exactly to the existing form inputs:
 | `month` | |
 | `nights` | |
 | `budget` | Total trip budget |
+| `stay` | Stay tier — `budget` / `mid` / `nice`, the form's own values |
 | `assumed` | Array of field names the model filled without support from the query |
 | `unused` | Array of query fragments that could not be mapped to any input |
 | `originFallback` | Set when the user named an unsupported departure city; carries the requested city name |
