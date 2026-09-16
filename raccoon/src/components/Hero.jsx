@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Header from './Header'
 import NightSky from './NightSky'
 import SearchBar from './SearchBar'
 import OriginPicker from './OriginPicker'
 import MobileSearch from './MobileSearch'
+import AskBox from './AskBox'
 import { useMediaQuery } from '../lib/useMediaQuery'
 import heroImg from '../assets/hero-mural.webp'
 
@@ -20,6 +21,12 @@ import heroImg from '../assets/hero-mural.webp'
  *  • Mobile (≤720px) — the MobileSearch sentence composer, which owns all five
  *    values (origin included) and hands the whole object to onSearch.
  * Either way the search flows through the seam and URL identically.
+ *
+ * Scout (AskBox) sits below whichever form is mounted, as an alternate way IN to
+ * that same form — not an alternate search. It hands up a parse; Hero seeds the
+ * form from it and re-keys the form so the new values mount with their
+ * highlight. Nothing about the search path changes: the traveller still presses
+ * the same amber button, and the amber button is still the loudest thing here.
  */
 export default function Hero({
   defaults,
@@ -30,16 +37,55 @@ export default function Hero({
   onHome,
 }) {
   const [origin, setOrigin] = useState(defaults.origin)
+  // The last parse Scout applied, or null when the traveller is driving the form
+  // themselves. `askKey` re-mounts the form on each fill so it reseeds and the
+  // highlight replays.
+  const [ask, setAsk] = useState(null)
+  const [askKey, setAskKey] = useState(0)
+  // Origin lives outside the form on desktop, so its "assumed" note is retired
+  // here rather than in SearchBar.
+  const [originTouched, setOriginTouched] = useState(false)
   const isMobile = useMediaQuery('(max-width: 720px)')
 
+  const applyAsk = useCallback((read) => {
+    setOrigin(read.filters.origin)
+    setOriginTouched(false)
+    setAsk(read)
+    setAskKey((k) => k + 1)
+  }, [])
+
+  const chooseOrigin = useCallback((value) => {
+    setOriginTouched(true)
+    setOrigin(value)
+  }, [])
+
+  // The form's starting values: Scout's parse once it has filled the form,
+  // otherwise whatever Home resolved from the URL (or the blank composer).
+  const seed = ask ? ask.filters : defaults
+  const askFilled = ask ? ask.filled : []
+  const askNotes = ask ? ask.fieldNotes : {}
+  const originNote = originTouched ? null : askNotes.origin || null
+  // Origin is not one of SearchBar's fields, so its highlight is applied here.
+  const originSetByAsk = !originTouched && askFilled.includes('origin')
+
+  const scout = <AskBox onApply={applyAsk} />
+
   return (
+    <>
     <section className="rc-hero">
       <NightSky />
 
       <Header onNavigate={onNavigate} onHowItWorks={onHowItWorks} onHome={onHome} />
 
       {isMobile ? (
-        <MobileSearch defaults={defaults} pending={pending} onSearch={onSearch} />
+        <MobileSearch
+          key={askKey}
+          defaults={seed}
+          pending={pending}
+          onSearch={onSearch}
+          askFilled={askFilled}
+          askNotes={askNotes}
+        />
       ) : (
         <div className="rc-hero__content">
           <h1 className="rc-hero__title">find somewhere to go</h1>
@@ -49,12 +95,21 @@ export default function Hero({
           </p>
 
           <div className="rc-searchgroup">
-            <OriginPicker value={origin} onChange={setOrigin} />
+            <OriginPicker
+              value={origin}
+              onChange={chooseOrigin}
+              note={originNote}
+              highlight={originSetByAsk}
+            />
             <SearchBar
-              defaults={defaults}
+              key={askKey}
+              defaults={seed}
               pending={pending}
               onSearch={(fields) => onSearch({ ...fields, origin })}
+              askFilled={askFilled}
+              askNotes={askNotes}
             />
+            <div className="rc-hero__ask">{scout}</div>
           </div>
         </div>
       )}
@@ -67,5 +122,12 @@ export default function Hero({
         <img src={heroImg} alt="" />
       </div>
     </section>
+
+    {/* On the phone the hero is a full-height panel with the mural pinned behind
+        the CTA, so Scout can't hang off the bottom of it without the mural
+        floating over the box. It becomes its own band directly under the hero
+        instead — the first thing past the fold, still feeding the same form. */}
+    {isMobile && <div className="rc-askband">{scout}</div>}
+    </>
   )
 }

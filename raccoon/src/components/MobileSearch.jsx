@@ -57,13 +57,22 @@ const SHEET_TITLES = {
   budget: 'Total budget',
 }
 
-/** A tappable value inside the sentence / eyebrow. Never wraps mid-pill. */
-function Pill({ id, label, open, onOpen, variant, buttonRef }) {
+/**
+ * A tappable value inside the sentence / eyebrow. Never wraps mid-pill.
+ *
+ * `assumed` marks a value the form filled itself after a Scout fill, and
+ * `askset` one Scout read out of the traveller's own words — the sentence
+ * layout has no room for a note beside each pill, so the pill carries the mark
+ * and the note list below the sentence carries the words (see the notes row).
+ */
+function Pill({ id, label, open, onOpen, variant, buttonRef, assumed, askset }) {
   return (
     <button
       type="button"
       ref={buttonRef}
-      className={`rc-pill${variant ? ` rc-pill--${variant}` : ''}${open ? ' is-open' : ''}`}
+      className={`rc-pill${variant ? ` rc-pill--${variant}` : ''}${open ? ' is-open' : ''}${
+        assumed ? ' is-assumed' : ''
+      }${askset ? ' is-askset' : ''}`}
       aria-haspopup="dialog"
       aria-expanded={open}
       onClick={(e) => onOpen(id, e.currentTarget)}
@@ -151,7 +160,13 @@ function Tile({ label, sub, selected, size, onClick }) {
   )
 }
 
-export default function MobileSearch({ defaults, pending, onSearch }) {
+export default function MobileSearch({
+  defaults,
+  pending,
+  onSearch,
+  askFilled = [],
+  askNotes = {},
+}) {
   const [origin, setOrigin] = useState(defaults.origin || DEFAULT_FILTERS.origin)
   // The mobile composer is a sentence, so it can't rest on empty field names the
   // way the desktop bar does — a blank landing (BLANK_FILTERS) would read
@@ -169,6 +184,18 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
   const [nightsDraft, setNightsDraft] = useState(NIGHTS_MIN)
   // The pill that opened the current sheet, so focus can return to it on close.
   const triggerRef = useRef(null)
+  // Values the traveller has changed since Scout filled the sentence. Once a
+  // value is theirs, there is nothing left for the form to disclose about it.
+  const [touched, setTouched] = useState(() => new Set())
+  const touch = (field) =>
+    setTouched((prev) => (prev.has(field) ? prev : new Set(prev).add(field)))
+  const noteFor = (field) => (touched.has(field) ? null : askNotes[field] || null)
+  const setByAsk = (field) => !touched.has(field) && askFilled.includes(field)
+  // The assumption notes, in sentence order. Each one is a button that opens the
+  // sheet for its own value, so the note IS the correction affordance.
+  const assumedNotes = ['origin', 'nights', 'month', 'stay', 'budget']
+    .map((field) => ({ field, text: noteFor(field) }))
+    .filter((n) => n.text)
 
   const openMonth = MONTH_OPTIONS.find((o) => o.value === month) || MONTH_OPTIONS[0]
   const selectedOrigin = ORIGINS.find((o) => o.value === origin) || ORIGINS[0]
@@ -200,6 +227,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
   const clampNights = (n) => Math.min(NIGHTS_MAX, Math.max(NIGHTS_MIN, n))
 
   const commitNights = () => {
+    touch('nights')
     setNights(clampNights(nightsDraft))
     close()
   }
@@ -224,6 +252,8 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
             label={selectedOrigin.city.toUpperCase()}
             open={openSheet === 'origin'}
             onOpen={open}
+            assumed={!!noteFor('origin')}
+            askset={setByAsk('origin')}
           />
         </p>
 
@@ -232,15 +262,59 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
             space before a comma / period). */}
         <p className="rc-msearch__sentence">
           <span className="rc-msearch__static">I want to go for</span>{' '}
-          <Pill id="nights" label={nightsLabel} open={openSheet === 'nights'} onOpen={open} />{' '}
+          <Pill
+            id="nights"
+            label={nightsLabel}
+            open={openSheet === 'nights'}
+            onOpen={open}
+            assumed={!!noteFor('nights')}
+            askset={setByAsk('nights')}
+          />{' '}
           <span className="rc-msearch__static">in</span>{' '}
-          <Pill id="month" label={openMonth.name} open={openSheet === 'month'} onOpen={open} />
+          <Pill
+            id="month"
+            label={openMonth.name}
+            open={openSheet === 'month'}
+            onOpen={open}
+            assumed={!!noteFor('month')}
+            askset={setByAsk('month')}
+          />
           <span className="rc-msearch__static">, staying</span>{' '}
-          <Pill id="stay" label={stayLabel} open={openSheet === 'stay'} onOpen={open} />
+          <Pill
+            id="stay"
+            label={stayLabel}
+            open={openSheet === 'stay'}
+            onOpen={open}
+            assumed={!!noteFor('stay')}
+            askset={setByAsk('stay')}
+          />
           <span className="rc-msearch__static">, under</span>{' '}
-          <Pill id="budget" label={money(budget)} open={openSheet === 'budget'} onOpen={open} />
+          <Pill
+            id="budget"
+            label={money(budget)}
+            open={openSheet === 'budget'}
+            onOpen={open}
+            assumed={!!noteFor('budget')}
+            askset={setByAsk('budget')}
+          />
           <span className="rc-msearch__static">.</span>
         </p>
+
+        {assumedNotes.length > 0 && (
+          <ul className="rc-msearch__notes">
+            {assumedNotes.map((n) => (
+              <li key={n.field}>
+                <button
+                  type="button"
+                  className="rc-asknote rc-asknote--tap"
+                  onClick={(e) => open(n.field, e.currentTarget)}
+                >
+                  {n.text}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
 
         <p className="rc-msearch__helper">
           Tap any raised word to change it — we remember what you pick.
@@ -271,6 +345,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
                     sub={o.code}
                     selected={o.value === origin}
                     onClick={() => {
+                      touch('origin')
                       setOrigin(o.value)
                       close()
                     }}
@@ -340,6 +415,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
                   sub={o.year}
                   selected={o.value === month}
                   onClick={() => {
+                    touch('month')
                     setMonth(o.value)
                     close()
                   }}
@@ -357,6 +433,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
                   label={s.label}
                   selected={s.value === stay}
                   onClick={() => {
+                    touch('stay')
                     setStay(s.value)
                     close()
                   }}
@@ -374,6 +451,7 @@ export default function MobileSearch({ defaults, pending, onSearch }) {
                   label={money(b)}
                   selected={b === budget}
                   onClick={() => {
+                    touch('budget')
                     setBudget(b)
                     close()
                   }}

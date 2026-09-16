@@ -622,7 +622,9 @@ a:hover {
   position: relative;
   width: 100%;
   display: flex;
-  align-items: stretch;
+  /* Top-aligned, not stretched: each field sits in a column that may also carry
+     a Scout assumption note beneath it, and the note must not stretch the field. */
+  align-items: flex-start;
   gap: 10px;
   padding: 10px;
   border-radius: 24px;
@@ -670,8 +672,28 @@ a:hover {
     background-position: 160% 0;
   }
 }
+/* One search column: the field, and the assumption note that may sit under it. */
+.rc-fieldwrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.rc-fieldwrap--budget {
+  flex: 1.15;
+}
+.rc-fieldwrap--nights {
+  flex: 0.6;
+}
+.rc-fieldwrap--when {
+  flex: 1.1;
+}
+.rc-fieldwrap--stay {
+  flex: 1;
+}
 .rc-field {
   position: relative;
+  width: 100%;
+  flex: none;
   height: 58px;
   text-align: left;
   border-radius: 16px;
@@ -682,18 +704,6 @@ a:hover {
 }
 .rc-field:focus-within {
   border-color: var(--ac);
-}
-.rc-field--budget {
-  flex: 1.15;
-}
-.rc-field--nights {
-  flex: 0.6;
-}
-.rc-field--when {
-  flex: 1.1;
-}
-.rc-field--stay {
-  flex: 1;
 }
 /* Floating label (Trip Search Bar handoff — the design element). The label rests
    centred over the value like a placeholder, then rises to a small cap at the top
@@ -787,7 +797,10 @@ a:hover {
 
 .rc-search__submit {
   flex: none;
-  padding: 15px 27px;
+  height: 58px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 27px;
   border: 0;
   border-radius: 16px;
   background: linear-gradient(180deg, var(--ac-hi) 0%, var(--ac) 55%, var(--ac-lo) 100%);
@@ -824,6 +837,317 @@ a:hover {
 .rc-search__submit:disabled {
   opacity: 0.7;
   cursor: default;
+}
+
+/* ── Scout — the natural-language way into the form ──────────────────────────
+   Scout reads a sentence into the five form inputs and says what it assumed and
+   what it could not carry. It is a label, not a persona, and it must never look
+   louder than the amber CTA it feeds: the box is a sunken panel, and its own
+   button is an outline, not a fill.
+
+   Three kinds of disclosure, three weights:
+     .rc-asknote      quiet, per field, under the control it corrects
+     .rc-ask__unused  quiet, one sentence, under the box
+     .rc-ask__flag    prominent — these change what the numbers mean
+   ------------------------------------------------------------------------- */
+
+/* The inline "· assumed, tap to change" note under one field. Sits in its own
+   column under its own control, so two at once (the normal case, not an edge
+   case) land side by side rather than stacking into a banner. */
+.rc-asknote {
+  display: block;
+  padding: 7px 8px 0;
+  font-size: 11.5px;
+  line-height: 1.35;
+  letter-spacing: 0.005em;
+  color: var(--field-label, var(--muted));
+  text-wrap: pretty;
+}
+.rc-asknote--origin {
+  padding: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* The brief highlight on a field Scout set from the traveller's own words. One
+   shot, then gone — it marks the change, it does not decorate the field. */
+@keyframes rc-askset {
+  0% {
+    border-color: var(--ac);
+    box-shadow: 0 0 0 0 rgba(var(--ac-rgb), 0.5);
+  }
+  55% {
+    border-color: var(--ac);
+    box-shadow: 0 0 0 7px rgba(var(--ac-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--ac-rgb), 0);
+  }
+}
+.rc-field.is-askset,
+.rc-originbar__pick.is-askset {
+  animation: rc-askset 1.9s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+.rc-originbar__pick {
+  border-radius: 12px;
+}
+
+.rc-hero__ask {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.rc-ask {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px 17px 16px;
+  text-align: left;
+  border-radius: 20px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+}
+.rc-ask__head {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.rc-ask__title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.rc-ask__mark {
+  flex: none;
+}
+.rc-ask__lede {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-muted, var(--muted));
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+.rc-ask__form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rc-ask__field {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+.rc-ask__input {
+  width: 100%;
+  height: 46px;
+  padding: 0 52px 0 15px;
+  border-radius: 14px;
+  border: 1px solid var(--field-border, var(--border));
+  background: var(--glass, var(--surface));
+  color: var(--field-val, var(--text));
+  font-family: var(--font-body);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.rc-ask__input:focus {
+  border-color: var(--ac);
+}
+.rc-ask__input::placeholder {
+  color: var(--field-label, var(--muted));
+  opacity: 0.72;
+}
+.rc-ask__count {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--field-label, var(--muted));
+  pointer-events: none;
+}
+/* Outline, never a fill: the amber "Show me where" stays the one loud element. */
+.rc-ask__go {
+  flex: none;
+  height: 46px;
+  padding: 0 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(var(--ac-rgb), 0.5);
+  background: transparent;
+  color: var(--accent-text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+.rc-ask__go:hover:not(:disabled) {
+  background: rgba(var(--ac-rgb), 0.12);
+  border-color: var(--ac);
+}
+.rc-ask__go:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Curated examples — the empty state. Chips are fine HERE: this is a fixed set
+   of three stored strings, not model output, so nothing about them shifts
+   between renders. */
+.rc-ask__examples {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rc-ask__exlabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--field-label, var(--muted));
+}
+.rc-ask__exlist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rc-ask__ex {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--field-border, var(--border));
+  background: var(--glass, var(--surface));
+  color: var(--ink-muted, var(--muted));
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.rc-ask__ex:hover {
+  color: var(--ink, var(--text));
+  border-color: rgba(var(--ac-rgb), 0.55);
+}
+
+.rc-ask__out {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rc-ask__out:empty {
+  display: none;
+}
+/* Prominent. Both flags say the numbers below mean something other than what a
+   traveller would assume — an unsupported origin, or a party priced as one. */
+.rc-ask__flag {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 0;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: rgba(232, 115, 90, 0.1);
+  border: 1px solid rgba(232, 115, 90, 0.34);
+  color: var(--ink, var(--text));
+  font-size: 13px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.rc-ask__flag-mark {
+  flex: none;
+  width: 3px;
+  align-self: stretch;
+  border-radius: 2px;
+  background: var(--coral);
+}
+/* Quiet. A sentence, not chips — the model's wording for these fragments varies
+   between identical queries, and chips would make that look like instability. */
+.rc-ask__unused,
+.rc-ask__ok,
+.rc-ask__error {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-muted, var(--muted));
+  text-wrap: pretty;
+}
+.rc-ask__error {
+  padding-left: 11px;
+  border-left: 2px solid var(--field-border, var(--border));
+}
+
+/* ── Scout on the phone composer ─────────────────────────────────────────── */
+/* The sentence has no room for a note beside each pill, so the pill carries a
+   mark and the note list below carries the words — each note a button that
+   opens its own sheet, so the note is itself the correction. */
+.rc-pill.is-assumed {
+  border-bottom: 1px dashed rgba(168, 155, 143, 0.6);
+}
+.rc-pill.is-askset {
+  animation: rc-askset 1.9s cubic-bezier(0.22, 0.9, 0.3, 1) both;
+}
+.rc-msearch__notes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.rc-asknote--tap {
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: var(--nm-dim, var(--muted));
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+/* The phone band: Scout sits under the full-height hero panel rather than
+   inside it, because the mural is pinned behind the CTA there (see the 720px
+   block) and would float over a box appended to the hero. */
+.rc-askband {
+  width: 100%;
+  padding: 18px 16px 4px;
+  background: var(--page-bg, var(--bg));
+}
+@media (max-width: 720px) {
+  /* The field and its button stack — side by side there is room for neither. */
+  .rc-ask__form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .rc-ask__go {
+    width: 100%;
+  }
+  .rc-ask__examples {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .rc-ask__exlist {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rc-ask__ex {
+    text-align: left;
+  }
 }
 
 /* ── Results ────────────────────────────────────────────────────────────── */
@@ -2337,6 +2661,13 @@ html[data-ambient='day'] .rc-blind__fade {
     transition: none !important;
   }
   .rc-lightbox {
+    animation: none !important;
+  }
+  /* Scout's fill highlight is decoration only — the assumption notes
+     carry everything a traveller needs to read. */
+  .rc-field.is-askset,
+  .rc-originbar__pick.is-askset,
+  .rc-pill.is-askset {
     animation: none !important;
   }
   /* Blind appears/disappears without the glide (blur still applies — it isn't

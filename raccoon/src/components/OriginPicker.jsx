@@ -15,24 +15,33 @@ const HAS_COMING_SOON = ORIGIN_OPTIONS.some((o) => !o.available)
  * parameter, applied with the rest of the filters on the next "Show me where".
  * Uses the shared Menu (handoff §1) so it inherits the ambient surfaces and the
  * session accent; the "coming soon" note rides along as the panel footer.
+ *
+ * `note` and `highlight` are Scout's two disclosures for this control, same as
+ * the ones SearchBar places on its own fields: `note` is the inline "assumed,
+ * tap to change" line when the query never said where they fly from, and
+ * `highlight` is the brief mark on an origin Scout read out of their words.
+ * Origin lives here rather than in the form, so the notes do too.
  */
-export default function OriginPicker({ value, onChange }) {
+export default function OriginPicker({ value, onChange, note = null, highlight = false }) {
   return (
     <div className="rc-originbar">
       <span className="rc-eyebrow">Leaving from</span>
-      <Menu
-        variant="origin"
-        ariaLabel="Departure city"
-        value={value}
-        onChange={onChange}
-        options={ORIGIN_MENU}
-        placeholder="Toronto · YYZ"
-        footer={
-          HAS_COMING_SOON ? (
-            <p className="rc-menu__note">Other departure cities coming soon.</p>
-          ) : null
-        }
-      />
+      <div className={`rc-originbar__pick${highlight ? ' is-askset' : ''}`}>
+        <Menu
+          variant="origin"
+          ariaLabel="Departure city"
+          value={value}
+          onChange={onChange}
+          options={ORIGIN_MENU}
+          placeholder="Toronto · YYZ"
+          footer={
+            HAS_COMING_SOON ? (
+              <p className="rc-menu__note">Other departure cities coming soon.</p>
+            ) : null
+          }
+        />
+      </div>
+      {note && <span className="rc-asknote rc-asknote--origin">{note}</span>}
     </div>
   )
 }
