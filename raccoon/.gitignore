@@ -35,3 +35,8 @@ handoff/
 # PMTiles extracts are build output, cut from tiles/cities.geojson and
 # uploaded to Blob storage — never source.
 *.pmtiles
+
+# Claude Code session state and its scratch worktrees. The worktrees are whole
+# checkouts nested inside the repo — never history, and vitest would otherwise
+# scan them and run every test twice (see the vitest exclude in package.json).
+.claude/
