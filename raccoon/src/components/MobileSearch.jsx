@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
+import AskPanel from './AskPanel'
+import ScoutIcon from './ScoutIcon'
 import {
   ORIGIN_OPTIONS,
   MONTH_OPTIONS,
@@ -166,6 +168,15 @@ export default function MobileSearch({
   onSearch,
   askFilled = [],
   askNotes = {},
+  askOpen = false,
+  asking = false,
+  askQuery = '',
+  summary = null,
+  failure = null,
+  onAskOpen,
+  onAskClose,
+  onAskSubmit,
+  onAskExample,
 }) {
   const [origin, setOrigin] = useState(defaults.origin || DEFAULT_FILTERS.origin)
   // The mobile composer is a sentence, so it can't rest on empty field names the
@@ -240,9 +251,28 @@ export default function MobileSearch({
 
   const nightsLabel = `${nights} night${nights === 1 ? '' : 's'}`
 
+  if (askOpen) {
+    // The panel takes the whole composer on the phone, the way it takes the
+    // widget shell on desktop. Mobile was never drawn (the design doc lists it
+    // as the next thing to do), so this follows 1c's behaviour, not its layout.
+    return (
+      <div className="rc-msearch rc-msearch--ask">
+        <AskPanel
+          initialQuery={askQuery}
+          loading={asking}
+          onSubmit={onAskSubmit}
+          onClose={onAskClose}
+          onUseExample={onAskExample}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="rc-msearch">
       <div className="rc-msearch__main">
+        {summary}
+        {failure}
         {/* Eyebrow: static label + origin pill at the eyebrow's own type scale. */}
         <p className="rc-msearch__eyebrow">
           <span className="rc-msearch__eyebrow-label">Your trip from</span>
@@ -255,6 +285,10 @@ export default function MobileSearch({
             assumed={!!noteFor('origin')}
             askset={setByAsk('origin')}
           />
+          <button type="button" className="rc-ask-entry rc-ask-entry--m" onClick={onAskOpen}>
+            <ScoutIcon />
+            ask Scout
+          </button>
         </p>
 
         {/* Sentence: static muted words + value pills. Punctuation belongs to the

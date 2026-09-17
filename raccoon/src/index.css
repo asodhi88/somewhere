@@ -622,9 +622,7 @@ a:hover {
   position: relative;
   width: 100%;
   display: flex;
-  /* Top-aligned, not stretched: each field sits in a column that may also carry
-     a Scout assumption note beneath it, and the note must not stretch the field. */
-  align-items: flex-start;
+  align-items: stretch;
   gap: 10px;
   padding: 10px;
   border-radius: 24px;
@@ -672,28 +670,8 @@ a:hover {
     background-position: 160% 0;
   }
 }
-/* One search column: the field, and the assumption note that may sit under it. */
-.rc-fieldwrap {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-.rc-fieldwrap--budget {
-  flex: 1.15;
-}
-.rc-fieldwrap--nights {
-  flex: 0.6;
-}
-.rc-fieldwrap--when {
-  flex: 1.1;
-}
-.rc-fieldwrap--stay {
-  flex: 1;
-}
 .rc-field {
   position: relative;
-  width: 100%;
-  flex: none;
   height: 58px;
   text-align: left;
   border-radius: 16px;
@@ -704,6 +682,18 @@ a:hover {
 }
 .rc-field:focus-within {
   border-color: var(--ac);
+}
+.rc-field--budget {
+  flex: 1.15;
+}
+.rc-field--nights {
+  flex: 0.6;
+}
+.rc-field--when {
+  flex: 1.1;
+}
+.rc-field--stay {
+  flex: 1;
 }
 /* Floating label (Trip Search Bar handoff — the design element). The label rests
    centred over the value like a placeholder, then rises to a small cap at the top
@@ -797,10 +787,7 @@ a:hover {
 
 .rc-search__submit {
   flex: none;
-  height: 58px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 27px;
+  padding: 15px 27px;
   border: 0;
   border-radius: 16px;
   background: linear-gradient(180deg, var(--ac-hi) 0%, var(--ac) 55%, var(--ac-lo) 100%);
@@ -839,314 +826,520 @@ a:hover {
   cursor: default;
 }
 
-/* ── Scout — the natural-language way into the form ──────────────────────────
-   Scout reads a sentence into the five form inputs and says what it assumed and
-   what it could not carry. It is a label, not a persona, and it must never look
-   louder than the amber CTA it feeds: the box is a sunken panel, and its own
-   button is an outline, not a fill.
+/* ── Scout — "Ask somewhere" (design 1c / 1d) ────────────────────────────────
+   Values lifted from the Ask somewhere design doc. Colours route through the
+   app's own tokens rather than the doc's locked sea glass, so Scout rides the
+   per-load accent and both ambients — which is what 1c and 1d are: one flow
+   under the night and day themes.
 
-   Three kinds of disclosure, three weights:
-     .rc-asknote      quiet, per field, under the control it corrects
-     .rc-ask__unused  quiet, one sentence, under the box
-     .rc-ask__flag    prominent — these change what the numbers mean
+   Scout never looks louder than the search itself. Its entry is an outline
+   button; the one accent-filled button it owns ("read my trip") only exists
+   while the panel is open, and the panel replaces the form, so there is never
+   more than one loud button in the band.
    ------------------------------------------------------------------------- */
 
-/* The inline "· assumed, tap to change" note under one field. Sits in its own
-   column under its own control, so two at once (the normal case, not an edge
-   case) land side by side rather than stacking into a banner. */
-.rc-asknote {
-  display: block;
-  padding: 7px 8px 0;
-  font-size: 11.5px;
-  line-height: 1.35;
-  letter-spacing: 0.005em;
-  color: var(--field-label, var(--muted));
-  text-wrap: pretty;
-}
-.rc-asknote--origin {
-  padding: 0;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-
-/* The brief highlight on a field Scout set from the traveller's own words. One
-   shot, then gone — it marks the change, it does not decorate the field. */
-@keyframes rc-askset {
-  0% {
-    border-color: var(--ac);
-    box-shadow: 0 0 0 0 rgba(var(--ac-rgb), 0.5);
-  }
-  55% {
-    border-color: var(--ac);
-    box-shadow: 0 0 0 7px rgba(var(--ac-rgb), 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(var(--ac-rgb), 0);
-  }
-}
-.rc-field.is-askset,
-.rc-originbar__pick.is-askset {
-  animation: rc-askset 1.9s cubic-bezier(0.22, 0.9, 0.3, 1) both;
-}
-.rc-originbar__pick {
+/* Entry — quiet, at the end of the "Leaving from" row. */
+.rc-ask-entry {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
   border-radius: 12px;
-}
-
-.rc-hero__ask {
-  width: 100%;
-  margin-top: 4px;
-}
-
-.rc-ask {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 15px 17px 16px;
-  text-align: left;
-  border-radius: 20px;
-  background: var(--glass-sunken, var(--surface-sunken));
-  border: 1px solid var(--glass-border, var(--border));
-}
-.rc-ask__head {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.rc-ask__title {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-text);
-}
-.rc-ask__mark {
-  flex: none;
-}
-.rc-ask__lede {
-  margin: 0;
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: var(--ink-muted, var(--muted));
-  max-width: 68ch;
-  text-wrap: pretty;
-}
-
-.rc-ask__form {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.rc-ask__field {
-  position: relative;
-  flex: 1;
-  min-width: 0;
-}
-.rc-ask__input {
-  width: 100%;
-  height: 46px;
-  padding: 0 52px 0 15px;
-  border-radius: 14px;
-  border: 1px solid var(--field-border, var(--border));
-  background: var(--glass, var(--surface));
-  color: var(--field-val, var(--text));
-  font-family: var(--font-body);
-  font-size: 15px;
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-.rc-ask__input:focus {
-  border-color: var(--ac);
-}
-.rc-ask__input::placeholder {
-  color: var(--field-label, var(--muted));
-  opacity: 0.72;
-}
-.rc-ask__count {
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 11px;
-  color: var(--field-label, var(--muted));
-  pointer-events: none;
-}
-/* Outline, never a fill: the amber "Show me where" stays the one loud element. */
-.rc-ask__go {
-  flex: none;
-  height: 46px;
-  padding: 0 18px;
-  border-radius: 14px;
-  border: 1px solid rgba(var(--ac-rgb), 0.5);
   background: transparent;
-  color: var(--accent-text);
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
-}
-.rc-ask__go:hover:not(:disabled) {
-  background: rgba(var(--ac-rgb), 0.12);
-  border-color: var(--ac);
-}
-.rc-ask__go:disabled {
-  opacity: 0.45;
-  cursor: default;
-}
-
-/* Curated examples — the empty state. Chips are fine HERE: this is a fixed set
-   of three stored strings, not model output, so nothing about them shifts
-   between renders. */
-.rc-ask__examples {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.rc-ask__exlabel {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--field-label, var(--muted));
-}
-.rc-ask__exlist {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.rc-ask__ex {
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--field-border, var(--border));
-  background: var(--glass, var(--surface));
-  color: var(--ink-muted, var(--muted));
-  font-family: var(--font-body);
-  font-size: 12.5px;
-  cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-.rc-ask__ex:hover {
+  border: 1px solid var(--glass-border, var(--border));
   color: var(--ink, var(--text));
-  border-color: rgba(var(--ac-rgb), 0.55);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.rc-ask-entry svg {
+  color: var(--accent-text);
+}
+.rc-ask-entry:hover {
+  border-color: var(--accent-ring);
+  background: var(--glass-sunken, var(--surface-sunken));
+}
+.rc-ask-entry.is-active {
+  background: linear-gradient(180deg, var(--ac-hi), var(--ac) 60%, var(--ac-lo));
+  color: var(--on-amber);
+  border-color: transparent;
+  box-shadow: 0 8px 18px -8px rgba(var(--ac-rgb), 0.5);
+}
+.rc-ask-entry.is-active svg {
+  color: var(--on-amber);
 }
 
-.rc-ask__out {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* The widget shell holds either the form or the panel — never both visible. The
+   form stays MOUNTED while the panel is open so a half-typed budget survives. */
+.rc-ask-host {
+  position: relative;
 }
-.rc-ask__out:empty {
+.rc-ask-host__form.is-hidden {
   display: none;
 }
-/* Prominent. Both flags say the numbers below mean something other than what a
-   traveller would assume — an unsupported origin, or a party priced as one. */
-.rc-ask__flag {
+
+/* Panel — the field grid's place, same shell. */
+.rc-search--ask {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  padding: 16px;
+}
+.rc-ask-head {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.rc-ask-title {
+  display: inline-flex;
+  align-items: center;
   gap: 9px;
-  margin: 0;
-  padding: 9px 12px;
-  border-radius: 12px;
-  background: rgba(232, 115, 90, 0.1);
-  border: 1px solid rgba(232, 115, 90, 0.34);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
   color: var(--ink, var(--text));
-  font-size: 13px;
-  line-height: 1.45;
-  text-wrap: pretty;
 }
-.rc-ask__flag-mark {
+.rc-ask-title svg {
+  color: var(--accent-text);
+}
+.rc-ask-close {
+  width: 30px;
+  height: 30px;
   flex: none;
-  width: 3px;
-  align-self: stretch;
-  border-radius: 2px;
-  background: var(--coral);
-}
-/* Quiet. A sentence, not chips — the model's wording for these fragments varies
-   between identical queries, and chips would make that look like instability. */
-.rc-ask__unused,
-.rc-ask__ok,
-.rc-ask__error {
-  margin: 0;
-  font-size: 12.5px;
-  line-height: 1.5;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
   color: var(--ink-muted, var(--muted));
-  text-wrap: pretty;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
 }
-.rc-ask__error {
-  padding-left: 11px;
-  border-left: 2px solid var(--field-border, var(--border));
+.rc-ask-close:hover {
+  color: var(--ink, var(--text));
+  border-color: var(--accent-ring);
+}
+.rc-ask-inputwrap {
+  position: relative;
+}
+.rc-ask-input {
+  display: block;
+  width: 100%;
+  min-height: 74px;
+  padding: 15px 17px;
+  border-radius: 15px;
+  background: var(--form-field-strong, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--field-val, var(--text));
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+  outline: none;
+  resize: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.rc-ask-input:focus {
+  border-color: var(--accent-ring);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.rc-ask-input::placeholder {
+  color: var(--ink-faint, var(--muted));
+  opacity: 0.85;
+}
+.rc-ask-count {
+  position: absolute;
+  right: 13px;
+  bottom: 10px;
+  font-size: 11px;
+  color: var(--ink-faint, var(--muted));
+  pointer-events: none;
 }
 
-/* ── Scout on the phone composer ─────────────────────────────────────────── */
-/* The sentence has no room for a note beside each pill, so the pill carries a
-   mark and the note list below carries the words — each note a button that
-   opens its own sheet, so the note is itself the correction. */
-.rc-pill.is-assumed {
-  border-bottom: 1px dashed rgba(168, 155, 143, 0.6);
-}
-.rc-pill.is-askset {
-  animation: rc-askset 1.9s cubic-bezier(0.22, 0.9, 0.3, 1) both;
-}
-.rc-msearch__notes {
+.rc-ask-chipsrow {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin: 10px 0 0;
-  padding: 0;
-  list-style: none;
+  gap: 8px;
 }
-.rc-asknote--tap {
-  padding: 2px 0;
+.rc-ask-chipslab {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint, var(--muted));
+}
+.rc-ask-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rc-ask-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--ink-muted, var(--muted));
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+.rc-ask-chip:hover {
+  border-color: var(--accent-ring);
+  color: var(--ink, var(--text));
+}
+.rc-ask-chip.is-dim {
+  opacity: 0.4;
+}
+.rc-ask-chip.is-hot {
+  border-color: var(--accent-ring);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+.rc-ask-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 2px;
+}
+.rc-ask-foot--end {
+  justify-content: flex-end;
+}
+.rc-ask-go {
+  height: auto;
+  padding: 10px 16px;
+  font-size: 13px;
+  border-radius: 12px;
+}
+.rc-search__submit.is-dim {
+  opacity: 0.5;
+}
+
+/* Loading — the query stays visible under a calm sweep. */
+.rc-ask-prog {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  overflow: hidden;
+  position: relative;
+}
+.rc-ask-prog::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 38%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--ac-rgb), 0),
+    var(--ac-hi),
+    rgba(var(--ac-rgb), 0)
+  );
+  animation: rc-ask-sweep 1.25s ease-in-out infinite;
+}
+@keyframes rc-ask-sweep {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 102%;
+  }
+}
+.rc-ask-loadrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ink-muted, var(--muted));
+}
+
+/* "Read as" — the traveller's own sentence, kept visible above the filled form
+   and doubling as the way back into the panel. */
+.rc-ask-summary {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-ring);
+  transition: border-color 0.15s ease;
+}
+.rc-ask-summary:hover {
+  border-color: var(--ac);
+}
+.rc-ask-summary__open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px 12px 14px;
   border: 0;
   background: none;
   text-align: left;
   font-family: var(--font-body);
-  font-size: 11.5px;
-  color: var(--nm-dim, var(--muted));
+  cursor: pointer;
+}
+.rc-ask-summary__ic {
+  color: var(--accent-text);
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+.rc-ask-summary__body {
+  min-width: 0;
+  flex: 1;
+}
+.rc-ask-summary__k {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.rc-ask-summary__q {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--ink, var(--text));
+  text-wrap: pretty;
+}
+.rc-ask-summary__edit {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.9;
+  color: var(--accent-text);
+}
+.rc-ask-summary__x {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  align-self: center;
+  margin-right: 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--ink-muted, var(--muted));
+  font-size: 14px;
+  cursor: pointer;
+}
+.rc-ask-summary__x:hover {
+  color: var(--ink, var(--text));
+  border-color: var(--accent-ring);
+}
+
+/* Struck-through words inside the sentence. Only ever words the model itself
+   quoted — see annotateQuery in src/lib/askNotes.js for why nothing is
+   positively highlighted. */
+.rc-tok--dead {
+  border-radius: 6px;
+  padding: 2px 6px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  box-shadow: inset 0 0 0 1px var(--glass-border, var(--border));
+  color: var(--ink-faint, var(--muted));
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-faint, var(--muted));
+  font-weight: 500;
+  white-space: nowrap;
+}
+.rc-toklab {
+  margin-left: 5px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: var(--ink-faint, var(--muted));
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Banner — prominent. Both of these change what the numbers mean: a departure
+   city we cannot price, and a party priced as one traveller. */
+.rc-ask-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-ring);
+  color: var(--ink, var(--text));
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+.rc-ask-banner svg {
+  color: var(--accent-text);
+  flex: none;
+  margin-top: 1px;
+}
+.rc-ask-banner strong {
+  font-weight: 700;
+}
+
+/* Note — quiet. Everything the form has no input for, as one sentence. */
+.rc-ask-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--ink-muted, var(--muted));
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+.rc-ask-note svg {
+  color: var(--ink-faint, var(--muted));
+  flex: none;
+}
+.rc-ask-note strong {
+  color: var(--ink, var(--text));
+  font-weight: 600;
+}
+.rc-ask-note--fail {
+  gap: 12px;
+  justify-content: space-between;
+}
+.rc-ask-note__body {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.rc-ask-note__retry {
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
   text-decoration: underline;
-  text-decoration-style: dotted;
   text-underline-offset: 3px;
 }
-/* The phone band: Scout sits under the full-height hero panel rather than
-   inside it, because the mural is pinned behind the CTA there (see the 720px
-   block) and would float over a box appended to the hero. */
-.rc-askband {
-  width: 100%;
-  padding: 18px 16px 4px;
-  background: var(--page-bg, var(--bg));
+
+/* Field states after a reading. `.is-ai` marks a value taken from the
+   traveller's own words; `.is-assumed` marks one the form filled itself, and
+   never appears without the tag that says so. */
+.rc-field.is-ai,
+.rc-field.is-assumed,
+.rc-originbar--adj .rc-menu__trigger--origin {
+  border-color: var(--accent-ring);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+/* Absolutely positioned and non-wrapping: a long tag overhangs its column
+   rather than stretching the field or the widget. */
+.rc-field__tag {
+  position: absolute;
+  left: 2px;
+  top: calc(100% + 7px);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent-text);
+}
+.rc-field__tag svg {
+  flex: none;
+}
+/* Room for the tags, which sit outside the widget's own box. */
+.rc-search--tagged {
+  margin-bottom: 22px;
+}
+.rc-orig-tag {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent-text);
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────────── */
+/* The design doc covers desktop only — its own footer lists "mobile version of
+   1c" as the next thing to draw. The phone therefore keeps the sentence
+   composer and borrows 1c's behaviour, not its layout. */
+.rc-msearch--ask {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.rc-ask-entry--m {
+  margin-left: 0;
+  padding: 7px 12px;
+  font-size: 12px;
+}
+/* Sentence pills carry the same two marks the desktop fields do: a ring for a
+   value read from the traveller's words, a dashed rule for one the form filled
+   (which always has a tappable note under the sentence saying so). */
+.rc-pill.is-askset {
+  box-shadow: var(--nm-raise), 0 0 0 2px var(--accent-ring);
+}
+.rc-pill.is-assumed {
+  border-bottom: 1px dashed var(--nm-dim);
 }
 @media (max-width: 720px) {
-  /* The field and its button stack — side by side there is room for neither. */
-  .rc-ask__form {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .rc-ask__go {
-    width: 100%;
-  }
-  .rc-ask__examples {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 7px;
-  }
-  .rc-ask__exlist {
+  .rc-ask-chips {
     flex-direction: column;
     align-items: flex-start;
   }
-  .rc-ask__ex {
+  .rc-ask-chip {
     text-align: left;
+  }
+  .rc-msearch__main .rc-ask-summary,
+  .rc-msearch__main .rc-ask-banner,
+  .rc-msearch__main .rc-ask-note {
+    margin-bottom: 12px;
   }
 }
 
@@ -2663,11 +2856,9 @@ html[data-ambient='day'] .rc-blind__fade {
   .rc-lightbox {
     animation: none !important;
   }
-  /* Scout's fill highlight is decoration only — the assumption notes
-     carry everything a traveller needs to read. */
-  .rc-field.is-askset,
-  .rc-originbar__pick.is-askset,
-  .rc-pill.is-askset {
+  /* Scout: the loading sweep is decoration. The field rings are static, so
+     they survive — they carry meaning the tags also state in words. */
+  .rc-ask-prog::after {
     animation: none !important;
   }
   /* Blind appears/disappears without the glide (blur still applies — it isn't

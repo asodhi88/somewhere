@@ -15,7 +15,14 @@
  *     as prose that happens to quote them.
  *   - Two disclosures are promoted OUT of the quiet "couldn't use" line because
  *     acting on them changes what the numbers mean: an unsupported departure
- *     city, and a party of more than one.
+ *     city, and a party of more than one. Both render as the design's banner.
+ *   - The "Read as" card strikes words through IN PLACE (annotateQuery), but only
+ *     words the model itself quoted — those are exact. It never highlights the
+ *     words it thinks produced a value: /api/ask returns values, not character
+ *     offsets, so "which words gave nights=10" could only ever be a guess, and a
+ *     guess that moved between identical queries is the instability the sentence
+ *     rule above exists to avoid. The sentence is always rendered too, so a
+ *     fragment the model paraphrased instead of quoting is still disclosed.
  */
 import { ORIGIN_OPTIONS, MONTH_OPTIONS, STAY_OPTIONS, normalizeOrigin } from './searchState'
 
@@ -125,11 +132,11 @@ export function unusedSentence(fragments) {
   const list = (Array.isArray(fragments) ? fragments : []).filter(Boolean)
   if (!list.length) return null
   const one = list.length === 1
-  return (
-    `Scout couldn’t fit ${listOf(list)} into the form — ` +
-    `there’s no input for ${one ? 'that' : 'those'}, so ` +
-    `${one ? 'it isn’t' : 'they aren’t'} part of this search.`
-  )
+  // NOT the design's "Ranking is by total trip cost only" — that is false. The
+  // engine scores headroom, weather and flight time (src/lib/ranking.js), and
+  // the How-it-works page says so. The real limit is that the form has no input
+  // for these, which is also the honest thing to say.
+  return `Couldn’t use ${listOf(list)} — the form has no input for ${one ? 'it' : 'those'}.`
 }
 
 /**
@@ -139,14 +146,89 @@ export function unusedSentence(fragments) {
  */
 export function originFallbackNote(parse) {
   if (!parse?.originFallback) return null
-  return (
-    `Departures from ${parse.originFallback} are coming soon. ` +
-    `For now, here’s what these trips cost from ${originCity(parse.origin)}.`
-  )
+  return {
+    lead: `Departures from ${parse.originFallback} are coming soon.`,
+    rest: `For now, here’s what these trips cost from ${originCity(parse.origin)}.`,
+  }
 }
 
 /** The party-size note. Same prominence as the origin fallback, same reason. */
-export const PARTY_NOTE = 'Costs shown are for one traveller. Party pricing is coming.'
+export const PARTY_NOTE = {
+  lead: 'Costs shown are for one traveller.',
+  rest: 'Party pricing is coming.',
+}
+
+// ── the "Read as" sentence ─────────────────────────────────────────────────
+
+/**
+ * Split the traveller's own sentence into segments, striking through the words
+ * the parse could not carry (the design's `.rc-tok--dead`).
+ *
+ * Only words the MODEL QUOTED are marked. Every fragment in `unused` is a verbatim
+ * slice of the query by construction (rule 8: "in their own wording"), and
+ * `originFallback` is the city "exactly as they wrote it" (rule 7) — so these can
+ * be located rather than guessed. Recognised words are deliberately NOT
+ * highlighted: the endpoint returns values, not offsets, so which words produced
+ * nights=10 would be a guess, and a guess that moved between identical queries is
+ * the exact instability that keeps `unused` a sentence instead of chips.
+ *
+ * A fragment the model paraphrased instead of quoting simply isn't found and
+ * isn't marked; it is still disclosed by the sentence rendered underneath, which
+ * is why both are always shown.
+ *
+ * @param {string} query
+ * @param {Object} parse
+ * @returns {Array<{text: string, dead?: boolean, label?: string}>}
+ */
+export function annotateQuery(query, parse) {
+  const q = String(query || '')
+  if (!q) return []
+  const lower = q.toLowerCase()
+  const marks = []
+
+  const claim = (needle, label) => {
+    const n = String(needle || '').trim()
+    if (!n) return
+    const start = lower.indexOf(n.toLowerCase())
+    if (start === -1) return
+    const end = start + n.length
+    // First claim wins; a later fragment never re-marks text already struck.
+    if (marks.some((m) => start < m.end && end > m.start)) return
+    marks.push({ start, end, label })
+  }
+
+  // The departure city first: it is the most specific claim, and its own label.
+  if (parse.originFallback) claim(parse.originFallback, 'coming soon')
+  const { party, rest } = splitParty(parse.unused)
+  // "not ranked" would be wrong here — the trip is priced for one person, which
+  // is a different limitation from an ask the form cannot express.
+  for (const f of party) claim(f, 'priced for one')
+  for (const f of rest) claim(f, 'not ranked')
+
+  marks.sort((a, b) => a.start - b.start)
+
+  const out = []
+  let cursor = 0
+  for (const m of marks) {
+    if (m.start > cursor) out.push({ text: q.slice(cursor, m.start) })
+    out.push({ text: q.slice(m.start, m.end), dead: true, label: m.label })
+    cursor = m.end
+  }
+  if (cursor < q.length) out.push({ text: q.slice(cursor) })
+  return out
+}
+
+/**
+ * What the "Leaving from" row says about its own value after a fill — the
+ * design's `.rc-orig-tag`. Null when Scout has nothing to say about it, in which
+ * case the row shows the "ask Scout" entry button instead.
+ */
+export function originTag(parse) {
+  if (!parse) return null
+  if (parse.originFallback) return 'adjusted'
+  if ((parse.assumed || []).includes('origin')) return 'assumed · tap to change'
+  return 'from your words'
+}
 
 // ── parse → form ───────────────────────────────────────────────────────────
 
@@ -184,7 +266,7 @@ export function parseToFilters(parse) {
  *
  * @param {Object} parse
  * @returns {{filters: Object, assumed: string[], filled: string[],
- *            fieldNotes: Object, notes: Object}}
+ *            fieldNotes: Object, originTag: ?string, notes: Object}}
  */
 export function readParse(parse) {
   const { party, rest } = splitParty(parse.unused)
@@ -196,6 +278,9 @@ export function readParse(parse) {
     // field name → the inline note that field carries, for the form to place
     // under its own control.
     fieldNotes: Object.fromEntries(assumed.map((f) => [f, assumptionNote(f, parse)])),
+    // Origin is not one of the form's fields (it lives in the "Leaving from"
+    // row), so it carries its own tag rather than a field note.
+    originTag: originTag(parse),
     notes: {
       origin: originFallbackNote(parse),
       party: party.length ? PARTY_NOTE : null,

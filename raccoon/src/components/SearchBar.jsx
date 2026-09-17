@@ -22,16 +22,19 @@ const monthTriggerLabel = (opt) => (opt ? `${opt.label} ${opt.group}` : '')
  * four fields are budget, nights, month and stay tier. Month and stay use the
  * shared Menu listbox (handoff §1) rather than native selects.
  *
- * Scout (AskBox) fills this form rather than searching on its own. Two props
- * carry what it did, per field:
- *   askFilled — fields taken from the traveller's own words. They get a brief
- *               one-shot highlight so the change is visible where it happened.
- *   askNotes  — fields the form filled itself, each with its own inline note
- *               ("Mid-range · assumed, tap to change"). The note sits under its
- *               own field, not in a banner, because that is where the correction
- *               is made — and because two notes at once is the normal case, not
- *               an edge case, so they sit side by side in their own columns
- *               instead of stacking.
+ * Scout fills this form rather than searching on its own. Two props carry what
+ * it did, per field (Ask somewhere design 1c):
+ *   askFilled — fields taken from the traveller's own words. They carry the
+ *               design's `.is-ai` accent ring, so the change is visible where it
+ *               happened.
+ *   askNotes  — fields the form filled itself. Each gets `.is-assumed` plus the
+ *               design's `.rc-field__tag` underneath it ("Mid-range · assumed,
+ *               tap to change"). The tag sits under its own field, not in a
+ *               banner, because that is where the correction is made — and
+ *               because two tags at once is the normal case, not an edge case.
+ *               The tag is absolutely positioned and does not wrap, so a long
+ *               one overhangs its column rather than stretching the widget;
+ *               `.rc-search--tagged` adds the room it needs below.
  * Editing a field retires both: once the value is the traveller's, the form has
  * nothing left to disclose about it. Scout re-mounts this component on each fill
  * (Hero keys it), so that state resets with the new values.
@@ -58,21 +61,33 @@ export default function SearchBar({
   const noteFor = (field) => (touched.has(field) ? null : askNotes[field] || null)
   const setByAsk = (field) => !touched.has(field) && askFilled.includes(field)
 
-  // Field wrapper class: carries the column width, and the two Scout states.
   // `mod` is the existing CSS modifier, which is not always the field name — the
   // month field has been `.rc-field--when` since the Trip Search Bar handoff.
-  const wrapClass = (field, mod = field) =>
-    `rc-fieldwrap rc-fieldwrap--${mod}${noteFor(field) ? ' has-note' : ''}`
   const fieldClass = (field, filled, mod = field) =>
     `rc-field rc-field--${mod}${filled ? ' is-filled' : ''}${
-      setByAsk(field) ? ' is-askset' : ''
-    }`
+      setByAsk(field) ? ' is-ai' : ''
+    }${noteFor(field) ? ' is-assumed' : ''}`
 
-  /** The inline note under one field, or nothing at all when there is none. */
-  const note = (field) => {
+  /** The tag under one field, or nothing at all when there is none. */
+  const tag = (field) => {
     const text = noteFor(field)
-    return text ? <span className="rc-asknote">{text}</span> : null
+    if (!text) return null
+    return (
+      <span className="rc-field__tag">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+          <path d="M12 4v16M4 12h16" strokeLinecap="round" opacity="0" />
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 8.2v4.4" strokeLinecap="round" />
+          <circle cx="12" cy="16" r="0.6" fill="currentColor" stroke="none" />
+        </svg>
+        {text}
+      </span>
+    )
   }
+
+  // Any tag present? They are absolutely positioned under the widget, so the
+  // form reserves the space rather than growing a row.
+  const hasTags = ['budget', 'nights', 'month', 'stay'].some((f) => noteFor(f))
 
   const onBudgetChange = (e) => {
     touch('budget')
@@ -108,82 +123,74 @@ export default function SearchBar({
   }
 
   return (
-    <form className="rc-search" onSubmit={submit}>
+    <form className={`rc-search${hasTags ? ' rc-search--tagged' : ''}`} onSubmit={submit}>
       {/* Amber accent light tracing the border — the idle-state affordance.
           data-motion stills it under prefers-reduced-motion. */}
       <span className="rc-search__trace" data-motion="1" aria-hidden="true" />
 
-      <div className={wrapClass('budget')}>
-        <label className={fieldClass('budget', budget != null)}>
-          <span className="rc-field__label">Budget</span>
-          <div className="rc-field__control">
-            <span className="rc-field__prefix">$</span>
-            <input
-              inputMode="numeric"
-              aria-label="Total budget in Canadian dollars"
-              placeholder="no limit"
-              value={budgetText}
-              onChange={onBudgetChange}
-            />
-          </div>
-        </label>
-        {note('budget')}
-      </div>
-
-      <div className={wrapClass('nights')}>
-        <label className={fieldClass('nights', nights !== '')}>
-          <span className="rc-field__label">Nights</span>
-          <div className="rc-field__control">
-            <input
-              inputMode="numeric"
-              aria-label="Number of nights"
-              value={nights}
-              onChange={onNightsChange}
-            />
-          </div>
-        </label>
-        {note('nights')}
-      </div>
-
-      <div className={wrapClass('month', 'when')}>
-        <div className={fieldClass('month', !!month, 'when')}>
-          <span className="rc-field__label">When</span>
-          <div className="rc-field__control">
-            <Menu
-              variant="field"
-              ariaLabel="Travel month"
-              value={month}
-              onChange={(v) => {
-                touch('month')
-                setMonth(v)
-              }}
-              options={MONTH_MENU}
-              formatValue={monthTriggerLabel}
-              scrollable
-            />
-          </div>
+      <label className={fieldClass('budget', budget != null)}>
+        <span className="rc-field__label">Budget</span>
+        <div className="rc-field__control">
+          <span className="rc-field__prefix">$</span>
+          <input
+            inputMode="numeric"
+            aria-label="Total budget in Canadian dollars"
+            placeholder="no limit"
+            value={budgetText}
+            onChange={onBudgetChange}
+          />
         </div>
-        {note('month')}
+        {tag('budget')}
+      </label>
+
+      <label className={fieldClass('nights', nights !== '')}>
+        <span className="rc-field__label">Nights</span>
+        <div className="rc-field__control">
+          <input
+            inputMode="numeric"
+            aria-label="Number of nights"
+            value={nights}
+            onChange={onNightsChange}
+          />
+        </div>
+        {tag('nights')}
+      </label>
+
+      <div className={fieldClass('month', !!month, 'when')}>
+        <span className="rc-field__label">When</span>
+        <div className="rc-field__control">
+          <Menu
+            variant="field"
+            ariaLabel="Travel month"
+            value={month}
+            onChange={(v) => {
+              touch('month')
+              setMonth(v)
+            }}
+            options={MONTH_MENU}
+            formatValue={monthTriggerLabel}
+            scrollable
+          />
+        </div>
+        {tag('month')}
       </div>
 
-      <div className={wrapClass('stay')}>
-        <div className={fieldClass('stay', !!stay)}>
-          <span className="rc-field__label">Stay</span>
-          <div className="rc-field__control">
-            <Menu
-              variant="field"
-              ariaLabel="Stay tier"
-              value={stay}
-              onChange={(v) => {
-                touch('stay')
-                setStay(v)
-              }}
-              options={STAY_OPTIONS}
-              placeholder=""
-            />
-          </div>
+      <div className={fieldClass('stay', !!stay)}>
+        <span className="rc-field__label">Stay</span>
+        <div className="rc-field__control">
+          <Menu
+            variant="field"
+            ariaLabel="Stay tier"
+            value={stay}
+            onChange={(v) => {
+              touch('stay')
+              setStay(v)
+            }}
+            options={STAY_OPTIONS}
+            placeholder=""
+          />
         </div>
-        {note('stay')}
+        {tag('stay')}
       </div>
 
       <button type="submit" className="rc-search__submit" disabled={pending}>

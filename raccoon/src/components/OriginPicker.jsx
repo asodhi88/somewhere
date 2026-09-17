@@ -1,4 +1,5 @@
 import Menu from './Menu'
+import ScoutIcon from './ScoutIcon'
 import { ORIGIN_OPTIONS } from '../lib/searchState'
 
 // Selectable departure cities become listbox rows ("Toronto · YYZ"); the rest
@@ -16,32 +17,49 @@ const HAS_COMING_SOON = ORIGIN_OPTIONS.some((o) => !o.available)
  * Uses the shared Menu (handoff §1) so it inherits the ambient surfaces and the
  * session accent; the "coming soon" note rides along as the panel footer.
  *
- * `note` and `highlight` are Scout's two disclosures for this control, same as
- * the ones SearchBar places on its own fields: `note` is the inline "assumed,
- * tap to change" line when the query never said where they fly from, and
- * `highlight` is the brief mark on an origin Scout read out of their words.
- * Origin lives here rather than in the form, so the notes do too.
+ * The row's right-hand slot is Scout's (Ask somewhere design 1c). It holds
+ * either the quiet "ask Scout" entry button, or — once a reading exists — a tag
+ * saying what Scout did to this value: "from your words", "adjusted" when the
+ * departure city they named isn't one we fly from, or "assumed · tap to change"
+ * when the query never said. Origin has no field of its own to hang a note
+ * under, so the tag is where its disclosure lives.
  */
-export default function OriginPicker({ value, onChange, note = null, highlight = false }) {
+export default function OriginPicker({
+  value,
+  onChange,
+  tag = null,
+  ring = false,
+  onAsk = null,
+  askActive = false,
+}) {
   return (
-    <div className="rc-originbar">
+    <div className={`rc-originbar${ring ? ' rc-originbar--adj' : ''}`}>
       <span className="rc-eyebrow">Leaving from</span>
-      <div className={`rc-originbar__pick${highlight ? ' is-askset' : ''}`}>
-        <Menu
-          variant="origin"
-          ariaLabel="Departure city"
-          value={value}
-          onChange={onChange}
-          options={ORIGIN_MENU}
-          placeholder="Toronto · YYZ"
-          footer={
-            HAS_COMING_SOON ? (
-              <p className="rc-menu__note">Other departure cities coming soon.</p>
-            ) : null
-          }
-        />
-      </div>
-      {note && <span className="rc-asknote rc-asknote--origin">{note}</span>}
+      <Menu
+        variant="origin"
+        ariaLabel="Departure city"
+        value={value}
+        onChange={onChange}
+        options={ORIGIN_MENU}
+        placeholder="Toronto · YYZ"
+        footer={
+          HAS_COMING_SOON ? (
+            <p className="rc-menu__note">Other departure cities coming soon.</p>
+          ) : null
+        }
+      />
+      {tag && <span className="rc-orig-tag">{tag}</span>}
+      {onAsk && (
+        <button
+          type="button"
+          className={`rc-ask-entry${askActive ? ' is-active' : ''}`}
+          onClick={onAsk}
+          aria-expanded={askActive}
+        >
+          <ScoutIcon />
+          ask Scout
+        </button>
+      )}
     </div>
   )
 }

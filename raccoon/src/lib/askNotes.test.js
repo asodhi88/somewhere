@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import {
   ASK_FIELDS,
+  annotateQuery,
+  originTag,
   PARTY_NOTE,
   assumptionNote,
   filledFields,
@@ -70,14 +72,21 @@ describe('unusedSentence', () => {
 
   it('reads as one sentence, singular', () => {
     expect(unusedSentence(['nightlife'])).toBe(
-      'Scout couldn’t fit “nightlife” into the form — there’s no input for that, so it isn’t part of this search.',
+      'Couldn’t use “nightlife” — the form has no input for it.',
     )
   })
 
   it('reads as one sentence, plural, with the fragments quoted in order', () => {
     expect(unusedSentence(['nightlife', 'Lisbon', 'nonstop only'])).toBe(
-      'Scout couldn’t fit “nightlife”, “Lisbon” or “nonstop only” into the form — there’s no input for those, so they aren’t part of this search.',
+      'Couldn’t use “nightlife”, “Lisbon” or “nonstop only” — the form has no input for those.',
     )
+  })
+
+  it('does not repeat the design’s false claim about how ranking works', () => {
+    // Design 1c state 6 reads "Ranking is by total trip cost only". The engine
+    // scores headroom, weather and flight time (src/lib/ranking.js), so that
+    // sentence would contradict the product it describes.
+    expect(unusedSentence(['nightlife'])).not.toMatch(/total trip cost only/i)
   })
 })
 
@@ -113,7 +122,10 @@ describe('party size', () => {
 
   it('states the cost model plainly — one traveller, party pricing not yet', () => {
     const read = readParse(parse({ unused: ['for the two of us'] }))
-    expect(read.notes.party).toBe(PARTY_NOTE)
+    expect(read.notes.party).toEqual(PARTY_NOTE)
+    expect(`${PARTY_NOTE.lead} ${PARTY_NOTE.rest}`).toBe(
+      'Costs shown are for one traveller. Party pricing is coming.',
+    )
     // Promoted, so the quiet sentence has nothing left to carry.
     expect(read.notes.unused).toBeNull()
   })
@@ -125,13 +137,14 @@ describe('originFallbackNote', () => {
   })
 
   it('names the city they asked for and the city the numbers are actually from', () => {
-    expect(originFallbackNote(parse({ originFallback: 'Vancouver' }))).toBe(
+    const n = originFallbackNote(parse({ originFallback: 'Vancouver' }))
+    expect(`${n.lead} ${n.rest}`).toBe(
       'Departures from Vancouver are coming soon. For now, here’s what these trips cost from Toronto.',
     )
   })
 
   it('follows the origin the parse actually landed on', () => {
-    expect(originFallbackNote(parse({ origin: 'YUL', originFallback: 'Halifax' }))).toMatch(
+    expect(originFallbackNote(parse({ origin: 'YUL', originFallback: 'Halifax' })).rest).toMatch(
       /cost from Montreal\.$/,
     )
   })
@@ -203,6 +216,71 @@ describe('the curated examples', () => {
   })
 })
 
+describe('annotateQuery — the "Read as" sentence', () => {
+  const Q = '10 cheap nights in March from Vancouver with great nightlife'
+
+  it('rebuilds the traveller’s sentence exactly, whatever it marks', () => {
+    const segs = annotateQuery(Q, parse({
+      originFallback: 'Vancouver',
+      unused: ['great nightlife'],
+    }))
+    expect(segs.map((x) => x.text).join('')).toBe(Q)
+  })
+
+  it('strikes the departure city and labels it, in place', () => {
+    const segs = annotateQuery(Q, parse({ originFallback: 'Vancouver', unused: [] }))
+    const dead = segs.filter((x) => x.dead)
+    expect(dead).toEqual([{ text: 'Vancouver', dead: true, label: 'coming soon' }])
+  })
+
+  it('labels a party fragment for what it is, not "not ranked"', () => {
+    // The trip is priced for one person — a different limitation from an ask
+    // the form has no input for, so it must not borrow that label.
+    const q = 'a week in May for the two of us'
+    const segs = annotateQuery(q, parse({ unused: ['for the two of us'] }))
+    expect(segs.find((x) => x.dead).label).toBe('priced for one')
+  })
+
+  it('never positively highlights a recognised word', () => {
+    // /api/ask returns values, not offsets, so which words produced nights=10
+    // could only be guessed. Nothing but a struck fragment is ever marked.
+    const segs = annotateQuery(Q, parse({ nights: 10, unused: [] }))
+    expect(segs.every((x) => x.dead || (!x.label && !x.tok))).toBe(true)
+  })
+
+  it('leaves a paraphrased fragment unmarked rather than guessing at it', () => {
+    // The sentence underneath still discloses it — that is why both render.
+    const segs = annotateQuery(Q, parse({ unused: ['partying and bars'] }))
+    expect(segs.some((x) => x.dead)).toBe(false)
+    expect(unusedSentence(['partying and bars'])).toContain('partying and bars')
+  })
+
+  it('never marks the same words twice when fragments overlap', () => {
+    const q = 'great nightlife please'
+    const segs = annotateQuery(q, parse({ unused: ['great nightlife', 'nightlife'] }))
+    expect(segs.filter((x) => x.dead).length).toBe(1)
+    expect(segs.map((x) => x.text).join('')).toBe(q)
+  })
+
+  it('is empty for an empty query rather than throwing', () => {
+    expect(annotateQuery('', parse())).toEqual([])
+  })
+})
+
+describe('originTag', () => {
+  it('says the departure city was adjusted when we cannot fly from it', () => {
+    expect(originTag(parse({ originFallback: 'Vancouver' }))).toBe('adjusted')
+  })
+
+  it('says it was assumed — and how to change it — when the query never said', () => {
+    expect(originTag(parse({ assumed: ['origin'] }))).toBe('assumed · tap to change')
+  })
+
+  it('credits the traveller when it came from their own words', () => {
+    expect(originTag(parse())).toBe('from your words')
+  })
+})
+
 describe('copy honesty', () => {
   // Scout reads, fills and discloses. It does not rank, price, pick or
   // recommend — so no string this module can produce may claim it does.
@@ -210,11 +288,15 @@ describe('copy honesty', () => {
     /\b(found|finds|picked|picks|chose|chooses|recommends?|suggests?|best|perfect|ideal|cheapest)\b/i
 
   it('never claims Scout did anything but read the query into the form', () => {
+    const fallback = originFallbackNote(parse({ originFallback: 'Vancouver' }))
     const strings = [
-      PARTY_NOTE,
-      originFallbackNote(parse({ originFallback: 'Vancouver' })),
+      PARTY_NOTE.lead,
+      PARTY_NOTE.rest,
+      fallback.lead,
+      fallback.rest,
       unusedSentence(['nightlife', 'Lisbon']),
       ...ASK_FIELDS.map((f) => assumptionNote(f, parse())),
+      ...['from your words', 'adjusted', 'assumed · tap to change'],
     ]
     for (const s of strings) expect(s, s).not.toMatch(FORBIDDEN)
   })
