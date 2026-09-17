@@ -120,6 +120,24 @@ describe('party size', () => {
     expect(rest).toEqual(['nightlife'])
   })
 
+  it('discloses a party the model omitted from `unused`, from the raw sentence', () => {
+    // Measured against the deployed endpoint: the model reports the party
+    // wording in roughly 3 of 5 runs of an identical query. A disclosure resting
+    // on that fragment alone would be missing about 40% of the time, leaving a
+    // party budget filtered against a one-traveller total with nothing saying so.
+    const dropped = parse({ budget: 5000, unused: ['nightlife'] })
+    const q = '10 nights in March, nice hotel, $5000 for the two of us, great nightlife'
+    expect(readParse(dropped).notes.party).toBeNull() // no query: fragment only
+    expect(readParse(dropped, q).notes.party).toEqual(PARTY_NOTE)
+    // The number itself is never touched — it is the traveller's own figure.
+    expect(readParse(dropped, q).filters.budget).toBe(5000)
+  })
+
+  it('does not fire on a sentence with no party in it', () => {
+    const q = 'a couple of weeks somewhere warm in February under $2,000'
+    expect(readParse(parse(), q).notes.party).toBeNull()
+  })
+
   it('states the cost model plainly — one traveller, party pricing not yet', () => {
     const read = readParse(parse({ unused: ['for the two of us'] }))
     expect(read.notes.party).toEqual(PARTY_NOTE)

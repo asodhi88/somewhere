@@ -76,10 +76,21 @@ export const filledFields = (parse) =>
 //
 // The parser has no party field — rule 8 of its system prompt routes party
 // wording into `unused` — so the promotion happens here, by reading those
-// fragments. That makes it a heuristic over the model's own phrasing: a party
-// described in wording none of these patterns match still gets disclosed, just
-// in the quiet line rather than the prominent one. The failure mode is
-// under-promotion, never a wrong number.
+// fragments.
+//
+// MEASURED, against the deployed endpoint: the model surfaces the party wording
+// in roughly 3 of 5 runs of an IDENTICAL query. It reads the budget correctly
+// every time (it never divides it), but it drops "for the two of us" from
+// `unused` often enough that a disclosure resting on that fragment alone would
+// be missing about 40% of the time.
+//
+// So the banner fires on EITHER a matching fragment OR the raw query text (see
+// readParse). Biasing toward showing it is the safe direction: the note is a
+// true statement about the cost model in every case — the estimate really is one
+// traveller's trip — so a false positive is merely redundant, while a false
+// negative leaves a party budget filtered against a solo total with nothing
+// saying so. The durable fix is a dedicated party field in the PR 1 tool schema,
+// where the model cannot forget to fill it; this is the honest interim.
 const PARTY_PATTERNS = [
   // "2 of us", "four people", "3 adults", "two travellers"
   /\b(?:\d+|two|three|four|five|six|both)\s+(?:of\s+us|people|adults|travell?ers|passengers|guests)\b/i,
@@ -265,11 +276,15 @@ export function parseToFilters(parse) {
  * Everything the UI needs from one parse, in one object.
  *
  * @param {Object} parse
+ * @param {string} [query] the traveller's own sentence, so a party the model
+ *        failed to report in `unused` is still disclosed
  * @returns {{filters: Object, assumed: string[], filled: string[],
  *            fieldNotes: Object, originTag: ?string, notes: Object}}
  */
-export function readParse(parse) {
+export function readParse(parse, query = '') {
   const { party, rest } = splitParty(parse.unused)
+  // The raw sentence is the backstop for a party the model forgot to report.
+  const partyMentioned = party.length > 0 || looksLikeParty(query)
   const assumed = ASK_FIELDS.filter((f) => (parse.assumed || []).includes(f))
   return {
     filters: parseToFilters(parse),
@@ -283,7 +298,7 @@ export function readParse(parse) {
     originTag: originTag(parse),
     notes: {
       origin: originFallbackNote(parse),
-      party: party.length ? PARTY_NOTE : null,
+      party: partyMentioned ? PARTY_NOTE : null,
       unused: unusedSentence(rest),
     },
   }

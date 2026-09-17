@@ -59,7 +59,10 @@ export default function Hero({
   const isMobile = useMediaQuery('(max-width: 720px)')
 
   const applyReading = useCallback((query, parse) => {
-    const read = readParse(parse)
+    // The query goes in too: the party disclosure falls back to the raw sentence
+    // when the model omits the party wording from `unused`, which it does often
+    // enough to matter (see askNotes.js).
+    const read = readParse(parse, query)
     setAsk({ query, parse, read })
     setOrigin(read.filters.origin)
     setOriginTouched(false)
