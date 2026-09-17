@@ -2614,6 +2614,48 @@ html[data-ambient='day'] .rc-eyebrow {
   }
 }
 
+/* ── Desktop search bar, narrow desktop (721–1040px) ───────────────────────
+   Between the mobile breakpoint and the design width the desktop SearchBar still
+   renders, but the four fields are splitting whatever the flex:none submit button
+   leaves — about 420px of the 642px row at 728px — and .rc-menu__value clips
+   ("September 2027" → "September…", "Mid-range" → "Mid-…").
+
+   Upper bound: 1040px is .rc-hero__content's max-width, so it is the last width at
+   which the bar is still viewport-constrained in any meaningful way; past it the bar
+   settles at its design size (960px inner) and "when" clears the longest month with
+   the same few px to spare it has at 1180px. Below it the bar shrinks with the
+   viewport and the month clips — a hairline at the top of the band, 78px at 728px.
+   Measured with the widest values the fields can hold — "$100,000", 30 nights,
+   "September 2027", "Mid-range".
+
+   Two changes, both scoped to this band: the bar wraps so the button takes its own
+   full-width row (matching the mobile CTA), which hands the fields the whole row;
+   and the field ratios shift the recovered width to the two that carry the long
+   values. Budget and nights run with large slack at the design ratios, so they
+   give up share to when and stay. */
+@media (min-width: 721px) and (max-width: 1040px) {
+  .rc-search {
+    flex-wrap: wrap;
+  }
+  /* The 100% basis is what forces the wrap — the fields all have flex-basis 0
+     and would otherwise never push the button off the row. */
+  .rc-search__submit {
+    flex: 1 0 100%;
+  }
+  .rc-field--budget {
+    flex: 0.95;
+  }
+  .rc-field--nights {
+    flex: 0.5;
+  }
+  .rc-field--when {
+    flex: 1.45;
+  }
+  .rc-field--stay {
+    flex: 1.1;
+  }
+}
+
 @media (max-width: 720px) {
   .rc-header {
     padding: 18px 20px;
