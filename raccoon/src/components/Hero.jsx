@@ -50,6 +50,11 @@ export default function Hero({
   const [ask, setAsk] = useState(null)
   // Bumped on each fill so the form re-mounts, reseeds, and replays its rings.
   const [askKey, setAskKey] = useState(0)
+  // True once a search has actually run on Scout's values. The "assumed, tap to
+  // change" tags are a prompt to correct something BEFORE searching; once the
+  // traveller has looked at them and searched anyway, they have served their
+  // purpose and keeping them on screen just nags.
+  const [searchRan, setSearchRan] = useState(false)
   const [originTouched, setOriginTouched] = useState(false)
   const isMobile = useMediaQuery('(max-width: 720px)')
 
@@ -61,6 +66,7 @@ export default function Hero({
     setAskError('')
     setAskOpen(false)
     setAsking(false)
+    setSearchRan(false) // a new reading brings its assumptions back with it
     setAskKey((k) => k + 1)
   }, [])
 
@@ -95,6 +101,7 @@ export default function Hero({
   const clearAsk = useCallback(() => {
     setAsk(null)
     setAskError('')
+    setSearchRan(false)
     setAskKey((k) => k + 1)
   }, [])
 
@@ -103,16 +110,33 @@ export default function Hero({
     setOrigin(value)
   }, [])
 
+  // Every search — from either composer — retires the assumption tags.
+  const runSearch = useCallback(
+    (fields) => {
+      setSearchRan(true)
+      onSearch(fields)
+    },
+    [onSearch],
+  )
+
   // The form's starting values: Scout's reading once it has filled the form,
   // otherwise whatever Home resolved from the URL (or the blank composer).
   const seed = ask ? ask.read.filters : defaults
   const askFilled = ask ? ask.read.filled : []
-  const askNotes = ask ? ask.read.fieldNotes : {}
-  // Origin sits outside the form, so its own disclosures resolve here.
-  const originTag = originTouched ? null : ask?.read.originTag || null
+  // The tags go once the search has run; the `.is-ai` rings on fields Scout read
+  // from the traveller's own words stay, since those are a record of what
+  // happened rather than a correction still waiting to be made.
+  const askNotes = ask && !searchRan ? ask.read.fieldNotes : {}
+  // Origin sits outside the form, so its own disclosures resolve here. Its
+  // "assumed · tap to change" tag retires with the field tags; "from your words"
+  // and "adjusted" do not — they describe what became of the value, and
+  // "adjusted" in particular is half of the origin-fallback disclosure.
+  const originAssumed = !!ask?.read.assumed.includes('origin')
+  const originTag =
+    originTouched || (searchRan && originAssumed) ? null : ask?.read.originTag || null
   // The accent ring goes on an origin Scout actually set or adjusted — not on
   // one the form defaulted to, which the tag calls "assumed" instead.
-  const originRing = !!originTag && !ask?.read.assumed.includes('origin')
+  const originRing = !!originTag && !originAssumed
 
   const summary = ask && !askOpen && (
     <AskSummary
@@ -138,7 +162,7 @@ export default function Hero({
           key={askKey}
           defaults={seed}
           pending={pending}
-          onSearch={onSearch}
+          onSearch={runSearch}
           askFilled={askFilled}
           askNotes={askNotes}
           askOpen={askOpen}
@@ -183,7 +207,7 @@ export default function Hero({
                   key={askKey}
                   defaults={seed}
                   pending={pending}
-                  onSearch={(fields) => onSearch({ ...fields, origin })}
+                  onSearch={(fields) => runSearch({ ...fields, origin })}
                   askFilled={askFilled}
                   askNotes={askNotes}
                 />
