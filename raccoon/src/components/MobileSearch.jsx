@@ -62,19 +62,18 @@ const SHEET_TITLES = {
 /**
  * A tappable value inside the sentence / eyebrow. Never wraps mid-pill.
  *
- * `assumed` marks a value the form filled itself after a Scout fill, and
- * `askset` one Scout read out of the traveller's own words — the sentence
- * layout has no room for a note beside each pill, so the pill carries the mark
- * and the note list below the sentence carries the words (see the notes row).
+ * `askset` marks a value Scout read out of the traveller's own words. A value
+ * the form filled itself carries no mark: the assumption notes that used to sit
+ * under the sentence were removed, so the composer discloses nothing per value.
  */
-function Pill({ id, label, open, onOpen, variant, buttonRef, assumed, askset }) {
+function Pill({ id, label, open, onOpen, variant, buttonRef, askset }) {
   return (
     <button
       type="button"
       ref={buttonRef}
       className={`rc-pill${variant ? ` rc-pill--${variant}` : ''}${open ? ' is-open' : ''}${
-        assumed ? ' is-assumed' : ''
-      }${askset ? ' is-askset' : ''}`}
+        askset ? ' is-askset' : ''
+      }`}
       aria-haspopup="dialog"
       aria-expanded={open}
       onClick={(e) => onOpen(id, e.currentTarget)}
@@ -167,7 +166,6 @@ export default function MobileSearch({
   pending,
   onSearch,
   askFilled = [],
-  askNotes = {},
   askOpen = false,
   asking = false,
   askQuery = '',
@@ -196,17 +194,11 @@ export default function MobileSearch({
   // The pill that opened the current sheet, so focus can return to it on close.
   const triggerRef = useRef(null)
   // Values the traveller has changed since Scout filled the sentence. Once a
-  // value is theirs, there is nothing left for the form to disclose about it.
+  // value is theirs, the ring marking it as Scout's has nothing left to say.
   const [touched, setTouched] = useState(() => new Set())
   const touch = (field) =>
     setTouched((prev) => (prev.has(field) ? prev : new Set(prev).add(field)))
-  const noteFor = (field) => (touched.has(field) ? null : askNotes[field] || null)
   const setByAsk = (field) => !touched.has(field) && askFilled.includes(field)
-  // The assumption notes, in sentence order. Each one is a button that opens the
-  // sheet for its own value, so the note IS the correction affordance.
-  const assumedNotes = ['origin', 'nights', 'month', 'stay', 'budget']
-    .map((field) => ({ field, text: noteFor(field) }))
-    .filter((n) => n.text)
 
   const openMonth = MONTH_OPTIONS.find((o) => o.value === month) || MONTH_OPTIONS[0]
   const selectedOrigin = ORIGINS.find((o) => o.value === origin) || ORIGINS[0]
@@ -282,7 +274,6 @@ export default function MobileSearch({
             label={selectedOrigin.city.toUpperCase()}
             open={openSheet === 'origin'}
             onOpen={open}
-            assumed={!!noteFor('origin')}
             askset={setByAsk('origin')}
           />
           <button type="button" className="rc-ask-entry rc-ask-entry--m" onClick={onAskOpen}>
@@ -301,7 +292,6 @@ export default function MobileSearch({
             label={nightsLabel}
             open={openSheet === 'nights'}
             onOpen={open}
-            assumed={!!noteFor('nights')}
             askset={setByAsk('nights')}
           />{' '}
           <span className="rc-msearch__static">in</span>{' '}
@@ -310,7 +300,6 @@ export default function MobileSearch({
             label={openMonth.name}
             open={openSheet === 'month'}
             onOpen={open}
-            assumed={!!noteFor('month')}
             askset={setByAsk('month')}
           />
           <span className="rc-msearch__static">, staying</span>{' '}
@@ -319,7 +308,6 @@ export default function MobileSearch({
             label={stayLabel}
             open={openSheet === 'stay'}
             onOpen={open}
-            assumed={!!noteFor('stay')}
             askset={setByAsk('stay')}
           />
           <span className="rc-msearch__static">, under</span>{' '}
@@ -328,27 +316,10 @@ export default function MobileSearch({
             label={money(budget)}
             open={openSheet === 'budget'}
             onOpen={open}
-            assumed={!!noteFor('budget')}
             askset={setByAsk('budget')}
           />
           <span className="rc-msearch__static">.</span>
         </p>
-
-        {assumedNotes.length > 0 && (
-          <ul className="rc-msearch__notes">
-            {assumedNotes.map((n) => (
-              <li key={n.field}>
-                <button
-                  type="button"
-                  className="rc-asknote rc-asknote--tap"
-                  onClick={(e) => open(n.field, e.currentTarget)}
-                >
-                  {n.text}
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
 
         <p className="rc-msearch__helper">
           Tap any raised word to change it — we remember what you pick.
