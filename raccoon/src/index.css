@@ -3176,6 +3176,18 @@ html[data-ambient='day'] .rc-eyebrow {
   .rc-field--stay {
     flex: 1.1;
   }
+  /* Scout's assumption tags are absolutely positioned 7px under their own field
+     (.rc-field__tag), which in this band is exactly where the wrapped submit
+     button now sits — the tag renders behind the amber CTA and is unreadable.
+     Give the button its own lane when tags are present. The widget's usual
+     bottom margin is not needed here: with the button wrapped inside the bar,
+     the tags are mid-widget rather than hanging off the bottom. */
+  .rc-search--tagged .rc-search__submit {
+    margin-top: 22px;
+  }
+  .rc-search--tagged {
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 720px) {
