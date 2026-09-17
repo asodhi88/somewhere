@@ -21,21 +21,82 @@ const monthTriggerLabel = (opt) => (opt ? `${opt.label} ${opt.group}` : '')
  * Origin lives in the OriginPicker control above the widget, not here — these
  * four fields are budget, nights, month and stay tier. Month and stay use the
  * shared Menu listbox (handoff §1) rather than native selects.
+ *
+ * Scout fills this form rather than searching on its own. Two props carry what
+ * it did, per field (Ask somewhere design 1c):
+ *   askFilled — fields taken from the traveller's own words. They carry the
+ *               design's `.is-ai` accent ring, so the change is visible where it
+ *               happened.
+ *   askNotes  — fields the form filled itself. Each gets `.is-assumed` plus the
+ *               design's `.rc-field__tag` underneath it ("Mid-range · assumed,
+ *               tap to change"). The tag sits under its own field, not in a
+ *               banner, because that is where the correction is made — and
+ *               because two tags at once is the normal case, not an edge case.
+ *               The tag is absolutely positioned and does not wrap, so a long
+ *               one overhangs its column rather than stretching the widget;
+ *               `.rc-search--tagged` adds the room it needs below.
+ * Editing a field retires both: once the value is the traveller's, the form has
+ * nothing left to disclose about it. Scout re-mounts this component on each fill
+ * (Hero keys it), so that state resets with the new values.
  */
-export default function SearchBar({ defaults, pending, onSearch }) {
+export default function SearchBar({
+  defaults,
+  pending,
+  onSearch,
+  askFilled = [],
+  askNotes = {},
+}) {
   const [budget, setBudget] = useState(defaults.budget)
   const [nights, setNights] = useState(defaults.nights)
   const [month, setMonth] = useState(defaults.month)
   const [stay, setStay] = useState(defaults.stay)
+  // Fields the traveller has touched since Scout filled the form.
+  const [touched, setTouched] = useState(() => new Set())
 
   const budgetText = budget == null ? '' : budget.toLocaleString('en-US')
 
+  const touch = (field) =>
+    setTouched((prev) => (prev.has(field) ? prev : new Set(prev).add(field)))
+
+  const noteFor = (field) => (touched.has(field) ? null : askNotes[field] || null)
+  const setByAsk = (field) => !touched.has(field) && askFilled.includes(field)
+
+  // `mod` is the existing CSS modifier, which is not always the field name — the
+  // month field has been `.rc-field--when` since the Trip Search Bar handoff.
+  const fieldClass = (field, filled, mod = field) =>
+    `rc-field rc-field--${mod}${filled ? ' is-filled' : ''}${
+      setByAsk(field) ? ' is-ai' : ''
+    }${noteFor(field) ? ' is-assumed' : ''}`
+
+  /** The tag under one field, or nothing at all when there is none. */
+  const tag = (field) => {
+    const text = noteFor(field)
+    if (!text) return null
+    return (
+      <span className="rc-field__tag">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+          <path d="M12 4v16M4 12h16" strokeLinecap="round" opacity="0" />
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 8.2v4.4" strokeLinecap="round" />
+          <circle cx="12" cy="16" r="0.6" fill="currentColor" stroke="none" />
+        </svg>
+        {text}
+      </span>
+    )
+  }
+
+  // Any tag present? They are absolutely positioned under the widget, so the
+  // form reserves the space rather than growing a row.
+  const hasTags = ['budget', 'nights', 'month', 'stay'].some((f) => noteFor(f))
+
   const onBudgetChange = (e) => {
+    touch('budget')
     const digits = e.target.value.replace(/[^0-9]/g, '')
     setBudget(digits === '' ? null : Math.min(100000, Number(digits)))
   }
 
   const onNightsChange = (e) => {
+    touch('nights')
     const digits = e.target.value.replace(/[^0-9]/g, '')
     if (digits === '') return setNights('')
     setNights(Math.min(30, Number(digits)))
@@ -62,11 +123,12 @@ export default function SearchBar({ defaults, pending, onSearch }) {
   }
 
   return (
-    <form className="rc-search" onSubmit={submit}>
+    <form className={`rc-search${hasTags ? ' rc-search--tagged' : ''}`} onSubmit={submit}>
       {/* Amber accent light tracing the border — the idle-state affordance.
           data-motion stills it under prefers-reduced-motion. */}
       <span className="rc-search__trace" data-motion="1" aria-hidden="true" />
-      <label className={`rc-field rc-field--budget${budget != null ? ' is-filled' : ''}`}>
+
+      <label className={fieldClass('budget', budget != null)}>
         <span className="rc-field__label">Budget</span>
         <div className="rc-field__control">
           <span className="rc-field__prefix">$</span>
@@ -78,9 +140,10 @@ export default function SearchBar({ defaults, pending, onSearch }) {
             onChange={onBudgetChange}
           />
         </div>
+        {tag('budget')}
       </label>
 
-      <label className={`rc-field rc-field--nights${nights !== '' ? ' is-filled' : ''}`}>
+      <label className={fieldClass('nights', nights !== '')}>
         <span className="rc-field__label">Nights</span>
         <div className="rc-field__control">
           <input
@@ -90,35 +153,44 @@ export default function SearchBar({ defaults, pending, onSearch }) {
             onChange={onNightsChange}
           />
         </div>
+        {tag('nights')}
       </label>
 
-      <div className={`rc-field rc-field--when${month ? ' is-filled' : ''}`}>
+      <div className={fieldClass('month', !!month, 'when')}>
         <span className="rc-field__label">When</span>
         <div className="rc-field__control">
           <Menu
             variant="field"
             ariaLabel="Travel month"
             value={month}
-            onChange={setMonth}
+            onChange={(v) => {
+              touch('month')
+              setMonth(v)
+            }}
             options={MONTH_MENU}
             formatValue={monthTriggerLabel}
             scrollable
           />
         </div>
+        {tag('month')}
       </div>
 
-      <div className={`rc-field rc-field--stay${stay ? ' is-filled' : ''}`}>
+      <div className={fieldClass('stay', !!stay)}>
         <span className="rc-field__label">Stay</span>
         <div className="rc-field__control">
           <Menu
             variant="field"
             ariaLabel="Stay tier"
             value={stay}
-            onChange={setStay}
+            onChange={(v) => {
+              touch('stay')
+              setStay(v)
+            }}
             options={STAY_OPTIONS}
             placeholder=""
           />
         </div>
+        {tag('stay')}
       </div>
 
       <button type="submit" className="rc-search__submit" disabled={pending}>

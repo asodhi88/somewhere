@@ -826,6 +826,523 @@ a:hover {
   cursor: default;
 }
 
+/* ── Scout — "Ask somewhere" (design 1c / 1d) ────────────────────────────────
+   Values lifted from the Ask somewhere design doc. Colours route through the
+   app's own tokens rather than the doc's locked sea glass, so Scout rides the
+   per-load accent and both ambients — which is what 1c and 1d are: one flow
+   under the night and day themes.
+
+   Scout never looks louder than the search itself. Its entry is an outline
+   button; the one accent-filled button it owns ("read my trip") only exists
+   while the panel is open, and the panel replaces the form, so there is never
+   more than one loud button in the band.
+   ------------------------------------------------------------------------- */
+
+/* Entry — quiet, at the end of the "Leaving from" row. */
+.rc-ask-entry {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--ink, var(--text));
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.rc-ask-entry svg {
+  color: var(--accent-text);
+}
+.rc-ask-entry:hover {
+  border-color: var(--accent-ring);
+  background: var(--glass-sunken, var(--surface-sunken));
+}
+.rc-ask-entry.is-active {
+  background: linear-gradient(180deg, var(--ac-hi), var(--ac) 60%, var(--ac-lo));
+  color: var(--on-amber);
+  border-color: transparent;
+  box-shadow: 0 8px 18px -8px rgba(var(--ac-rgb), 0.5);
+}
+.rc-ask-entry.is-active svg {
+  color: var(--on-amber);
+}
+
+/* The widget shell holds either the form or the panel — never both visible. The
+   form stays MOUNTED while the panel is open so a half-typed budget survives. */
+.rc-ask-host {
+  position: relative;
+}
+.rc-ask-host__form.is-hidden {
+  display: none;
+}
+
+/* Panel — the field grid's place, same shell. */
+.rc-search--ask {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  padding: 16px;
+}
+.rc-ask-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.rc-ask-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--ink, var(--text));
+}
+.rc-ask-title svg {
+  color: var(--accent-text);
+}
+.rc-ask-close {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--ink-muted, var(--muted));
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.rc-ask-close:hover {
+  color: var(--ink, var(--text));
+  border-color: var(--accent-ring);
+}
+.rc-ask-inputwrap {
+  position: relative;
+}
+.rc-ask-input {
+  display: block;
+  width: 100%;
+  min-height: 74px;
+  padding: 15px 17px;
+  border-radius: 15px;
+  background: var(--form-field-strong, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--field-val, var(--text));
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+  outline: none;
+  resize: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.rc-ask-input:focus {
+  border-color: var(--accent-ring);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.rc-ask-input::placeholder {
+  color: var(--ink-faint, var(--muted));
+  opacity: 0.85;
+}
+.rc-ask-count {
+  position: absolute;
+  right: 13px;
+  bottom: 10px;
+  font-size: 11px;
+  color: var(--ink-faint, var(--muted));
+  pointer-events: none;
+}
+
+.rc-ask-chipsrow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rc-ask-chipslab {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint, var(--muted));
+}
+.rc-ask-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.rc-ask-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--ink-muted, var(--muted));
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+.rc-ask-chip:hover {
+  border-color: var(--accent-ring);
+  color: var(--ink, var(--text));
+}
+.rc-ask-chip.is-dim {
+  opacity: 0.4;
+}
+.rc-ask-chip.is-hot {
+  border-color: var(--accent-ring);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+.rc-ask-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 2px;
+}
+.rc-ask-foot--end {
+  justify-content: flex-end;
+}
+.rc-ask-go {
+  height: auto;
+  padding: 10px 16px;
+  font-size: 13px;
+  border-radius: 12px;
+}
+.rc-search__submit.is-dim {
+  opacity: 0.5;
+}
+
+/* Loading — the query stays visible under a calm sweep. */
+.rc-ask-prog {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  overflow: hidden;
+  position: relative;
+}
+.rc-ask-prog::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 38%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--ac-rgb), 0),
+    var(--ac-hi),
+    rgba(var(--ac-rgb), 0)
+  );
+  animation: rc-ask-sweep 1.25s ease-in-out infinite;
+}
+@keyframes rc-ask-sweep {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 102%;
+  }
+}
+.rc-ask-loadrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ink-muted, var(--muted));
+}
+
+/* "Read as" — the traveller's own sentence, kept visible above the filled form
+   and doubling as the way back into the panel. */
+.rc-ask-summary {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-ring);
+  transition: border-color 0.15s ease;
+}
+.rc-ask-summary:hover {
+  border-color: var(--ac);
+}
+.rc-ask-summary__open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px 12px 14px;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+.rc-ask-summary__ic {
+  color: var(--accent-text);
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+.rc-ask-summary__body {
+  min-width: 0;
+  flex: 1;
+}
+.rc-ask-summary__k {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+.rc-ask-summary__q {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--ink, var(--text));
+  text-wrap: pretty;
+}
+.rc-ask-summary__edit {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.9;
+  color: var(--accent-text);
+}
+.rc-ask-summary__x {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  align-self: center;
+  margin-right: 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--ink-muted, var(--muted));
+  font-size: 14px;
+  cursor: pointer;
+}
+.rc-ask-summary__x:hover {
+  color: var(--ink, var(--text));
+  border-color: var(--accent-ring);
+}
+
+/* Struck-through words inside the sentence. Only ever words the model itself
+   quoted — see annotateQuery in src/lib/askNotes.js for why nothing is
+   positively highlighted. */
+.rc-tok--dead {
+  border-radius: 6px;
+  padding: 2px 6px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  box-shadow: inset 0 0 0 1px var(--glass-border, var(--border));
+  color: var(--ink-faint, var(--muted));
+  text-decoration: line-through;
+  text-decoration-color: var(--ink-faint, var(--muted));
+  font-weight: 500;
+  white-space: nowrap;
+}
+.rc-toklab {
+  margin-left: 5px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: var(--ink-faint, var(--muted));
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Banner — prominent. Both of these change what the numbers mean: a departure
+   city we cannot price, and a party priced as one traveller. */
+.rc-ask-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-ring);
+  color: var(--ink, var(--text));
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+.rc-ask-banner svg {
+  color: var(--accent-text);
+  flex: none;
+  margin-top: 1px;
+}
+.rc-ask-banner strong {
+  font-weight: 700;
+}
+
+/* Note — quiet. Everything the form has no input for, as one sentence. */
+.rc-ask-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--glass-sunken, var(--surface-sunken));
+  border: 1px solid var(--glass-border, var(--border));
+  color: var(--ink-muted, var(--muted));
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+  text-wrap: pretty;
+}
+.rc-ask-note svg {
+  color: var(--ink-faint, var(--muted));
+  flex: none;
+}
+.rc-ask-note strong {
+  color: var(--ink, var(--text));
+  font-weight: 600;
+}
+.rc-ask-note--fail {
+  gap: 12px;
+  justify-content: space-between;
+}
+.rc-ask-note__body {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.rc-ask-note__retry {
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Field states after a reading. `.is-ai` marks a value taken from the
+   traveller's own words; `.is-assumed` marks one the form filled itself, and
+   never appears without the tag that says so. */
+.rc-field.is-ai,
+.rc-field.is-assumed,
+.rc-originbar--adj .rc-menu__trigger--origin {
+  border-color: var(--accent-ring);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+/* Absolutely positioned and non-wrapping: a long tag overhangs its column
+   rather than stretching the field or the widget. */
+.rc-field__tag {
+  position: absolute;
+  left: 2px;
+  top: calc(100% + 7px);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent-text);
+}
+.rc-field__tag svg {
+  flex: none;
+}
+/* Room for the tags, which sit outside the widget's own box. */
+.rc-search--tagged {
+  margin-bottom: 22px;
+}
+.rc-orig-tag {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent-text);
+}
+
+/* ── Phone ───────────────────────────────────────────────────────────────── */
+/* The design doc covers desktop only — its own footer lists "mobile version of
+   1c" as the next thing to draw. The phone therefore keeps the sentence
+   composer and borrows 1c's behaviour, not its layout. */
+.rc-msearch--ask {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.rc-ask-entry--m {
+  margin-left: 0;
+  padding: 7px 12px;
+  font-size: 12px;
+}
+/* Sentence pills carry the same two marks the desktop fields do: a ring for a
+   value read from the traveller's words, a dashed rule for one the form filled
+   (which always has a tappable note under the sentence saying so). */
+.rc-pill.is-askset {
+  box-shadow: var(--nm-raise), 0 0 0 2px var(--accent-ring);
+}
+.rc-pill.is-assumed {
+  border-bottom: 1px dashed var(--nm-dim);
+}
+@media (max-width: 720px) {
+  .rc-ask-chips {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rc-ask-chip {
+    text-align: left;
+  }
+  .rc-msearch__main .rc-ask-summary,
+  .rc-msearch__main .rc-ask-banner,
+  .rc-msearch__main .rc-ask-note {
+    margin-bottom: 12px;
+  }
+}
+
 /* ── Results ────────────────────────────────────────────────────────────── */
 #results {
   scroll-margin-top: 16px;
@@ -2337,6 +2854,11 @@ html[data-ambient='day'] .rc-blind__fade {
     transition: none !important;
   }
   .rc-lightbox {
+    animation: none !important;
+  }
+  /* Scout: the loading sweep is decoration. The field rings are static, so
+     they survive — they carry meaning the tags also state in words. */
+  .rc-ask-prog::after {
     animation: none !important;
   }
   /* Blind appears/disappears without the glide (blur still applies — it isn't
