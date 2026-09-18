@@ -8,11 +8,13 @@
  * The rules this module encodes:
  *   - Scout reads, fills and discloses. Nothing here says it found, picked,
  *     priced, recommended or chose anything, because it does none of those.
- *   - Assumptions are NOT disclosed. Fields the form filled itself once carried
- *     an "assumed, tap to change" note, and the origin row its own version; both
- *     were removed. `assumed` survives as the inverse of `filled`, which is what
- *     marks the fields Scout really did read, and as the reason `originTag` can
- *     be null. Nothing here turns it into copy.
+ *   - The form does not narrate itself. It once tagged every field Scout
+ *     touched — "assumed, tap to change" where it filled a default, "from your
+ *     words" on the origin row where it hadn't. All of it is gone. A disclosure
+ *     has to earn its space by telling the traveller something that changes what
+ *     the numbers mean; neither of those did. `assumed` survives only as the
+ *     inverse of `filled`, which marks the fields Scout really did read. What
+ *     passes that test is the next two rules.
  *   - `unused` renders as a SENTENCE, not chips. The model's wording varies
  *     between identical queries, so chips would look unstable; a sentence reads
  *     as prose that happens to quote them.
@@ -203,24 +205,20 @@ export function annotateQuery(query, parse) {
 
 /**
  * What the "Leaving from" row says about its own value after a fill — the
- * design's `.rc-orig-tag`. Null when Scout has nothing to say about it.
+ * design's `.rc-orig-tag`. There is exactly one thing left worth saying, so this
+ * is null in every other case.
  *
- * An origin the form defaulted to says NOTHING: the "assumed · tap to change"
- * disclosures were removed from the whole form, origin included. Note that this
- * must return null rather than fall through — "from your words" would be a lie
- * about a city the traveller never named.
+ * The row used to narrate every outcome: "assumed · tap to change" for an origin
+ * the form defaulted to, "from your words" for one the traveller named. Both are
+ * gone. Neither earned the space — one disclosed a default nobody asked about,
+ * the other told the traveller something they already knew, having just typed it.
  *
- * The two tags that remain describe what became of a value the traveller DID
- * give, so they are a record rather than a correction waiting to be made:
- * "adjusted" when the city they named isn't one we fly from (half of the
- * origin-fallback disclosure), and "from your words" when it is.
+ * "adjusted" stays because it is not narration: it is half of the origin-fallback
+ * disclosure, the visible half. It fires only when the traveller named a
+ * departure city we don't fly from, and the numbers on screen are therefore
+ * priced from somewhere else. `originFallbackNote()` carries the other half.
  */
-export function originTag(parse) {
-  if (!parse) return null
-  if (parse.originFallback) return 'adjusted'
-  if ((parse.assumed || []).includes('origin')) return null
-  return 'from your words'
-}
+export const originTag = (parse) => (parse?.originFallback ? 'adjusted' : null)
 
 // ── parse → form ───────────────────────────────────────────────────────────
 

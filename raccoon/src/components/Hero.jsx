@@ -110,18 +110,17 @@ export default function Hero({
   // otherwise whatever Home resolved from the URL (or the blank composer).
   const seed = ask ? ask.read.filters : defaults
   const askFilled = ask ? ask.read.filled : []
-  // Nothing the form filled itself is disclosed any more — not per field, and
-  // not on the origin row. The `.is-ai` rings on fields Scout read from the
-  // traveller's own words stay: those are a record of what happened.
+  // The form no longer narrates what Scout did to any single value. The `.is-ai`
+  // rings on fields it read from the traveller's own words stay — those mark
+  // where a value came from without spending a line of copy on it.
   //
-  // Origin sits outside the form, so its disclosure resolves here. `originTag`
-  // is null for an origin the form defaulted to, so the only tags left are
-  // "from your words" and "adjusted" — both records of a city the traveller
-  // actually named, so neither retires on search. Editing the origin clears it:
-  // once the value is theirs, the tag no longer describes it.
+  // Origin sits outside the form, so its one surviving disclosure resolves here:
+  // `originTag` is "adjusted" for a departure city we don't fly from, and null
+  // otherwise. Editing the origin clears it, since the tag then describes a
+  // value the traveller has replaced.
   const originTag = originTouched ? null : ask?.read.originTag || null
-  // The accent ring tracks the tag exactly: a tag now only ever marks an origin
-  // Scout really set or adjusted.
+  // The ring follows the tag, which means it now fires only on an adjusted
+  // origin — finally matching the name of the class it sets (`--adj`).
   const originRing = !!originTag
 
   const summary = ask && !askOpen && (
