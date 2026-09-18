@@ -290,8 +290,23 @@ describe('originTag', () => {
     expect(originTag(parse({ originFallback: 'Vancouver' }))).toBe('adjusted')
   })
 
-  it('says it was assumed — and how to change it — when the query never said', () => {
-    expect(originTag(parse({ assumed: ['origin'] }))).toBe('assumed · tap to change')
+  it('says nothing at all when the query never named a departure city', () => {
+    // The "assumed · tap to change" tag was removed with the per-field ones.
+    expect(originTag(parse({ assumed: ['origin'] }))).toBeNull()
+  })
+
+  it('never credits the traveller for an origin they did not name', () => {
+    // The trap in returning null above: falling through to "from your words"
+    // would claim they said Toronto when the form defaulted to it.
+    expect(originTag(parse({ assumed: ['origin'] }))).not.toBe('from your words')
+  })
+
+  it('still says "adjusted" for an unsupported city, even unnamed elsewhere', () => {
+    // The fallback outranks the assumed check — "adjusted" is half of the
+    // origin-fallback disclosure and must survive it.
+    expect(originTag(parse({ originFallback: 'Vancouver', assumed: ['origin'] }))).toBe(
+      'adjusted',
+    )
   })
 
   it('credits the traveller when it came from their own words', () => {
@@ -314,7 +329,7 @@ describe('copy honesty', () => {
       fallback.rest,
       unusedSentence(['nightlife', 'Lisbon']),
       ...ASK_FIELDS.map((f) => assumptionNote(f, parse())),
-      ...['from your words', 'adjusted', 'assumed · tap to change'],
+      ...['from your words', 'adjusted'],
     ]
     for (const s of strings) expect(s, s).not.toMatch(FORBIDDEN)
   })

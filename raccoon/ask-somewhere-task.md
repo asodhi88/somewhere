@@ -108,7 +108,7 @@ in (tap to edit, ✕ to clear).
 - Query box with placeholder, positioned alongside the existing form
 - Curated example searches shown when the box is empty
 - Form prefill with a brief highlight on AI-set fields
-- ~~Inline assumption notes on individual fields (e.g. "7 nights · assumed, tap to change") rather than a banner, so the note sits where the correction happens~~ — **shipped, then removed.** See "Assumed fields are no longer disclosed per field" below. The `assumed` array is still derived; the search bar just doesn't render it.
+- ~~Inline assumption notes on individual fields (e.g. "7 nights · assumed, tap to change") rather than a banner, so the note sits where the correction happens~~ — **shipped, then removed**, along with the origin row's own assumed tag. See "Assumed fields are no longer disclosed" below. The `assumed` array is still derived; the form just doesn't render it anywhere.
 - Origin fallback note — prominent, since a traveler from an unsupported city faces materially different real costs
 - "Couldn't use" note listing unrankable fragments
 - Failure note; form stays usable
@@ -165,10 +165,11 @@ origin-fallback prominence. Mobile was never drawn — the design doc lists
 "mobile version of 1c" as its own next step — so the phone keeps the sentence
 composer and borrows 1c's behaviour, not its layout.
 
-### Assumed fields are no longer disclosed per field
+### Assumed fields are no longer disclosed
 
-The per-field assumption notes shipped and were **subsequently removed**. The
-search bar now says nothing about a value the form filled itself.
+The assumption disclosures shipped and were **subsequently removed** — first the
+per-field notes, then the origin row's tag. Nothing in the form now says anything
+about a value the form filled itself.
 
 **What the build does:**
 
@@ -181,10 +182,17 @@ search bar now says nothing about a value the form filled itself.
 - What Scout **read from the traveller's own words** is still marked: the
   `.is-ai` accent ring on desktop fields, `.rc-pill.is-askset` on mobile pills.
   Editing a field still retires its ring.
-- The **origin** row is the one exception and still carries
-  "assumed · tap to change" (`.rc-orig-tag`, from `originTag()`). It sits outside
-  the form, and the same tag also carries "adjusted", which is half the
-  origin-fallback disclosure. It still retires once a search has run.
+- The **origin** row discloses nothing either. `originTag()` returns null for an
+  origin the form defaulted to, so the "Leaving from" slot is simply empty in
+  that case — the "Read as" card above is still the way back in.
+  - It returns `null` rather than falling through to "from your words", which
+    would claim the traveller named a city they never named. Two tests pin this.
+  - The two tags that remain are records of a city the traveller **did** give:
+    "from your words", and "adjusted" when it isn't one we fly from (half the
+    origin-fallback disclosure, so it outranks the assumed check). Neither
+    retires on search — only editing the origin clears them.
+  - With nothing left to retire, Hero's `searchRan` state is gone, and with it
+    the `runSearch` wrapper; both composers call `onSearch` directly.
 
 **Backend untouched.** `/api/ask` still returns `assumed[]` and the normaliser
 still derives it from the model's nulls (`api/_lib/askSchema.js`). This was a
