@@ -231,13 +231,22 @@ export function annotateQuery(query, parse) {
 
 /**
  * What the "Leaving from" row says about its own value after a fill — the
- * design's `.rc-orig-tag`. Null when Scout has nothing to say about it, in which
- * case the row shows the "ask Scout" entry button instead.
+ * design's `.rc-orig-tag`. Null when Scout has nothing to say about it.
+ *
+ * An origin the form defaulted to says NOTHING: the "assumed · tap to change"
+ * disclosures were removed from the whole form, origin included. Note that this
+ * must return null rather than fall through — "from your words" would be a lie
+ * about a city the traveller never named.
+ *
+ * The two tags that remain describe what became of a value the traveller DID
+ * give, so they are a record rather than a correction waiting to be made:
+ * "adjusted" when the city they named isn't one we fly from (half of the
+ * origin-fallback disclosure), and "from your words" when it is.
  */
 export function originTag(parse) {
   if (!parse) return null
   if (parse.originFallback) return 'adjusted'
-  if ((parse.assumed || []).includes('origin')) return 'assumed · tap to change'
+  if ((parse.assumed || []).includes('origin')) return null
   return 'from your words'
 }
 

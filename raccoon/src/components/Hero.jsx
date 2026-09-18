@@ -30,8 +30,8 @@ import heroImg from '../assets/hero-mural.webp'
  * an alternate search. Hero owns the whole flow because the pieces outlive each
  * other: the panel opens in the widget's own shell and closes again, while the
  * "Read as" card and the banners stay above the form it filled. Nothing here
- * ranks or prices — the traveller still presses the same
- * amber button, and that button is still the loudest thing in the band.
+ * ranks or prices — the traveller still presses the same amber button, and that
+ * button is still the loudest thing in the band.
  */
 export default function Hero({
   defaults,
@@ -50,11 +50,6 @@ export default function Hero({
   const [ask, setAsk] = useState(null)
   // Bumped on each fill so the form re-mounts, reseeds, and replays its rings.
   const [askKey, setAskKey] = useState(0)
-  // True once a search has actually run on Scout's values. The origin's
-  // "assumed · tap to change" tag is a prompt to correct something BEFORE
-  // searching; once the traveller has looked at it and searched anyway, it has
-  // served its purpose and keeping it on screen just nags.
-  const [searchRan, setSearchRan] = useState(false)
   const [originTouched, setOriginTouched] = useState(false)
   const isMobile = useMediaQuery('(max-width: 720px)')
 
@@ -69,7 +64,6 @@ export default function Hero({
     setAskError('')
     setAskOpen(false)
     setAsking(false)
-    setSearchRan(false) // a new reading brings its assumptions back with it
     setAskKey((k) => k + 1)
   }, [])
 
@@ -104,7 +98,6 @@ export default function Hero({
   const clearAsk = useCallback(() => {
     setAsk(null)
     setAskError('')
-    setSearchRan(false)
     setAskKey((k) => k + 1)
   }, [])
 
@@ -113,34 +106,23 @@ export default function Hero({
     setOrigin(value)
   }, [])
 
-  // Every search — from either composer — retires the origin's assumed tag.
-  const runSearch = useCallback(
-    (fields) => {
-      setSearchRan(true)
-      onSearch(fields)
-    },
-    [onSearch],
-  )
-
   // The form's starting values: Scout's reading once it has filled the form,
   // otherwise whatever Home resolved from the URL (or the blank composer).
   const seed = ask ? ask.read.filters : defaults
   const askFilled = ask ? ask.read.filled : []
-  // Fields the form filled itself are no longer disclosed per field — the
-  // per-field "assumed, tap to change" notes are gone (and with them
-  // `read.fieldNotes`). The `.is-ai` rings on fields Scout read from the
+  // Nothing the form filled itself is disclosed any more — not per field, and
+  // not on the origin row. The `.is-ai` rings on fields Scout read from the
   // traveller's own words stay: those are a record of what happened.
   //
-  // Origin sits outside the form, so its own disclosures resolve here. Its
-  // "assumed · tap to change" tag retires once a search has run; "from your
-  // words" and "adjusted" do not — they describe what became of the value, and
-  // "adjusted" in particular is half of the origin-fallback disclosure.
-  const originAssumed = !!ask?.read.assumed.includes('origin')
-  const originTag =
-    originTouched || (searchRan && originAssumed) ? null : ask?.read.originTag || null
-  // The accent ring goes on an origin Scout actually set or adjusted — not on
-  // one the form defaulted to, which the tag calls "assumed" instead.
-  const originRing = !!originTag && !originAssumed
+  // Origin sits outside the form, so its disclosure resolves here. `originTag`
+  // is null for an origin the form defaulted to, so the only tags left are
+  // "from your words" and "adjusted" — both records of a city the traveller
+  // actually named, so neither retires on search. Editing the origin clears it:
+  // once the value is theirs, the tag no longer describes it.
+  const originTag = originTouched ? null : ask?.read.originTag || null
+  // The accent ring tracks the tag exactly: a tag now only ever marks an origin
+  // Scout really set or adjusted.
+  const originRing = !!originTag
 
   const summary = ask && !askOpen && (
     <AskSummary
@@ -166,7 +148,7 @@ export default function Hero({
           key={askKey}
           defaults={seed}
           pending={pending}
-          onSearch={runSearch}
+          onSearch={onSearch}
           askFilled={askFilled}
           askOpen={askOpen}
           asking={asking}
@@ -210,7 +192,7 @@ export default function Hero({
                   key={askKey}
                   defaults={seed}
                   pending={pending}
-                  onSearch={(fields) => runSearch({ ...fields, origin })}
+                  onSearch={(fields) => onSearch({ ...fields, origin })}
                   askFilled={askFilled}
                 />
               </div>

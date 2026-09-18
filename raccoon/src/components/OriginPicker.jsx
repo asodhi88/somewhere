@@ -19,10 +19,13 @@ const HAS_COMING_SOON = ORIGIN_OPTIONS.some((o) => !o.available)
  *
  * The row's right-hand slot is Scout's (Ask somewhere design 1c). It holds
  * either the quiet "ask Scout" entry button, or — once a reading exists — a tag
- * saying what Scout did to this value: "from your words", "adjusted" when the
- * departure city they named isn't one we fly from, or "assumed · tap to change"
- * when the query never said. Origin has no field of its own to hang a note
- * under, so the tag is where its disclosure lives.
+ * saying what Scout did to this value: "from your words", or "adjusted" when the
+ * departure city they named isn't one we fly from.
+ *
+ * An origin the form defaulted to gets NO tag. It used to read "assumed · tap to
+ * change"; that disclosure was removed along with the per-field ones, so the
+ * slot is simply empty in that case (the "Read as" card above is still the way
+ * back in). Hero resolves which of the two it is — see `originTag()`.
  */
 export default function OriginPicker({
   value,
