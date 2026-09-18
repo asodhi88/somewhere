@@ -4,7 +4,6 @@ import {
   annotateQuery,
   originTag,
   PARTY_NOTE,
-  assumptionNote,
   filledFields,
   isParse,
   looksLikeParty,
@@ -30,28 +29,6 @@ const parse = (over = {}) => ({
   unused: [],
   originFallback: null,
   ...over,
-})
-
-describe('assumptionNote', () => {
-  it('names the value as the form shows it, not the stored value', () => {
-    // The form stores `mid` and labels it "Mid-range"; a note that said "mid"
-    // would not match the control it sits under.
-    expect(assumptionNote('stay', parse())).toBe('Mid-range · assumed, tap to change')
-  })
-
-  it('reads origin as a city, not an airport code', () => {
-    expect(assumptionNote('origin', parse())).toBe('Toronto · assumed, tap to change')
-  })
-
-  it('singularises one night', () => {
-    expect(assumptionNote('nights', parse({ nights: 1 }))).toMatch(/^1 night · /)
-    expect(assumptionNote('nights', parse({ nights: 3 }))).toMatch(/^3 nights · /)
-  })
-
-  it('formats budget with a thousands separator, and no limit as words', () => {
-    expect(assumptionNote('budget', parse({ budget: 2000 }))).toMatch(/^\$2,000 · /)
-    expect(assumptionNote('budget', parse({ budget: null }))).toMatch(/^No limit · /)
-  })
 })
 
 describe('filledFields', () => {
@@ -227,7 +204,9 @@ describe('the curated examples', () => {
     }
   })
 
-  it('all carry at least one assumption, so two notes is the normal layout', () => {
+  it('all carry at least one assumption, so `filled` is never the whole form', () => {
+    // Nothing renders this any more, but it is still what keeps the `.is-ai`
+    // rings meaningful: a ring on every field would say nothing.
     for (const ex of ASK_EXAMPLES) {
       expect(readParse(resolveExample(ex)).assumed.length, ex.query).toBeGreaterThan(0)
     }
@@ -328,9 +307,26 @@ describe('copy honesty', () => {
       fallback.lead,
       fallback.rest,
       unusedSentence(['nightlife', 'Lisbon']),
-      ...ASK_FIELDS.map((f) => assumptionNote(f, parse())),
       ...['from your words', 'adjusted'],
     ]
     for (const s of strings) expect(s, s).not.toMatch(FORBIDDEN)
+  })
+
+  it('discloses no assumption anywhere, on any field or on the origin row', () => {
+    // The guard against the removed notes creeping back. Every string a reading
+    // can produce is checked, for a parse where the form filled EVERY field.
+    const read = readParse(parse({ assumed: [...ASK_FIELDS] }))
+    const strings = [
+      read.originTag,
+      read.notes.unused,
+      read.notes.origin?.lead,
+      read.notes.origin?.rest,
+      read.notes.party?.lead,
+      read.notes.party?.rest,
+    ].filter(Boolean)
+    for (const s of strings) expect(s, s).not.toMatch(/assumed/i)
+    // …and the reading carries no per-field copy to render in the first place.
+    expect(read.fieldNotes).toBeUndefined()
+    expect(read.originTag).toBeNull()
   })
 })
