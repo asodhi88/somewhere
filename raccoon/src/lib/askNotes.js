@@ -8,8 +8,11 @@
  * The rules this module encodes:
  *   - Scout reads, fills and discloses. Nothing here says it found, picked,
  *     priced, recommended or chose anything, because it does none of those.
- *   - Every assumption gets a note ON its own field, where the correction is
- *     made — never rolled up into one banner.
+ *   - Assumptions are NOT disclosed. Fields the form filled itself once carried
+ *     an "assumed, tap to change" note, and the origin row its own version; both
+ *     were removed. `assumed` survives as the inverse of `filled`, which is what
+ *     marks the fields Scout really did read, and as the reason `originTag` can
+ *     be null. Nothing here turns it into copy.
  *   - `unused` renders as a SENTENCE, not chips. The model's wording varies
  *     between identical queries, so chips would look unstable; a sentence reads
  *     as prose that happens to quote them.
@@ -32,37 +35,6 @@ export const ASK_FIELDS = ['origin', 'month', 'nights', 'budget', 'stay']
 const originCity = (code) =>
   ORIGIN_OPTIONS.find((o) => o.code === String(code || '').toUpperCase())?.city ||
   String(code || '')
-
-const money = (n) => '$' + Number(n).toLocaleString('en-US')
-
-/**
- * How a filled field reads in its own note — the value as the form shows it, so
- * the note and the control never disagree ("Mid-range", not "mid").
- */
-export function fieldValueLabel(field, parse) {
-  switch (field) {
-    case 'origin':
-      return originCity(parse.origin)
-    case 'month':
-      return MONTH_OPTIONS.find((m) => m.value === parse.month)?.label || parse.month
-    case 'nights':
-      return `${parse.nights} night${Number(parse.nights) === 1 ? '' : 's'}`
-    case 'budget':
-      return parse.budget == null ? 'No limit' : money(parse.budget)
-    case 'stay':
-      return STAY_OPTIONS.find((s) => s.value === parse.stay)?.label || parse.stay
-    default:
-      return ''
-  }
-}
-
-/**
- * The inline note for one assumed field, e.g. "Mid-range · assumed, tap to change".
- * It names the value the form filled, not the field — the field name is already
- * on the control the note sits under.
- */
-export const assumptionNote = (field, parse) =>
-  `${fieldValueLabel(field, parse)} · assumed, tap to change`
 
 /** Which fields came from the traveller's own words (everything not assumed). */
 export const filledFields = (parse) =>
@@ -288,7 +260,7 @@ export function parseToFilters(parse) {
  * @param {string} [query] the traveller's own sentence, so a party the model
  *        failed to report in `unused` is still disclosed
  * @returns {{filters: Object, assumed: string[], filled: string[],
- *            fieldNotes: Object, originTag: ?string, notes: Object}}
+ *            originTag: ?string, notes: Object}}
  */
 export function readParse(parse, query = '') {
   const { party, rest } = splitParty(parse.unused)
@@ -299,11 +271,9 @@ export function readParse(parse, query = '') {
     filters: parseToFilters(parse),
     assumed,
     filled: filledFields(parse),
-    // field name → the inline note that field carries, for the form to place
-    // under its own control.
-    fieldNotes: Object.fromEntries(assumed.map((f) => [f, assumptionNote(f, parse)])),
     // Origin is not one of the form's fields (it lives in the "Leaving from"
-    // row), so it carries its own tag rather than a field note.
+    // row), so it carries its own tag. Null unless the traveller named a city —
+    // nothing discloses an assumed value any more.
     originTag: originTag(parse),
     notes: {
       origin: originFallbackNote(parse),
