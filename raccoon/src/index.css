@@ -1265,36 +1265,14 @@ a:hover {
 }
 
 /* Field states after a reading. `.is-ai` marks a value taken from the
-   traveller's own words; `.is-assumed` marks one the form filled itself, and
-   never appears without the tag that says so. */
+   traveller's own words. A value the form filled itself gets no state at all:
+   the per-field assumption notes (and their `.is-assumed` ring, `.rc-field__tag`
+   line and the `.rc-search--tagged` room below the widget) were removed, so the
+   bar sits clean with nothing under it. */
 .rc-field.is-ai,
-.rc-field.is-assumed,
 .rc-originbar--adj .rc-menu__trigger--origin {
   border-color: var(--accent-ring);
   box-shadow: 0 0 0 3px var(--accent-soft);
-}
-/* Absolutely positioned and non-wrapping: a long tag overhangs its column
-   rather than stretching the field or the widget. */
-.rc-field__tag {
-  position: absolute;
-  left: 2px;
-  top: calc(100% + 7px);
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--accent-text);
-}
-.rc-field__tag svg {
-  flex: none;
-}
-/* Room for the tags, which sit outside the widget's own box. */
-.rc-search--tagged {
-  margin-bottom: 22px;
 }
 .rc-orig-tag {
   font-family: var(--font-body);
@@ -1319,14 +1297,11 @@ a:hover {
   padding: 7px 12px;
   font-size: 12px;
 }
-/* Sentence pills carry the same two marks the desktop fields do: a ring for a
-   value read from the traveller's words, a dashed rule for one the form filled
-   (which always has a tappable note under the sentence saying so). */
+/* Sentence pills carry the same mark the desktop fields do: a ring for a value
+   read from the traveller's own words. A value the form filled itself is not
+   marked — the notes that used to sit under the sentence are gone. */
 .rc-pill.is-askset {
   box-shadow: var(--nm-raise), 0 0 0 2px var(--accent-ring);
-}
-.rc-pill.is-assumed {
-  border-bottom: 1px dashed var(--nm-dim);
 }
 @media (max-width: 720px) {
   .rc-ask-chips {
@@ -3175,18 +3150,6 @@ html[data-ambient='day'] .rc-eyebrow {
   }
   .rc-field--stay {
     flex: 1.1;
-  }
-  /* Scout's assumption tags are absolutely positioned 7px under their own field
-     (.rc-field__tag), which in this band is exactly where the wrapped submit
-     button now sits — the tag renders behind the amber CTA and is unreadable.
-     Give the button its own lane when tags are present. The widget's usual
-     bottom margin is not needed here: with the button wrapped inside the bar,
-     the tags are mid-widget rather than hanging off the bottom. */
-  .rc-search--tagged .rc-search__submit {
-    margin-top: 22px;
-  }
-  .rc-search--tagged {
-    margin-bottom: 0;
   }
 }
 

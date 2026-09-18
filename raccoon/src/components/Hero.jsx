@@ -29,8 +29,8 @@ import heroImg from '../assets/hero-mural.webp'
  * Scout (Ask somewhere design 1c) is an alternate way IN to that same form, not
  * an alternate search. Hero owns the whole flow because the pieces outlive each
  * other: the panel opens in the widget's own shell and closes again, while the
- * "Read as" card, the banners and the field tags stay above and around the form
- * it filled. Nothing here ranks or prices — the traveller still presses the same
+ * "Read as" card and the banners stay above the form it filled. Nothing here
+ * ranks or prices — the traveller still presses the same
  * amber button, and that button is still the loudest thing in the band.
  */
 export default function Hero({
@@ -50,10 +50,10 @@ export default function Hero({
   const [ask, setAsk] = useState(null)
   // Bumped on each fill so the form re-mounts, reseeds, and replays its rings.
   const [askKey, setAskKey] = useState(0)
-  // True once a search has actually run on Scout's values. The "assumed, tap to
-  // change" tags are a prompt to correct something BEFORE searching; once the
-  // traveller has looked at them and searched anyway, they have served their
-  // purpose and keeping them on screen just nags.
+  // True once a search has actually run on Scout's values. The origin's
+  // "assumed · tap to change" tag is a prompt to correct something BEFORE
+  // searching; once the traveller has looked at it and searched anyway, it has
+  // served its purpose and keeping it on screen just nags.
   const [searchRan, setSearchRan] = useState(false)
   const [originTouched, setOriginTouched] = useState(false)
   const isMobile = useMediaQuery('(max-width: 720px)')
@@ -113,7 +113,7 @@ export default function Hero({
     setOrigin(value)
   }, [])
 
-  // Every search — from either composer — retires the assumption tags.
+  // Every search — from either composer — retires the origin's assumed tag.
   const runSearch = useCallback(
     (fields) => {
       setSearchRan(true)
@@ -126,13 +126,14 @@ export default function Hero({
   // otherwise whatever Home resolved from the URL (or the blank composer).
   const seed = ask ? ask.read.filters : defaults
   const askFilled = ask ? ask.read.filled : []
-  // The tags go once the search has run; the `.is-ai` rings on fields Scout read
-  // from the traveller's own words stay, since those are a record of what
-  // happened rather than a correction still waiting to be made.
-  const askNotes = ask && !searchRan ? ask.read.fieldNotes : {}
+  // Fields the form filled itself are no longer disclosed per field — the
+  // per-field "assumed, tap to change" notes are gone (and with them
+  // `read.fieldNotes`). The `.is-ai` rings on fields Scout read from the
+  // traveller's own words stay: those are a record of what happened.
+  //
   // Origin sits outside the form, so its own disclosures resolve here. Its
-  // "assumed · tap to change" tag retires with the field tags; "from your words"
-  // and "adjusted" do not — they describe what became of the value, and
+  // "assumed · tap to change" tag retires once a search has run; "from your
+  // words" and "adjusted" do not — they describe what became of the value, and
   // "adjusted" in particular is half of the origin-fallback disclosure.
   const originAssumed = !!ask?.read.assumed.includes('origin')
   const originTag =
@@ -167,7 +168,6 @@ export default function Hero({
           pending={pending}
           onSearch={runSearch}
           askFilled={askFilled}
-          askNotes={askNotes}
           askOpen={askOpen}
           asking={asking}
           askQuery={ask?.query || ''}
@@ -212,7 +212,6 @@ export default function Hero({
                   pending={pending}
                   onSearch={(fields) => runSearch({ ...fields, origin })}
                   askFilled={askFilled}
-                  askNotes={askNotes}
                 />
               </div>
               {askOpen && (

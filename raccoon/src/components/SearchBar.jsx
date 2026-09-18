@@ -22,30 +22,22 @@ const monthTriggerLabel = (opt) => (opt ? `${opt.label} ${opt.group}` : '')
  * four fields are budget, nights, month and stay tier. Month and stay use the
  * shared Menu listbox (handoff §1) rather than native selects.
  *
- * Scout fills this form rather than searching on its own. Two props carry what
+ * Scout fills this form rather than searching on its own. One prop carries what
  * it did, per field (Ask somewhere design 1c):
  *   askFilled — fields taken from the traveller's own words. They carry the
  *               design's `.is-ai` accent ring, so the change is visible where it
  *               happened.
- *   askNotes  — fields the form filled itself. Each gets `.is-assumed` plus the
- *               design's `.rc-field__tag` underneath it ("Mid-range · assumed,
- *               tap to change"). The tag sits under its own field, not in a
- *               banner, because that is where the correction is made — and
- *               because two tags at once is the normal case, not an edge case.
- *               The tag is absolutely positioned and does not wrap, so a long
- *               one overhangs its column rather than stretching the widget;
- *               `.rc-search--tagged` adds the room it needs below.
- * Editing a field retires both: once the value is the traveller's, the form has
- * nothing left to disclose about it. Scout re-mounts this component on each fill
+ * Fields the form filled itself carry NO mark. The per-field assumption notes
+ * ("Mid-range · assumed, tap to change") were removed along with their
+ * `.is-assumed` styling and the space the widget reserved for them, so the bar
+ * sits clean with nothing below it. The parse still derives `assumed` — the form
+ * simply no longer discloses it per field.
+ *
+ * Editing a field retires the ring: once the value is the traveller's, the form
+ * has nothing left to say about it. Scout re-mounts this component on each fill
  * (Hero keys it), so that state resets with the new values.
  */
-export default function SearchBar({
-  defaults,
-  pending,
-  onSearch,
-  askFilled = [],
-  askNotes = {},
-}) {
+export default function SearchBar({ defaults, pending, onSearch, askFilled = [] }) {
   const [budget, setBudget] = useState(defaults.budget)
   const [nights, setNights] = useState(defaults.nights)
   const [month, setMonth] = useState(defaults.month)
@@ -58,7 +50,6 @@ export default function SearchBar({
   const touch = (field) =>
     setTouched((prev) => (prev.has(field) ? prev : new Set(prev).add(field)))
 
-  const noteFor = (field) => (touched.has(field) ? null : askNotes[field] || null)
   const setByAsk = (field) => !touched.has(field) && askFilled.includes(field)
 
   // `mod` is the existing CSS modifier, which is not always the field name — the
@@ -66,28 +57,7 @@ export default function SearchBar({
   const fieldClass = (field, filled, mod = field) =>
     `rc-field rc-field--${mod}${filled ? ' is-filled' : ''}${
       setByAsk(field) ? ' is-ai' : ''
-    }${noteFor(field) ? ' is-assumed' : ''}`
-
-  /** The tag under one field, or nothing at all when there is none. */
-  const tag = (field) => {
-    const text = noteFor(field)
-    if (!text) return null
-    return (
-      <span className="rc-field__tag">
-        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
-          <path d="M12 4v16M4 12h16" strokeLinecap="round" opacity="0" />
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 8.2v4.4" strokeLinecap="round" />
-          <circle cx="12" cy="16" r="0.6" fill="currentColor" stroke="none" />
-        </svg>
-        {text}
-      </span>
-    )
-  }
-
-  // Any tag present? They are absolutely positioned under the widget, so the
-  // form reserves the space rather than growing a row.
-  const hasTags = ['budget', 'nights', 'month', 'stay'].some((f) => noteFor(f))
+    }`
 
   const onBudgetChange = (e) => {
     touch('budget')
@@ -123,7 +93,7 @@ export default function SearchBar({
   }
 
   return (
-    <form className={`rc-search${hasTags ? ' rc-search--tagged' : ''}`} onSubmit={submit}>
+    <form className="rc-search" onSubmit={submit}>
       {/* Amber accent light tracing the border — the idle-state affordance.
           data-motion stills it under prefers-reduced-motion. */}
       <span className="rc-search__trace" data-motion="1" aria-hidden="true" />
@@ -140,7 +110,6 @@ export default function SearchBar({
             onChange={onBudgetChange}
           />
         </div>
-        {tag('budget')}
       </label>
 
       <label className={fieldClass('nights', nights !== '')}>
@@ -153,7 +122,6 @@ export default function SearchBar({
             onChange={onNightsChange}
           />
         </div>
-        {tag('nights')}
       </label>
 
       <div className={fieldClass('month', !!month, 'when')}>
@@ -172,7 +140,6 @@ export default function SearchBar({
             scrollable
           />
         </div>
-        {tag('month')}
       </div>
 
       <div className={fieldClass('stay', !!stay)}>
@@ -190,7 +157,6 @@ export default function SearchBar({
             placeholder=""
           />
         </div>
-        {tag('stay')}
       </div>
 
       <button type="submit" className="rc-search__submit" disabled={pending}>

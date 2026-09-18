@@ -108,7 +108,7 @@ in (tap to edit, ✕ to clear).
 - Query box with placeholder, positioned alongside the existing form
 - Curated example searches shown when the box is empty
 - Form prefill with a brief highlight on AI-set fields
-- Inline assumption notes on individual fields (e.g. "7 nights · assumed, tap to change") rather than a banner, so the note sits where the correction happens
+- ~~Inline assumption notes on individual fields (e.g. "7 nights · assumed, tap to change") rather than a banner, so the note sits where the correction happens~~ — **shipped, then removed.** See "Assumed fields are no longer disclosed per field" below. The `assumed` array is still derived; the search bar just doesn't render it.
 - Origin fallback note — prominent, since a traveler from an unsupported city faces materially different real costs
 - "Couldn't use" note listing unrankable fragments
 - Failure note; form stays usable
@@ -126,8 +126,10 @@ three times and produced the stored parse every time, with an empty `unused`:
 - "7 nights in March from Toronto"
 - "Long weekend in Oct, $1,500 all in"
 
-All three produce exactly **two** assumed fields, which is why two assumption
-tags is the layout's default case rather than an edge case.
+All three produce exactly **two** assumed fields. That shaped the original
+layout (two assumption tags as the default case, not an edge case); since the
+per-field notes were removed it no longer has any layout consequence, but it is
+still the reason the `assumed` array is rarely empty.
 
 The month is stored as a 3-letter key and resolved against the rolling 13-month
 window at click time — storing `feb-2027` would go stale and eventually fall out
@@ -154,18 +156,45 @@ cannot rot silently between passes.
    false.** The engine scores headroom, weather and flight time
    (`src/lib/ranking.js`), and the How-it-works page prints that formula. The
    note reads "the form has no input for it" instead, which is the real limit.
-3. **Every assumed field carries a tag.** The design has no assumed state at all
-   (`.is-assumed` and `.rc-field__tag` exist in its CSS but appear in zero
-   markup) and leaves budget blank and unnoted in its own Filled example. A
-   silently filled default is the one failure this feature exists to prevent.
+3. ~~**Every assumed field carries a tag.**~~ — **reverted.** This shipped and
+   was then removed; see the section below. The design's own lack of an assumed
+   state is now what the build does too, so this is no longer a departure.
 
 Party size has no treatment in the design either; it reuses the banner at
 origin-fallback prominence. Mobile was never drawn — the design doc lists
 "mobile version of 1c" as its own next step — so the phone keeps the sentence
 composer and borrows 1c's behaviour, not its layout.
 
-Assumption tags retire once a search has actually run: they prompt a correction
-*before* searching, and nag after it. A new reading brings them back.
+### Assumed fields are no longer disclosed per field
+
+The per-field assumption notes shipped and were **subsequently removed**. The
+search bar now says nothing about a value the form filled itself.
+
+**What the build does:**
+
+- No field renders an "assumed, tap to change" line. The note elements, the
+  `.is-assumed` field styling, and the layout space the widget reserved for them
+  (`.rc-search--tagged`, plus the wrapped-CTA lane it needed in the 720–1040px
+  band) are gone, so the bar sits clean with nothing below it.
+- On the phone, the tappable notes row under the sentence and the dashed
+  `.rc-pill.is-assumed` underline are gone with it.
+- What Scout **read from the traveller's own words** is still marked: the
+  `.is-ai` accent ring on desktop fields, `.rc-pill.is-askset` on mobile pills.
+  Editing a field still retires its ring.
+- The **origin** row is the one exception and still carries
+  "assumed · tap to change" (`.rc-orig-tag`, from `originTag()`). It sits outside
+  the form, and the same tag also carries "adjusted", which is half the
+  origin-fallback disclosure. It still retires once a search has run.
+
+**Backend untouched.** `/api/ask` still returns `assumed[]` and the normaliser
+still derives it from the model's nulls (`api/_lib/askSchema.js`). This was a
+UI-only removal.
+
+**Now unused in the UI** as a result: `readParse().fieldNotes` and the
+`assumptionNote()` / `fieldValueLabel()` pair in `src/lib/askNotes.js` that
+builds it. Left in place (with their tests) rather than deleted in the same pass.
+`assumed` itself is still read by `filledFields()` — which drives the `.is-ai`
+rings — and by `originTag()`.
 
 ### Explicitly out of scope for PR 2
 
@@ -197,7 +226,10 @@ Assumption tags retire once a search has actually run: they prompt a correction
   model cannot forget to fill, derived the way `assumed` already is, is the real
   answer.
 - **Reverse-sync the design** to match shipped code, per CLAUDE.md §12 step 6 —
-  the three departures above, plus the assumed state the design lacks.
+  departures 1 and 2 above. Departure 3 no longer needs syncing: the per-field
+  assumed state was removed, so the build and the design agree that fields
+  carry no assumed tag. The design's unused `.is-assumed` / `.rc-field__tag`
+  rules can be dropped there too.
 - **The desktop search bar truncates its values between 720px and ~1000px**
   ("June 2027" renders as "June …"). Pre-existing, unrelated to Scout: the field
   flex ratios are tuned for the ~980-1040px design width, and below that the four
