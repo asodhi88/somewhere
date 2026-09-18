@@ -65,6 +65,7 @@ export default function Hero({
     setAskOpen(false)
     setAsking(false)
     setAskKey((k) => k + 1)
+    return read
   }, [])
 
   // A curated example is verified up front (src/lib/askExamples.js), so it fills
@@ -79,7 +80,16 @@ export default function Hero({
       setAsking(true)
       setAskError('')
       const { parse, error } = await requestParse(query)
-      if (parse) return applyReading(query, parse)
+      if (parse) {
+        // The panel's button is the same CTA as the form's, so it does the same
+        // thing: the reading fills the form AND runs the search in one press.
+        // `read.filters` is the same five values SearchBar submits, already put
+        // through the same normalisers (parseToFilters), so this cannot hand the
+        // search something the form would have refused.
+        const read = applyReading(query, parse)
+        onSearch(read.filters)
+        return
+      }
       // A failure leaves the form untouched and closes the panel with one
       // neutral line above it. Any earlier reading stays: it still describes the
       // values sitting in the form.
@@ -87,7 +97,7 @@ export default function Hero({
       setAskOpen(false)
       setAskError(error)
     },
-    [applyReading],
+    [applyReading, onSearch],
   )
 
   const openAsk = useCallback(() => {

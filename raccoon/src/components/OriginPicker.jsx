@@ -1,5 +1,5 @@
 import Menu from './Menu'
-import ScoutIcon from './ScoutIcon'
+import ArrowFillButton from './ui/ArrowFillButton'
 import { ORIGIN_OPTIONS } from '../lib/searchState'
 
 // Selectable departure cities become listbox rows ("Toronto · YYZ"); the rest
@@ -52,15 +52,12 @@ export default function OriginPicker({
       />
       {tag && <span className="rc-orig-tag">{tag}</span>}
       {onAsk && (
-        <button
-          type="button"
-          className={`rc-ask-entry${askActive ? ' is-active' : ''}`}
+        <ArrowFillButton
+          label="ask Scout"
+          active={askActive}
           onClick={onAsk}
           aria-expanded={askActive}
-        >
-          <ScoutIcon />
-          ask Scout
-        </button>
+        />
       )}
     </div>
   )
