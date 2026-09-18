@@ -198,11 +198,19 @@ about a value the form filled itself.
 still derives it from the model's nulls (`api/_lib/askSchema.js`). This was a
 UI-only removal.
 
-**Now unused in the UI** as a result: `readParse().fieldNotes` and the
-`assumptionNote()` / `fieldValueLabel()` pair in `src/lib/askNotes.js` that
-builds it. Left in place (with their tests) rather than deleted in the same pass.
-`assumed` itself is still read by `filledFields()` — which drives the `.is-ai`
-rings — and by `originTag()`.
+**The copy that built those notes is deleted**, not just unrendered:
+`readParse().fieldNotes`, `assumptionNote()`, `fieldValueLabel()` and the `money`
+helper only `fieldValueLabel` used are gone from `src/lib/askNotes.js`, along
+with their four unit tests. A new copy-honesty test replaces them: for a parse
+where the form filled **every** field, no string a reading can produce matches
+`/assumed/i`, `fieldNotes` is undefined, and `originTag` is null. That is the
+guard against the notes creeping back.
+
+`assumed` itself stays. It is the inverse of `filled`, which drives the `.is-ai`
+rings, and it is why `originTag()` can return null. `readParse()` still returns
+it even though no component reads it directly — it is the honest shape of a
+parse, and two tests assert the five fields are always split between `assumed`
+and `filled`.
 
 ### Explicitly out of scope for PR 2
 
