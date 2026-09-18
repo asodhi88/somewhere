@@ -108,7 +108,7 @@ in (tap to edit, ✕ to clear).
 - Query box with placeholder, positioned alongside the existing form
 - Curated example searches shown when the box is empty
 - Form prefill with a brief highlight on AI-set fields
-- ~~Inline assumption notes on individual fields (e.g. "7 nights · assumed, tap to change") rather than a banner, so the note sits where the correction happens~~ — **shipped, then removed**, along with the origin row's own assumed tag. See "Assumed fields are no longer disclosed" below. The `assumed` array is still derived; the form just doesn't render it anywhere.
+- ~~Inline assumption notes on individual fields (e.g. "7 nights · assumed, tap to change") rather than a banner, so the note sits where the correction happens~~ — **shipped, then removed**, along with both of the origin row's tags. See "The form no longer narrates its own fields" below. The `assumed` array is still derived; the form just doesn't render it anywhere.
 - Origin fallback note — prominent, since a traveler from an unsupported city faces materially different real costs
 - "Couldn't use" note listing unrankable fragments
 - Failure note; form stays usable
@@ -165,11 +165,18 @@ origin-fallback prominence. Mobile was never drawn — the design doc lists
 "mobile version of 1c" as its own next step — so the phone keeps the sentence
 composer and borrows 1c's behaviour, not its layout.
 
-### Assumed fields are no longer disclosed
+### The form no longer narrates its own fields
 
-The assumption disclosures shipped and were **subsequently removed** — first the
-per-field notes, then the origin row's tag. Nothing in the form now says anything
-about a value the form filled itself.
+The per-field disclosures shipped and were **subsequently removed**, in three
+passes: the per-field "assumed" notes, then the origin row's "assumed" tag, then
+its "from your words" tag. Nothing in the form now comments on what Scout did to
+any individual value.
+
+The rule that replaced them: **a disclosure has to earn its space by telling the
+traveller something that changes what the numbers mean.** Neither an announced
+default nor a value read back to the person who typed it clears that bar. The
+origin fallback, the party note and the "couldn't use" line do, and all three
+stay.
 
 **What the build does:**
 
@@ -182,17 +189,24 @@ about a value the form filled itself.
 - What Scout **read from the traveller's own words** is still marked: the
   `.is-ai` accent ring on desktop fields, `.rc-pill.is-askset` on mobile pills.
   Editing a field still retires its ring.
-- The **origin** row discloses nothing either. `originTag()` returns null for an
-  origin the form defaulted to, so the "Leaving from" slot is simply empty in
-  that case — the "Read as" card above is still the way back in.
-  - It returns `null` rather than falling through to "from your words", which
-    would claim the traveller named a city they never named. Two tests pin this.
-  - The two tags that remain are records of a city the traveller **did** give:
-    "from your words", and "adjusted" when it isn't one we fly from (half the
-    origin-fallback disclosure, so it outranks the assumed check). Neither
-    retires on search — only editing the origin clears them.
-  - With nothing left to retire, Hero's `searchRan` state is gone, and with it
-    the `runSearch` wrapper; both composers call `onSearch` directly.
+- The **origin** row says nothing about what Scout did to it either. It used to
+  narrate every outcome — "assumed · tap to change" where the form defaulted the
+  city, "from your words" where the traveller named it. Both were removed, in
+  that order. The slot is simply empty after most readings; the "Read as" card
+  above is the way back in.
+  - `originTag()` is now one expression: **"adjusted", or null.** It fires only
+    when the traveller named a departure city we don't fly from, which is the
+    visible half of the origin-fallback disclosure (`originFallbackNote()`
+    carries the other half). Three tests pin it, including that every other
+    parse shape — named, defaulted, either supported origin, null — is silent.
+  - That tag is the exception because it is not narration: it means the numbers
+    on screen are priced from a city other than the one asked for. "From your
+    words" told the traveller something they had just typed themselves.
+  - `originRing` follows the tag, so the accent ring now fires only on an
+    adjusted origin — which finally matches the name of the class it sets
+    (`.rc-originbar--adj`). Editing the origin clears both.
+  - With nothing left to retire on search, Hero's `searchRan` state is gone, and
+    with it the `runSearch` wrapper; both composers call `onSearch` directly.
 
 **Backend untouched.** `/api/ask` still returns `assumed[]` and the normaliser
 still derives it from the model's nulls (`api/_lib/askSchema.js`). This was a
@@ -206,11 +220,12 @@ where the form filled **every** field, no string a reading can produce matches
 `/assumed/i`, `fieldNotes` is undefined, and `originTag` is null. That is the
 guard against the notes creeping back.
 
-`assumed` itself stays. It is the inverse of `filled`, which drives the `.is-ai`
-rings, and it is why `originTag()` can return null. `readParse()` still returns
-it even though no component reads it directly — it is the honest shape of a
-parse, and two tests assert the five fields are always split between `assumed`
-and `filled`.
+`assumed` itself stays, with exactly one job left: it is the inverse of
+`filled`, which drives the `.is-ai` rings. `originTag()` no longer consults it
+at all — that tag now reads `originFallback` and nothing else. `readParse()`
+still returns `assumed` even though no component reads it directly; it is the
+honest shape of a parse, and two tests assert the five fields are always split
+between `assumed` and `filled`.
 
 ### Explicitly out of scope for PR 2
 

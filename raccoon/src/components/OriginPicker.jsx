@@ -17,15 +17,14 @@ const HAS_COMING_SOON = ORIGIN_OPTIONS.some((o) => !o.available)
  * Uses the shared Menu (handoff §1) so it inherits the ambient surfaces and the
  * session accent; the "coming soon" note rides along as the panel footer.
  *
- * The row's right-hand slot is Scout's (Ask somewhere design 1c). It holds
- * either the quiet "ask Scout" entry button, or — once a reading exists — a tag
- * saying what Scout did to this value: "from your words", or "adjusted" when the
- * departure city they named isn't one we fly from.
+ * The row's right-hand slot is Scout's (Ask somewhere design 1c). It holds the
+ * quiet "ask Scout" entry button until a reading exists, and after that it is
+ * usually empty — the "Read as" card above is the way back in.
  *
- * An origin the form defaulted to gets NO tag. It used to read "assumed · tap to
- * change"; that disclosure was removed along with the per-field ones, so the
- * slot is simply empty in that case (the "Read as" card above is still the way
- * back in). Hero resolves which of the two it is — see `originTag()`.
+ * `tag` is the one exception: "adjusted", when the departure city the traveller
+ * named isn't one we fly from. The row used to narrate every outcome
+ * ("assumed · tap to change", "from your words"); both were removed as noise.
+ * See `originTag()` for why this one is different.
  */
 export default function OriginPicker({
   value,
