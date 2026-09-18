@@ -833,44 +833,188 @@ a:hover {
    under the night and day themes.
 
    Scout never looks louder than the search itself. Its entry is an outline
-   button; the one accent-filled button it owns ("read my trip") only exists
+   button; the one accent-filled button it owns ("Show me where") only exists
    while the panel is open, and the panel replaces the form, so there is never
    more than one loud button in the band.
    ------------------------------------------------------------------------- */
 
-/* Entry — quiet, at the end of the "Leaving from" row. */
-.rc-ask-entry {
+/* Entry, arrow-fill treatment (src/components/ui/ArrowFillButton.jsx). The icon
+   puck sweeps out to fill the pill on hover. Deliberately QUIET at rest — a
+   transparent pill with a soft accent puck, no louder than the origin menu
+   beside it — because the band's one loud element is the amber CTA. The accent
+   only fills on hover/press, or is pinned open while the panel is active. */
+.rc-afb {
+  --afb-h: 34px; /* 9px padding + 13px line + 9px + 1px border, top and bottom */
+  --afb-puck: 24px;
+  --afb-inset: 5px; /* (34 - 24) / 2, so the puck sits centred */
+  --afb-pl: 14px;
+  --afb-fs: 13px;
+  --afb-icon: 14px;
+  --afb-dur: 420ms; /* keep in step with DURATION_MS in ArrowFillButton.jsx */
+  --afb-ease: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  /* The puck as an inset rectangle. Kept in one var so the fill's resting inset
+     and the ghost label's resting clip-path can never drift apart. */
+  --afb-box: var(--afb-inset) var(--afb-inset) var(--afb-inset)
+    calc(100% - var(--afb-inset) - var(--afb-puck));
+
+  position: relative;
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 15px;
-  border-radius: 12px;
-  background: transparent;
+  justify-content: center;
+  height: var(--afb-h);
+  padding: 0 calc(var(--afb-inset) + var(--afb-puck) + 8px) 0 var(--afb-pl);
   border: 1px solid var(--glass-border, var(--border));
+  border-radius: 999px;
+  background: transparent;
   color: var(--ink, var(--text));
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: var(--afb-fs);
   font-weight: 600;
   line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
 }
-.rc-ask-entry svg {
+.rc-afb--compact {
+  /* The eyebrow row's smaller scale: 7px + 12px line + 7px + border. */
+  --afb-h: 28px;
+  --afb-puck: 20px;
+  --afb-inset: 4px;
+  --afb-pl: 12px;
+  --afb-fs: 12px;
+  --afb-icon: 12px;
+  margin-left: 0;
+}
+.rc-afb:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+}
+
+.rc-afb__label {
+  position: relative;
+  z-index: 1;
+}
+.rc-afb__fill {
+  position: absolute;
+  z-index: 2;
+  inset: var(--afb-box);
+  border-radius: 999px;
+  background: transparent;
+  pointer-events: none;
+}
+.rc-afb__ghost {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 calc(var(--afb-inset) + var(--afb-puck) + 8px) 0 var(--afb-pl);
+  color: var(--on-amber);
+  clip-path: inset(var(--afb-box) round 999px);
+  pointer-events: none;
+}
+.rc-afb__puck {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  right: var(--afb-inset);
+  height: var(--afb-puck);
+  width: var(--afb-puck);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--accent-soft);
   color: var(--accent-text);
+  transform: translateY(-50%);
+  overflow: hidden;
+  /* Safari rounds overflow with poor AA without a mask on the clipping box. */
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+  pointer-events: none;
 }
-.rc-ask-entry:hover {
-  border-color: var(--accent-ring);
-  background: var(--glass-sunken, var(--surface-sunken));
+.rc-afb__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: var(--afb-icon);
+  width: var(--afb-icon);
+  transform-origin: center;
 }
-.rc-ask-entry.is-active {
-  background: linear-gradient(180deg, var(--ac-hi), var(--ac) 60%, var(--ac-lo));
+.rc-afb__icon svg {
+  display: block;
+}
+/* The two icon copies cross over: --in slides in from the left as --out leaves
+   to the right, so the mark is never mid-pill. */
+.rc-afb__icon--in {
+  transform: translate(-170%, -50%) scale(0);
+}
+.rc-afb__icon--out {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Transitions are gated on data-ready (set after first paint) so nothing
+   animates on mount. `inset` is transitioned as longhands — the shorthand is
+   not itself animatable. */
+.rc-afb[data-ready='true'] .rc-afb__fill,
+.rc-afb[data-ready='true'] .rc-afb__ghost,
+.rc-afb[data-ready='true'] .rc-afb__puck,
+.rc-afb[data-ready='true'] .rc-afb__icon {
+  transition: top var(--afb-dur) var(--afb-ease), right var(--afb-dur) var(--afb-ease),
+    bottom var(--afb-dur) var(--afb-ease), left var(--afb-dur) var(--afb-ease),
+    clip-path var(--afb-dur) var(--afb-ease), transform var(--afb-dur) var(--afb-ease),
+    background-color var(--afb-dur) var(--afb-ease), color var(--afb-dur) var(--afb-ease);
+}
+
+/* Filled state. Hover only where hover really exists — on touch it latches and
+   the button would sit stuck open; touch uses data-filled from a press instead. */
+@media (hover: hover) {
+  .rc-afb:hover .rc-afb__fill {
+    inset: 0;
+    background: var(--ac);
+  }
+  .rc-afb:hover .rc-afb__ghost {
+    clip-path: inset(0 round 999px);
+  }
+  .rc-afb:hover .rc-afb__puck {
+    background: transparent;
+    color: var(--on-amber);
+  }
+  .rc-afb:hover .rc-afb__icon--in {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .rc-afb:hover .rc-afb__icon--out {
+    transform: translate(70%, -50%) scale(0);
+  }
+}
+.rc-afb[data-filled='true'] .rc-afb__fill {
+  inset: 0;
+  background: var(--ac);
+}
+.rc-afb[data-filled='true'] .rc-afb__ghost {
+  clip-path: inset(0 round 999px);
+}
+.rc-afb[data-filled='true'] .rc-afb__puck {
+  background: transparent;
   color: var(--on-amber);
-  border-color: transparent;
-  box-shadow: 0 8px 18px -8px rgba(var(--ac-rgb), 0.5);
 }
-.rc-ask-entry.is-active svg {
-  color: var(--on-amber);
+.rc-afb[data-filled='true'] .rc-afb__icon--in {
+  transform: translate(-50%, -50%) scale(1);
+}
+.rc-afb[data-filled='true'] .rc-afb__icon--out {
+  transform: translate(70%, -50%) scale(0);
+}
+
+/* The sweep is a transition, so the repo's [data-motion] seam (which only
+   clears `animation`) does not reach it. */
+@media (prefers-reduced-motion: reduce) {
+  .rc-afb[data-ready='true'] .rc-afb__fill,
+  .rc-afb[data-ready='true'] .rc-afb__ghost,
+  .rc-afb[data-ready='true'] .rc-afb__puck,
+  .rc-afb[data-ready='true'] .rc-afb__icon {
+    transition: none;
+  }
 }
 
 /* The widget shell holds either the form or the panel — never both visible. The
@@ -975,7 +1119,10 @@ a:hover {
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.14em;
-  text-transform: uppercase;
+  /* Lower case, and left — the hero centres its text, and this eyebrow would
+     otherwise inherit that and float over the left-aligned chips it labels. */
+  text-transform: none;
+  text-align: left;
   color: var(--ink-faint, var(--muted));
 }
 .rc-ask-chips {
@@ -1291,11 +1438,6 @@ a:hover {
   display: flex;
   align-items: center;
   flex: 1;
-}
-.rc-ask-entry--m {
-  margin-left: 0;
-  padding: 7px 12px;
-  font-size: 12px;
 }
 /* Sentence pills carry the same mark the desktop fields do: a ring for a value
    read from the traveller's own words. A value the form filled itself is not
@@ -3138,6 +3280,14 @@ html[data-ambient='day'] .rc-eyebrow {
      and would otherwise never push the button off the row. */
   .rc-search__submit {
     flex: 1 0 100%;
+  }
+  /* …but only the FORM's CTA wraps. Scout's footer button wears
+     .rc-search__submit for its looks while sitting in a space-between row with
+     the loading line beside it, where a 100% basis overflowed the panel by the
+     width of that line. It has no fields to wrap around, so it keeps the
+     content width it already has above 1040px. */
+  .rc-ask-go {
+    flex: 0 0 auto;
   }
   .rc-field--budget {
     flex: 0.95;

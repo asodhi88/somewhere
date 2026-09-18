@@ -21,7 +21,7 @@ import { MAX_QUERY_CHARS } from '../lib/askClient'
  * The closest curated example to what is being typed, by word overlap.
  *
  * This is string matching against three stored strings — NOT a parse. Nothing
- * here reads the trip; the label says "Closest example" and means it. Returns
+ * here reads the trip; the label says "closest example" and means it. Returns
  * null until there is enough typed to be meaningful, so the chips stay a plain
  * menu while the box is empty.
  */
@@ -78,8 +78,8 @@ export default function AskPanel({
     onSubmit(trimmed)
   }
 
-  // Enter reads the trip; Shift+Enter is a newline, and Escape backs out to the
-  // form — the panel is a detour, never a trap.
+  // Enter reads the trip and runs the search; Shift+Enter is a newline, and
+  // Escape backs out to the form — the panel is a detour, never a trap.
   const onKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
@@ -136,9 +136,12 @@ export default function AskPanel({
         <>
           <div className="rc-ask-prog" data-motion="1" aria-hidden="true" />
           <div className="rc-ask-foot">
-            <span className="rc-ask-loadrow">Reading your trip…</span>
+            <span className="rc-ask-loadrow">Finding somewhere to go…</span>
+            {/* Same pending word the form's CTA uses, so one press reads as one
+                action: `rc-search__submit` lower-cases it to "searching…",
+                exactly as it renders on the button behind the panel. */}
             <button type="submit" className="rc-search__submit rc-ask-go is-dim" disabled>
-              reading…
+              Searching…
             </button>
           </div>
         </>
@@ -146,7 +149,7 @@ export default function AskPanel({
         <>
           <div className="rc-ask-chipsrow">
             <span className="rc-ask-chipslab">
-              {closest ? 'Closest example' : 'Try one of these'}
+              {closest ? 'closest example' : 'try one of these'}
             </span>
             <div className="rc-ask-chips">
               {ASK_EXAMPLES.map((ex) => {
@@ -170,12 +173,15 @@ export default function AskPanel({
           </div>
 
           <div className="rc-ask-foot rc-ask-foot--end">
+            {/* This IS the search CTA, same label and same action as the one on
+                the form behind it — reading the trip and running the search are
+                one press, not two. */}
             <button
               type="submit"
               className={`rc-search__submit rc-ask-go${trimmed ? '' : ' is-dim'}`}
               disabled={!trimmed}
             >
-              read my trip
+              Show me where →
             </button>
           </div>
         </>
