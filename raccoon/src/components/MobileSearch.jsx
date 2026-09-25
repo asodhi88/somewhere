@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import AskPanel from './AskPanel'
-import ScoutIcon from './ScoutIcon'
+import ArrowFillButton from './ui/ArrowFillButton'
 import {
   ORIGIN_OPTIONS,
   MONTH_OPTIONS,
@@ -276,10 +276,7 @@ export default function MobileSearch({
             onOpen={open}
             askset={setByAsk('origin')}
           />
-          <button type="button" className="rc-ask-entry rc-ask-entry--m" onClick={onAskOpen}>
-            <ScoutIcon />
-            ask Scout
-          </button>
+          <ArrowFillButton label="ask Scout" size="compact" onClick={onAskOpen} />
         </p>
 
         {/* Sentence: static muted words + value pills. Punctuation belongs to the
