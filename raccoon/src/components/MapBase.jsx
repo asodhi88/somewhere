@@ -215,72 +215,100 @@ export default function MapBase({
     ensureArchive()
     const pal = PALETTES[currentAmbient()]
 
-    // Framing from bounds is set at construction rather than fitted after load,
-    // so the map never paints one view and then jumps to another.
-    const camera = fitBounds
-      ? { bounds: fitBounds, fitBoundsOptions: { padding: fitPadding, maxZoom: fitMaxZoom } }
-      : { center, zoom }
-
-    const map = new maplibregl.Map({
-      container: el,
-      ...camera,
-      minZoom,
-      maxZoom,
-      attributionControl: false,
-      style: {
-        version: 8,
-        // Self-hosted, same reasoning as the tiles: a hosted glyph CDN would be
-        // exactly the runtime third-party call the PMTiles extract exists to
-        // avoid. Relative URL, served from public/fonts/ off our own origin.
-        // Only the Latin ranges of one stack are vendored (see tiles/README.md).
-        glyphs: '/fonts/{fontstack}/{range}.pbf',
-        sources: {
-          basemap: {
-            type: 'vector',
-            url: `pmtiles://${PMTILES_URL}`,
-            attribution: ATTRIBUTION,
-            minzoom: 0,
-            maxzoom: BASE_MAX_ZOOM,
-          },
-        },
-        layers: [
-          { id: 'background', type: 'background', paint: { 'background-color': pal.background } },
-          ...basemapLayers(pal),
-        ],
-      },
-      // No rotate/pitch flourishes — a reference map, not a globe toy.
-      dragRotate: false,
-      pitchWithRotate: false,
-      touchZoomRotate: true,
-    })
-    map.touchZoomRotate.disableRotation()
-    // In the page, wheel-zoom would trap the scroll over the map; the module's
-    // own +/- buttons zoom instead. The overlay has no page scroll to steal.
-    if (!scrollZoom) map.scrollZoom.disable()
-
-    // ODbL: the credit is an obligation, so it is passed as customAttribution
-    // rather than left to the source's own string — that way it renders even if
-    // tiles are slow or fail, instead of silently disappearing with them.
-    map.addControl(
-      new maplibregl.AttributionControl({ compact: false, customAttribution: ATTRIBUTION }),
-      'bottom-right',
-    )
-
+    let map = null
+    let loaded = false
     let cancelled = false
-    map.on('load', () => {
-      if (cancelled) return
-      onReadyRef.current?.(map)
-    })
 
-    // The container is not a fixed box: it appears with the overlay and changes
-    // with the viewport. Without this the GL canvas keeps its creation-time size.
-    const ro = new ResizeObserver(() => map.resize())
+    // The container is not a fixed box: it mounts inside a section that is
+    // still expanding, appears with the overlay and changes with the viewport.
+    // One observer covers all of it — it defers construction until there is a
+    // real box to measure, then keeps the GL canvas in step with the container.
+    const ro = new ResizeObserver(() => {
+      if (!el.clientWidth || !el.clientHeight) return
+      if (!map) {
+        build()
+        return
+      }
+      map.resize()
+      // Before the first load nothing but the background has painted, so the
+      // framing can follow the container without a visible jump. After load the
+      // reader may have moved the camera, and a resize must not undo that.
+      if (!loaded && fitBounds) {
+        map.fitBounds(fitBounds, { padding: fitPadding, maxZoom: fitMaxZoom, duration: 0 })
+      }
+    })
     ro.observe(el)
+
+    // Constructing against a zero-size container computes the bounds camera
+    // (and the canvas) for a 0×0 viewport, so the map would paint blank until a
+    // remount. Build synchronously when the box is already there; otherwise the
+    // observer builds on the first non-zero measure.
+    if (el.clientWidth && el.clientHeight) build()
 
     return () => {
       cancelled = true
       ro.disconnect()
-      map.remove()
+      map?.remove()
+    }
+
+    function build() {
+      // Framing from bounds is set at construction rather than fitted after load,
+      // so the map never paints one view and then jumps to another. Construction
+      // waits for a measured container, so this fits against the real size.
+      const camera = fitBounds
+        ? { bounds: fitBounds, fitBoundsOptions: { padding: fitPadding, maxZoom: fitMaxZoom } }
+        : { center, zoom }
+
+      map = new maplibregl.Map({
+        container: el,
+        ...camera,
+        minZoom,
+        maxZoom,
+        attributionControl: false,
+        style: {
+          version: 8,
+          // Self-hosted, same reasoning as the tiles: a hosted glyph CDN would be
+          // exactly the runtime third-party call the PMTiles extract exists to
+          // avoid. Relative URL, served from public/fonts/ off our own origin.
+          // Only the Latin ranges of one stack are vendored (see tiles/README.md).
+          glyphs: '/fonts/{fontstack}/{range}.pbf',
+          sources: {
+            basemap: {
+              type: 'vector',
+              url: `pmtiles://${PMTILES_URL}`,
+              attribution: ATTRIBUTION,
+              minzoom: 0,
+              maxzoom: BASE_MAX_ZOOM,
+            },
+          },
+          layers: [
+            { id: 'background', type: 'background', paint: { 'background-color': pal.background } },
+            ...basemapLayers(pal),
+          ],
+        },
+        // No rotate/pitch flourishes — a reference map, not a globe toy.
+        dragRotate: false,
+        pitchWithRotate: false,
+        touchZoomRotate: true,
+      })
+      map.touchZoomRotate.disableRotation()
+      // In the page, wheel-zoom would trap the scroll over the map; the module's
+      // own +/- buttons zoom instead. The overlay has no page scroll to steal.
+      if (!scrollZoom) map.scrollZoom.disable()
+
+      // ODbL: the credit is an obligation, so it is passed as customAttribution
+      // rather than left to the source's own string — that way it renders even if
+      // tiles are slow or fail, instead of silently disappearing with them.
+      map.addControl(
+        new maplibregl.AttributionControl({ compact: false, customAttribution: ATTRIBUTION }),
+        'bottom-right',
+      )
+
+      map.on('load', () => {
+        if (cancelled) return
+        loaded = true
+        onReadyRef.current?.(map)
+      })
     }
     // Read once at mount; callers remount (via React key) when the city changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
