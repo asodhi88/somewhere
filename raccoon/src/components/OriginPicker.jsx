@@ -53,7 +53,7 @@ export default function OriginPicker({
       {tag && <span className="rc-orig-tag">{tag}</span>}
       {onAsk && (
         <ArrowFillButton
-          label="ask Scout"
+          label="Ask AI"
           active={askActive}
           onClick={onAsk}
           aria-expanded={askActive}

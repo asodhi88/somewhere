@@ -19,16 +19,24 @@ This is the first backend component in the project.
 ## Naming
 
 The feature is **"Ask somewhere"** in this document and in the code (`/api/ask`,
-`askNotes.js`); the UI calls it **Scout**.
+`askNotes.js`); the UI calls it **Ask AI**.
 
-**Scout is a label, not a persona.** No avatar, no voice, no chat bubbles, no
-conversation history, no follow-up turns. The name is on the entry button and the
-panel header, and nowhere else. It does not change what shipped: Scout reads,
-fills, and discloses.
+It shipped briefly as **Scout** and was renamed. A named agent invites copy
+written with a subject — "Scout couldn't read that" — and every such line is one
+edit away from "Scout found you…". "Ask AI" names the action, not an actor, so
+UI copy is written subjectless: the failure note reads "That couldn't be read
+just now", not "Ask AI couldn't…". Code identifiers (`ScoutIcon`, comments) kept
+the old name; none of them reach the page.
+
+**Ask AI is a label, not a persona.** No avatar, no voice, no chat bubbles, no
+conversation history, no follow-up turns. The name is on the entry button (and
+the close control's aria-label), and nowhere else — the panel header reads
+"Describe your trip". It does not change what shipped: the AI reads, fills, and
+discloses.
 
 The constraint the original wording was protecting still holds, and is now
 enforced by a test (`src/lib/askNotes.test.js`, "copy honesty"): **no UI copy may
-say Scout found, picked, priced, recommended or chose anything**, because it does
+say the AI found, picked, priced, recommended or chose anything**, because it does
 none of those. A name that implies conversational capability would be the failure
 here — a name alone is not.
 
@@ -96,10 +104,10 @@ the same flow in the day ambient). Read directly from the Claude Design project
 via DesignSync rather than a `handoff/` bundle — see auto-memory
 `raccoon-design-source` for the project id and the `/design-login` requirement.
 
-**What shipped, in shape:** a quiet `ask Scout` button at the end of the
+**What shipped, in shape:** a quiet `Ask AI` button at the end of the
 "Leaving from" row opens a query panel **inside the search widget's own shell**,
 in place of the field grid. The form is never unmounted while the panel is open,
-so a half-typed budget survives a trip through Scout. On success the panel closes
+so a half-typed budget survives a trip into the Ask AI panel. On success the panel closes
 and a **"Read as"** card stands above the filled form, doubling as the way back
 in (tap to edit, ✕ to clear).
 
@@ -169,7 +177,7 @@ composer and borrows 1c's behaviour, not its layout.
 
 The per-field disclosures shipped and were **subsequently removed**, in three
 passes: the per-field "assumed" notes, then the origin row's "assumed" tag, then
-its "from your words" tag. Nothing in the form now comments on what Scout did to
+its "from your words" tag. Nothing in the form now comments on what the AI did to
 any individual value.
 
 The rule that replaced them: **a disclosure has to earn its space by telling the
@@ -186,10 +194,10 @@ stay.
   band) are gone, so the bar sits clean with nothing below it.
 - On the phone, the tappable notes row under the sentence and the dashed
   `.rc-pill.is-assumed` underline are gone with it.
-- What Scout **read from the traveller's own words** is still marked: the
+- What the AI **read from the traveller's own words** is still marked: the
   `.is-ai` accent ring on desktop fields, `.rc-pill.is-askset` on mobile pills.
   Editing a field still retires its ring.
-- The **origin** row says nothing about what Scout did to it either. It used to
+- The **origin** row says nothing about what the AI did to it either. It used to
   narrate every outcome — "assumed · tap to change" where the form defaulted the
   city, "from your words" where the traveller named it. Both were removed, in
   that order. The slot is simply empty after most readings; the "Read as" card
@@ -262,6 +270,6 @@ between `assumed` and `filled`.
   carry no assumed tag. The design's unused `.is-assumed` / `.rc-field__tag`
   rules can be dropped there too.
 - **The desktop search bar truncates its values between 720px and ~1000px**
-  ("June 2027" renders as "June …"). Pre-existing, unrelated to Scout: the field
+  ("June 2027" renders as "June …"). Pre-existing, unrelated to Ask AI: the field
   flex ratios are tuned for the ~980-1040px design width, and below that the four
   fields split whatever the submit button leaves.
