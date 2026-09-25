@@ -1210,16 +1210,6 @@ a:hover {
     left: 102%;
   }
 }
-.rc-ask-loadrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--ink-muted, var(--muted));
-}
 
 /* "Read as" — the traveller's own sentence, kept visible above the filled form
    and doubling as the way back into the panel. */
