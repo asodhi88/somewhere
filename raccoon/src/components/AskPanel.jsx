@@ -135,8 +135,7 @@ export default function AskPanel({
       {loading ? (
         <>
           <div className="rc-ask-prog" data-motion="1" aria-hidden="true" />
-          <div className="rc-ask-foot">
-            <span className="rc-ask-loadrow">Searching…</span>
+          <div className="rc-ask-foot rc-ask-foot--end">
             {/* Same pending word the form's CTA uses, so one press reads as one
                 action: `rc-search__submit` lower-cases it to "searching…",
                 exactly as it renders on the button behind the panel. */}
