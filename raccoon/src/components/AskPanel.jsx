@@ -105,7 +105,7 @@ export default function AskPanel({
           type="button"
           className="rc-ask-close"
           onClick={onClose}
-          aria-label="Close Scout and go back to the form"
+          aria-label="Close Ask AI and go back to the form"
         >
           ✕
         </button>
@@ -136,7 +136,7 @@ export default function AskPanel({
         <>
           <div className="rc-ask-prog" data-motion="1" aria-hidden="true" />
           <div className="rc-ask-foot">
-            <span className="rc-ask-loadrow">Finding somewhere to go…</span>
+            <span className="rc-ask-loadrow">Searching…</span>
             {/* Same pending word the form's CTA uses, so one press reads as one
                 action: `rc-search__submit` lower-cases it to "searching…",
                 exactly as it renders on the button behind the panel. */}

@@ -42,4 +42,4 @@ export async function requestParse(query) {
 }
 
 export const defaultFailure = () =>
-  'Scout couldn’t read that just now. The search is yours to fill in.'
+  'That couldn’t be read just now. The search is yours to fill in.'

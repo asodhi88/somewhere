@@ -276,7 +276,7 @@ export default function MobileSearch({
             onOpen={open}
             askset={setByAsk('origin')}
           />
-          <ArrowFillButton label="ask Scout" size="compact" onClick={onAskOpen} />
+          <ArrowFillButton label="Ask AI" size="compact" onClick={onAskOpen} />
         </p>
 
         {/* Sentence: static muted words + value pills. Punctuation belongs to the
